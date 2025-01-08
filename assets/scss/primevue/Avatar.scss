@@ -1,0 +1,26 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Avatar {
+    min-width: 48px;
+    min-height: 48px;
+    --p-avatar-background: var(--avatarBackground, #{vars.$colors-black});
+    --p-avatar-lg-width: var(--avatarWidth, 8rem);
+    --p-avatar-xl-width: var(--avatarWidth, 10rem);
+    &__label {
+      font-size: vars.$fs-m;
+      font-weight: vars.$fw-bold;
+      color: vars.$colors-white;
+    }
+  }
+
+  @include mobile {
+    .Avatar {
+      &__label {
+        font-size: vars.$fs-x2l;
+      }
+    }
+  }
+}

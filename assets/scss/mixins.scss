@@ -1,0 +1,171 @@
+@use 'sass:list';
+@use './vars';
+
+
+@mixin allStyles($styles) {
+  @each $property, $value in $styles {
+    #{$property}: $value;
+  }
+}
+
+@mixin fullsize {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin borderedFullsize {
+  @include fullsize;
+  box-sizing: border-box;
+}
+
+@mixin flex($styles: ()) {
+  display: flex;
+  @include allStyles($styles);
+}
+
+@mixin flexColumn($styles: ()) {
+  @include flex((flex-direction: column));
+  @include allStyles($styles);
+}
+
+@mixin centeredFlex($styles: ()) {
+  @include flex((justify-content: center, align-items: center));
+  @include allStyles($styles);
+}
+
+@mixin centeredFlexColumn($styles: ()) {
+  @include centeredFlex((flex-direction: column));
+  @include allStyles($styles);
+}
+
+@mixin absolute($styles: ()) {
+  position: absolute;
+  @include allStyles($styles);
+}
+
+@mixin relative($styles: ()) {
+  position: relative;
+  @include allStyles($styles);
+}
+
+@mixin fixed($styles: ()) {
+  position: fixed;
+  @include allStyles($styles);
+}
+
+@mixin sticky($styles: ()) {
+  position: sticky;
+  @include allStyles($styles);
+}
+
+@mixin disabled($opacity: 0.5) {
+  opacity: $opacity;
+  cursor: default;
+  pointer-events: none;
+}
+
+@mixin laptop($bottom: 760px, $upper: 1024px) {
+  @media only screen and (min-device-width: $bottom) and (max-device-width: $upper) {
+    @content;
+  }
+}
+
+@mixin mobile($bottom: 320px, $upper: 760px) {
+  @media only screen and (min-device-width: $bottom) and (max-device-width: $upper) {
+    @content;
+  }
+}
+
+@mixin media($type, $size, $firstSize, $secondSize: 0px) {
+  @if $type == between {
+    @media (min-#{$size}: #{$firstSize}) and (#{max-$size}: #{$secondSize}) {
+      @content;
+    }
+  } @else if $type == under {
+    @media (max-#{$size}: #{$firstSize}) {
+      @content;
+    }
+  } @else if $type == above {
+    @media (min-#{size}: #{$firstSize}) {
+      @content;
+    }
+  }
+}
+
+@mixin title($fontSize: vars.$fs-_2xl, $fontWeight: vars.$fw-bold) {
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+}
+
+@mixin transition($args...) {
+  $res: '';
+  $default: vars.$rest-defaultTransitionDuration ease-out;
+  // проходимся по каждому из переданных свойств
+  @for $i from 0 to list.length($args) {
+    // проходимся по каждому аргументу как по мапе
+    
+    @each $prop, $value in list.nth($args, $i + 1) {
+      /**
+       *  @todo: сделать, чтобы добавление запятой было внутри этого цикла
+       * Это позволит перейти от записи вида 
+       *   @include transition(
+       *     (border-color: $transitionTime ease-out),
+       *     (box-shadow: $transitionTime ease-out)
+       *   );
+       * к записи вида
+       *   @include transition((
+       *     border-color: $transitionTime ease-out,
+       *     box-shadow: $transitionTime ease-out
+       *   ));
+       */
+      $val: $value;
+      @if $value == null {
+        $val: $default;
+      }
+      $res: #{$res} + #{$prop} + ' ' + #{$val};
+    }
+    @if $i != list.length($args) - 1 {
+      $res: #{$res} + ', ';
+    }
+  }
+  transition: $res;
+}
+
+@mixin withPseudoBefore($styles) {
+  &::before {
+    @include fullsize;
+    @include absolute;
+    content: '';
+    @include allStyles($styles);
+  }
+}
+
+@mixin withPseudoAfter($styles) {
+  &::after {
+    @include fullsize;
+    @include absolute;
+    content: '';
+    @include allStyles($styles);
+  }
+}
+
+@mixin withEllipsis($maxWidth: 100%) {
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  max-width: $maxWidth;
+}
+
+@mixin containerQueryBase($name, $type) {
+  container: #{$name} / #{$type};
+  box-sizing: unset;
+}
+
+@mixin titleWithLink {
+  @include flex((gap: 4px));
+  font-size: 12px;
+  cursor: pointer;
+  & span {
+    text-decoration: underline;
+  }
+}

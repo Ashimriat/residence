@@ -1,0 +1,25 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Paginator {
+    --p-paginator-nav-button-width: 32px;
+    --p-paginator-nav-button-height: 32px;
+    --p-paginator-background: transparent;
+    --p-paginator-nav-button-border-radius: #{vars.$br-xs};
+    
+    --p-paginator-nav-button-background: transparent;
+    --p-paginator-nav-button-color: #{vars.$colors-black};
+
+    --p-paginator-nav-button-hover-background: #{vars.$colors-beigeMuted};
+    --p-paginator-nav-button-hover-color: #{vars.$colors-white};
+
+    --p-paginator-nav-button-selected-background: #{vars.$colors-beige};
+    --p-paginator-nav-button-selected-color: #{vars.$colors-white};
+    & button {
+      font-size: 14px;
+      font-weight: vars.$fw-extraBold;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Tab {
+    --p-tabs-tab-background: transparent;
+    --p-tabs-tab-active-background: #{vars.$colors-black};
+    --p-tabs-tab-border-color: #{vars.$colors-black};
+    --p-tabs-tab-hover-border-color: #{vars.$colors-black};
+    --p-tabs-tab-active-border-color: #{vars.$colors-black};
+    --p-tabs-tab-color: #{vars.$colors-black};
+    --p-tabs-tab-active-color: #{vars.$colors-white};
+    --p-tabs-tab-padding: 9px 16px;
+    --p-tabs-tab-border-width: 3px;
+
+    font-size: vars.$fs-m;
+    border-radius: vars.$br-s;
+  }
+
+  .TabList {
+    --p-tabs-tablist-background: transparent;
+    --p-tabs-tablist-border-color: transparent;
+    --p-tabs-active-bar-height: 0;
+
+    & .p-tablist-tab-list {
+      gap: 16px;
+    }
+  }
+
+  .TabPanels {
+    @include relative;
+    --p-tabs-tabpanel-background: transparent;
+    padding: 20px 0 0;
+  }
+}

@@ -1,0 +1,13 @@
+@use './colors';
+
+$baseShadow: 0px 2px 3px 0px colors.$baseShadow;
+$popupShadow: 0px 4px 24px 0px colors.$popupShadow;
+
+
+
+$defaultTransitionDuration: 0.2s;
+
+$footerDesktopHeight: 276px;
+$footerMobileHeight: 386px;
+$desktopHeaderHeight: 100px;
+$mobileHeaderOffset: 160px;

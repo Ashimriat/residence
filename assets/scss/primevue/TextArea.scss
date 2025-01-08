@@ -1,0 +1,10 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .TextArea {
+    --p-textarea-focus-border-color: none;
+  }
+}
+

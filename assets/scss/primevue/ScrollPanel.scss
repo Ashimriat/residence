@@ -1,0 +1,28 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .ScrollPanel {
+    height: var(--scrollPanelHeight, 300px);
+    max-width: var(--scrollPanelWidth, 100%);
+    border-radius: vars.$br-s;
+    padding: 12px 0;
+    background-color: vars.$colors-white;
+    & .p-scrollpanel-bar {
+      --p-scrollpanel-bar-background: #{vars.$colors-scrollbar};
+      --p-scrollpanel-bar-size: 4px;
+    }
+    & .p-scrollpanel-content {
+      @include flex((
+        gap: var(--scrollPanelGap, 40px),
+        flex-wrap: wrap,
+      ));
+      padding-inline: 20px;
+      width: 100%;
+      & > * {
+        flex: var(--scrollPanelItemGrow, 1) var(--scrollPanelItemBasis, 100%);
+      }
+    }
+  }
+}

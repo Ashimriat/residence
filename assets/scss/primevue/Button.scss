@@ -1,0 +1,89 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+
+@layer residence {
+  .p-button {
+    outline: none;
+  }
+
+  .Button {
+    --p-button-gap: 8px;
+    --p-button-padding-x: 12px;
+    --p-button-padding-y: 12px;
+
+    /** Primary */
+    --p-button-primary-background: #{vars.$colors-beige};
+    --p-button-primary-hover-background: #{vars.$colors-beige};
+    --p-button-primary-active-background: #{vars.$colors-beige};
+    --p-button-primary-border-color: #{vars.$colors-beige};
+    --p-button-primary-hover-border-color: #{vars.$colors-beige};
+    --p-button-primary-active-border-color: #{vars.$colors-beige};
+    --p-button-primary-color: #{vars.$colors-white};
+    --p-button-primary-hover-color: #{vars.$colors-white};
+    --p-button-primary-active-color: #{vars.$colors-white};
+    --p-button-text-primary-hover-background: transparent;
+    --p-button-text-primary-active-background: transparent;
+    --p-button-text-primary-color: #{vars.$colors-beige};
+
+
+    /** Secondary */
+    --p-button-secondary-background: #{vars.$colors-white};
+    --p-button-secondary-hover-background: #{vars.$colors-white};
+    --p-button-secondary-active-background: #{vars.$colors-white};
+    --p-button-secondary-border-color: #{vars.$colors-beige};
+    --p-button-secondary-hover-border-color: #{vars.$colors-beige};
+    --p-button-secondary-active-border-color: #{vars.$colors-beige};
+    --p-button-secondary-color: #{vars.$colors-beige};
+    --p-button-secondary-hover-color: #{vars.$colors-beige};
+    --p-button-secondary-active-color: #{vars.$colors-beige};
+    --p-button-text-secondary-hover-background: transparent;
+    --p-button-text-secondary-active-background: transparent;
+
+    /** Contrast */
+    --p-button-contrast-background: #{vars.$colors-white};
+    --p-button-contrast-hover-background: #{vars.$colors-white};
+    --p-button-contrast-active-background: #{vars.$colors-white};
+    --p-button-contrast-border-color: #{vars.$colors-black};
+    --p-button-contrast-hover-border-color: #{vars.$colors-black};
+    --p-button-contrast-active-border-color: #{vars.$colors-black};
+    --p-button-contrast-color: #{vars.$colors-black};
+    --p-button-contrast-hover-color: #{vars.$colors-black};
+    --p-button-contrast-active-color: #{vars.$colors-black};
+
+    /** Danger */
+    --p-button-danger-background: #{vars.$colors-red};
+    --p-button-danger-border-color: #{vars.$colors-red};
+    /*
+    --p-button-error-hover-background: #{vars.$colors-beige};
+    --p-button-error-active-background: #{vars.$colors-beige};
+    --p-button-error-border-color: #{vars.$colors-beige};
+    --p-button-error-hover-border-color: #{vars.$colors-beige};
+    --p-button-error-active-border-color: #{vars.$colors-beige};
+    --p-button-error-color: #{vars.$colors-white};
+    --p-button-error-hover-color: #{vars.$colors-white};
+    --p-button-error-active-color: #{vars.$colors-white};
+    */
+
+
+    --p-button-border-radius: #{vars.$br-s};
+    border-width: 3px;
+    height: 48px;
+
+    &__label {
+      font-size: var(--buttonLabelFontSize, vars.$fs-m);
+      font-weight: vars.$fw-heavy;
+    }
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @include mobile {
+    .Button {
+      height: 40px;
+    }
+  }
+}

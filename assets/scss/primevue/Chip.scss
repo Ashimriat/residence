@@ -1,0 +1,20 @@
+
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Chip {
+    width: 179px;
+    height: 20px;
+    padding: 4px 8px;
+    box-sizing: content-box;
+    border-radius: vars.$br-x2s;
+    background-color: vars.$colors-beige;
+    &__label {
+      color: vars.$colors-white;
+      font-size: vars.$fs-s;
+      font-weight: vars.$fw-bold;
+    }
+  }
+}

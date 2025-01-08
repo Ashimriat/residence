@@ -1,0 +1,21 @@
+
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .RadioButton {
+    --p-radiobutton-background: transparent;
+    --p-radiobutton-border-color: #{vars.$colors-black};
+    --p-radiobutton-checked-border-color: #{vars.$colors-beige};
+    --p-radiobutton-checked-background: #{vars.$colors-beige};
+    --p-radiobutton-checked-hover-border-color: #{vars.$colors-beige};
+    --p-radiobutton-checked-focus-border-color: #{vars.$colors-beige};
+    --p-radiobutton-focus-ring-color: #{vars.$colors-beige};
+    --p-radiobutton-checked-hover-background: #{vars.$colors-beige};
+
+    & .p-radiobutton-box {
+      border-width: 2px;
+    }
+  }
+}

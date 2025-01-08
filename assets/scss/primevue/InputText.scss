@@ -1,0 +1,10 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .InputText {
+    --p-inputtext-focus-border-color: none;
+  }
+}
+

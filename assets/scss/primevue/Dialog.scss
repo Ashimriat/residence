@@ -1,0 +1,15 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Dialog {
+    --p-dialog-background: #{vars.$colors-greyBackground};
+    --p-dialog-header-padding: 24px 64px;
+    --p-dialog-content-padding: 0 64px 24px;
+
+    & .p-dialog-close-button {
+      @include relative((right: -10px));
+    }
+  }
+}
