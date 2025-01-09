@@ -17,7 +17,6 @@ declare module 'vue' {
     PGalleria: typeof import('primevue/galleria')['default']
     PInputGroup: typeof import('primevue/inputgroup')['default']
     PInputGroupAddon: typeof import('primevue/inputgroupaddon')['default']
-    PInputNumber: typeof import('primevue/inputnumber')['default']
     PInputText: typeof import('primevue/inputtext')['default']
     PPaginator: typeof import('primevue/paginator')['default']
     PPassword: typeof import('primevue/password')['default']
@@ -36,6 +35,5 @@ declare module 'vue' {
   }
   export interface ComponentCustomProperties {
     KeyFilter: typeof import('primevue/keyfilter')['default']
-    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }
