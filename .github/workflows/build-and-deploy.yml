@@ -16,8 +16,9 @@ jobs:
         with:
           deno-version: v2.x
       # Pick your own package manager and build script
-      - name: Build step
+      - name: Install step
         run: deno install --allow-scripts=npm:@parcel/watcher@2.5.0,npm:vue-demi@0.14.10
+      - name: Build step
         run: deno run -A generate:github
         env:
           NUXT_APP_BASE_URL: ashimriat.github.io/residence_test
