@@ -1,0 +1,1 @@
+import{d as a,a as n,o as s,c as t,n as o,e as c}from"./BP5lhVkG.js";const i=a({__name:"Rating",setup(r){const e=n("Rating");return(l,m)=>(s(),t("div",{class:o(c(e)())},null,2))}});export{i as default};

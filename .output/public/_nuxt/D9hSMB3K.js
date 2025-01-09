@@ -1,0 +1,1 @@
+import{d as a,a as s,o as n,c as o,n as r,e as t}from"./BP5lhVkG.js";const p=a({__name:"Gallery",setup(c){const e=s();return(l,m)=>(n(),o("div",{class:r(t(e)())},"Галлерея",2))}});export{p as default};
