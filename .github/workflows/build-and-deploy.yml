@@ -20,8 +20,8 @@ jobs:
         run: deno install --allow-scripts=npm:@parcel/watcher@2.5.0,npm:vue-demi@0.14.10
       - name: Build step
         run: deno run -A generate:github
-        env:
-          # NUXT_APP_BASE_URL: residence_test
+      #  env:
+        #  NUXT_APP_BASE_URL: residence_test
       - name: Upload artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
