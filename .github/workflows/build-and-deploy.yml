@@ -19,9 +19,10 @@ jobs:
       - name: Install step
         run: deno install --allow-scripts=npm:@parcel/watcher@2.5.0,npm:vue-demi@0.14.10
       - name: Build step
-        run: deno run -A generate:github
-      #  env:
-        #  NUXT_APP_BASE_URL: residence_test
+        run: deno run -A generate
+        env:
+          NITRO_PRESET: github_pages
+          NUXT_BASE_APP_URL: /residence/
       - name: Upload artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3

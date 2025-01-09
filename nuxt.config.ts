@@ -9,18 +9,30 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export default defineNuxtConfig({
   ssr: false,
   nitro: {
-    ignore: [
-      '/constants'
-    ]
+    hooks: {
+      'prerender:generate'(route) {
+        route.skip = route.route.indexOf('constants') !== -1;
+      },
+    },
   },
   app: {
+    baseURL: '/residence/',
     head: {
+      title: 'Резиденция',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: 'Твоё главное комьюнити' },
+        // { name: 'format-detection', content: 'telephone=no' }
+      ],
       script: [
         {
           src: 'https://telegram.org/js/telegram-web-app.js',
         },
       ],
     },
+    pageTransition: false,
+    layoutTransition: false,
   },
   compatibilityDate: '2024-11-01',
   alias: {
@@ -51,10 +63,6 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  app: {
-    pageTransition: false,
-    layoutTransition: false,
   },
   components: [
     {
