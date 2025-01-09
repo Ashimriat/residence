@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: "20"
       # Pick your own package manager and build script
-      - run: deno install
-      - run: deno run -A build:github
+      - run: npm install
+      - run: npm run build:github
         env:
           NUXT_APP_BASE_URL: ashimriat.github.io/residence_test
           NITRO_PRESET: github_pages
