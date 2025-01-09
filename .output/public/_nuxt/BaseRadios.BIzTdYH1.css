@@ -1,0 +1,1 @@
+.BaseRadios{border:2px solid #1b1b1b;border-radius:12px;display:flex}.BaseRadios__option{display:flex;flex-basis:calc(100%/var(--29db8421));gap:12px;padding:10px}.BaseRadios__option:not(.BaseRadios__option:last-of-type){border-right:1px solid #1b1b1b}.BaseRadios__label{color:#1b1b1b;font-weight:500}

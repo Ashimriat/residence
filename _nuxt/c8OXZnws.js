@@ -1,0 +1,1 @@
+import{d as a,a as s,c as n,n as o,e as r,o as t}from"./BPtkx-2G.js";const p=a({__name:"Gallery",setup(c){const e=s();return(l,m)=>(t(),n("div",{class:o(r(e)())},"Галлерея",2))}});export{p as default};

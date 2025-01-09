@@ -1,0 +1,1 @@
+import{d as s,a,c as n,n as o,e as t,o as c}from"./BPtkx-2G.js";const l=s({__name:"Directions",setup(r){const e=a("DirectionsPage");return(i,m)=>(c(),n("div",{class:o(t(e)())},"Направления",2))}});export{l as default};

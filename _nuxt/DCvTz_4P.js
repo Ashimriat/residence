@@ -1,0 +1,1 @@
+import{d as a,a as n,c as s,n as t,e as o,o as c}from"./BPtkx-2G.js";const i=a({__name:"Rating",setup(r){const e=n("Rating");return(l,m)=>(c(),s("div",{class:t(o(e)())},null,2))}});export{i as default};
