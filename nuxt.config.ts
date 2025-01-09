@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   ssr: false,
   nitro: {
     static: true,
-    preset: 'github-pages',
   },
   app: {
     head: {
