@@ -9,12 +9,9 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export default defineNuxtConfig({
   ssr: false,
   nitro: {
-    static: true,
-    hooks: {
-      'prerender:generate'(route) {
-        route.skip = true;
-      }
-    }
+    ignore: [
+      '/constants'
+    ]
   },
   app: {
     head: {
