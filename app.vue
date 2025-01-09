@@ -16,7 +16,7 @@ PDynamicDialog
 
 <style lang="scss">
 @use 'primeicons/primeicons.css';
-@use '~scss/fonts';
+@use '~scss/fonts'; 
 
 html {
   font-size: var(--docFontSize, 20px);
