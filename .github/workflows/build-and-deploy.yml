@@ -9,14 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
         with:
-          node-version: "20"
+          deno-version: v2.x
       # Pick your own package manager and build script
-      - run: npm install
-      - run: npm run build:github
+      - name: Build step
+        run: deno install --allow-scripts=npm:@parcel/watcher@2.5.0,npm:vue-demi@0.14.10
+        run: deno run -A generate:github
         env:
           NUXT_APP_BASE_URL: ashimriat.github.io/residence_test
           NITRO_PRESET: github_pages
