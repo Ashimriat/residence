@@ -10,6 +10,11 @@ export default defineNuxtConfig({
   ssr: false,
   nitro: {
     static: true,
+    hooks: {
+      'prerender:generate'(route) {
+        route.skip = true;
+      }
+    }
   },
   app: {
     head: {

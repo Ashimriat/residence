@@ -1,1 +1,0 @@
-.BaseButton{max-width:var(--buttonMaxWidth)}.BaseButton--text{--p-button-padding-x:0;--p-button-padding-y:0;--buttonLabelFontSize:500}.BaseButton--icon_left div{order:1}.BaseButton--icon_left span,.BaseButton--icon_right div{order:2}.BaseButton--icon_right span{order:1}

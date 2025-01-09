@@ -21,7 +21,7 @@ jobs:
       - name: Build step
         run: deno run -A generate:github
         env:
-          NUXT_APP_BASE_URL: ashimriat.github.io/residence_test
+          # NUXT_APP_BASE_URL: ashimriat.github.io/residence_test
           NITRO_PRESET: github_pages
       - name: Upload artifact
         id: deployment
