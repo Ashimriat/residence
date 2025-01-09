@@ -7,6 +7,10 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+  nitro: {
+    static: true,
+  },
   app: {
     head: {
       script: [
