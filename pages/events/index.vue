@@ -73,7 +73,7 @@ div(:class="$b()")
     EventsList(
       with-calendar
       with-pagination
-      :events-on-page-amount="6"
+      :events-on-page-amount="4"
       :tabs-list="tabsList"
       :events-data="mockEventsBigData(4, 8)"
       :filters="filters"
@@ -85,6 +85,7 @@ div(:class="$b()")
   @include flexColumn((gap: 4rem));
   &__section {
     @include flexColumn((gap: 26px));
+    padding: 0 80px;
     & > button {
       max-width: 275px;
       justify-content: space-between;

@@ -65,12 +65,12 @@ BaseTabs(
       :class="$b('calendar')"
     )
   template(#commonTab)
-    div(:class="$b('eventsCardsContainer')")
+    div(:class="$b('eventsCardsContainer', { calendar: withCalendar })")
       EventCard(
         v-for="(data, j) in displayedItems"
         :key="`eventData_${j}`"
         :event-data="data"
-        :class="$b('eventCard', { withCalendar: withCalendar })"
+        :class="$b('eventCard', { calendar: withCalendar })"
       )
 BasePagination(
   v-if="withPagination"
@@ -88,11 +88,15 @@ $paddingTop: 28px;
     @include flex((gap: 40px, flex-wrap: wrap));
     padding: 28px 0;
     min-height: 340px;
+    &--calendar {
+      max-width: 932px;
+    }
   }
   &__eventCard {
     max-width: 400px;
-    &--withCalendar {
-      max-width: 448px;
+    &--calendar {
+      max-width: 446px;
+      max-height: 394px;
     }
   }
   &__calendar {
