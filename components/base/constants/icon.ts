@@ -13,6 +13,8 @@ enum EIcons {
   INSTAGRAM_CONTACTS = 'instagramContacts',
   ARROW_DOWN = 'arrowDown',
   ARROW_UP_RIGHT = 'arrowUpRight',
+  CALENDAR_PREV_MONTH = 'calendarPrevMonth',
+  CALENDAR_NEXT_MONTH = 'calendarNextMonth',
   CALENDAR = 'calendar',
   USER = 'user',
   EDIT = 'edit',
@@ -27,6 +29,7 @@ enum EIcons {
   CROSS_CIRCLED = 'crossCircled',
   SEARCH = 'search',
   SHIELD = 'shield',
+  CROSS = 'cross',
 }
 
 enum EIconsSizes {

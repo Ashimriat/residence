@@ -33,6 +33,14 @@ const openEventsCalendar = () => {};
 
 const handleEventRequestSubmit = () => {};
 
+const tabsList: TabData[] = [
+  { label: 'Игры', id: 'games'},
+  { label: 'Поездки', id: 'trips' },
+  { label: 'Встречи', id: 'meets' },
+  { label: 'Kids', id: 'kids' },
+  { label: 'Women', id: 'women' },
+];
+
 const $b = useBem('MainPage');
 </script>
 
@@ -116,7 +124,7 @@ div(:class="$b()")
     h2
       | Ближайшие ивенты
     EventsList(
-      :tabs-list="['Игры', 'Поездки', 'Встречи', 'Kids', 'Women']"
+      :tabs-list="tabsList"
       :events-data="mockEventsBigData(5, 6)"
       :events-on-page-amount="6"
     )

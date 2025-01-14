@@ -24,8 +24,11 @@ import WhatsApp from '~assets/icons/whatsapp.svg';
 import Gear from '~assets/icons/settings.svg';
 import Clans from '~assets/icons/clans.svg';
 import CrossCircled from '~assets/icons/crossCircled.svg';
+import CalendarNextMonth from '~assets/icons/calendarNextMonth.svg';
+import CalendarPrevMonth from '~assets/icons/calendarPrevMonth.svg';
 import Shield from '~assets/icons/shield.svg';
 import Search from '~assets/icons/search.svg';
+import Cross from '~assets/icons/cross.svg';
 import { EIcons, EIconsSizes } from '../constants/icon';
 
 
@@ -58,6 +61,9 @@ const ICONS_LIST: Record<EIcons, string> = {
   [EIcons.CROSS_CIRCLED]: CrossCircled,
   [EIcons.SEARCH]: Search,
   [EIcons.SHIELD]: Shield,
+  [EIcons.CALENDAR_NEXT_MONTH]: CalendarNextMonth,
+  [EIcons.CALENDAR_PREV_MONTH]: CalendarPrevMonth,
+  [EIcons.CROSS]: Cross,
 } as const;
 
 const ICONS_DESKTOP_SIZES: Record<EIconsSizes, number> = {
@@ -90,14 +96,17 @@ export default function useIcon(iconType: EIcons, iconSize: EIconsSizes) {
   const { isMobile } = useDevice();
   const usedSizes = isMobile ? ICONS_MOBILE_SIZES : ICONS_DESKTOP_SIZES;
   let size = usedSizes[iconSize];
-  if (iconType === EIcons.USERS && iconSize !== EIconsSizes.M) {
-    size = 28;
-  }
-
-  return {
+  
+  const res = {
     image: ICONS_LIST[iconType],
     finalSize: `${size}rem`,
     isSocialIcon: SOCIAL_ICONS.includes(iconType),
   };
+
+  if (iconType === EIcons.USERS && iconSize !== EIconsSizes.M) {
+    res.finalSize = '28px';
+  }
+  
+  return res;
 }
 export { SOCIAL_ICONS };

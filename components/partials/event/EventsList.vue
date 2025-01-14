@@ -29,14 +29,11 @@ const eventType = ref<'kid' | 'women' | ''>('');
 
 const activeEvents = computed(() => {
   const activeTabIndex = tabsList.findIndex(({ id }) => id === activeTab.value);
-  console.log("ACTIVE TAB INDEX", activeTabIndex);
-  console.log("EVENTS DATA", eventsData[activeTabIndex]);
   return eventsData[activeTabIndex];
 });
 const { isMobile } = useDevice();
 
 const { page, itemsAmount, displayedItems } = usePagination(activeEvents, eventsOnPageAmount);
-console.log("DISPLAYED ITEMS", displayedItems.value);
 
 const $b = useBem();
 

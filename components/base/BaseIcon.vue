@@ -6,6 +6,7 @@ import useIcon from './composables/useIcon';
 /** Local Types & Variables */
 type Props = {
   type: EIcons;
+  isClickable?: boolean;
   size?: EIconsSizes;
 }; 
 
@@ -13,6 +14,7 @@ type Props = {
 /** Props & Emits */
 const {
   type,
+  isClickable = false,
   size = EIconsSizes.M
 } = defineProps<Props>();
 
@@ -26,7 +28,7 @@ const $b = useBem('BaseIcon');
 </script>
 
 <template lang="pug">
-div(:class="$b({ 'social': isSocialIcon })")
+div(:class="$b({ 'social': isSocialIcon, clickable: isClickable })")
   component(:is="image")
 </template>
 
@@ -40,6 +42,9 @@ div(:class="$b({ 'social': isSocialIcon })")
     padding: 8px;
     border-radius: vars.$br_x2l;
     background: vars.$colors_greyDark;
+  }
+  &--clickable {
+    cursor: pointer;
   }
 }
 </style>

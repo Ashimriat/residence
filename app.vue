@@ -2,8 +2,11 @@
 const { isMobile } = useDevice();
 
 onBeforeMount(() => {
-  if (!isMobile) return;
-  document.documentElement.style.setProperty('--docFontSize', '10px');
+  if (!isMobile) {
+    window.Telegram.WebApp.expand();
+  } else {
+    document.documentElement.style.setProperty('--docFontSize', '10px');
+  }
 });
 </script>
 

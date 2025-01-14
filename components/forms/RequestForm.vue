@@ -118,7 +118,6 @@ div(:class="$b()")
     }
   }
   &__requestText {
-    padding: 16px 12px 8px 16px;
     height: 150px;
     resize: none;
   }
