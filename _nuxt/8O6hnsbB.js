@@ -1,0 +1,1 @@
+import{G as a,H as s,c as n,J as t,K as o,o as c}from"./aB8ygRKp.js";const i=a({__name:"Rating",setup(r){const e=s("Rating");return(l,m)=>(c(),n("div",{class:t(o(e)())},null,2))}});export{i as default};
