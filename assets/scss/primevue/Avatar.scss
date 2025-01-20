@@ -4,13 +4,13 @@
 
 @layer residence {
   .Avatar {
-    min-width: 48px;
-    min-height: 48px;
+    min-width: var(--avatarSize, 48px);
+    min-height: var(--avatarSize, 48px);
     --p-avatar-background: var(--avatarBackground, #{vars.$colors-black});
-    --p-avatar-lg-width: var(--avatarWidth, 8rem);
-    --p-avatar-xl-width: var(--avatarWidth, 10rem);
+    --p-avatar-lg-width: 9rem;
+    --p-avatar-xl-width: 12rem;
     &__label {
-      font-size: vars.$fs-m;
+      font-size: var(--avatarLabelFontSize, #{vars.$fs-m});
       font-weight: vars.$fw-bold;
       color: vars.$colors-white;
     }
@@ -18,9 +18,7 @@
 
   @include mobile {
     .Avatar {
-      &__label {
-        font-size: vars.$fs-x2l;
-      }
+      --avatarLabelFontSize: #{vars.$fs-x2l};
     }
   }
 }

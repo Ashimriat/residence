@@ -5,7 +5,7 @@ onBeforeMount(() => {
   if (!isMobile) {
     window.Telegram.WebApp.expand();
   } else {
-    document.documentElement.style.setProperty('--docFontSize', '10px');
+    document.documentElement.style.setProperty('--docFontSize', '12px');
   }
 });
 </script>

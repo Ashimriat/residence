@@ -1,0 +1,22 @@
+@use '~scss/mixins' as *;
+@use '~scss/vars';
+
+
+@layer residence {
+  .Badge {
+    --p-overlaybadge-outline-width: 0;
+    --p-badge-primary-background: #{vars.$colors-beige};
+    --p-badge-height: 18px;
+    --p-badge-min-width: 18px;
+    --p-badge-font-size: 10px;
+  }
+
+  @include mobile {
+    .Badge {
+      --p-badge-height: 12px;
+      --p-badge-min-width: 12px;
+      --p-badge-font-size: 8px;
+      transform: translate(2px, -4px);
+    }
+  }
+}

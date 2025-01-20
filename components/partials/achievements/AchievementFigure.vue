@@ -12,6 +12,6 @@ div(:class="$b()")
   aspect-ratio: 1;
   background-color: var(--backgroundColor);
   clip-path: vars.$figures-achievement;
-  --backgroundColor: #{vars.$colors-greyLight};
+  --backgroundColor: #{vars.$colors-grey};
 }
 </style>

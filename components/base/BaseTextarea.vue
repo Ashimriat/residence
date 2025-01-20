@@ -44,10 +44,15 @@ div(:class="$b()")
     min-height: 115px;
     height: 100%;
     resize: none;
+    padding: 6px 8px;
   }
   & span {
     @include absolute((bottom: 10px, right: 12px));
     font-size: vars.$fs-xs;
   }
+}
+
+@include mobile {
+
 }
 </style>

@@ -6,7 +6,7 @@ type MenuItem = {
   url: string;
   icon?: EIcons;
 };
-declare type MenuStructure = Array<{
+export type MenuStructure = Array<{
   section: Optional<MenuItem, 'url'>;
   items?: MenuItem[];
 }>;

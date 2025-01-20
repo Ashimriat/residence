@@ -6,19 +6,14 @@ import {
   EIconsSizes,
 } from '~/components/base';
 
-enum EComponentEvents {
-  ADDITIONAL_BUTTON = 'additionalButton',
-  DATA_SUBMIT = 'dataSubmit'
-}
-
 type Props = {
   withoutSex?: boolean;
   submitButton: EButtons;
   additionalButtons?: EButtons[];
 };
 type Emits = {
-  (e: EComponentEvents.ADDITIONAL_BUTTON, type: EButtons): void;
-  (e: EComponentEvents.DATA_SUBMIT, data: EditableUserData): void;
+  additionalButton: [type: EButtons];
+  dataSubmit: [data: EditableUserData];
 }
 
 const {
@@ -56,7 +51,7 @@ const $b = useBem('UserDataForm');
 <template lang="pug">
 form(
   :class="$b()"
-  @submit.prevent.stop="emit(EComponentEvents.DATA_SUBMIT, data)"
+  @submit.prevent.stop="emit('dataSubmit', data)"
 )
   div(:class="$b('container')")
     PAvatar(
@@ -125,7 +120,7 @@ form(
     :key="button"
     :type="button"
     :class="$b('textButton')"
-    @click="emit(EComponentEvents.ADDITIONAL_BUTTON, button)"
+    @click="emit('additionalButton', button)"
   )
   BaseButton(
     is-submit

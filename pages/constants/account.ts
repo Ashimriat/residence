@@ -17,7 +17,7 @@ const TABS = [
   {
     id: 'clans',
     label: 'Кланы',
-    icon: EIcons.CLANS,
+    icon: EIcons.SHIELD,
   },
   {
     id: 'referrals',

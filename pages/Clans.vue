@@ -97,7 +97,7 @@ section(:class="$b()")
   &__createClanButton {
     width: 100%;
     --buttonMaxWidth: 250px;
-    --buttonLabelFontSize: 20px;
+    --buttonLabelFontSize: #{vars.$fs-static-m};
   }
   &__search {
     --searchMaxWidth: 360px;

@@ -8,12 +8,24 @@ import { TABS, GAMES_ICONS } from '../constants/account';
 
 const activeTab = ref<string>(TABS[0].id);
 
+const route = useRoute();
+const router = useRouter();
+
 function setActiveTab(tab: string): void {
   activeTab.value = tab;
 }
 
 
 const $b = useBem('AccountPage');
+
+onMounted(async () => {
+  let { tab } = route.query;
+  if (!tab) {
+    tab = TABS[0].id;
+    router.push({ path: route.path, query: { tab }});
+  }
+  activeTab.value = tab as string;
+})
 </script>
 
 <template lang="pug">
@@ -131,8 +143,11 @@ div(:class="$b()")
     &:first-of-type {
       gap: 8px;
     }
+    &:nth-of-type {
+      font-size: vars.$fs-s;
+    }
     &:last-of-type {
-      font-size: vars.$fs-x2s;
+      font-size: vars.$fs-static-x2s;
       gap: 14px;
       & span {
         @include relative;
@@ -158,7 +173,7 @@ div(:class="$b()")
     font-weight: vars.$fw-bold;
   }
   &__userTitle {
-    font-size: vars.$fs-x2s;
+    font-size: vars.$fs-static-x2s;
     font-weight: vars.$fw-bold;
     width: 53px;
     height: 14px;
@@ -169,7 +184,7 @@ div(:class="$b()")
   }
   &__settingsButton {
     --p-button-gap: 0px;
-    --buttonLabelFontSize: #{vars.$fs-xs};
+    --buttonLabelFontSize: #{vars.$fs-static-xs};
     width: 112px;
     height: 24px;
     border-radius: vars.$br-x2s;

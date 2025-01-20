@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { EButtons, EIcons } from '../../base';
 
-
-enum EComponentEvents {
-  SIGN_UP = 'signUp'
-}
-
 /** Local Types & Variables */
 type Props = {
   withDetails?: boolean;
@@ -13,7 +8,7 @@ type Props = {
   eventData: EventData;
 };
 type Emits = {
-  (e: EComponentEvents.SIGN_UP): void
+  signUp: [void]
 };
 
 
@@ -45,70 +40,65 @@ const $b = useBem();
 </script>
 
 <template lang="pug">
-div(:class="$b({ account: isAccountMode })")
-  div(
-    v-if="!isAccountMode"
-    :class="$b('topContainer')"
-  )
-    div(:class="$b('masterDataBlock')")
-      PAvatar(
-        label="UI"
-        shape="circle"
-      )
-      div(:class="$b('masterName')")
-        | {{ gameData.master }}
-    div(:class="$b('playersAmount')")
-      span
-        | {{ `${currentPlayers.length}/${gameData.maxPlayersAmount}` }}
-      BaseIcon(:type="EIcons.USERS")
-  EventInfo(
-    :data="eventData"
-    :is-account-mode="isAccountMode"
-    :with-abon="isAbonWorks && !isAccountMode"
-  )
-    template(v-if="withDetails")
-      div(
-        v-if="isShowingDetails"
-        :class="$b('detailsBlock')"
-      )
-        div
-          | {{ gameData.description }}
-        div(:class="$b('playersBlock')")
-          PAvatar(
-            v-for="player in currentPlayers"
-            :key="player"
-            label="UI"
-          )
-      div(:class="$b('buttonsBlock')")
-        BaseButton(
-          :type="EButtons.ENTER_EVENT"
-          @click="emit(EComponentEvents.SIGN_UP)"
+BaseCard(:class="$b({ account: isAccountMode })")
+  template(#subContent)
+    div(
+      v-if="!isAccountMode"
+      :class="$b('topContainer')"
+    )
+      div(:class="$b('masterDataBlock')")
+        PAvatar(
+          label="UI"
+          shape="circle"
         )
-        BaseButton(
-          :type="secondButtonType"
-          omit-icon
-          @click="toggleDetails"
-        )
-        BaseButton(
+        div(:class="$b('masterName')")
+          | {{ gameData.master }}
+      div(:class="$b('playersAmount')")
+        span
+          | {{ `${currentPlayers.length}/${gameData.maxPlayersAmount}` }}
+        BaseIcon(:type="EIcons.USERS")
+  template(#default)
+    EventInfo(
+      :data="eventData"
+      :is-account-mode="isAccountMode"
+      :with-abon="isAbonWorks && !isAccountMode"
+    )
+      template(v-if="withDetails")
+        div(
           v-if="isShowingDetails"
-          :type="EButtons.SHARE"
+          :class="$b('detailsBlock')"
         )
+          div
+            | {{ gameData.description }}
+          div(:class="$b('playersBlock')")
+            PAvatar(
+              v-for="player in currentPlayers"
+              :key="player"
+              label="UI"
+            )
+        div(:class="$b('buttonsBlock')")
+          BaseButton(
+            :type="EButtons.ENTER_EVENT"
+            @click="emit('signUp')"
+          )
+          BaseButton(
+            :type="secondButtonType"
+            omit-icon
+            @click="toggleDetails"
+          )
+          BaseButton(
+            v-if="isShowingDetails"
+            :type="EButtons.SHARE"
+          )
 </template>
 
 <style lang="scss">
 .EventCard {
-  @include flexColumn((justify-content: space-between));
-  max-width: 876px;
-  height: 584px;
-  padding: 24px 12px 12px 12px;
-  background-color: vars.$colors-greyLight;
-  border-radius: vars.$br-l;
-  box-shadow: vars.$rest-popupShadow;
   &--account {
-    width: 392px;
-    height: fit-content;
-    padding: 0;
-    box-shadow: none;
+    --cardWidth: 392px;
+    --cardHeight: fit-content;
+    --cardPadding: 0;
+    --cardBoxShadow: none;
   }
   &__topContainer {
     @include flex((

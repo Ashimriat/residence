@@ -35,7 +35,7 @@ section(:class="$b()")
   &__merchItem {
     @include flex((align-items: flex-end));
     padding: 12px;
-    background-color: vars.$colors-greyLight;
+    background-color: vars.$colors-grey;
     flex-basis: 100%;
     height: 400px;
     max-width: 400px;

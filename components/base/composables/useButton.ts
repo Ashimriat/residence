@@ -15,6 +15,12 @@ type ButtonData = {
   isText?: boolean;
 };
 
+const SIGN_IN_BUTTON_DATA: ButtonData = {
+  label: 'Войти',
+  icon: EIcons.LOGIN,
+  iconPos: EIconPos.RIGHT,
+} as const;
+
 const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.ALREADY_REGISTERED]: {
     label: 'Уже есть аккаунт?',
@@ -28,9 +34,10 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Забыли пароль?',
     isText: true,
   },
-  [EButtons.SIGN_IN]: {
-    label: 'Войти',
-    icon: EIcons.LOGIN,
+  [EButtons.SIGN_IN]: SIGN_IN_BUTTON_DATA,
+  [EButtons.SIGN_IN_MOBILE]: {
+    ...SIGN_IN_BUTTON_DATA,
+    variant: EButtonVariant.SECONDARY,
   },
   [EButtons.ENTER_EVENT]: {
     label: 'Записаться',
@@ -51,6 +58,9 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.WELCOME_BEGINNING]: {
     label: 'Начнём!',
+    variant: EButtonVariant.CONTRAST,
+    iconPos: EIconPos.RIGHT,
+    icon: EIcons.ARROW_DOWN,
   },
   [EButtons.DETAILS]: {
     label: 'Подробнее',
@@ -61,6 +71,11 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.ADD_EVENT]: {
     label: 'Событие',
     icon: EIcons.PLUS_CIRCLED,
+  },
+  [EButtons.ADD_EVENT_MOBILE]: {
+    label: 'Создать событие',
+    icon: EIcons.PLUS_CIRCLED,
+    iconPos: EIconPos.RIGHT,
   },
   [EButtons.SHARE]: {
     icon: EIcons.LINK,
@@ -94,7 +109,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.BUY_MERCH]: {
     label: 'Написать',
-    icon: EIcons.TELEGRAM_MERCH,
+    icon: EIcons.MERCH,
   },
   [EButtons.USER_SETTINGS]: {
     label: 'Настройки',
@@ -104,6 +119,12 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.ORDER_GAME]: {
     label: 'Заказать игру',
     icon: EIcons.PLUS_CIRCLED,
+  },
+  [EButtons.ORDER_GAME_MOBILE]: {
+    label: 'Заказать игру',
+    icon: EIcons.ARROW_UP_RIGHT,
+    iconPos: EIconPos.RIGHT,
+    variant: EButtonVariant.SECONDARY,
   },
   [EButtons.ADD_PLAYERS]: {
     label: 'Добавить игроков',

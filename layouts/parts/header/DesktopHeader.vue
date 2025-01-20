@@ -1,16 +1,12 @@
 <script setup lang="ts">
+import type { Emits } from './types';
 import {
   EIcons,
   EButtons,
 } from '~/components/base';
-import { EComponentEvents } from '../constants/header';
 import Logo from '~/assets/images/logo/small.svg';
+import NavigationMenu from '../NavigationMenu/NavigationMenu.vue';
 
-
-type Emits = {
-  (e: EComponentEvents.LOGIN): void;
-  (e: EComponentEvents.ADD_EVENT): void;
-};
 
 const emit = defineEmits<Emits>();
 
@@ -27,27 +23,25 @@ div(:class="$b()")
     div(:class="$b('logoContainer')")
       Logo(
         :class="$b('logo')"
-        width="125"
-        height="52"
       )
     div(:class="$b('locationBlock')")
       BaseIcon(:type="EIcons.LOCATION")
       span
         | Москва
-  NavigationMenu(:class="$b('menu')")
+  NavigationMenu
   div(:class="$b('userBlock')")
     BaseButton(
       v-if="!isLoggedIn"
       :type="EButtons.SIGN_IN"
       :class="$b('userButton')"
-      @click="emit(EComponentEvents.LOGIN)"
+      @click="emit('login')"
     )
     template(v-else)
       BaseButton(
         v-if="!isCommonUser"
         :type="EButtons.ADD_EVENT"
         :class="$b('userButton')"
-        @click="emit(EComponentEvents.ADD_EVENT)"
+        @click="emit('addEvent')"
       )
       Notifications
       NuxtLink(to="/account")
@@ -57,7 +51,6 @@ div(:class="$b()")
 <style lang="scss">
 .DesktopHeader {
   @include flex((justify-content: space-between));
-  padding: 0 80px;
   &__subBlock {
     @include flex((gap: 16px));
   }
@@ -79,11 +72,6 @@ div(:class="$b()")
       width: 18px;
       height: 18px;
     }
-  }
-  &__menu {
-    --titleFontSize: #{vars.$fs-s};
-    --gap: 24px;
-    --sectionJustify: center;
   }
   &__userBlock {
     @include flex((

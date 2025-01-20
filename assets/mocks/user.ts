@@ -1,5 +1,6 @@
-import { EUserRoles } from '~/stores/constants/user';
 import type { EditableUserData, ProvidedUserData } from '~/types/stores/user';
+import { EUserRoles } from '~/stores/constants/user';
+import { mockNotifications } from './notification';
 
 
 const EDITABLE_DATA: EditableUserData = {
@@ -20,7 +21,7 @@ const EDITABLE_DATA: EditableUserData = {
 const PROVIDED_DATA: ProvidedUserData = {
   id: '0',
   role: EUserRoles.ADMIN,
-  notifications: [],
+  notifications: [...mockNotifications(8)],
   clans: {
     participant: [0],
     owner: [1],

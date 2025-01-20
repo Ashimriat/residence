@@ -9,7 +9,7 @@ export default function useTemplateElemsRefs<T extends Record<string, Element>>(
     templateElems.value[refName] = elem;
   }
 
-  const setTemplateElemRef = (refName: string): VNodeRef => setRefOriginal.bind(null, refName);
+  const setRef = (refName: string): VNodeRef => setRefOriginal.bind(null, refName);
 
-  return { templateElems, setTemplateElemRef }
+  return { templateElems, setRef }
 };

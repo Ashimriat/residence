@@ -20,29 +20,27 @@ const useUserStore = defineStore('user', () => {
   const providedData = ref<ProvidedUserData>({
     id: '',
     role: EUserRoles.USER,
-    notifications: [],
+    notifications: [{}],
     clans: {
       participant: [],
       owner: [1],
     }
   } as ProvidedUserData);
+  const isLoggedIn = ref<boolean>(false);
 
   /**
    *
    */
-  const isLoggedIn = computed<boolean>(() => providedData.value.id !== '');
-  /**
-   *
-   */
-  const isCommonUser = computed<boolean>(() => providedData.value.role === EUserRoles.USER);
+  const isCommonUser = computed<boolean>(() => isLoggedIn.value && providedData.value.role === EUserRoles.USER);
 
-  const isAdmin = computed<boolean>(() => providedData.value.role === EUserRoles.ADMIN);
+  const isAdmin = computed<boolean>(() => isLoggedIn.value && providedData.value.role === EUserRoles.ADMIN);
 
   function setUserData([editable, provided]: [EditableUserData, ProvidedUserData?]): void {
     if (provided) {
       providedData.value = provided;
     }
     userData.value = editable;
+    isLoggedIn.value = true;
   }
 
   return {

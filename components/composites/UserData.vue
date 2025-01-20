@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { AvatarProps } from 'primevue';
-
 /** Local Types & Variables */
 type Props = {
   avatar?: string;

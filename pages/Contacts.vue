@@ -42,7 +42,7 @@ div(:class="$b()")
         v-for="(social, i) of mockSocials()"
         :key="`social_${i}`"
         :type="social.icon"
-        :size="EIconsSizes.XXL"
+        :size="EIconsSizes.XL"
       )
 </template>
 
@@ -88,7 +88,7 @@ div(:class="$b()")
       }
     }
     &__avatar {
-      --avatarWidth: 10rem;
+      --avatarSize: 10rem;
     }
     &__contactDataContainer {
       gap: 2rem;

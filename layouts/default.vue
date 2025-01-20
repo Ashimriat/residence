@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DesktopHeader from '~/components/layouts/header/DesktopHeader.vue';
-import MobileHeader from '~/components/layouts/header/MobileHeader.vue';
+import DesktopHeader from './parts/header/DesktopHeader.vue';
+import MobileHeader from './parts/header/MobileHeader.vue';
+import FooterContent from './parts/FooterContent.vue';
 
-// const userStore = useUserStore();
-// const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
+
 const { isMobile } = useDevice();
 const { openSignIn } = useModalDialog();
 
@@ -35,7 +35,10 @@ footer(:class="$b('footer')")
 <style lang="scss">
 .DefaultLayout {
   &__header {
+    --headerBackgroundColor: #{vars.$colors-greyBackground};
+
     @include sticky((z-index: 10, top: 0));
+    background-color: var(--headerBackgroundColor);
     &--desktop {
       @include flex((justify-content: center));
       padding: 24px 80px;
@@ -46,16 +49,20 @@ footer(:class="$b('footer')")
       @include fixed((top: 58px));
       @include centeredFlex;
       background-color: transparent;
+      padding: 0 24px;
     }
     & > div {
-      max-width: 1440px;
       width: 100%;
+      max-width: 1280px;
     }
   }
 
   &__header,
   &__footer {
     width: 100%;
+  }
+
+  &__footer {
     background-color: vars.$colors-greyBackground;
   }
 
@@ -83,6 +90,9 @@ footer(:class="$b('footer')")
         width: 100%;
         padding: 0 24px 40px !important;
       }
+    }
+    &__header {
+      --headerBackgroundColor: transparent;
     }
   }
 }

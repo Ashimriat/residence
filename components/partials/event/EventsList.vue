@@ -43,61 +43,59 @@ watch(activeTab, () => {
 </script>
 
 <template lang="pug">
-BaseTabs(
-  v-model:tab="activeTab"
-  :tabs="tabsList"
-)
-  template(#tabsCommon)
-    div(
-      v-if="withCalendar && isMobile"
-      :class="$b('mobileCalendar')"
-    )
-      | Выбрать дату
-      BaseIcon(:type="EIcons.CALENDAR")
-    BaseRadios(
-      v-if="filters?.length"
-      v-model="eventType"
-      is-resettable
-      :options="filters"
-    )
-    Calendar(
-      v-if="withCalendar && !isMobile"
-      :class="$b('calendar')"
-    )
-  template(#commonTab)
-    div(:class="$b('eventsCardsContainer', { calendar: withCalendar })")
-      EventCard(
-        v-for="(data, j) in displayedItems"
-        :key="`eventData_${j}`"
-        :event-data="data"
-        :class="$b('eventCard', { calendar: withCalendar })"
+div(:class="$b({ calendar: withCalendar })")
+  BaseTabs(
+    v-model:tab="activeTab"
+    :tabs="tabsList"
+  )
+    template(#tabsCommon)
+      div(
+        v-if="withCalendar && isMobile"
+        :class="$b('mobileCalendar')"
       )
-BasePagination(
-  v-if="withPagination"
-  v-model:page="page"
-  :amount-on-page="eventsOnPageAmount"
-  :items-amount="itemsAmount"
-)
+        | Выбрать дату
+        BaseIcon(:type="EIcons.CALENDAR")
+      BaseRadios(
+        v-if="filters?.length"
+        v-model="eventType"
+        is-resettable
+        :options="filters"
+      )
+      Calendar(
+        v-if="withCalendar && !isMobile"
+        :class="$b('calendar')"
+      )
+    template(#commonTab)
+      div(:class="$b('eventsCardsContainer', { calendar: withCalendar })")
+        EventCard(
+          v-for="(data, j) in displayedItems"
+          :key="`eventData_${j}`"
+          :event-data="data"
+          :class="$b('eventCard', { calendar: withCalendar })"
+        )
+  BasePagination(
+    v-if="withPagination"
+    v-model:page="page"
+    :amount-on-page="eventsOnPageAmount"
+    :items-amount="itemsAmount"
+  )
 </template>
 
 <style lang="scss">
 $paddingTop: 28px;
 
 .EventsList {
+  --cardMaxWidth: 400px;
+  &--calendar {
+    --cardsContainerMaxWidth: 932px;
+    --cardMaxWidth: 446px;
+    --cardMaxHeight: 394px;
+  }
   &__eventsCardsContainer {
     @include flex((gap: 40px, flex-wrap: wrap));
     padding: 28px 0;
     min-height: 340px;
-    &--calendar {
-      max-width: 932px;
-    }
-  }
-  &__eventCard {
-    max-width: 400px;
-    &--calendar {
-      max-width: 446px;
-      max-height: 394px;
-    }
+    max-width: var(--cardsContainerMaxWidth, initial);
   }
   &__calendar {
     @include absolute((right: 0, top: calc(20px + 49px + 28px)));
@@ -106,6 +104,7 @@ $paddingTop: 28px;
 
 @include mobile {
   .EventsList {
+    --cardMaxWidth: unset;
     &__mobileCalendar {
       @include flex((justify-content: space-between, align-items: center));
       height: 40xp;

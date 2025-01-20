@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type Props = {
   username: string;
-  avatar: string;
+  avatar?: string;
   game: string;
   text: string;
 };
@@ -57,6 +57,7 @@ div(:class="$b()")
 @include mobile {
   .UserReview {
     border-radius: vars.$br-s;
+    max-width: unset;
   }
 }
 </style>

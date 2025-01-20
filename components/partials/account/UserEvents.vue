@@ -117,7 +117,7 @@ $carouselMaxWidth: 800px;
   }
   &__subscription {
     @include flexColumn((gap: 1rem));
-    background-color: vars.$colors-greyExtraLight;
+    background-color: vars.$colors-greyLight;
     border-radius: vars.$br-s;
     padding: 20px;
     flex-basis: calc(50% - 0.4rem);

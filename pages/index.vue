@@ -8,6 +8,10 @@ import {
 import { GAMES_OPTIONS } from './constants/events';
 
 
+const aboutRef = useTemplateRef<HTMLDivElement>('about');
+
+
+
 const activeIndex = ref(0);
 const displayCustom = ref(false);
 const responsiveOptions = ref([
@@ -41,25 +45,37 @@ const tabsList: TabData[] = [
   { label: 'Women', id: 'women' },
 ];
 
+const { isMobile } = useDevice();
+
+function goToDetails(): void {
+  aboutRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+}
+
 const $b = useBem('MainPage');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
   section(:class="$b('section', bMod('general'))")
-    div(:class="$b('generalDataContainer')")
-      div
-        h1
-          span
-            | Что такое
-          span
-            | Резиденция?
+    BaseCard(:type="isMobile ? 'vertical' : 'horizontal'")
+      div(:class="$b('generalDataContainer')")
         div
-          | {{ mockText() }}
-      div(:class="$b('topButtonsContainer')")
-        BaseButton(:type="EButtons.WELCOME_BEGINNING")
-        BaseButton(:type="EButtons.DETAILS")
-  section(:class="$b('section', bMod('founder'))")
+          h1
+            span
+              | Что такое
+            span
+              | Резиденция?
+          div
+            | {{ mockText() }}
+        div(:class="$b('topButtonsContainer')")
+          BaseButton(
+            :type="EButtons.WELCOME_BEGINNING"
+            @click="goToDetails"
+          )
+  section(
+    ref="about"
+    :class="$b('section', bMod('founder'))"
+  )
     PAvatar(
       size="xlarge"
       shape="circle"
@@ -73,11 +89,11 @@ div(:class="$b()")
           | Основатель Резиденции
       div
         BaseIcon(
-          :size="EIconsSizes.XL"
+          :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.TELEGRAM"
         )
         BaseIcon(
-          :size="EIconsSizes.XL"
+          :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.INSTAGRAM"
         )
   section(:class="$b('section', bMod('gallery'))")
@@ -156,6 +172,10 @@ div(:class="$b()")
   @include centeredFlexColumn((gap: 4rem));
   padding-left: 80px;
   padding-right: 80px;
+
+  --generalCardHeight: 720px;
+
+
   &__section {
     width: 100%;
     max-width: 1280px;
@@ -165,19 +185,11 @@ div(:class="$b()")
       @include flexColumn((gap: 26px));
     }
     &--general {
-      @include flex((justify-content: flex-end));
-      width: 100%;
-      max-width: 1280px;
-      height: 720px;
-      padding: 12px;
-      border-radius: 2rem;
-      background-color: vars.$colors-greyLight;
-      &_mobile {
-        justify-content: center;
-        align-items: flex-end;
-        padding: 8px;
-        height: 470px;
-      }
+      --cardMinWidth: 100%;
+      --cardHeight: var(--generalCardHeight);
+      --cardPadding: 12px;
+      --cardBorderRadius: #{vars.$br-x2l};
+      --cardContentBorderRadius: #{vars.$br-xl};
     }
     &--founder {
       @include centeredFlex((gap: 1.5rem));
@@ -193,8 +205,7 @@ div(:class="$b()")
     @include flexColumn((justify-content: space-between));
     width: 560px;
     padding: 54px 48px 60px 48px;
-    background-color: vars.$colors-white;
-    border-radius: vars.$br-xl;
+    height: 100%;
     & > div:first-child {
       @include flexColumn((gap: 1rem));
     }
@@ -208,11 +219,12 @@ div(:class="$b()")
   &__topButtonsContainer {
     @include centeredFlex((gap: 16px));
     & > button {
-      width: 50%;
+      width: 100%;
     }
   }
   &__founderAvatar {
     border: 6px solid vars.$colors-beige;
+    --avatarSize: 12rem;
   }
   &__founderData {
     @include flexColumn((gap: 1.5rem));
@@ -225,7 +237,7 @@ div(:class="$b()")
       }
     }
     & > div:last-child {
-      @include flex((gap: 20px));
+      @include flex((gap: #{vars.$gaps-adaptive-s}));
     }
   }
   &__galleryPreview {
@@ -242,7 +254,9 @@ div(:class="$b()")
 }
 
 @include mobile {
-  .Main {
+  .MainPage {
+    --generalCardHeight: 470px;
+
     &__section {
       &--general {
         justify-content: center;

@@ -89,7 +89,7 @@ div(:class="$b()")
     @include flex((justify-content: space-between, align-items: center));
     padding: 20px;
     border-radius: vars.$br-s vars.$br-s 0 0; 
-    border-bottom: 2px solid vars.$colors-greyExtraLight;
+    border-bottom: 2px solid vars.$colors-greyLight;
   }
   &__notificationsContainer {
     border-radius: 0 0 vars.$br-s vars.$br-s;
@@ -101,7 +101,7 @@ div(:class="$b()")
     grid-template-rows: repeat(2, 1fr);
     gap: 10px;
     padding: 12px;
-    border-bottom: 2px solid vars.$colors-greyExtraLight;
+    border-bottom: 2px solid vars.$colors-greyLight;
     &:last-child {
       border-bottom: none;
     }

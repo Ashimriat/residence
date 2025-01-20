@@ -2,21 +2,23 @@ import type { PrimeVuePTOptions } from 'primevue/config';
 
 
 const pt: PrimeVuePTOptions = {
-  paginator: {
-    paginatorContainer: 'Paginator',
-  },
   avatar: {
     root: 'Avatar',
     label: 'Avatar__label',
   },
-  chip: {
-    root: 'Chip',
-    label: 'Chip__label',
+  overlaybadge: {
+    pcBadge: {
+      root: 'Badge'
+    },
   },
   button: {
     root: 'Button',
     label: 'Button__label',
     icon: 'Button__icon',
+  },
+  chip: {
+    root: 'Chip',
+    label: 'Chip__label',
   },
   dialog: {
     root: 'Dialog',
@@ -26,6 +28,9 @@ const pt: PrimeVuePTOptions = {
   },
   inputtext: {
     root: 'InputText',
+  },
+  paginator: {
+    paginatorContainer: 'Paginator',
   },
   radiobutton: {
     root: 'RadioButton',

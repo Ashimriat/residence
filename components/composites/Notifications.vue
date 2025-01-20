@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { EIcons } from '../base';
 
-
+type Props = {
+  withBg?: boolean;
+}
 /** State & Composables */
+const { withBg } = defineProps<Props>();
 const userStore = useUserStore();
 const { providedData  } = storeToRefs(userStore);
 
@@ -16,40 +19,31 @@ const { providedData  } = storeToRefs(userStore);
 
 
 /** Lifecycle Hooks */
-const $b = useBem();
+const $b = useBem('Notifications');
 </script>
 
 <template lang="pug">
-div(:class="$b()")
-  BaseIcon(:type="EIcons.BELL")
-  span
-    | {{ providedData.notifications?.length }}
+NuxtLink(
+  :class="$b({ colored: withBg })"
+  to="/account/notifications"
+)
+  BaseIcon(
+    v-if="!providedData.notifications.length"
+    :type="EIcons.BELL"
+  )
+  POverlayBadge(
+    v-else
+    :value="providedData.notifications.length"
+  )
+    BaseIcon(:type="EIcons.BELL")
 </template>
 
-<style module lang="scss">
+<style lang="scss">
 .Notifications {
-  @include relative;
-  @include centeredFlex;
-  min-width: 38px;
-  height: 38px;
-  cursor: pointer;
-  & > div {
-    width: unset;
-    height: unset;
-  }
-  & > span {
-    @include absolute((
-      top: 0,
-      right: 2px,
-    ));
-    @include centeredFlex;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: vars.$colors-beige;
-    color: vars.$colors-white;
-    font-size: 8px;
-    font-weight: vars.$fw-midHeavy;
+  padding: 6px;
+  border-radius: vars.$br-xs;
+  &--colored {
+    background-color: vars.$colors-white;
   }
 }
 </style>

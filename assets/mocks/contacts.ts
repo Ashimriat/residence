@@ -20,10 +20,10 @@ const mockContacts = (length: number) => Array.from({ length }, () => CONTACT);
 
 const mockSocials = () => [
   {
-    icon: EIcons.TELEGRAM_CONTACTS,
+    icon: EIcons.TELEGRAM,
   },
   {
-    icon: EIcons.INSTAGRAM_CONTACTS,
+    icon: EIcons.INSTAGRAM,
   },
 ];
 

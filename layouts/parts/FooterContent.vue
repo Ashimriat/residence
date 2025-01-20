@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { EIcons } from '~/components/base';
+import { EIcons, EIconsSizes } from '~/components/base';
+import NavigationMenu from './NavigationMenu';
 
 const $b = useBem();
 </script>
@@ -10,12 +11,15 @@ div(:class="$b()")
     div(:class="$b('companyDataBlock')")
       img(src="~assets/images/logo/logo.png")
       div(:class="$b('companyContactsBlock')")
-        BaseIcon(:type="EIcons.TELEGRAM")
-        BaseIcon(:type="EIcons.INSTAGRAM")
-    NavigationMenu(
-      is-footer-menu
-      :class="$b('menu')"
-    )
+        BaseIcon(
+          :type="EIcons.TELEGRAM"
+          :size="EIconsSizes.XL"
+        )
+        BaseIcon(
+          :type="EIcons.INSTAGRAM"
+          :size="EIconsSizes.XL"
+        )
+    NavigationMenu(is-footer-menu)
   div(:class="$b('copyright')")
     | © Все права защищены
 </template>
@@ -37,14 +41,6 @@ div(:class="$b()")
   }
   &__companyContactsBlock {
     @include flex((gap: 12px));
-    & > div {
-      --iconSize: 48px;
-    }
-  }
-  &__menu {
-    --titleFontSize: #{vars.$fs-m};
-    --gap: 64px;
-    --sectionJustify: flex-start;
   }
   &__copyright {
     @include flex((align-items: flex-end));
@@ -67,14 +63,6 @@ div(:class="$b()")
     &__companyDataBlock {
       flex-direction: row;
       align-items: center;
-    }
-    &__menu {
-      --gap: 40px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      & > div {
-        min-width: 26%;
-      }
     }
   }
 }

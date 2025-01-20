@@ -93,7 +93,7 @@ div(:class="$b()")
     @include flex((align-items: center, gap: 8px));
     height: 40px;
     & button {
-      --buttonLabelFontSize: #{vars.$fs-s};
+      --buttonLabelFontSize: #{vars.$fs-static-s};
       height: 100%;
       &:not(&:last-child) {
         flex-grow: 1;
@@ -138,7 +138,7 @@ div(:class="$b()")
     padding: 8px 12px;
     border-radius: vars.$br-s;
     &:hover {
-      background-color: vars.$colors-greyExtraLight;
+      background-color: vars.$colors-greyLight;
       & button {
         opacity: 1;
         pointer-events: all;
@@ -155,7 +155,6 @@ div(:class="$b()")
     padding: 0px;
     font-size: vars.$fs-xs;
     --p-button-border-radius: #{vars.$br-x2s};
-    --iconSize: 1rem;
   }
 }
 </style>

@@ -7,7 +7,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    PAccordion: typeof import('primevue/accordion')['default']
+    PAccordionContent: typeof import('primevue/accordioncontent')['default']
+    PAccordionHeader: typeof import('primevue/accordionheader')['default']
+    PAccordionPanel: typeof import('primevue/accordionpanel')['default']
     PAvatar: typeof import('primevue/avatar')['default']
+    PBadge: typeof import('primevue/badge')['default']
     PButton: typeof import('primevue/button')['default']
     PCarousel: typeof import('primevue/carousel')['default']
     PChip: typeof import('primevue/chip')['default']
@@ -18,6 +23,7 @@ declare module 'vue' {
     PInputGroup: typeof import('primevue/inputgroup')['default']
     PInputGroupAddon: typeof import('primevue/inputgroupaddon')['default']
     PInputText: typeof import('primevue/inputtext')['default']
+    POverlayBadge: typeof import('primevue/overlaybadge')['default']
     PPaginator: typeof import('primevue/paginator')['default']
     PPassword: typeof import('primevue/password')['default']
     PRadioButton: typeof import('primevue/radiobutton')['default']

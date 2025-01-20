@@ -2,10 +2,6 @@
 import { EButtons } from '../base';
 
 
-enum EComponentEvents {
-  SUBMIT = 'submit'
-}
-
 type Props = {
   title: string;
   subtext: string;
@@ -14,7 +10,7 @@ type Props = {
   buttonType: EButtons;
 };
 type Emits = {
-  (e: EComponentEvents.SUBMIT, data: RequestFormData): void;
+  submit: [data: RequestFormData];
 };
 
 /** Props & Emits */
@@ -76,12 +72,11 @@ div(:class="$b()")
     BaseTextarea(
       v-model="formData.text"
       :placeholder="requestTextPlaceholder"
-      :class="$b('requestText')"
     )
     BaseButton(
       :type="buttonType"
       :disabled="!isRequestFormFilled"
-      @click="emit(EComponentEvents.SUBMIT, formData)"
+      @click="emit('submit', formData)"
     )
 </template>
 
@@ -117,10 +112,6 @@ div(:class="$b()")
       max-width: 325px;
     }
   }
-  &__requestText {
-    height: 150px;
-    resize: none;
-  }
 }
 
 @include mobile {
@@ -128,9 +119,11 @@ div(:class="$b()")
     flex-direction: column;
     border-radius: vars.$br-s;
     height: unset;
+    width: 100%;
     &__requestQuestion {
       border-radius: 0 0 vars.$br-s vars.$br-s;
       padding: 20px;
+      max-width: unset;
       & span {
         font-size: vars.$fs-xl;
       }
@@ -142,14 +135,16 @@ div(:class="$b()")
       box-sizing: border-box;
     }
     &__inputsContainer {
+      & > input {
+        max-width: unset;
+      }
+    }
+    &__inputsContainer {
       flex-direction: column;
       gap: 12px;
       & > input {
         min-height: 32px;
       }
-    }
-    &__requestText {
-      padding: 6px 8px;
     }
   }
 }

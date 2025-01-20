@@ -68,7 +68,7 @@ div(:class="$b()")
   }
   &__button {
     width: 100%;
-    --buttonLabelFontSize: 16px;
+    --buttonLabelFontSize: #{vars.$fs-static-s};
   }
 }
 </style>

@@ -9,6 +9,9 @@
   }
 
   .Button {
+    --labelFontSize:  #{vars.$fs-static-m};
+
+
     --p-button-gap: 8px;
     --p-button-padding-x: 12px;
     --p-button-padding-y: 12px;
@@ -72,18 +75,31 @@
     height: 48px;
 
     &__label {
-      font-size: var(--buttonLabelFontSize, vars.$fs-m);
-      font-weight: vars.$fw-heavy;
-    }
-    &__icon {
-      width: 16px;
-      height: 16px;
+      font-size: var(--buttonLabelFontSize, var(--labelFontSize));
+      font-weight: var(--buttonLabelFontWeight, #{vars.$fw-heavy});
     }
   }
 
   @include mobile {
     .Button {
+      --labelFontSize:  #{vars.$fs-static-s};
+      --p-button-border-radius: #{vars.$br-xs};
+      justify-content: space-between;
+      border-width: 2px;
       height: 40px;
+
+      --p-button-secondary-background: transparent;
+      --p-button-secondary-hover-background: transparent;
+      --p-button-secondary-active-background: transparent;
+      --p-button-secondary-border-color: #{vars.$colors-beige};
+      --iconStroke: #{vars.$colors-beige};
+      --p-button-secondary-hover-border-color: #{vars.$colors-beige};
+      --p-button-secondary-active-border-color: #{vars.$colors-beige};
+      --p-button-secondary-color: #{vars.$colors-beige};
+      --p-button-secondary-hover-color: #{vars.$colors-beige};
+      --p-button-secondary-active-color: #{vars.$colors-beige};
+      --p-button-text-secondary-hover-background: transparent;
+      --p-button-text-secondary-active-background: transparent;
     }
   }
 }

@@ -6,9 +6,7 @@ type DisplayData = {
   pages: number[];
   skipPos: SkipPosition[];
 };
-type TemplateElems = {
-  input: HTMLInputElement;
-}
+
 type Props = {
   itemsAmount: number;
 };
@@ -22,8 +20,7 @@ const PAGES_AMOUNT_TO_CHOOSE = 5;
 const MAX_PAGES_SLOTS_AMOUNT = 7;
 
 
-
-const { templateElems, setTemplateElemRef } = useTemplateElemsRefs<TemplateElems>();
+const inputRef = useTemplateRef<HTMLInputElement>('input');
 
 
 const inputValue = ref<string>('');
@@ -76,7 +73,7 @@ const activeSkipperInput = ref<'start' | 'end' | ''>('');
 async function setActiveSkipperInput(skipPos: SkipPosition | ''): Promise<void> {
   activeSkipperInput.value = skipPos;
   await nextTick();
-  templateElems.value.input.focus();
+  inputRef.value?.focus();
 }
 
 function processPageSelect(pageNumber: number, callback?: Function): void {
@@ -101,7 +98,6 @@ function processPageSelect(pageNumber: number, callback?: Function): void {
 function resetInput(): void {
   activeSkipperInput.value = '';
   inputValue.value = '';
-  templateElems.value.input = {} as HTMLInputElement;
 }
 
 const $b = useBem('BasePagination');
@@ -156,9 +152,9 @@ PPaginator(
           PInputText(
             v-else
             v-keyfilter.int
-            :class="$b('skipperInput', bMod(skipPos))"
-            :ref="setTemplateElemRef('input')"
             v-model="inputValue"
+            ref="input"
+            :class="$b('skipperInput', bMod(skipPos))"
             @blur="resetInput"
             @confirm="processInputConfirm"
           )
@@ -170,8 +166,6 @@ PPaginator(
 </template>
 
 <style lang="scss">
-$fontSize: 14px;
-
 .BasePagination {
   @include flex((gap: 4px));
   &__container {
@@ -184,7 +178,7 @@ $fontSize: 14px;
   &__pageButton {
     height: var(--p-paginator-nav-button-height);
     border: none;
-    --buttonLabelFontSize: #{$fontSize};
+    --buttonLabelFontSize: #{vars.$fs-static-s};
   }
   &__controlButton {
     &--disabled {
@@ -237,7 +231,7 @@ $fontSize: 14px;
   }
   &__skipperInput {
     padding: 8px;
-    font-size: $fontSize;
+    font-size: vars.$fs-static-s;
   }
 }
 </style>

@@ -46,7 +46,7 @@ div(:class="$b()")
   @include flex((gap: 20px));
   --p-avatar-width: 64px;
   --p-avatar-height: 64px;
-  --avatarBackground: #{vars.$colors-greyLight};
+  --avatarBackground: #{vars.$colors-grey};
   &__innerContainer {
     @include flexColumn((justify-content: center));
   }

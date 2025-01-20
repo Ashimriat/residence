@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { EIconsSizes } from './constants/icon';
-import type { EButtons } from './constants/button';
+import { type EButtons } from './constants/button';
+import { EIconsSizes } from './constants/icon';
 import useButtonData from './composables/useButton';
 
 
@@ -19,6 +19,8 @@ const {
   omitIcon = false
 } = defineProps<Props>();
 
+const { isMobile } = useDevice();
+
 const {
   label,
   icon,
@@ -35,7 +37,7 @@ PButton(
   :label="label"
   :severity="variant"
   :text="isText"
-  :class="$b(bMod(`icon_${iconPos}`, { text: isText }))"
+  :class="$b(bMod(`icon-${iconPos}`, { text: isText }))"
   :pt:root:type="isSubmit ? 'submit' : 'button'"
 )
   template(
@@ -44,7 +46,7 @@ PButton(
   )
     BaseIcon(
       :type="icon"
-      :size="iconSize"
+      :size="isMobile ? EIconsSizes.S : iconSize"
     )
 </template>
 
@@ -54,19 +56,19 @@ PButton(
   &--text {
     --p-button-padding-x: 0;
     --p-button-padding-y: 0;
-    --buttonLabelFontSize: #{vars.$fw-midHeavy};
+    --buttonLabelFontWeight: #{vars.$fw-midHeavy};
   }
   &--icon{
-    &_left {
-      & div {
+    &-left {
+      & svg {
         order: 1;
       }
       & span {
         order: 2;
       }
     }
-    &_right {
-      & div {
+    &-right {
+      & svg {
         order: 2;
       }
       & span {
