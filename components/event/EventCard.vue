@@ -123,6 +123,7 @@ BaseCard(:class="$b({ account: isAccountMode })")
     width: 93px;
     height: 32px;
     background-color: vars.$colors-white;
+    color: vars.$colors-black;
     padding: 4px 12px;
     border-radius: vars.$br-xs;
     font-size: vars.$fs-static-s;
