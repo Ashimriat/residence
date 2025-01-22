@@ -10,7 +10,7 @@ const {
 } = defineProps<Props>();
 
 const { seeAchievement } = useModalDialog();
-const $b = useBem('AchievementsList');
+const $b = useBEM('AchievementsList');
 </script>
 
 <template lang="pug">

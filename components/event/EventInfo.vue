@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EIcons } from '../../base';
+import { EIcons } from '~/components/base';
 
 
 type Props = {
@@ -20,7 +20,7 @@ const {
   oldPrice,
 } = data;
 
-const $b = useBem('EventInfo');
+const $b = useBEM('EventInfo');
 </script>
 
 <template lang="pug">

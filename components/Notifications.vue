@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EIcons } from '../base';
+import { EIcons } from '~/components/base';
 
 type Props = {
   withBg?: boolean;
@@ -19,7 +19,7 @@ const { providedData  } = storeToRefs(userStore);
 
 
 /** Lifecycle Hooks */
-const $b = useBem('Notifications');
+const $b = useBEM('Notifications');
 </script>
 
 <template lang="pug">

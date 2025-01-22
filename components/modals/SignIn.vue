@@ -2,7 +2,7 @@
 import { mockUserData } from '~/assets/mocks';
 import { EButtons } from '~/components/base';
 
-const $b = useBem();
+const $b = useBEM();
 const userStore = useUserStore();
 const { setUserData } = userStore;
 const { openSignUp, closeModal } = useModalDialog();
@@ -45,7 +45,7 @@ div(:class="$b()")
   @include flexColumn((gap: 16px));
 
   width: 460px;
-  background-color: vars.$colors-greyBackground;
+  background-color: vars.$colors-bg;
   box-sizing: content-box;
   &__input {
     border-radius: vars.$br-s;

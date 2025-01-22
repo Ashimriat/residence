@@ -20,7 +20,7 @@ const {
   finalSize,
 } = useIcon(type, size);
 
-const $b = useBem('BaseIcon');
+const $b = useBEM('BaseIcon');
 </script>
 
 <template lang="pug">

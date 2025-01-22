@@ -9,7 +9,7 @@ const data = ref<ClanCreationData>({
 
 const { showClanCreated } = useModalDialog();
 
-const $b = useBem('CreateClan');
+const $b = useBEM('CreateClan');
 </script>
 
 <template lang="pug">

@@ -30,7 +30,7 @@ const errorTexts = computed<ErrorTexts>(() => ({
   title: TITLES_DICT[error.statusCode] ?? TITLES_DICT.default,
   details: DETAILS_DICT[error.statusCode] ?? `${error.message}. ${DETAILS_DICT.default}`,
 }));
-const $b = useBem('Error');
+const $b = useBEM('Error');
 
 onMounted(() => {
   setTimeout(() => clearError({ redirect: '/' }), 5_000);

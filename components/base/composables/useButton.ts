@@ -13,6 +13,7 @@ type ButtonData = {
   iconPos?: EIconPos;
   variant?: EButtonVariant;
   isText?: boolean;
+  omitIconInMobile?: boolean;
 };
 
 const SIGN_IN_BUTTON_DATA: ButtonData = {
@@ -103,6 +104,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Подарить другу',
     variant: EButtonVariant.CONTRAST,
     icon: EIcons.GIFT,
+    omitIconInMobile: true,
   },
   [EButtons.BUY]: {
     label: 'Купить',

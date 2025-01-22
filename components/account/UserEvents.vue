@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockAchievementsList, mockEventsBigData, mockSubscriptions } from '~assets/mocks';
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">
@@ -37,17 +37,13 @@ div(:class="$b()")
     h5
       | Абонементы
     div(:class="$b('subscriptionsContainer')")
-      div(
-        v-for="({ name, price, description }, i) of mockSubscriptions(2)"
+      Subscription(
+        v-for="(data, i) of mockSubscriptions(2)"
         :key="`sub_${i}`"
+        is-owned
+        :data="data"
         :class="$b('subscription')"
       )
-        div
-          h5
-            | {{ name }}
-          PriceTag(:value="price")
-        div
-          | {{ description }}
 </template>
 
 <style lang="scss">
@@ -114,13 +110,15 @@ $carouselMaxWidth: 800px;
   }
   &__subscriptionsContainer {
     @include flex((flex-wrap: wrap, gap: 0.8rem));
+    & > div {
+      flex-basis: calc(50% - 0.4rem);
+    }
   }
   &__subscription {
     @include flexColumn((gap: 1rem));
     background-color: vars.$colors-greyLight;
     border-radius: vars.$br-s;
     padding: 20px;
-    flex-basis: calc(50% - 0.4rem);
     & > div:first-child {
       @include flex((justify-content: space-between));
     }

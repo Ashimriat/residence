@@ -1,20 +1,8 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/base';
 
-
-
-/** Local Types & Variables */
-type Props = {
-  
-};
-
-
-/** Props & Emits */
-const props = defineProps<Props>();
-
-
 /** State & Composables */
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

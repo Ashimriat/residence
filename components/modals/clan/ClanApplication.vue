@@ -3,7 +3,7 @@ import { EButtons } from '~/components/base';
 
 const { closeModal } = useModalDialog();
 
-const $b = useBem('ClanApplication');
+const $b = useBEM('ClanApplication');
 </script>
 
 <template lang="pug">

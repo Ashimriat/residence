@@ -16,7 +16,7 @@ function setActiveTab(tab: string): void {
 }
 
 
-const $b = useBem('AccountPage');
+const $b = useBEM('AccountPage');
 
 onMounted(async () => {
   let { tab } = route.query;
@@ -30,8 +30,8 @@ onMounted(async () => {
 
 <template lang="pug">
 div(:class="$b()")
-  section(:class="$b('section', bMod('user'))")
-    div(:class="$b('subsection', bMod('data'))")
+  section(:class="$b('section', ['user'])")
+    div(:class="$b('subsection', ['data'])")
       div(:class="$b('userDataWrapper')")
         PAvatar(
           label="UI"
@@ -62,7 +62,7 @@ div(:class="$b()")
           :icon-size="EIconsSizes.S"
           :class="$b('settingsButton')"
         )
-    div(:class="$b('subsection', bMod('rating'))")
+    div(:class="$b('subsection', ['rating'])")
       TitleWithLink(
         title="Рейтинг"
         link="/account/rating"
@@ -81,7 +81,7 @@ div(:class="$b()")
           component(:is="icon")
           span
             | 6150
-  section(:class="$b('section', bMod('content'))")
+  section(:class="$b('section', ['content'])")
     div(:class="$b('tabsContainer')")
       div(
         v-for="({ id, label, icon }) of TABS"

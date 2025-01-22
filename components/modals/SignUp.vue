@@ -2,7 +2,7 @@
 import type { EditableUserData } from '~/types/stores/user';
 import { mockUserData } from '~/assets/mocks';
 import { EButtons } from '~/components/base';
-import UserDataForm from '../forms/UserDataForm.vue';
+import UserDataForm from '~/components/forms/UserDataForm.vue';
 
 
 const { openSignIn, closeModal } = useModalDialog();
@@ -44,7 +44,7 @@ UserDataForm(
     min-width: 112px;
     min-height: 112px;
     background-color: vars.$colors-white;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: vars.$shadows-base;
   }
   &__textAreaContainer {
     @include relative;

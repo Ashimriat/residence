@@ -6,7 +6,7 @@ import { mockUserData } from '~/assets/mocks';
 
 const { setUserData } = useUserStore();
 
-const $b = useBem('SettingsPage');
+const $b = useBEM('SettingsPage');
 
 function handleSubmit(data: EditableUserData): void {
   setUserData([data, mockUserData()[1]]);
@@ -14,7 +14,7 @@ function handleSubmit(data: EditableUserData): void {
 </script>
 
 <template lang="pug">
-section(:class="$b()")
+div(:class="$b()")
   UserDataForm(
     without-sex
     :submit-button="EButtons.SAVE_CHANGES"

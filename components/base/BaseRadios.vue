@@ -14,7 +14,7 @@ function checkForReset(value: string): void {
   selectedOption.value = '';
 }
 
-const $b = useBem('BaseRadios');
+const $b = useBEM('BaseRadios');
 </script>
 
 <template lang="pug">
@@ -34,8 +34,12 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
+$border: 1px solid vars.$colors-black;
+
 .BaseRadios {
-  @include flex;
+  @include flex((
+    flex-direction: var(--radiosFlexDirection, row)
+  ));
   border: 2px solid vars.$colors-black;
   border-radius: 12px;
   &__option {
@@ -43,12 +47,21 @@ div(:class="$b()")
     padding: 10px;
     flex-basis: calc(100% / v-bind(optionsAmount));
     &:not(&:last-of-type) {
-      border-right: 1px solid vars.$colors-black;
+      border-right: var(--radiosOptionBorderRight, #{$border});
+      border-bottom: var(--radiosOptionBorderBottom, none);
     }
   }
   &__label {
     color: vars.$colors-black;
     font-weight: vars.$fw-midHeavy;
+  }
+}
+
+@include mobile {
+  .BaseRadios {
+    --radiosFlexDirection: column;
+    --radiosOptionBorderRight: none;
+    --radiosOptionBorderBottom: #{$border};
   }
 }
 </style>

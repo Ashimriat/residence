@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

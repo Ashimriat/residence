@@ -4,7 +4,7 @@
 
 @layer residence {
   .Dialog {
-    --p-dialog-background: #{vars.$colors-greyBackground};
+    --p-dialog-background: #{vars.$colors-bg};
     --p-dialog-header-padding: 24px 64px;
     --p-dialog-content-padding: 0 64px 24px;
 

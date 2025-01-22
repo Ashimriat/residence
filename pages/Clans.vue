@@ -12,11 +12,11 @@ const { providedData } = useUserStore();
 const { page, displayedItems } = usePagination(clans, AMOUNT_ON_PAGE);
 const { createClan, showClanRequestSent, seeClanParticipants } = useModalDialog();
 
-const $b = useBem('ClansPage');
+const $b = useBEM('ClansPage');
 </script>
 
 <template lang="pug">
-section(:class="$b()")
+div(:class="$b()")
   h1(:class="$b('title')")
     | Кланы
   BaseButton(
@@ -83,7 +83,7 @@ section(:class="$b()")
 
 <style lang="scss">
 .ClansPage {
-  @include flexColumn((gap: vars.$gaps-l));
+  @include flexColumn((gap: vars.$gaps-xl));
   --searchMaxWidth: 360px;
   &__title {
     text-align: center;

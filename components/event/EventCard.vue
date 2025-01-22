@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons, EIcons } from '../../base';
+import { EButtons, EIcons } from '~/components/base';
 
 /** Local Types & Variables */
 type Props = {
@@ -36,7 +36,7 @@ function toggleDetails(): void {
   isShowingDetails.value = !isShowingDetails.value;
 }
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">
@@ -124,7 +124,7 @@ BaseCard(:class="$b({ account: isAccountMode })")
     font-size: vars.$fs-s;
   }
   &__detailsBlock {
-    @include flex((gap: vars.$gaps-l));
+    @include flex((gap: vars.$gaps-xl));
   }
   &__playersBlock {
     @include flex((

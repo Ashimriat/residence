@@ -27,11 +27,7 @@ function removeNotification(nId: string): void {
   notifications.value = notifications.value.filter(({ id }) => id !== nId);
 }
 
-const $b = useBem('NotificationsPage');
-
-onMounted(() => {
-  window.Temporal = Temporal;
-})
+const $b = useBEM('NotificationsPage');
 </script>
 
 <template lang="pug">
@@ -76,7 +72,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .NotificationsPage {
-  @include flexColumn((gap: vars.$gaps-l));
+  @include flexColumn((gap: vars.$gaps-xl));
   --sectionPaddingBottom: 0;
   & span.pi-trash {
     cursor: pointer;

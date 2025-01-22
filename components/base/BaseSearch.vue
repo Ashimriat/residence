@@ -10,7 +10,7 @@ const { placeholder } = defineProps<Props>();
 
 const value = defineModel<string>({ required: true });
 
-const $b = useBem('BaseSearch');
+const $b = useBEM('BaseSearch');
 </script>
 
 <template lang="pug">

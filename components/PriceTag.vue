@@ -10,7 +10,7 @@ type Props = {
 const { value, oldValue, isLargeFont } = defineProps<Props>();
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

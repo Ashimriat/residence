@@ -44,7 +44,7 @@ const isRequestFormFilled = computed<boolean>(() => (
 ));
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

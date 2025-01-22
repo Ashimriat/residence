@@ -26,10 +26,17 @@ const {
   icon,
   iconPos,
   variant,
+  omitIconInMobile,
   isText,
 } = useButtonData(type);
 
-const $b = useBem('BaseButton');
+
+const withIcon = computed<boolean>(() => {
+  if (!icon) return false;
+  return isMobile ? !omitIconInMobile : !omitIcon;
+});
+
+const $b = useBEM('BaseButton');
 </script>
 
 <template lang="pug">
@@ -37,11 +44,11 @@ PButton(
   :label="label"
   :severity="variant"
   :text="isText"
-  :class="$b(bMod(`icon-${iconPos}`, { text: isText }))"
+  :class="$b([withIcon && `icon-${iconPos}`], { text: isText }, { iconless: !withIcon })"
   :pt:root:type="isSubmit ? 'submit' : 'button'"
 )
   template(
-    v-if="icon && !omitIcon"
+    v-if="icon && withIcon"
     #icon
   )
     BaseIcon(
@@ -57,6 +64,13 @@ PButton(
     --p-button-padding-x: 0;
     --p-button-padding-y: 0;
     --buttonLabelFontWeight: #{vars.$fw-midHeavy};
+  }
+  &--iconless {
+    padding: 0;
+    justify-content: center;
+    & span {
+      width: 100%;
+    }
   }
   &--icon{
     &-left {

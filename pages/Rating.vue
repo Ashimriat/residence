@@ -6,7 +6,7 @@ import { OPTIONS } from './constants/rating';
 const { isMobile } = useDevice();
 
 
-const $b = useBem('RatingPage');
+const $b = useBEM('RatingPage');
 </script>
 
 <template lang="pug">

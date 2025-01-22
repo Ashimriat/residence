@@ -45,7 +45,7 @@ const withEmptyFields = computed<boolean>(() => {
   return false;
 });
 
-const $b = useBem('UserDataForm');
+const $b = useBEM('UserDataForm');
 </script>
 
 <template lang="pug">
@@ -149,7 +149,7 @@ form(
     min-width: 112px;
     min-height: 112px;
     background-color: vars.$colors-white;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: vars.$shadows-base;
   }
   &__textAreaContainer {
     @include relative;

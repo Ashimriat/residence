@@ -14,7 +14,7 @@ const { isFooterMenu = false } = defineProps<Props>();
 
 const route = useRoute();
 
-const $b = useBem('Menu');
+const $b = useBEM('Menu');
 </script>
 
 <template lang="pug">
@@ -60,7 +60,7 @@ div(:class="$b({ footer: isFooterMenu })")
 
   &--footer {
     --titleFontSize: #{vars.$fs-m};
-    --gap: #{vars.$gaps-l};
+    --gap: #{vars.$gaps-xl};
     --sectionJustify: flex-start;
     --linkColor: #{vars.$colors-white};
     --sectionTitleBorderHoverColor: transparent;

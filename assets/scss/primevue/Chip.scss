@@ -5,10 +5,10 @@
 
 @layer residence {
   .Chip {
-    width: 179px;
-    height: 20px;
+    max-width: 195px;
+    width: fit-content;
+    height: 28px;
     padding: 4px 8px;
-    box-sizing: content-box;
     border-radius: vars.$br-x2s;
     background-color: vars.$colors-beige;
     &__label {

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { EIcons } from '~/components/base';
-
-
-/** Local Types & Variables */
 type Props = {
   tabsList: TabData[];
   eventsData: EventData[][];
@@ -23,7 +19,8 @@ const {
   withPagination
 } = defineProps<Props>();
 const activeTab = ref<string>(tabsList[0].id);
-const selectedDate = ref<any>('');
+
+const selectedDate = useCalendar();
 
 const eventType = ref<'kid' | 'women' | ''>('');
 
@@ -31,11 +28,10 @@ const activeEvents = computed(() => {
   const activeTabIndex = tabsList.findIndex(({ id }) => id === activeTab.value);
   return eventsData[activeTabIndex];
 });
-const { isMobile } = useDevice();
 
 const { page, itemsAmount, displayedItems } = usePagination(activeEvents, eventsOnPageAmount);
 
-const $b = useBem();
+const $b = useBEM('EventsList');
 
 watch(activeTab, () => {
   page.value = 1;
@@ -49,20 +45,15 @@ div(:class="$b({ calendar: withCalendar })")
     :tabs="tabsList"
   )
     template(#tabsCommon)
-      div(
-        v-if="withCalendar && isMobile"
-        :class="$b('mobileCalendar')"
-      )
-        | Выбрать дату
-        BaseIcon(:type="EIcons.CALENDAR")
       BaseRadios(
         v-if="filters?.length"
         v-model="eventType"
         is-resettable
         :options="filters"
       )
-      Calendar(
-        v-if="withCalendar && !isMobile"
+      DatePickerCalendar(
+        v-if="withCalendar"
+        v-model="selectedDate"
         :class="$b('calendar')"
       )
     template(#commonTab)
@@ -105,16 +96,6 @@ $paddingTop: 28px;
 @include mobile {
   .EventsList {
     --cardMaxWidth: unset;
-    &__mobileCalendar {
-      @include flex((justify-content: space-between, align-items: center));
-      height: 40xp;
-      background-color: vars.$colors-white;
-      font-size: 16px;
-      font-weight: vars.$fw-bold;
-      margin-bottom: 16px;
-      padding: 10px 16px;
-      border-radius: vars.$br-xs;
-    }
     &__filtersContainer {
       flex-direction: column;
       & > div {
@@ -131,6 +112,10 @@ $paddingTop: 28px;
     &__eventsCardsContainer {
       flex-direction: column;
       width: 100%;
+    }
+    &__calendar {
+      margin-top: 16px;
+      position: static;
     }
   }
 }

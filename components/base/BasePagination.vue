@@ -100,7 +100,7 @@ function resetInput(): void {
   inputValue.value = '';
 }
 
-const $b = useBem('BasePagination');
+const $b = useBEM('BasePagination');
 </script>
 
 <template lang="pug">
@@ -112,7 +112,7 @@ PPaginator(
   template(#container)
     div(:class="$b()")
       PButton.p-paginator-prev(
-        :class="$b('controlButton', bMod('first', { disabled: currentPage === 0 }))"
+        :class="$b('controlButton', ['first'], { disabled: currentPage === 0 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
       )
         span.pi.pi-angle-left
@@ -120,7 +120,7 @@ PPaginator(
         PButton.p-paginator-page(
           v-if="displayData.withFirst"
           label="1"
-          :class="$b('pageButton', bMod('first', { selected: currentPage === 0 }))"
+          :class="$b('pageButton', ['first'], { selected: currentPage === 0 })"
           @click.prevent.stop="processPageSelect(0)"
         )
         PButton.p-paginator-page(
@@ -135,7 +135,7 @@ PPaginator(
         PButton.p-paginator-page(
           v-if="displayData.withLast"
           :label="`${pagesAmount}`"
-          :class="$b('pageButton', bMod('last', { selected: currentPage === pagesAmount }))"
+          :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount })"
           @click.prevent.stop="processPageSelect(pagesAmount)"
         )
           | {{ pagesAmount }}
@@ -145,7 +145,7 @@ PPaginator(
         )
           span(
             v-if="activeSkipperInput !== skipPos"
-            :class="$b('skipper', bMod(skipPos))"
+            :class="$b('skipper', [skipPos])"
             @dblclick="setActiveSkipperInput(skipPos)"
           )
             | ...
@@ -154,12 +154,12 @@ PPaginator(
             v-keyfilter.int
             v-model="inputValue"
             ref="input"
-            :class="$b('skipperInput', bMod(skipPos))"
+            :class="$b('skipperInput', [skipPos])"
             @blur="resetInput"
             @confirm="processInputConfirm"
           )
       PButton.p-paginator-next(
-        :class="$b('controlButton', bMod('last', { disabled: currentPage === pagesAmount }))"
+        :class="$b('controlButton', ['last'], { disabled: currentPage === pagesAmount })"
         @click.prevent.stop="processPageSelect(currentPage + 1)"
       )
         span.pi.pi-angle-right
@@ -178,6 +178,7 @@ PPaginator(
   &__pageButton {
     height: var(--p-paginator-nav-button-height);
     border: none;
+    justify-content: center;
     --buttonLabelFontSize: #{vars.$fs-static-s};
   }
   &__controlButton {

@@ -14,7 +14,7 @@ const GAMES_OPTIONS = [
 const eventType = ref<string>('');
 const event = ref<string>('');
 
-const $b = useBem('CreatePage');
+const $b = useBEM('CreatePage');
 </script>
 
 <template lang="pug">

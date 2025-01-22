@@ -16,7 +16,7 @@ const {
   participantsAmount = null,
 } = defineProps<Props>();
 
-const $b = useBem('ClanDataHeader');
+const $b = useBEM('ClanDataHeader');
 </script>
 
 <template lang="pug">

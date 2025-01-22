@@ -9,7 +9,7 @@ const {
   isInverted = false,
 } = defineProps<Props>();
 
-const $b = useBem('BaseSelectButtons');
+const $b = useBEM('BaseSelectButtons');
 </script>
 
 <template lang="pug">

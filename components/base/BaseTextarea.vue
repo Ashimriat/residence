@@ -19,7 +19,7 @@ const passedProps = computed<TextareaProps>(() => {
   return { maxlength: maxLength };
 });
 
-const $b = useBem('BaseTextarea');
+const $b = useBEM('BaseTextarea');
 </script>
 
 <template lang="pug">

@@ -8,7 +8,7 @@ const { isAdmin } = storeToRefs(userStore);
 
 const isEditMode = ref<boolean>(false);
 
-const $b = useBem('RulesPage');
+const $b = useBEM('RulesPage');
 const route = useRoute();
 const { params: { gameType } } = route;
 

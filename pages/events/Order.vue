@@ -4,7 +4,7 @@ import { GAMES_OPTIONS } from '../constants/events';
 
 const option = ref<string>('');
 
-const $b = useBem('OrderPAge');
+const $b = useBEM('OrderPAge');
 </script>
 
 <template lang="pug">

@@ -16,34 +16,40 @@ function addEvent(): void {
   
 }
 
-const $b = useBem('DefaultLayout');
+const $b = useBEM('DefaultLayout');
 </script>
 
 <template lang="pug">
-header(:class="$b('header', { desktop: !isMobile, mobile: isMobile })")
-  component(
-    :is="headerComponent"
-    @login="openSignIn"
-    @add-event="addEvent"
-  )
-main(:class="$b('contentContainer')")
-  slot
-footer(:class="$b('footer')")
-  FooterContent
+div(:class="$b()")
+  header(:class="$b('header', { desktop: !isMobile, mobile: isMobile, camelCase: true })")
+    component(
+      :is="headerComponent"
+      @login="openSignIn"
+      @add-event="addEvent"
+    )
+  main(:class="$b('contentContainer')")
+    slot
+  footer(:class="$b('footer')")
+    FooterContent
 </template>
 
 <style lang="scss">
 .DefaultLayout {
+  @include flexColumn;
+  --headerHeight: 100px;
+  --footerHeight: 276px;
+  --mobileHeaderOffset: 0;
+  --headerBackgroundColor: #{vars.$colors-bg};
+  --mainContentWidth: 1440px;
+  --mainContentPadding: 60px 0 160px;
   &__header {
-    --headerBackgroundColor: #{vars.$colors-greyBackground};
-
     @include sticky((z-index: 10, top: 0));
     background-color: var(--headerBackgroundColor);
     &--desktop {
       @include flex((justify-content: center));
       padding: 24px 80px;
       height: vars.$rest-desktopHeaderHeight;
-      box-shadow: vars.$rest-baseShadow;
+      box-shadow: vars.$shadows-base;
     }
     &--mobile {
       @include fixed((top: 58px));
@@ -63,37 +69,31 @@ footer(:class="$b('footer')")
   }
 
   &__footer {
-    background-color: vars.$colors-greyBackground;
+    background-color: vars.$colors-bg;
   }
 
   &__contentContainer {
     @include flexColumn((align-items: center));
-    background-color: vars.$colors-greyBackground;
+    background-color: vars.$colors-bg;
     min-height: calc(
-      100vh - var(--headerHeight, #{vars.$rest-desktopHeaderHeight}) - var(--footerHeight, vars.$rest-footerDesktopHeight)
+      100vh - var(--headerHeight) - var(--footerHeight)
     );
-    & > div,
-    & > section {
-      width: 1440px;
-      padding: var(--sectionPaddingTop, 60px) 0 var(--sectionPaddingBottom, 160px);
+    padding-top: var(--mobileHeaderOffset);
+    & > div {
+      width: var(--mainContentWidth);
+      padding: var(--mainContentPadding);
     }
   }
 }
 
 @include mobile {
   .DefaultLayout {
-    &__contentContainer {
-      padding-top: vars.$rest-mobileHeaderOffset;
-      --headerHeight: 0px;
-      --footerHeight: #{vars.$rest-footerMobileHeight};
-      & > div {
-        width: 100%;
-        padding: 0 24px 40px !important;
-      }
-    }
-    &__header {
-      --headerBackgroundColor: transparent;
-    }
+    --headerHeight: 0px;
+    --footerHeight: 386px;
+    --mobileHeaderOffset: 160px;
+    --headerBackgroundColor: transparent;
+    --mainContentWidth: 100%;
+    --mainContentPadding: 0 24px 40px;
   }
 }
 

@@ -9,7 +9,7 @@ type Props = {
 const {  } = defineProps<Props>();
 
 
-const $b = useBem('Rating');
+const $b = useBEM('Rating');
 </script>
 
 <template lang="pug">

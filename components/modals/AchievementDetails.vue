@@ -2,7 +2,7 @@
 const { getModalData } = useModalDialog<AchievementData>();
 const { title, description } = getModalData();
 
-const $b = useBem('AchievementDetails');
+const $b = useBEM('AchievementDetails');
 </script>
 
 <template lang="pug">

@@ -19,8 +19,10 @@ const filters: RadioOption[] = [
   { label: 'Женские ивенты', value: 'women' },
 ];
 
+const { isMobile } = useDevice();
+
 /** State & Composables */
-const $b = useBem('EventsPage');
+const $b = useBEM('EventsPage');
 </script>
 
 <template lang="pug">
@@ -35,11 +37,12 @@ div(:class="$b()")
         :class="$b('game')"
         :to="`events/rules/${gameType}`"
       )
-        component(:is="logo")
-        div
+        div(:class="$b('logoContainer')")
+          component(:is="logo")
+        div(:class="$b('gameData')")
           h3
             | {{ name }}
-          span
+          span(v-if="!isMobile")
             | {{ description }}
     BaseButton(
       v-if="isAdmin"
@@ -49,20 +52,11 @@ div(:class="$b()")
     h2
       | Абонементы
     div(:class="$b('sectionContent')")
-      div(
-        v-for="({ name, description, price }) of mockSubscriptions(2)"
-        :key="name"
-        :class="$b('subscription')"
+      Subscription(
+        v-for="(data, i) of mockSubscriptions(2)"
+        :key="i"
+        :data="data"
       )
-        div
-          h5
-            | {{ name }}
-          PriceTag(:value="price")
-        div
-          | {{ description }}
-        div
-          BaseButton(:type="EButtons.BUY")
-          BaseButton(:type="EButtons.GIFT_TO_FRIEND")
     BaseButton(
       v-if="isAdmin"
       :type="EButtons.ADD_SUBSCRIPTION"
@@ -85,7 +79,7 @@ div(:class="$b()")
   @include flexColumn((gap: 4rem));
   &__section {
     @include flexColumn((gap: 26px));
-    padding: 0 80px;
+    padding: var(--sectionPadding, 0 80px);
     & > button {
       max-width: 275px;
       justify-content: space-between;
@@ -96,47 +90,55 @@ div(:class="$b()")
     }
   }
   &__sectionContent {
-    @include flex((gap: 40px, flex-wrap: wrap));
+    @include flex((
+      gap: var(--sectionContentGap, #{vars.$gaps-l}),
+      flex-wrap: wrap
+    ));
   }
   &__game {
-    @include flex((align-items: center, gap: 40px));
-    width: 620px;
-    height: 204px;
+    @include flex((
+      align-items: center,
+      gap: var(--gameGap, #{vars.$gaps-l}),
+    ));
+    max-width: calc((100% - var(--sectionContentGap, #{vars.$gaps-l})) / 2);
+    height: var(--gameHeight, 204px);
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
+    flex-grow: 1;
     cursor: pointer;
-    & svg {
-      min-width: 174px;
-      height: 174px;
-    }
-    & div {
-      @include flexColumn((gap: 12px, justify-content: center));
-    }
+    overflow: hidden;
     & span {
       font-size: vars.$fs-m;
     }
   }
-  &__subscription {
-    @include flexColumn((gap: 20px));
-    padding: 20px;
-    background-color: vars.$colors-white;
-    border-radius: vars.$br-s;
-    max-width: 620px;
-    & div:first-child {
-      @include flex((align-items: center, justify-content: space-between));
-      & span {
-        color: vars.$colors-beige;
-        font-size: vars.$fs-l;
-        font-weight: vars.$fw-bold;
-      }
+  &__logoContainer {
+    @include fullsize;
+    min-width: 115px;
+    min-height: 125px;
+    max-width: var(--logoMaxWidth, 173px);
+    max-height: var(--logoMaxHeight, 200px);
+    transform: translateX(var(--logoTranslateX, 5%));
+    &,
+    & svg {
+      @include fullsize;
     }
-    & div:last-child {
-      @include flex((justify-content: space-between, gap: 16px));
-      & button {
-        width: 50%;
-        height: 40px;
-      }
-    }
+  }
+  &__gameData {
+    @include flexColumn((gap: vars.$gaps-s, justify-content: center));
+    transform: translateX(var(--gameDataTranslateX, 0));
+  }
+}
+
+@include mobile {
+  .EventsPage {
+    --sectionPadding: 0;
+    --sectionContentGap: #{vars.$gaps-s};
+    --gameGap: 0;
+    --gameHeight: 154px;
+    --logoTranslateX: -35%;
+    --logoMaxWidth: 115px;
+    --logoMaxHeight: 125px;
+    --gameDataTranslateX: var(--logoTranslateX);
   }
 }
 </style>

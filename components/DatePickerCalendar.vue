@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { Temporal } from '@js-temporal/polyfill';
-import { EIcons, EIconsSizes } from '../base';
+import { EIcons, EIconsSizes } from '~/components/base';
 
+type Props = {
+  asDesktop?: boolean;
+}
 
-type Date = {
-  start: Temporal.PlainDate;
+export type CalendarDate = {
+  start: Temporal.PlainDate | null;
   end?: Temporal.PlainDate;
 };
 
@@ -40,7 +43,21 @@ const WEEK_DAYS = [
   'ВС',
 ];
 
-const selectedDate = ref<Date | null>(null);
+const { asDesktop } = defineProps<Props>();
+const selectedDate = defineModel<CalendarDate>({ required: true });
+
+const { isMobile } = useDevice();
+
+const { closeModal, showMobileCalendar } = useModalDialog();
+
+function openOnMobile(): void {
+  showMobileCalendar({
+    onSelect: (date: NonNullable<CalendarDate>) => {
+      selectedDate.value = date;
+      closeModal();
+    },
+  });
+}
 
 const selectedDateLabel = computed<string>(() => {
   if (!selectedDate.value) return '';
@@ -99,30 +116,42 @@ const days = computed<CalendarDay[]>(() => {
 });
 
 function resetSelectedDate(): void {
-  selectedDate.value = null;
+  selectedDate.value = { start: null };
 }
 
 function changeMonth(mod: -1 | 1): void {
   processedDate.value = processedDate.value.add({ months: mod });
 }
  
-const isSelectedDate = ({ day, isInactiveMonth }: CalendarDay): boolean => {
-  if (isInactiveMonth) return false;
-  if (!selectedDate.value) return false;
-  return selectedDate.value.start.day === day || selectedDate.value.end?.day === day;
+const isSelectedDate = ({ day, isInactiveMonth }: CalendarDay): { first: boolean, last: boolean } => {
+  if (isInactiveMonth || !selectedDate.value) return { first: false, last: false };
+  return {
+    first: selectedDate.value.start?.day === day,
+    last: selectedDate.value.end?.day === day,
+  };
 };
 
 const isInSelection = ({ day, isInactiveMonth }: CalendarDay): boolean => {
   if (isInactiveMonth) return false;
-  if (!selectedDate.value || !selectedDate.value.end) return false;
+  if (!selectedDate.value.start || !selectedDate.value.end) return false;
   return day > selectedDate.value?.start?.day && day < selectedDate.value.end?.day;
 };
 
 function getDayClasses(cDay: CalendarDay): string {
+  const { first, last } = isSelectedDate(cDay);
+  const firstSelected = selectedDate.value?.end && first;
+  const lastSelected = selectedDate.value?.end && last;
+  const selected = !selectedDate.value?.end && first;
+  const inactive = cDay.isInactiveMonth;
+  const selection = isInSelection(cDay);
+  const common = !firstSelected && !lastSelected && !selected && !inactive && !selection;
   return $b('day', {
-    inactive: cDay.isInactiveMonth,
-    selected: isSelectedDate(cDay),
-    selection: isInSelection(cDay),
+    firstSelected,
+    lastSelected,
+    selected,
+    inactive,
+    selection,
+    common,
   });
 }
 
@@ -130,18 +159,28 @@ function setSelectedDate(day: number): void {
   const daysAddedDate = processedDate.value.add({ days: day - processedDate.value.day });
   if (selectedDate.value?.start && selectedDate.value.end || !selectedDate.value) {
     selectedDate.value = { start: daysAddedDate };
-  } else if (day === selectedDate.value.start.day) {
-    selectedDate.value = null;
+  } else if (day === selectedDate.value.start?.day) {
+    selectedDate.value = { start: null };
   } else {
     selectedDate.value.end = daysAddedDate;
   }
 }
 
-const $b = useBem();
+const $b = useBEM('Calendar');
 </script>
 
 <template lang="pug">
-div(:class="$b()")
+div(
+  v-if="isMobile && !asDesktop"
+  :class="$b(['mobile'])"
+  @click="openOnMobile"
+)
+  | Выбрать дату
+  BaseIcon(:type="EIcons.CALENDAR")
+div(
+  v-else
+  :class="$b(['desktop'])"
+)
   div(:class="$b('header')")
     div(:class="$b('processedDate')")
       span
@@ -185,17 +224,31 @@ div(:class="$b()")
       :class="getDayClasses(cDay)"
       @click="setSelectedDate(cDay.day)"
     )
-      | {{ cDay.day }}
+      span(:class="$b('filler')")
+      span(:class="$b('dayNum')")
+        | {{ cDay.day }}
 </template>
 
 <style lang="scss">
 .Calendar {
-  @include flexColumn((gap: 12px));
-  background-color: vars.$colors-white;
-  padding: 16px;
-  width: 320px;
-  border-radius: vars.$br-l;
-  box-sizing: border-box;
+  &--desktop {
+    @include flexColumn((gap: 12px));
+    background-color: vars.$colors-white;
+    padding: 16px;
+    width: 320px;
+    border-radius: vars.$br-l;
+    box-sizing: border-box;
+  }
+  &--mobile {
+    @include flex((justify-content: space-between, align-items: center));
+    height: 40px;
+    background-color: vars.$colors-white;
+    font-size: 16px;
+    font-weight: vars.$fw-bold;
+    padding: 10px 16px;
+    border-radius: vars.$br-xs;
+    --iconStroke: #{vars.$colors-black};
+  }
   &__header {
     @include flex((
       justify-content: space-between,
@@ -219,6 +272,9 @@ div(:class="$b()")
     font-size: 12px;
     height: 24px;
     padding: 4px 8px;
+    & span {
+      height: 16px;
+    }
   }
   &__container {
     @include flex((flex-wrap: wrap));
@@ -234,29 +290,106 @@ div(:class="$b()")
     font-size: 13px;
   }
   &__day {
+    @include relative;
     cursor: pointer;
     font-size: 12px;
     border-radius: vars.$br-xs;
-    &:hover:not(&--selected) {
-      background-color: vars.$colors-beige;
-      opacity: 0.7;
-      color: vars.$colors-white;
+    overflow: hidden;
+
+    --dayNumColor: #{vars.$colors-black};
+    --dayOpacity: 1;
+    --fillerWidth: 0;
+    --fillerBackgroundColor: transparent;
+
+    &--common,
+    &--selection {
+      &:hover {
+        --dayNumColor: #{vars.$colors-white};
+        --fillerWidth: 100%;
+        --fillerBackgroundColor: #{vars.$colors-beige};
+        --fillerBorderRadius: #{vars.$br-xs};
+        --dayOpacity: 0.7;
+      }  
+    }
+    &--selection {
+      background-color: vars.$colors-greyLight;
+      color: vars.$colors-black;
+      border-radius: 0;
+    }
+    &--firstSelected,
+    &--lastSelected,
+    &--selected {
+      @include relative;
+      --dayNumColor: #{vars.$colors-white};
+      pointer-events: none;
+      /*&,
+      &:hover {
+        background-color: vars.$colors-beige;
+        color: vars.$colors-white;
+        opacity: 1;
+      }*/
     }
 
-    &--selected,
-    &--selection {
+    &--selected {
       background-color: vars.$colors-beige;
-      color: vars.$colors-white;
     }
-    &--selection {
-      opacity: 0.5;
+    
+
+    &--firstSelected {
+      --fillerLeft: 0;
+      border-radius: vars.$br-xs 0 0 vars.$br-xs;
+      @include withPseudoAfter((
+        transform: rotate(180deg),
+        right: 0,
+      ));
+    }
+    &--lastSelected {
+      --fillerRight: 0;
+      border-radius: 0 vars.$br-xs vars.$br-xs 0;
+      @include withPseudoBefore((
+        left: 0,
+      ));
+    }
+    &--firstSelected,
+    &--lastSelected {
+      background-color: vars.$colors-greyLight;
+      --fillerWidth: 31px;
+      --fillerBackgroundColor: #{vars.$colors-beige};
+      &::before,
+      &::after {
+        width: 12px;
+        height: 36px;
+        clip-path: vars.$figures-selectedDateArrow;
+        background-color: vars.$colors-beige;
+      }
     }
     &--inactive {
-      background: none;
-      color: vars.$colors-beigeMuted;
+      --dayNumColor: #{vars.$colors-beigeMuted};
+      background-color: transparent;
       cursor: default;
       pointer-events: none;
     }
+  }
+  &__filler {
+    @include absolute((
+      right: var(--fillerRight, unset),
+      left: var(--fillerLeft, unset),
+    ));
+    height: 100%;
+    display: block;
+    width: var(--fillerWidth);
+    background-color: var(--fillerBackgroundColor);
+    border-radius: var(--fillerBorderRadius);
+  }
+  &__dayNum {
+    @include fullsize;
+    @include centeredFlex;
+    color: var(--dayNumColor);
+    z-index: 1;
+  }
+  &__filler,
+  &__dayNum {
+    opacity: var(--dayOpacity);
   }
 }
 </style>

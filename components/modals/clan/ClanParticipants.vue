@@ -2,10 +2,10 @@
 import { EButtons } from '~/components/base';
 
 const { getModalData, closeModal } = useModalDialog<ClanData>();
-const { title, description, image, participants } = getModalData();
+const { title, participants } = getModalData();
 
 
-const $b = useBem('ClanParticipants');
+const $b = useBEM('ClanParticipants');
 </script>
 
 <template lang="pug">

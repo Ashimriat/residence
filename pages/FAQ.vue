@@ -45,7 +45,7 @@ onMounted(() => {
   });
 });
 
-const $b = useBem('PageFAQ');
+const $b = useBEM('PageFAQ');
 </script>
 
 <template lang="pug">
@@ -205,7 +205,7 @@ div(:class="$b()")
   }
   &__question {
     justify-content: space-between;
-    --backgroundColor: #{vars.$colors-greyBackground};
+    --backgroundColor: #{vars.$colors-bg};
   }
   &__answer {
     --backgroundColor: #{vars.$colors-black};

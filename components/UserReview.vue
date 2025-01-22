@@ -11,7 +11,7 @@ const {
 } = defineProps<Props>();
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">
@@ -35,7 +35,7 @@ div(:class="$b()")
   padding: 20px;
   border-radius: vars.$br-l;
   background-color: vars.$colors-white;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: vars.$shadows-base;
   --userDataMaxWidth: none;
   &__topContainer {
     @include flex((

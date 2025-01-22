@@ -3,7 +3,7 @@ import { mockContacts, mockSocials } from '~assets/mocks';
 import { EIconsSizes } from '~/components/base';
 
 
-const $b = useBem('ContactsPage');
+const $b = useBEM('ContactsPage');
 </script>
 
 <template lang="pug">

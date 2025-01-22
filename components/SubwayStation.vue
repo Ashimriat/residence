@@ -21,7 +21,7 @@ const styles = computed<CSSProperties>(() => ({
 }));
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

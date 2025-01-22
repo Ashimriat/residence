@@ -1,6 +1,6 @@
 import { mockText } from './text';
 
-const SUBSCRIPTION = {
+const SUBSCRIPTION: Subscription = {
   name: 'Абонемент на игру',
   description: mockText(),
   price: 300,

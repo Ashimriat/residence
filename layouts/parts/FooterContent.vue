@@ -2,7 +2,7 @@
 import { EIcons, EIconsSizes } from '~/components/base';
 import NavigationMenu from './NavigationMenu';
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">
@@ -31,7 +31,7 @@ div(:class="$b()")
   padding: 24px 80px;
   background-color: vars.$colors-black;
   border-radius: vars.$br-x2l vars.$br-x2l 0 0;
-  height: var(--height, #{vars.$rest-footerDesktopHeight});
+  height: var(--footerHeight);
   &__topContainer {
     @include flex((justify-content: space-between));
     height: 190px;
@@ -54,7 +54,6 @@ div(:class="$b()")
   .FooterContent {
     padding: 24px;
     gap: 40px;
-    --height: #{vars.$rest-footerMobileHeight};
     &__topContainer {
       flex-direction: column;
       height: unset;

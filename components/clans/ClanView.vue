@@ -18,7 +18,7 @@ const {
 const { providedData } = useUserStore();
 const { inviteToClan } = useModalDialog();
 
-const $b = useBem('ClanView');
+const $b = useBEM('ClanView');
 </script>
 
 <template lang="pug">

@@ -34,7 +34,7 @@ function processSelection(data: OtherUserData): void {
   }
 }
 
-const $b = useBem('InviteToClan');
+const $b = useBEM('InviteToClan');
 </script>
 
 <template lang="pug">

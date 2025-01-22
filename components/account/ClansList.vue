@@ -2,7 +2,7 @@
 import { mockClans } from '~/assets/mocks';
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

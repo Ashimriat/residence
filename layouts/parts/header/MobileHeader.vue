@@ -43,7 +43,7 @@ watch(() => route.path, () => {
   isOpen.value = false;
 });
 
-const $b = useBem('MobileHeader');
+const $b = useBEM('MobileHeader');
 </script>
 
 <template lang="pug">
@@ -129,7 +129,7 @@ div(:class="$b()")
   height: 54px;
   padding: 4px 16px;
   background-color: vars.$colors-white;
-  box-shadow: 0px 0px 0px 2px rgba(#000000, 0.15);
+  box-shadow: vars.$shadows-header;
   border-radius: vars.$br-s;
   &__logo {
     border-radius: 50%;
@@ -146,7 +146,7 @@ div(:class="$b()")
     height: 100vh;
     padding: 72px 20px;
     box-sizing: border-box;
-    background-color: vars.$colors-menuBackgroundGrey;
+    background-color: vars.$colors-bg;
   }
   &__topLinks {
     @include flex((

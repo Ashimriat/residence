@@ -13,7 +13,7 @@ type Props = {
 /** Props & Emits */
 const { content } = defineProps<Props>();
 
-const $b = useBem('BaseAccordion');
+const $b = useBEM('BaseAccordion');
 </script>
 
 <template lang="pug">

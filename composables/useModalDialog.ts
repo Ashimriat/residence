@@ -7,7 +7,7 @@ import ClanCreated from '~/components/modals/clan/ClanCreated.vue';
 import ClanParticipants from '~/components/modals/clan/ClanParticipants.vue';
 import CreateClan from '~/components/modals/clan/CreateClan.vue';
 import InviteToClan from '~/components/modals/clan/InviteToClan.vue';
-
+import MobileCalendar, { type MobileCalendarModalOperators } from '~/components/modals/MobileCalendar.vue';
 
 type DialogRef<T> = {
   value: {
@@ -21,7 +21,7 @@ type OpenParams<T> = {
   closable?: boolean;
   title?: string;
   id?: string;
-}
+};
 
 export default function useModalDialog<T>() {
   const dialog = useDialog();
@@ -109,6 +109,14 @@ export default function useModalDialog<T>() {
     });
   }
 
+  function showMobileCalendar(operators: MobileCalendarModalOperators): void {
+    openModal<MobileCalendarModalOperators>(MobileCalendar, {
+      id: 'mobileCalendar',
+      data: operators,
+      closable: true,
+    })
+  }
+
   return {
     getModalData,
     closeModal,
@@ -122,5 +130,6 @@ export default function useModalDialog<T>() {
     seeClanParticipants,
     showClanRequestSent,
     inviteToClan,
+    showMobileCalendar,
   };
 }

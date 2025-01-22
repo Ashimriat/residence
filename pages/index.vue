@@ -51,12 +51,12 @@ function goToDetails(): void {
   aboutRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
 }
 
-const $b = useBem('MainPage');
+const $b = useBEM('MainPage');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  section(:class="$b('section', bMod('general'))")
+  section(:class="$b('section', ['general'])")
     BaseCard(:type="isMobile ? 'vertical' : 'horizontal'")
       div(:class="$b('generalDataContainer')")
         div
@@ -74,7 +74,7 @@ div(:class="$b()")
           )
   section(
     ref="about"
-    :class="$b('section', bMod('founder'))"
+    :class="$b('section', ['founder'])"
   )
     PAvatar(
       size="xlarge"
@@ -96,7 +96,7 @@ div(:class="$b()")
           :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.INSTAGRAM"
         )
-  section(:class="$b('section', bMod('gallery'))")
+  section(:class="$b('section', ['gallery'])")
     h2
       | Посмотрите на наши ивенты!
     PGalleria(
@@ -136,7 +136,7 @@ div(:class="$b()")
           :alt="slotProps.data.alt"
           style="cursor: pointer"
         )
-  section(:class="$b('section', bMod('events'))")
+  section(:class="$b('section', ['events'])")
     h2
       | Ближайшие ивенты
     EventsList(
@@ -148,7 +148,7 @@ div(:class="$b()")
       :type="EButtons.EVENTS_CALENDAR"
       @click="openEventsCalendar"
     )
-  section(:class="$b('section', bMod('reviews'))")
+  section(:class="$b('section', ['reviews'])")
     h2
       | Отзывы
     div(:class="$b('reviewsContainer')")

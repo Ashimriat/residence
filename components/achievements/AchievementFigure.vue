@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const $b = useBem('Achievement');
+const $b = useBEM('Achievement');
 </script>
 
 <template lang="pug">

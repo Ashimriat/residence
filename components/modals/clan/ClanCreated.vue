@@ -7,7 +7,7 @@ function processInvite(): void {
   closeModal();
 }
 
-const $b = useBem('ClanCreated');
+const $b = useBEM('ClanCreated');
 </script>
 
 <template lang="pug">

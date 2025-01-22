@@ -3,11 +3,11 @@ import { mockMerchData } from '~assets/mocks';
 
 
 const { seeMerch } = useModalDialog();
-const $b = useBem('MerchPage');
+const $b = useBEM('MerchPage');
 </script>
 
 <template lang="pug">
-section(:class="$b()")
+div(:class="$b()")
   h2
     | Мерч Резиденции
   div(:class="$b('container')")

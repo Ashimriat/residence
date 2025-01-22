@@ -8,7 +8,7 @@ type Props = {
 
 const { title, link } = defineProps<Props>();
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

@@ -6,7 +6,7 @@ const itemsAmount = isMobile ? 9 : 8;
 const itemsInRowAmount = isMobile ? 3 : 4;
 
 
-const $b = useBem('Achievements');
+const $b = useBEM('Achievements');
 
 </script>
 
@@ -30,7 +30,7 @@ div(:class="$b()")
 .Achievements {
   @include flexColumn((
     align-items: center,
-    gap: vars.$gaps-l,
+    gap: vars.$gaps-xl,
   ));
   &__title {
     text-align: center;

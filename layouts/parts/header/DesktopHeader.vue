@@ -14,7 +14,7 @@ const userStore = useUserStore();
 const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
 
 
-const $b = useBem();
+const $b = useBEM();
 </script>
 
 <template lang="pug">

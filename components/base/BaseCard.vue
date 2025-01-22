@@ -11,11 +11,11 @@ const {
 } = defineProps<Props>();
 
 
-const $b = useBem('Card');
+const $b = useBEM('Card');
 </script>
 
 <template lang="pug">
-div(:class="$b(bMod(type))")
+div(:class="$b([type])")
   slot(name="subContent")
     div
   div(:class="$b('content')")
@@ -32,7 +32,7 @@ div(:class="$b(bMod(type))")
   height: var(--cardHeight, 584px);
   padding: var(--cardPadding, 24px 12px 12px 12px);
   border-radius: var(--cardBorderRadius, #{vars.$br-l});
-  box-shadow: var(--cardBoxShadow, #{vars.$rest-popupShadow});
+  box-shadow: var(--cardBoxShadow, #{vars.$shadows-popup});
   &--vertical {
     flex-direction: column;
   }

@@ -9,7 +9,7 @@ type Props = {
 /** Props & Emits */
 const { name, avatar, isClanOwner } = defineProps<Props>();
 
-const $b = useBem('UserData');
+const $b = useBEM('UserData');
 </script>
 
 <template lang="pug">
