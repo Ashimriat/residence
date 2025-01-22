@@ -1,0 +1,1 @@
+import{I as a,K as s,c as n,L as t,M as o,o as c}from"./CVWYDmIW.js";const m=a({__name:"Rating",setup(r){const e=s("Rating");return(l,_)=>(c(),n("div",{class:t(o(e)())},null,2))}});export{m as default};
