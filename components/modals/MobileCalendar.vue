@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Calendar } from 'primevue';
 import { EButtons } from '~/components/base';
 import type { CalendarDate } from '~/components/DatePickerCalendar.vue';
 
@@ -13,6 +12,8 @@ const selectedDate = useCalendar();
 const { getModalData } = useModalDialog<MobileCalendarModalOperators>();
 const { onSelect } = getModalData();
 
+const confirm = () => onSelect(selectedDate.value as NonNullable<CalendarDate>);
+
 const $b = useBEM('MobileCalendar');
 </script>
 
@@ -25,7 +26,7 @@ div(:class="$b()")
   BaseButton(
     :type="EButtons.CONFIRM"
     :disabled="!selectedDate"
-    @click="onSelect(selectedDate)"
+    @click="confirm"
   )
 </template>
 
@@ -58,7 +59,7 @@ div(:class="$b()")
     gap: vars.$gaps-m,
   ));
   & button {
-    max-width: 50%;
+    width: 50%;
   }
 }
 </style>

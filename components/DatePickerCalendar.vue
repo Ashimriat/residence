@@ -7,9 +7,9 @@ type Props = {
 }
 
 export type CalendarDate = {
-  start: Temporal.PlainDate | null;
+  start: Temporal.PlainDate;
   end?: Temporal.PlainDate;
-};
+} | null;
 
 type CalendarDay = {
   day: number;
@@ -116,7 +116,7 @@ const days = computed<CalendarDay[]>(() => {
 });
 
 function resetSelectedDate(): void {
-  selectedDate.value = { start: null };
+  selectedDate.value = null;
 }
 
 function changeMonth(mod: -1 | 1): void {
@@ -133,8 +133,8 @@ const isSelectedDate = ({ day, isInactiveMonth }: CalendarDay): { first: boolean
 
 const isInSelection = ({ day, isInactiveMonth }: CalendarDay): boolean => {
   if (isInactiveMonth) return false;
-  if (!selectedDate.value.start || !selectedDate.value.end) return false;
-  return day > selectedDate.value?.start?.day && day < selectedDate.value.end?.day;
+  if (!selectedDate.value || !selectedDate.value.end) return false;
+  return day > selectedDate.value?.start.day && day < selectedDate.value.end?.day;
 };
 
 function getDayClasses(cDay: CalendarDay): string {
@@ -159,8 +159,8 @@ function setSelectedDate(day: number): void {
   const daysAddedDate = processedDate.value.add({ days: day - processedDate.value.day });
   if (selectedDate.value?.start && selectedDate.value.end || !selectedDate.value) {
     selectedDate.value = { start: daysAddedDate };
-  } else if (day === selectedDate.value.start?.day) {
-    selectedDate.value = { start: null };
+  } else if (day === selectedDate.value.start.day) {
+    selectedDate.value = null;
   } else {
     selectedDate.value.end = daysAddedDate;
   }
