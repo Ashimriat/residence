@@ -47,8 +47,17 @@ const { asDesktop } = defineProps<Props>();
 const selectedDate = defineModel<CalendarDate>({ required: true });
 
 const { isMobile } = useDevice();
-
 const { closeModal, showMobileCalendar } = useModalDialog();
+
+const selectedDateLabel = computed<string>(() => {
+    if (!selectedDate.value) return '';
+    const { start, end } = selectedDate.value;
+    let res = `${dNumber(start.day)}.${dNumber(start.month)}`;
+    if (end) {
+      res += ` - ${dNumber(end.day)}.${dNumber(end.month)}`;
+    }
+    return res;
+  });
 
 function openOnMobile(): void {
   showMobileCalendar({
@@ -58,16 +67,6 @@ function openOnMobile(): void {
     },
   });
 }
-
-const selectedDateLabel = computed<string>(() => {
-  if (!selectedDate.value) return '';
-  const { start, end } = selectedDate.value;
-  let res = `${dNumber(start.day)}.${dNumber(start.month)}`;
-  if (end) {
-    res += ` - ${dNumber(end.day)}.${dNumber(end.month)}`;
-  }
-  return res;
-});
 
 const processedDate = ref<Temporal.PlainDate>(
   Temporal.Now.instant().toZonedDateTimeISO(Temporal.Now.timeZoneId()).toPlainDate()
@@ -175,7 +174,7 @@ div(
   :class="$b(['mobile'])"
   @click="openOnMobile"
 )
-  | Выбрать дату
+  | {{ selectedDateLabel || 'Выбрать дату' }}
   BaseIcon(:type="EIcons.CALENDAR")
 div(
   v-else
