@@ -1,1 +1,0 @@
-import{M as a,B as r,D as s,P as e}from"./ddmJf16G.js";import{E as o}from"./Bd5TAZbL.js";import"./aB8ygRKp.js";const c=[a,r,s,e],t=[{id:"events",label:"События",icon:o.CALENDAR},{id:"clans",label:"Кланы",icon:o.SHIELD},{id:"referrals",label:"Рефералка",icon:o.USERS}];export{c as GAMES_ICONS,t as TABS};
