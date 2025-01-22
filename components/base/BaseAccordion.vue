@@ -41,6 +41,7 @@ PAccordion(
 
 .BaseAccordion {
   @include flexColumn((gap: 10px));
+  --p-accordion-header-toggle-icon-active-color: var(--p-accordion-header-toggle-icon-color);
   &__panel {
     --p-accordion-panel-border-color: var(--p-slate-200);
   }
@@ -60,6 +61,7 @@ PAccordion(
     @include flexColumn;
     --p-accordion-content-padding: 12px;
     border-radius: 0 0 vars.$br-xs vars.$br-xs;
+    background-color: vars.$colors-white;
   }
   &__link {
     padding: 12px 0;

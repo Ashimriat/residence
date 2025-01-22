@@ -11,7 +11,7 @@ const {
 } = defineProps<Props>();
 
 
-const $b = useBEM();
+const $b = useBEM('UserReview');
 </script>
 
 <template lang="pug">
@@ -51,6 +51,7 @@ div(:class="$b()")
   }
   &__reviewText {
     color: vars.$colors-greyDark;
+    font-size: vars.$fs-static-s;
   }
 }
 
@@ -58,6 +59,9 @@ div(:class="$b()")
   .UserReview {
     border-radius: vars.$br-s;
     max-width: unset;
+    &__reviewText {
+      font-size: vars.$fs-static-xs;
+    }
   }
 }
 </style>

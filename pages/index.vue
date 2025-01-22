@@ -197,7 +197,7 @@ div(:class="$b()")
     &--events {
       & button {
         --buttonMaxWidth: 357px;
-        --iconStroke: vars.$colors-white;
+        --iconStroke: #{vars.$colors-white};
         align-self: center;
       }
     }
@@ -265,7 +265,6 @@ div(:class="$b()")
       &--general {
         justify-content: center;
         align-items: flex-end;
-        padding: 8px;
         height: 470px;
         border-radius: vars.$br-l;
       }

@@ -81,10 +81,11 @@ $paddingTop: 28px;
     --cardsContainerMaxWidth: 932px;
     --cardMaxWidth: 446px;
     --cardMaxHeight: 394px;
+    --cardContainerPaddingTop: 28px;
   }
   &__eventsCardsContainer {
     @include flex((gap: 40px, flex-wrap: wrap));
-    padding-bottom: 28px;
+    padding: var(--cardContainerPaddingTop, 0) 0 28px;
     min-height: 340px;
     max-width: var(--cardsContainerMaxWidth, initial);
   }
@@ -96,6 +97,7 @@ $paddingTop: 28px;
 @include mobile {
   .EventsList {
     --cardMaxWidth: unset;
+    --cardContainerPaddingTop: 0;
     &__filtersContainer {
       flex-direction: column;
       & > div {
