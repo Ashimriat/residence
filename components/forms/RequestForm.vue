@@ -110,6 +110,7 @@ div(:class="$b()")
       box-sizing: border-box;
       width: 100%;
       max-width: 325px;
+      background-color: vars.$colors-white;
     }
   }
 }

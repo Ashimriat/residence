@@ -51,12 +51,16 @@ div(:class="$b({ owned: isOwned })")
     }
   }
   &__description {
-    font-size: vars.$fs-s;
+    font-size: var(--descriptionFontSize, #{vars.$fs-static-s});
+    color: vars.$colors-black;
   }
   &__buttonsContainer {
-    @include flex((justify-content: space-between, gap: 16px));
+    @include flex((
+      justify-content: space-between,
+      gap: vars.$gaps-s,
+    ));
     & button {
-      width: 50%;
+      width: calc((100% - #{vars.$gaps-s}) / 2);
       height: 40px;
     }
   }
@@ -65,6 +69,7 @@ div(:class="$b({ owned: isOwned })")
 @include mobile {
   .Subscription {
     --subscriptionPadding: 12px;
+    --descriptionFontSize: #{vars.$fs-static-xs};
   }
 }
 </style>

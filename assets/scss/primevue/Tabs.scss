@@ -23,7 +23,7 @@
     --p-tabs-tablist-border-color: transparent;
     --p-tabs-active-bar-height: 0;
 
-    overflow: scroll;
+    overflow: auto;
 
     & .p-tablist-tab-list {
       gap: 16px;

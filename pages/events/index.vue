@@ -138,7 +138,7 @@ div(:class="$b()")
     --logoTranslateX: -35%;
     --logoMaxWidth: 115px;
     --logoMaxHeight: 125px;
-    --gameDataTranslateX: var(--logoTranslateX);
+    --gameDataTranslateX: -55%;
   }
 }
 </style>

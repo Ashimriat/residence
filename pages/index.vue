@@ -59,7 +59,7 @@ div(:class="$b()")
   section(:class="$b('section', ['general'])")
     BaseCard(:type="isMobile ? 'vertical' : 'horizontal'")
       div(:class="$b('generalDataContainer')")
-        div
+        div(:class="$b('textContainer')")
           h1
             span
               | Что такое
@@ -169,7 +169,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .MainPage {
-  @include centeredFlexColumn((gap: 4rem));
+  @include centeredFlexColumn((gap: vars.$gaps-adaptive-l));
   padding-left: 80px;
   padding-right: 80px;
 
@@ -182,7 +182,7 @@ div(:class="$b()")
     &--reviews,
     &--gallery,
     &--events {
-      @include flexColumn((gap: 26px));
+      @include flexColumn((gap: vars.$gaps-m));
     }
     &--general {
       --cardMinWidth: 100%;
@@ -192,11 +192,12 @@ div(:class="$b()")
       --cardContentBorderRadius: #{vars.$br-xl};
     }
     &--founder {
-      @include centeredFlex((gap: 1.5rem));
+      @include centeredFlex((gap: vars.$gaps-adaptive-m));
     }
     &--events {
       & button {
-        max-width: 357px;
+        --buttonMaxWidth: 357px;
+        --iconStroke: vars.$colors-white;
         align-self: center;
       }
     }
@@ -206,20 +207,23 @@ div(:class="$b()")
     width: 560px;
     padding: 54px 48px 60px 48px;
     height: 100%;
-    & > div:first-child {
-      @include flexColumn((gap: 1rem));
-    }
-    & h1 {
+  }
+  &__textContainer {
+    @include flexColumn((gap: 1rem));
+    & > h1 {
       @include flexColumn((gap: 4px));
       & > span:last-child  {
         color: vars.$colors-beige;
       }
     }
+    & > div {
+      color: vars.$colors-black;
+    }
   }
   &__topButtonsContainer {
     @include centeredFlex((gap: 16px));
     & > button {
-      width: 100%;
+      width: 50%;
     }
   }
   &__founderAvatar {

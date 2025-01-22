@@ -5,6 +5,14 @@
 @layer residence {
   .InputText {
     --p-inputtext-focus-border-color: none;
+    height: 48px;
+  }
+
+  @include mobile {
+    .InputText {
+      height: 44px;
+      font-size: vars.$fs-static-xs;
+    }
   }
 }
 

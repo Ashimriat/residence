@@ -49,8 +49,8 @@ div(:class="$b()")
   box-sizing: content-box;
   &__input {
     border-radius: vars.$br-s;
-    border: 1px solid #EEEEEE;
-    height: 48px;
+    border: 1px solid vars.$colors-greyLight;
+    background-color: vars.$colors-white;
   }
   &__textButton {
     justify-content: flex-start;

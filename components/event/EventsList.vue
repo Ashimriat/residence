@@ -84,7 +84,7 @@ $paddingTop: 28px;
   }
   &__eventsCardsContainer {
     @include flex((gap: 40px, flex-wrap: wrap));
-    padding: 28px 0;
+    padding-bottom: 28px;
     min-height: 340px;
     max-width: var(--cardsContainerMaxWidth, initial);
   }
@@ -114,7 +114,7 @@ $paddingTop: 28px;
       width: 100%;
     }
     &__calendar {
-      margin-top: 16px;
+      margin: 16px 0;
       position: static;
     }
   }

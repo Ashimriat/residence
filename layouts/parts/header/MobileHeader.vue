@@ -48,13 +48,14 @@ const $b = useBEM('MobileHeader');
 
 <template lang="pug">
 div(:class="$b()")
-  Logo(:class="$b('logo')")
-  div(
-    :class="$b('subcontainer')"
-    @click="toggleMenu"
-  )
-    Notifications(v-if="isLoggedIn")
-    BaseIcon(:type="EIcons.BURGER")
+  div(:class="$b('mainView')")
+    Logo(:class="$b('logo')")
+    div(
+      :class="$b('subcontainer')"
+      @click="toggleMenu"
+    )
+      Notifications(v-if="isLoggedIn")
+      BaseIcon(:type="EIcons.BURGER")
   div(
     v-if="isOpen"
     :class="$b('innerMenu')"
@@ -125,26 +126,35 @@ div(:class="$b()")
 
 <style lang="scss">
 .MobileHeader {
-  @include flex((align-items: center, justify-content: space-between));
-  height: 54px;
-  padding: 4px 16px;
-  background-color: vars.$colors-white;
-  box-shadow: vars.$shadows-header;
-  border-radius: vars.$br-s;
+  &__mainView {
+    @include relative((z-index: 1));
+    @include flex((
+      align-items: center,
+      justify-content: space-between
+    ));
+    height: 54px;
+    padding: 4px 16px;
+    background-color: vars.$colors-white;
+    box-shadow: vars.$shadows-header;
+    border-radius: vars.$br-s;
+  }
   &__logo {
     border-radius: 50%;
     max-width: 40px;
     max-height: 40px;
   }
   &__subcontainer {
-    @include flex((gap: 16px));
+    @include flex((
+      gap: 16px,
+      align-items: center,
+    ));
   }
   &__innerMenu {
-    @include absolute((top: 58px, left: 0));
+    @include absolute((top: -58px, left: 0));
     @include flexColumn((gap: vars.$gaps-s));
     width: 100vw;
     height: 100vh;
-    padding: 72px 20px;
+    padding: 170px 20px 72px;
     box-sizing: border-box;
     background-color: vars.$colors-bg;
   }

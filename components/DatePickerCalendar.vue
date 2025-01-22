@@ -239,6 +239,7 @@ div(
     box-sizing: border-box;
   }
   &--mobile {
+    --iconStroke: #{vars.$colors-black};
     @include flex((justify-content: space-between, align-items: center));
     height: 40px;
     background-color: vars.$colors-white;
@@ -246,7 +247,7 @@ div(
     font-weight: vars.$fw-bold;
     padding: 10px 16px;
     border-radius: vars.$br-xs;
-    --iconStroke: #{vars.$colors-black};
+    color: vars.$colors-black;
   }
   &__header {
     @include flex((

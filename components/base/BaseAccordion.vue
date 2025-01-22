@@ -27,6 +27,7 @@ PAccordion(
     v-for="({ header, id }) of content"
     :key="id"
     :value="id"
+    :pt:root:class="$b('panel')"
   )
     PAccordionHeader(:pt:root:class="$b('header')")
       | {{ header }}
@@ -40,11 +41,15 @@ PAccordion(
 
 .BaseAccordion {
   @include flexColumn((gap: 10px));
+  &__panel {
+    --p-accordion-panel-border-color: var(--p-slate-200);
+  }
   &__header {
     font-size: vars.$fs-static-s;
     font-weight: vars.$fw-bold;
     border-radius: vars.$br-x2s;
     padding: 10px 12px;
+    background-color: vars.$colors-white;
     &[data-p-active="true"] {
       color: vars.$colors-greyMuted;
       border-end-start-radius: 0;

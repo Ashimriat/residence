@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons, EIcons } from '~/components/base';
+import { EButtons, EIcons, EIconsSizes } from '~/components/base';
 
 /** Local Types & Variables */
 type Props = {
@@ -16,6 +16,7 @@ type Emits = {
 const { withDetails, isAccountMode, eventData } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
+const { isMobile } = useDevice();
 /** State & Composables */
 const isShowingDetails = ref<boolean>(false);
 
@@ -36,7 +37,7 @@ function toggleDetails(): void {
   isShowingDetails.value = !isShowingDetails.value;
 }
 
-const $b = useBEM();
+const $b = useBEM('EventCard');
 </script>
 
 <template lang="pug">
@@ -56,7 +57,10 @@ BaseCard(:class="$b({ account: isAccountMode })")
       div(:class="$b('playersAmount')")
         span
           | {{ `${currentPlayers.length}/${gameData.maxPlayersAmount}` }}
-        BaseIcon(:type="EIcons.USERS")
+        BaseIcon(
+          :type="EIcons.USERS"
+          :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
+        )
   template(#default)
     EventInfo(
       :data="eventData"
@@ -118,10 +122,10 @@ BaseCard(:class="$b({ account: isAccountMode })")
     @include centeredFlex((gap: vars.$gaps-s));
     width: 93px;
     height: 32px;
-    background-color: vars.$colors-white;;
+    background-color: vars.$colors-white;
     padding: 4px 12px;
     border-radius: vars.$br-xs;
-    font-size: vars.$fs-s;
+    font-size: vars.$fs-static-s;
   }
   &__detailsBlock {
     @include flex((gap: vars.$gaps-xl));

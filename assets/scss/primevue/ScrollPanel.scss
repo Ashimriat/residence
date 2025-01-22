@@ -15,7 +15,7 @@
     }
     & .p-scrollpanel-content {
       @include flex((
-        gap: var(--scrollPanelGap, 40px),
+        gap: var(--scrollPanelGap, #{vars.$gaps-l}),
         flex-wrap: wrap,
       ));
       padding-inline: 20px;

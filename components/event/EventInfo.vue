@@ -71,6 +71,7 @@ div(:class="$b({ account: isAccountMode })")
   --contentFontSize: #{vars.$fs-s};
   --contentColor: #{vars.$colors-black};
   --gameColor: #{vars.$colors-black};
+  --gameTitleColor: #{vars.$colors-black};
   &--account {
     --contentGap: 0;
     --contentBackgroundColor: #{vars.$colors-greyDark};
