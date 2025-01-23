@@ -33,6 +33,7 @@ $figureWidth: 100px;
 $gap: 2rem;
 
 .AchievementsList {
+  justify-content: var(--justify, flex-start);
   @include flex((flex-wrap: wrap));
   gap: $gap;
   max-width: calc(v-bind(itemsInRow) * $figureWidth + $gap * (v-bind(itemsInRow) - 1));
@@ -56,6 +57,12 @@ $gap: 2rem;
     text-decoration: underline;
     font-size: vars.$fs-s;
     font-weight: vars.$fw-midHeavy;
+  }
+}
+
+@include mobile {
+  .AchievementsList {
+    --justify: space-evenly;
   }
 }
 </style>

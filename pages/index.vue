@@ -170,8 +170,6 @@ div(:class="$b()")
 <style lang="scss">
 .MainPage {
   @include centeredFlexColumn((gap: vars.$gaps-adaptive-l));
-  padding-left: 80px;
-  padding-right: 80px;
 
   --generalCardHeight: 720px;
 

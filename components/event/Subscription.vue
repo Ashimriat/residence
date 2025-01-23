@@ -39,6 +39,7 @@ div(:class="$b({ owned: isOwned })")
   background-color: var(--subscriptionBackgroundColor, #{vars.$colors-white});
   border-radius: vars.$br-s;
   max-width: 620px;
+  flex-grow: 1;
   &--owned {
     --subscriptionBackgroundColor: #{vars.$colors-greyLight};
   }

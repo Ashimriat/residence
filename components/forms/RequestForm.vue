@@ -43,8 +43,11 @@ const isRequestFormFilled = computed<boolean>(() => (
   }, true)
 ));
 
+function test(val: any) {
+  console.log("INPUT UPDATE EVENT", val);
+}
 
-const $b = useBEM();
+const $b = useBEM('RequestForm');
 </script>
 
 <template lang="pug">

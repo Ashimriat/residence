@@ -1,16 +1,24 @@
 <script setup lang="ts">
 import { mockAchievementsList, mockEventsBigData, mockSubscriptions } from '~assets/mocks';
 
-const $b = useBEM();
+
+const { isMobile } = useDevice();
+
+const eventsMock = isMobile
+  ? mockEventsBigData(6, 2)
+  : mockEventsBigData(3, 4)
+const achievementsMock = mockAchievementsList(isMobile ? 2 : 6)
+
+const $b = useBEM('UserEvents');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  div(:class="$b('contentSection')")
+  div(:class="$b('contentSection', ['events'])")
     h5
       | Предстоящие события
     PCarousel(
-      :value="mockEventsBigData(3, 4)"
+      :value="eventsMock"
       :num-visible="1"
       :num-scroll="1"
       :class="$b('carousel')"
@@ -32,7 +40,7 @@ div(:class="$b()")
     )
       h5
         | Достижения
-    AchievementsList(:list="mockAchievementsList(6)")
+    AchievementsList(:list="achievementsMock")
   div(:class="$b('contentSection')")
     h5
       | Абонементы
@@ -65,6 +73,10 @@ $carouselMaxWidth: 800px;
     padding: 20px;
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
+    flex-grow: 1;
+    &--events {
+      max-width: var(--eventsMaxWidth, 840px);
+    }
   }
   &__carousel {
     @include relative;
@@ -92,6 +104,7 @@ $carouselMaxWidth: 800px;
       width: $pageButtonSize;
       height: $pageButtonSize;
       border: none;
+      display: var(--carouselButtonDisplay, flex);
     }
     & .p-carousel-prev-button {
       left: calc(50% - #{$pageButtonOffset});
@@ -105,8 +118,9 @@ $carouselMaxWidth: 800px;
     max-width: $carouselMaxWidth;
   }
   &__eventData {
-    flex-basis: 49%;
+    flex-basis: calc((100% - 16px) / 2);
     gap: vars.$gaps-xs;
+    flex-grow: 1;
   }
   &__subscriptionsContainer {
     @include flex((flex-wrap: wrap, gap: 0.8rem));
@@ -125,6 +139,13 @@ $carouselMaxWidth: 800px;
     & > div:last-child {
       font-size: vars.$fs-s;
     }
+  }
+}
+
+@include mobile {
+  .UserEvents {
+    --eventsMaxWidth: 100%;
+    --carouselButtonDisplay: none;
   }
 }
 </style>

@@ -46,6 +46,9 @@ PAccordion(
     --p-accordion-panel-border-color: var(--p-slate-200);
   }
   &__header {
+    --p-accordion-header-hover-color: var(--p-accordion-header-color);
+    --p-accordion-header-toggle-icon-hover-color: var(--p-accordion-header-toggle-icon-color);
+    --p-accordion-header-toggle-icon-active-hover-color: var(--p-accordion-header-toggle-icon-active-color);
     font-size: vars.$fs-static-s;
     font-weight: vars.$fw-bold;
     border-radius: vars.$br-x2s;

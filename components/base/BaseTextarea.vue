@@ -12,7 +12,7 @@ const {
   maxLength = 0
 } = defineProps<Props>();
 
-const value = defineModel<string>({ required: true });
+const text = defineModel<string>({ required: true });
 
 const passedProps = computed<TextareaProps>(() => {
   if (maxLength === 0) return {};
@@ -26,28 +26,39 @@ const $b = useBEM('BaseTextarea');
 div(:class="$b()")
   PTextarea(
     v-bind="passedProps"
-    v-model="value"
+    v-model="text"
     fluid
+    :pt:root:class="$b('text')"
     :placeholder="placeholder"
-    :maxlength="maxLength"
   )
-  span(v-if="maxLength")
-    | {{ `${value.length}/${maxLength}` }}
+  span(
+    v-if="maxLength"
+    :class="$b('symbolsAmount')"
+  )
+    | {{ `${text.length}/${maxLength}` }}
 </template>
 
 <style lang="scss">
 .BaseTextarea {
   @include relative;
   width: 100%;
-  & textarea {
+  &__text {
+    --p-textarea-focus-border-color: none;
     box-sizing: border-box;
     min-height: 115px;
     height: 100%;
     resize: none;
-    padding: 6px 8px;
+    padding: 16px;
     background-color: vars.$colors-white;
+    &,
+    &::placeholder {
+      font-size: var(--textAreaFontSize, #{vars.$fs-static-s});
+    }
+    &::placeholder {
+      opacity: 0.5;
+    }
   }
-  & span {
+  &__symbolsAmount {
     @include absolute((bottom: 10px, right: 12px));
     font-size: vars.$fs-xs;
   }

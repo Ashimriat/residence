@@ -6,12 +6,21 @@
   .InputText {
     --p-inputtext-focus-border-color: none;
     height: 48px;
+
+    &,
+    &::placeholder {
+      font-size: var(--inputFontSize, #{vars.$fs-static-s});
+    }
+
+    &::placeholder {
+      opacity: 0.5;
+    }
   }
 
   @include mobile {
     .InputText {
       height: 44px;
-      font-size: vars.$fs-static-xs;
+      --inputFontSize: #{vars.$fs-static-xs};
     }
   }
 }

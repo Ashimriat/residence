@@ -79,7 +79,6 @@ div(:class="$b()")
   @include flexColumn((gap: 4rem));
   &__section {
     @include flexColumn((gap: 26px));
-    padding: var(--sectionPadding, 0 80px);
     & > button {
       max-width: 275px;
       justify-content: space-between;
@@ -131,7 +130,6 @@ div(:class="$b()")
 
 @include mobile {
   .EventsPage {
-    --sectionPadding: 0;
     --sectionContentGap: #{vars.$gaps-s};
     --gameGap: 0;
     --gameHeight: 154px;

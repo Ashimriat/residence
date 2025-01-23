@@ -94,16 +94,16 @@ div(:class="$b()")
           | {{ label }}
     UserEvents(v-if="activeTab === 'events'")
     ClansList(v-else-if="activeTab === 'clans'")
+    ReferralsList(v-else)
 </template>
 
 <style lang="scss">
 .AccountPage {
   @include flexColumn((gap: 2.5rem));
-  padding-left: 80px !important;
-  padding-right: 80px !important;
   &__section {
     @include flex((gap: 1rem));
     &--user {
+      flex-wrap: wrap;
       justify-content: space-between;
     }
     &--content {
@@ -114,12 +114,14 @@ div(:class="$b()")
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
     padding: 20px 28px;
+    flex-grow: 1;
     & * {
       font-weight: vars.$fw-bold;
     }
     &--data {
       @include flex((justify-content: space-between, align-items: center));
       flex-basis: 66%;
+      flex-direction: var(--userDataSubsectionFlexDirection, row);
     }
     &--rating {
       @include flexColumn((gap: 20px));
@@ -229,10 +231,16 @@ div(:class="$b()")
     font-weight: vars.$fw-midHeavy;
     font-size: vars.$fs-s;
     padding-bottom: 10px;
-    --stroke: #{vars.$colors-black};
+    --iconStroke: #{vars.$colors-black};
     &--active {
       border-color: vars.$colors-beige;
     }
+  }
+}
+
+@include mobile {
+  .AccountPage {
+    --userDataSubsectionFlexDirection: column;
   }
 }
 </style>

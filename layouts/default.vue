@@ -24,10 +24,11 @@ div(:class="$b()")
   header(:class="$b('header', { desktop: !isMobile, mobile: isMobile, camelCase: true })")
     component(
       :is="headerComponent"
+      :class="$b('headerContent')"
       @login="openSignIn"
       @add-event="addEvent"
     )
-  main(:class="$b('contentContainer')")
+  main(:class="$b('content')")
     slot
   footer(:class="$b('footer')")
     FooterContent
@@ -41,7 +42,7 @@ div(:class="$b()")
   --mobileHeaderOffset: 0;
   --headerBackgroundColor: #{vars.$colors-bg};
   --mainContentWidth: 1440px;
-  --mainContentPadding: 60px 0 160px;
+  --mainContentPadding: 60px 80px 160px;
   &__header {
     @include sticky((z-index: 10, top: 0));
     background-color: var(--headerBackgroundColor);
@@ -57,22 +58,22 @@ div(:class="$b()")
       background-color: transparent;
       padding: 0 24px;
     }
-    & > div {
-      width: 100%;
-      max-width: 1280px;
-    }
   }
-
   &__header,
+  &__headerContent,
   &__footer {
     width: 100%;
+  }
+
+  &__headerContent {
+    max-width: 1280px;
   }
 
   &__footer {
     background-color: vars.$colors-bg;
   }
 
-  &__contentContainer {
+  &__content {
     @include flexColumn((align-items: center));
     background-color: vars.$colors-bg;
     min-height: calc(
