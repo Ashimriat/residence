@@ -1,0 +1,1 @@
+import{G as s,I as a,c as n,J as o,K as r,o as t}from"./BU1ATpM-.js";const p=s({__name:"Gallery",setup(c){const e=a();return(l,_)=>(t(),n("div",{class:o(r(e)())},"Галлерея",2))}});export{p as default};

@@ -1,0 +1,1 @@
+import{G as s,I as a,c as n,J as o,K as t,o as c}from"./BU1ATpM-.js";const m=s({__name:"Directions",setup(r){const e=a("DirectionsPage");return(i,_)=>(c(),n("div",{class:o(t(e)())},"Направления",2))}});export{m as default};
