@@ -57,21 +57,22 @@ const $b = useBEM('MainPage');
 <template lang="pug">
 div(:class="$b()")
   section(:class="$b('section', ['general'])")
-    BaseCard(:type="isMobile ? 'vertical' : 'horizontal'")
-      div(:class="$b('generalDataContainer')")
-        div(:class="$b('textContainer')")
-          h1
-            span
-              | Что такое
-            span
-              | Резиденция?
-          div
-            | {{ mockText() }}
-        div(:class="$b('topButtonsContainer')")
-          BaseButton(
-            :type="EButtons.WELCOME_BEGINNING"
-            @click="goToDetails"
-          )
+    BaseCard(:orientation="isMobile ? 'column' : 'row'")
+      template(#content)
+        div(:class="$b('generalDataContainer')")
+          div(:class="$b('textContainer')")
+            h1
+              span
+                | Что такое
+              span
+                | Резиденция?
+            div
+              | {{ mockText() }}
+          div(:class="$b('topButtonsContainer')")
+            BaseButton(
+              :type="EButtons.WELCOME_BEGINNING"
+              @click="goToDetails"
+            )
   section(
     ref="about"
     :class="$b('section', ['founder'])"

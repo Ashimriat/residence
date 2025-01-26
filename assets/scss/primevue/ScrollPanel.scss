@@ -6,7 +6,6 @@
   .ScrollPanel {
     height: var(--scrollPanelHeight, 300px);
     max-width: var(--scrollPanelWidth, 100%);
-    border-radius: vars.$br-s;
     padding: 12px 0;
     background-color: vars.$colors-white;
     & .p-scrollpanel-bar {

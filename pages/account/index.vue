@@ -6,26 +6,17 @@ import {
 } from '~/components/base';
 import { TABS, GAMES_ICONS } from '../constants/account';
 
-const activeTab = ref<string>(TABS[0].id);
 
 const route = useRoute();
 const router = useRouter();
 
-function setActiveTab(tab: string): void {
-  activeTab.value = tab;
-}
+const tab = toRef(() => route.query.tab ?? TABS[0].id);
 
+watchEffect(() => {
+  router.push({ path: route.path, query: { tab: tab.value }});
+})
 
 const $b = useBEM('AccountPage');
-
-onMounted(async () => {
-  let { tab } = route.query;
-  if (!tab) {
-    tab = TABS[0].id;
-    router.push({ path: route.path, query: { tab }});
-  }
-  activeTab.value = tab as string;
-})
 </script>
 
 <template lang="pug">
@@ -88,17 +79,17 @@ div(:class="$b()")
             | 6150
   section(:class="$b('section', ['content'])")
     div(:class="$b('tabsContainer')")
-      div(
+      NuxtLink(
         v-for="({ id, label, icon }) of TABS"
         :key="id"
-        :class="$b('tab', { active: id === activeTab })"
-        @click="setActiveTab(id)"
+        :class="$b('tab', { active: id === tab })"
+        :to="`/account?tab=${id}`"
       )
         BaseIcon(:type="icon")
         span
           | {{ label }}
-    UserEvents(v-if="activeTab === 'events'")
-    ClansList(v-else-if="activeTab === 'clans'")
+    UserEvents(v-if="tab === 'events'")
+    ClansList(v-else-if="tab === 'clans'")
     ReferralsList(v-else)
 </template>
 
@@ -122,6 +113,7 @@ div(:class="$b()")
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
     flex-grow: 1;
+    min-height: 120px;
     & * {
       font-weight: vars.$fw-bold;
     }
@@ -136,7 +128,7 @@ div(:class="$b()")
       flex-direction: var(--userDataSubsectionFlexDirection, row);
     }
     &--rating {
-      @include flexColumn((gap: 20px));
+      @include flexColumn((justify-content: space-between));
       padding: var(--ratingSubsectionPadding, 16px 28px);
       flex-basis: 32%;
     }
@@ -161,7 +153,9 @@ div(:class="$b()")
     @include flex((align-items: center, ));
     &--user {
       font-size: var(--userFontSize, #{vars.$fs-static-s});
-      color: vars.$colors-black;
+      & > div {
+        color: vars.$colors-black;
+      }
     }
     &--birthdate {
       font-size: var(--userBirthdayDateFontSize, #{vars.$fs-static-s});
@@ -232,7 +226,7 @@ div(:class="$b()")
     @include flex((justify-content: space-between, align-items: center));
   }
   &__userRating {
-    font-size: vars.$fs-m;
+    font-size: var(--userRatingFontSize, #{vars.$fs-static-m});
     & span {
       color: vars.$colors-beige;
     }
@@ -250,7 +244,7 @@ div(:class="$b()")
       height: 32px;
     }
     & span {
-      font-size: vars.$fs-xs;
+      font-size: vars.$fs-static-xs;
     }
   }
   &__tabsContainer {
@@ -280,6 +274,7 @@ div(:class="$b()")
     --userBirthdayDateFontSize: #{vars.$fs-static-s};
     --userStatisticsFontSize: #{vars.$fs-static-xs};
     --badgeTranslateY: 5px;
+    --userRatingFontSize: #{vars.$fs-static-s};
   }
 }
 </style>

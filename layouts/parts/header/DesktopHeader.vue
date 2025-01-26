@@ -14,16 +14,17 @@ const userStore = useUserStore();
 const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
 
 
-const $b = useBEM();
+const $b = useBEM('DesktopHeader');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
   div(:class="$b('subBlock')")
     div(:class="$b('logoContainer')")
-      Logo(
-        :class="$b('logo')"
-      )
+      NuxtLink(to="/")
+        Logo(
+          :class="$b('logo')"
+        )
     div(:class="$b('locationBlock')")
       BaseIcon(:type="EIcons.LOCATION")
       span

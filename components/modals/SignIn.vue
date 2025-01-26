@@ -2,7 +2,7 @@
 import { mockUserData } from '~/assets/mocks';
 import { EButtons } from '~/components/base';
 
-const $b = useBEM();
+const $b = useBEM('SignIn');
 const userStore = useUserStore();
 const { setUserData } = userStore;
 const { openSignUp, closeModal } = useModalDialog();

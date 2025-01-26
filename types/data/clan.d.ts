@@ -1,4 +1,4 @@
-declare type ClanParticipant = {
+declare type Participant = {
   name: string;
   avatar?: string;
   id: string;
@@ -7,10 +7,11 @@ declare type ClanParticipant = {
 declare type ClanData = {
   id: string;
   title: string;
+  ownerId: string;
   description: string;
   image?: string;
   rating: number;
-  participants: ClanParticipant[];
+  participants: Participant[];
 };
 
 declare type ClanCreationData = Pick<ClanData, 'title' | 'description' | 'image'>;

@@ -60,9 +60,6 @@ div(:class="$b()")
 $dotsGap: 4px;
 $dotSize: 8px;
 $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
-$pageButtonSize: 16px;
-$pageButtonDotsGap: 18px;
-$pageButtonOffset: $pageButtonSize + $pageButtonDotsGap;
 $carouselMaxWidth: 800px;
 
 
@@ -83,7 +80,10 @@ $carouselMaxWidth: 800px;
     max-width: $carouselMaxWidth;
     & .p-carousel-content-container {
       @include relative;
-      gap: 1.6rem;
+      gap: var(--carouselContentContainerGap, #{vars.$gaps-g28});
+    }
+    & .p-carousel-content {
+      gap: vars.$gaps-g12;
     }
     & .p-carousel-indicator-list {
       flex-direction: row;
@@ -99,18 +99,11 @@ $carouselMaxWidth: 800px;
     }
     & .p-carousel-prev-button,
     & .p-carousel-next-button {
-      @include absolute((bottom: math.div($pageButtonSize, 4)));
       padding: 0;
-      width: $pageButtonSize;
-      height: $pageButtonSize;
+      width: 16px;
+      height: 100%;
       border: none;
       display: var(--carouselButtonDisplay, flex);
-    }
-    & .p-carousel-prev-button {
-      left: calc(50% - #{$pageButtonOffset});
-    }
-    & .p-carousel-next-button {
-      right: calc(50% - #{$pageButtonOffset} * 2);
     }
   }
   &__eventsPageContainer {
@@ -146,6 +139,7 @@ $carouselMaxWidth: 800px;
   .UserEvents {
     --eventsMaxWidth: 100%;
     --carouselButtonDisplay: none;
+    --carouselContentContainerGap: #{vars.$gaps-g16};
   }
 }
 </style>

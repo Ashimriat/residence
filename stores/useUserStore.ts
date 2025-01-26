@@ -35,6 +35,10 @@ const useUserStore = defineStore('user', () => {
 
   const isAdmin = computed<boolean>(() => isLoggedIn.value && providedData.value.role === EUserRoles.ADMIN);
 
+  function checkIsClanOwner(clanOwnerId: string): boolean {
+    return providedData.value.id === clanOwnerId;
+  }
+
   function setUserData([editable, provided]: [EditableUserData, ProvidedUserData?]): void {
     if (provided) {
       providedData.value = provided;
@@ -52,6 +56,7 @@ const useUserStore = defineStore('user', () => {
     isCommonUser,
     isAdmin,
     /** actions */
+    checkIsClanOwner,
     setUserData,
   };
 });

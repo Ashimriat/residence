@@ -15,6 +15,7 @@ enum EButtons {
   ADD_EVENT_MOBILE = 'addEventMobile',
   SHARE = 'share',
   EDIT_RULES = 'editRules',
+  REFERRAL = 'referral',
   EVENTS_CALENDAR = 'eventsCalendar',
   /** RequestForm */
   REQUEST_EVENT = 'requestEvent',

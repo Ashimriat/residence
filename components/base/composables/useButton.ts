@@ -47,6 +47,11 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Закрыть',
     variant: EButtonVariant.CONTRAST,
   },
+  [EButtons.REFERRAL]: {
+    label: 'Скопировать ссылку',
+    icon: EIcons.LINK,
+    variant: EButtonVariant.CONTRAST,
+  },
   [EButtons.EVENTS_CALENDAR]: {
     label: 'Открыть календарь ивентов',
     icon: EIcons.CALENDAR,

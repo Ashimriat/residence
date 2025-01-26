@@ -41,7 +41,10 @@ const $b = useBEM('EventCard');
 </script>
 
 <template lang="pug">
-BaseCard(:class="$b({ account: isAccountMode })")
+BaseCard(
+  orientation="column"
+  :class="$b({ account: isAccountMode })"
+)
   template(#subContent)
     div(
       v-if="!isAccountMode"
@@ -61,7 +64,7 @@ BaseCard(:class="$b({ account: isAccountMode })")
           :type="EIcons.USERS"
           :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
         )
-  template(#default)
+  template(#content)
     EventInfo(
       :data="eventData"
       :is-account-mode="isAccountMode"
@@ -98,6 +101,7 @@ BaseCard(:class="$b({ account: isAccountMode })")
 
 <style lang="scss">
 .EventCard {
+  --cardPadding: 24px 12px 12px;
   &--account {
     --cardWidth: 392px;
     --cardHeight: fit-content;

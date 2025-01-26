@@ -2,26 +2,27 @@
 import { mockClans } from '~/assets/mocks';
 
 
-const $b = useBEM();
+const $b = useBEM('ClansList');
+
+const clansData = mockClans(2, 20, false);
+
+const { checkIsClanOwner } = useUserStore();
+
+console.log("CLANS DATA", clansData);
 </script>
 
 <template lang="pug">
 div(:class="$b()")
   template(
-    v-for="(isClanOwner, i) of [true, false]"
-    :key="`clan_${i}`"
+    v-for="clanData of clansData"
+    :key="clanData.id"
   )
     h3
-      | {{ isClanOwner ? 'Ваш клан' : 'Кланы' }}
-    ClanView(
-      :is-clan-owner="isClanOwner"
-      :data="mockClans(1, 20, false)[0]"
-    )
+      | {{ checkIsClanOwner(clanData.ownerId) ? 'Ваш клан' : 'Кланы' }}
+    ClanView(:data="clanData")
 </template>
 
 <style lang="scss">
-@use 'sass:color';
-
 .ClansList {
   @include flexColumn((gap: 0.8rem));
 }
