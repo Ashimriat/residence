@@ -26,7 +26,7 @@ div(:class="$b({ king: isClanOwner })")
 
 <style lang="scss">
 .UserData {
-  @include flex((align-items: center, gap: vars.$gaps-s));
+  @include flex((align-items: center, gap: vars.$gaps-g12));
   max-width: var(--userDataMaxWidth, 139px);
   &--king > div {
     @include relative;

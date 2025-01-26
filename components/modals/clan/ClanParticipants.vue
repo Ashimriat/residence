@@ -49,7 +49,7 @@ div(:class="$b()")
 }
 
 .ClanParticipants {
-  @include centeredFlexColumn((gap: 16px));
+  @include centeredFlexColumn((gap: vars.$gaps-g16));
   max-width: 500px;
   --scrollPanelItemBasis: 0;
   &__closeButton {

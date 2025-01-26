@@ -20,7 +20,7 @@ div(:class="$b()")
 .MerchPurchase {
   @include flexColumn((
     align-items: center,
-    gap: 16px,
+    gap: vars.$gaps-g16,
   ));
   &__image {
     width: 240px;

@@ -34,7 +34,7 @@ div(:class="$b({ owned: isOwned })")
 
 <style lang="scss">
 .Subscription {
-  @include flexColumn((gap: vars.$gaps-m));
+  @include flexColumn((gap: vars.$gaps-g24));
   padding: var(--subscriptionPadding, 20px);
   background-color: var(--subscriptionBackgroundColor, #{vars.$colors-white});
   border-radius: vars.$br-s;
@@ -58,10 +58,10 @@ div(:class="$b({ owned: isOwned })")
   &__buttonsContainer {
     @include flex((
       justify-content: space-between,
-      gap: vars.$gaps-s,
+      gap: vars.$gaps-g12,
     ));
     & button {
-      width: calc((100% - #{vars.$gaps-s}) / 2);
+      width: calc((100% - #{vars.$gaps-g12}) / 2);
       height: 40px;
     }
   }

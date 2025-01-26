@@ -63,7 +63,7 @@ div(:class="$b()")
 
 .Error {
   @include fullsize;
-  @include centeredFlexColumn((gap: vars.$gaps-m));
+  @include centeredFlexColumn((gap: vars.$gaps-g24));
   background-color: vars.$colors-black;
   color: vars.$colors-white;
   &__title,
@@ -73,7 +73,7 @@ div(:class="$b()")
   &__trianglesContainer {
     @include flex((
       justify-content: space-between,
-      gap: vars.$gaps-m,
+      gap: vars.$gaps-g24,
     ));
   }
   &__triangle {

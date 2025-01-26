@@ -38,25 +38,30 @@ div(:class="$b()")
           :class="$b('avatar')"
         )
         div(:class="$b('userData')")
-          div(:class="$b('dataContainer')")
-            | Никита
-            span(:class="$b('userTitle')")
-              | Постоялец
-          div(:class="$b('dataContainer')")
+          div(:class="$b('dataContainer', ['user'])")
+            POverlayBadge(
+              severity="contrast"
+              value="Постоялец"
+            )
+              | Никита
+          div(:class="$b('dataContainer', ['birthdate'])")
             BaseIcon(
               :type="EIcons.GIFT"
               :size="EIconsSizes.S"
             )
             span
               | 11.01.2000
-          div(:class="$b('dataContainer')")
+          div(:class="$b('dataContainer', ['statistics'])")
             span
-              | Топ #1
-            span
+              | Топ #1 
+            span 
               | Рейтинг 24600
             span
               | 300 баллов
-      NuxtLink(to="/account/settings")
+      NuxtLink(
+        to="/account/settings"
+        :class="$b('settingsLink')"
+      )
         BaseButton(
           :type="EButtons.USER_SETTINGS"
           :icon-size="EIconsSizes.S"
@@ -100,6 +105,9 @@ div(:class="$b()")
 <style lang="scss">
 .AccountPage {
   @include flexColumn((gap: 2.5rem));
+  --badgeTranslateX: calc(100% + #{vars.$gaps-g8});
+  --badgeTranslateY: 2px;
+  --badgeFontSize: #{vars.$fs-static-x2s};
   &__section {
     @include flex((gap: 1rem));
     &--user {
@@ -113,18 +121,23 @@ div(:class="$b()")
   &__subsection {
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
-    padding: 20px 28px;
     flex-grow: 1;
     & * {
       font-weight: vars.$fw-bold;
     }
     &--data {
-      @include flex((justify-content: space-between, align-items: center));
+      @include flex((
+        justify-content: space-between,
+        align-items: center,
+        gap: vars.$gaps-g16,
+      ));
       flex-basis: 66%;
+      padding: var(--userDataSubsectionPadding, 20px);
       flex-direction: var(--userDataSubsectionFlexDirection, row);
     }
     &--rating {
       @include flexColumn((gap: 20px));
+      padding: var(--ratingSubsectionPadding, 16px 28px);
       flex-basis: 32%;
     }
   }
@@ -134,23 +147,33 @@ div(:class="$b()")
     border-radius: vars.$br-l;
   }
   &__userDataWrapper {
-    @include flex((align-items: center, gap: 16px));
+    @include flex((
+      align-items: center,
+      gap: vars.$gaps-g16,
+    ));
+    width: 100%;
   }
   &__userData {
     @include flexColumn((justify-content: space-between));
     height: 70px;
   }
   &__dataContainer {
-    @include flex((align-items: center, gap: 4px));
-    &:first-of-type {
-      gap: 8px;
+    @include flex((align-items: center, ));
+    &--user {
+      font-size: var(--userFontSize, #{vars.$fs-static-s});
+      color: vars.$colors-black;
     }
-    &:nth-of-type {
-      font-size: vars.$fs-s;
+    &--birthdate {
+      font-size: var(--userBirthdayDateFontSize, #{vars.$fs-static-s});
+      gap: vars.$gaps-g4;
+      &,
+      & span {
+        color: vars.$colors-black;
+      }
     }
-    &:last-of-type {
-      font-size: vars.$fs-static-x2s;
-      gap: 14px;
+    &--statistics {
+      font-size: var(--userStatisticsFontSize, #{vars.$fs-static-xs});
+      gap: vars.$gaps-g12;
       & span {
         @include relative;
         &:first-of-type,
@@ -160,9 +183,12 @@ div(:class="$b()")
             background-color: vars.$colors-black,
             width: 4px,
             height: 4px,
-            top: 2.5px,
+            top: 5px,
             right: -9px,
           ));
+          & span {
+            color: vars.$colors-black;
+          }
         }
         &:last-of-type {
           color: vars.$colors-beige;
@@ -184,15 +210,21 @@ div(:class="$b()")
     color: vars.$colors-white;
     background-color: vars.$colors-black;
   }
+  &__settingsLink {
+    width: var(--settingsButtonWidth, initial);
+  }
   &__settingsButton {
-    --p-button-gap: 0px;
+    --buttonGap: 0;
     --buttonLabelFontSize: #{vars.$fs-static-xs};
     width: 112px;
+    min-width: var(--settingsButtonMinWidth, initial);
     height: 24px;
     border-radius: vars.$br-x2s;
     border-width: 1px;
+    justify-content: center;
     & span {
       margin-left: 4px;
+      font-size: vars.$fs-static-xs;
     }
   }
 
@@ -241,6 +273,13 @@ div(:class="$b()")
 @include mobile {
   .AccountPage {
     --userDataSubsectionFlexDirection: column;
+    --settingsButtonMinWidth: 100%;
+    --userDataSubsectionPadding: 12px;
+    --ratingSubsectionPadding: 16px 20px;
+    --settingsButtonWidth: 100%;
+    --userBirthdayDateFontSize: #{vars.$fs-static-s};
+    --userStatisticsFontSize: #{vars.$fs-static-xs};
+    --badgeTranslateY: 5px;
   }
 }
 </style>

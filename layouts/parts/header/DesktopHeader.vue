@@ -52,7 +52,7 @@ div(:class="$b()")
 .DesktopHeader {
   @include flex((justify-content: space-between));
   &__subBlock {
-    @include flex((gap: 16px));
+    @include flex((gap: vars.$gaps-g16));
   }
   &__logoContainer {
     @include relative;
@@ -76,7 +76,7 @@ div(:class="$b()")
   &__userBlock {
     @include flex((
       align-items: center,
-      gap: 16px,
+      gap: vars.$gaps-g16,
     ));
   }
   &__userButton {

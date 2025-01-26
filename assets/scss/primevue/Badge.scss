@@ -6,17 +6,17 @@
   .Badge {
     --p-overlaybadge-outline-width: 0;
     --p-badge-primary-background: #{vars.$colors-beige};
-    --p-badge-height: 18px;
-    --p-badge-min-width: 18px;
-    --p-badge-font-size: 10px;
+    --p-badge-height: var(--badgeHeight, 18px);
+    --p-badge-min-width: var(--badgeMinWidth, 18px);
+    --p-badge-font-size: var(--badgeFontSize, #{vars.$fs-static-xs});
+    transform: translate(var(--badgeTranslateX, 50%), var(--badgeTranslateY, -50%));
   }
 
   @include mobile {
     .Badge {
-      --p-badge-height: 12px;
-      --p-badge-min-width: 12px;
-      --p-badge-font-size: 8px;
-      transform: translate(2px, -4px);
+      --badgeHeight: 12px;
+      --badgeFontSize: #{vars.$fs-static-x2s};
+      --badgeMinWidth: 12px;
     }
   }
 }

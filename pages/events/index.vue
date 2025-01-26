@@ -90,16 +90,16 @@ div(:class="$b()")
   }
   &__sectionContent {
     @include flex((
-      gap: var(--sectionContentGap, #{vars.$gaps-l}),
+      gap: var(--sectionContentGap, #{vars.$gaps-g40}),
       flex-wrap: wrap
     ));
   }
   &__game {
     @include flex((
       align-items: center,
-      gap: var(--gameGap, #{vars.$gaps-l}),
+      gap: var(--gameGap, #{vars.$gaps-g40}),
     ));
-    max-width: calc((100% - var(--sectionContentGap, #{vars.$gaps-l})) / 2);
+    max-width: calc((100% - var(--sectionContentGap, #{vars.$gaps-g40})) / 2);
     height: var(--gameHeight, 204px);
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
@@ -123,14 +123,14 @@ div(:class="$b()")
     }
   }
   &__gameData {
-    @include flexColumn((gap: vars.$gaps-s, justify-content: center));
+    @include flexColumn((gap: vars.$gaps-g12, justify-content: center));
     transform: translateX(var(--gameDataTranslateX, 0));
   }
 }
 
 @include mobile {
   .EventsPage {
-    --sectionContentGap: #{vars.$gaps-s};
+    --sectionContentGap: #{vars.$gaps-g12};
     --gameGap: 0;
     --gameHeight: 154px;
     --logoTranslateX: -35%;

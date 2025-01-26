@@ -83,7 +83,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .ClansPage {
-  @include flexColumn((gap: vars.$gaps-xl));
+  @include flexColumn((gap: vars.$gaps-g48));
   --searchMaxWidth: 360px;
   &__title {
     text-align: center;
@@ -109,7 +109,7 @@ div(:class="$b()")
     display: grid;
     grid-template-rows: 64px 1fr min(48px, 1fr);
     grid-template-columns: 1fr 5fr;
-    row-gap: 10px;
+    row-gap: vars.$gaps-g12;
     flex-basis: calc(50% - 10px);
     
     background-color: vars.$colors-white;
@@ -130,7 +130,7 @@ div(:class="$b()")
   &__buttonsContainer {
     @include flex((
       justify-content: space-between,
-      gap: vars.$gaps-xs,
+      gap: vars.$gaps-g8,
     ));
     grid-column: 1 / 3;
     margin-top: var(--marginTop, 30px);

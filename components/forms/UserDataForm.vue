@@ -131,7 +131,7 @@ form(
 
 <style lang="scss">
 .UserDataForm {
-  @include flexColumn((gap: 16px));
+  @include flexColumn((gap: vars.$gaps-g16));
   box-sizing: content-box;
   & input {
     height: 48px;
@@ -139,9 +139,9 @@ form(
     box-sizing: border-box;
   }
   &__container {
-    @include flex((gap: 16px));
+    @include flex((gap: vars.$gaps-g16));
     & > div:last-child {
-      @include flexColumn((gap: 16px));
+      @include flexColumn((gap: vars.$gaps-g16));
       width: 100%;
     }
   }

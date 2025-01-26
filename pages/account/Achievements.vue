@@ -30,7 +30,7 @@ div(:class="$b()")
 .Achievements {
   @include flexColumn((
     align-items: center,
-    gap: vars.$gaps-xl,
+    gap: vars.$gaps-g48,
   ));
   &__title {
     text-align: center;

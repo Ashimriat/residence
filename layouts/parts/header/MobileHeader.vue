@@ -145,13 +145,13 @@ div(:class="$b()")
   }
   &__subcontainer {
     @include flex((
-      gap: 16px,
+      gap: vars.$gaps-g16,
       align-items: center,
     ));
   }
   &__innerMenu {
     @include absolute((top: -58px, left: 0));
-    @include flexColumn((gap: vars.$gaps-s));
+    @include flexColumn((gap: vars.$gaps-g12));
     width: 100vw;
     height: 100vh;
     padding: 170px 20px 72px;
@@ -161,11 +161,11 @@ div(:class="$b()")
   &__topLinks {
     @include flex((
       justify-content: space-between,
-      gap: vars.$gaps-s,
+      gap: vars.$gaps-g12,
     ));
   }
   &__accountLink {
-    @include flex((align-items: center, gap: vars.$gaps-xs));
+    @include flex((align-items: center, gap: vars.$gaps-g8));
     padding: 6px 12px;
     font-size: vars.$fs-static-s;
     background-color: vars.$colors-white;
@@ -201,7 +201,7 @@ div(:class="$b()")
     border-radius: vars.$br-xs;
   }
   &__authPageLink {
-    @include flex((align-items: center, gap: vars.$gaps-xs));
+    @include flex((align-items: center, gap: vars.$gaps-g8));
     padding: 12px 0;
     font-size: vars.$fs-static-s;
     font-weight: vars.$fw-midHeavy;

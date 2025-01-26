@@ -46,4 +46,11 @@ NuxtLink(
     background-color: vars.$colors-white;
   }
 }
+
+@include mobile {
+  .Notifications {
+    --badgeTranslateX: 2px;
+    --badgeTranslateY: -4px;
+  }
+}
 </style>

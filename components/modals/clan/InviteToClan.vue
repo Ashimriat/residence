@@ -74,7 +74,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .InviteToClan {
-  @include flex((gap: 16px, flex-wrap: wrap));
+  @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
   max-width: 600px;
   --scrollPanelGap: 0;
   &__userRecord {

@@ -3,7 +3,7 @@
 
 @layer residence {
   .SelectButton {
-    @include flex((gap: 16px));
+    @include flex((gap: vars.$gaps-g16));
 
     --backgroundColor: #{vars.$colors-black};
     --hoverBackgroundColor: #{vars.$colors-white};

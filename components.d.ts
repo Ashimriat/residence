@@ -12,6 +12,7 @@ declare module 'vue' {
     PAccordionHeader: typeof import('primevue/accordionheader')['default']
     PAccordionPanel: typeof import('primevue/accordionpanel')['default']
     PAvatar: typeof import('primevue/avatar')['default']
+    PBadge: typeof import('primevue/badge')['default']
     PButton: typeof import('primevue/button')['default']
     PCarousel: typeof import('primevue/carousel')['default']
     PChip: typeof import('primevue/chip')['default']

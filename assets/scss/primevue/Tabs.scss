@@ -26,7 +26,7 @@
     overflow: auto;
 
     & .p-tablist-tab-list {
-      gap: 16px;
+      gap: vars.$gaps-g16;
     }
   }
 

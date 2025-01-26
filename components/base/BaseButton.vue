@@ -62,6 +62,7 @@ PButton(
 <style lang="scss">
 .BaseButton {
   max-width: var(--buttonMaxWidth);
+  --p-button-gap: var(--buttonGap, #{vars.$gaps-g8});
   & svg {
     order: var(--iconOrder, 1);
   }

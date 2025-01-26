@@ -114,12 +114,12 @@ $carouselMaxWidth: 800px;
     }
   }
   &__eventsPageContainer {
-    @include flex((gap: 16px, flex-wrap: wrap));
+    @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
     max-width: $carouselMaxWidth;
   }
   &__eventData {
     flex-basis: calc((100% - 16px) / 2);
-    gap: vars.$gaps-xs;
+    gap: vars.$gaps-g8;
     flex-grow: 1;
   }
   &__subscriptionsContainer {

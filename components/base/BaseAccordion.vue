@@ -40,7 +40,7 @@ PAccordion(
 <style lang="scss">
 
 .BaseAccordion {
-  @include flexColumn((gap: 10px));
+  @include flexColumn((gap: vars.$gaps-g12));
   --p-accordion-header-toggle-icon-active-color: var(--p-accordion-header-toggle-icon-color);
   &__panel {
     --p-accordion-panel-border-color: var(--p-slate-200);

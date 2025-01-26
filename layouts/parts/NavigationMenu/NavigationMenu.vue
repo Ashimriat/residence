@@ -50,7 +50,7 @@ div(:class="$b({ footer: isFooterMenu })")
 <style lang="scss">
 .Menu {
   --titleFontSize: #{vars.$fs-s};
-  --gap: #{vars.$gaps-m};
+  --gap: #{vars.$gaps-g24};
   --sectionJustify: center;
   --linkColor: #{vars.$colors-black};
   --sectionTitleBorderHoverColor: #{vars.$colors-greyMuted};
@@ -60,7 +60,7 @@ div(:class="$b({ footer: isFooterMenu })")
 
   &--footer {
     --titleFontSize: #{vars.$fs-m};
-    --gap: #{vars.$gaps-xl};
+    --gap: #{vars.$gaps-g48};
     --sectionJustify: flex-start;
     --linkColor: #{vars.$colors-white};
     --sectionTitleBorderHoverColor: transparent;

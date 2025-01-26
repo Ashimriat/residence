@@ -42,7 +42,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .SignIn {
-  @include flexColumn((gap: 16px));
+  @include flexColumn((gap: vars.$gaps-g16));
 
   width: 460px;
   background-color: vars.$colors-bg;

@@ -76,7 +76,11 @@ div(:class="$b()")
   --scrollPanelItemBasis: 30%;
 
   &__clanDataContainer {
-    @include flexColumn((justify-content: space-between, flex: 40%, gap: 10px));
+    @include flexColumn((
+      justify-content: space-between,
+      flex: 40%,
+      gap: vars.$gaps-g12
+    ));
     padding: 20px;
   }
   &__textsContainer {

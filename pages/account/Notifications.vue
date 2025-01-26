@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { NotificationData, NotificationType } from '~/types/data/notification';
 import { mockNotifications } from '~/assets/mocks';
-import { Temporal } from '@js-temporal/polyfill';
 
 
 const notifications = ref<NotificationData[]>(mockNotifications(8));
@@ -72,7 +71,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .NotificationsPage {
-  @include flexColumn((gap: vars.$gaps-xl));
+  @include flexColumn((gap: vars.$gaps-g48));
   --sectionPaddingBottom: 0;
   & span.pi-trash {
     cursor: pointer;
@@ -95,7 +94,7 @@ div(:class="$b()")
     display: grid;
     grid-template-columns: 1fr 32px;
     grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
+    gap: vars.$gaps-g12;
     padding: 12px;
     border-bottom: 2px solid vars.$colors-greyLight;
     &:last-child {
@@ -104,7 +103,7 @@ div(:class="$b()")
   }
   &__data {
     @include flex((
-      gap: vars.$gaps-xs,
+      gap: vars.$gaps-g8,
       align-items: center,
     ));
     grid-column: 1;

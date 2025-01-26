@@ -42,10 +42,10 @@ div(:class="$b()")
 }
 
 .AchievementDetails {
-  @include centeredFlexColumn((gap: vars.$gaps-s));
+  @include centeredFlexColumn((gap: vars.$gaps-g12));
   padding: 12px;
   & > div {
-    @include centeredFlex((gap: vars.$gaps-xs));
+    @include centeredFlex((gap: vars.$gaps-g8));
   }
   &__figure {
     width: 68px;

@@ -56,7 +56,7 @@ div(:class="$b()")
 .MobileCalendar {
   @include flexColumn((
     align-items: center,
-    gap: vars.$gaps-m,
+    gap: vars.$gaps-g24,
   ));
   & button {
     width: 50%;

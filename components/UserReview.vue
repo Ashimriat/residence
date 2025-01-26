@@ -28,7 +28,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .UserReview {
-  @include flexColumn((gap: 16px));
+  @include flexColumn((gap: vars.$gaps-g16));
   width: 100%;
   max-width: 400px;
   min-height: 86px;

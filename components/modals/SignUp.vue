@@ -25,7 +25,7 @@ UserDataForm(
 
 <style lang="scss">
 .SignUp {
-  @include flexColumn((gap: 16px));
+  @include flexColumn((gap: vars.$gaps-g16));
   width: 770px;
   box-sizing: content-box;
   & input {
@@ -34,9 +34,9 @@ UserDataForm(
     box-sizing: border-box;
   }
   &__container {
-    @include flex((gap: 16px));
+    @include flex((gap: vars.$gaps-g16));
     & > div:last-child {
-      @include flexColumn((gap: 16px));
+      @include flexColumn((gap: vars.$gaps-g16));
       width: 100%;
     }
   }

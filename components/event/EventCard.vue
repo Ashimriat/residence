@@ -119,7 +119,7 @@ BaseCard(:class="$b({ account: isAccountMode })")
     color: vars.$colors-white;
   }
   &__playersAmount {
-    @include centeredFlex((gap: vars.$gaps-s));
+    @include centeredFlex((gap: vars.$gaps-g12));
     width: 93px;
     height: 32px;
     background-color: vars.$colors-white;
@@ -129,17 +129,17 @@ BaseCard(:class="$b({ account: isAccountMode })")
     font-size: vars.$fs-static-s;
   }
   &__detailsBlock {
-    @include flex((gap: vars.$gaps-xl));
+    @include flex((gap: vars.$gaps-g48));
   }
   &__playersBlock {
     @include flex((
-      gap: 16px,
+      gap: vars.$gaps-g16,
       flex-wrap: wrap,
     ));
     min-width: 240px;
   }
   &__buttonsBlock {
-    @include flex((gap: vars.$gaps-xs));
+    @include flex((gap: vars.$gaps-g8));
   }
 }
 

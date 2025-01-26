@@ -180,7 +180,7 @@ div(:class="$b()")
     &--reviews,
     &--gallery,
     &--events {
-      @include flexColumn((gap: vars.$gaps-m));
+      @include flexColumn((gap: vars.$gaps-g24));
     }
     &--general {
       --cardMinWidth: 100%;
@@ -219,7 +219,7 @@ div(:class="$b()")
     }
   }
   &__topButtonsContainer {
-    @include centeredFlex((gap: 16px));
+    @include centeredFlex((gap: vars.$gaps-g16));
     & > button {
       width: 50%;
     }
@@ -269,7 +269,7 @@ div(:class="$b()")
     }
     &__generalDataContainer {
       flex-direction: column;
-      gap: 16px;
+      gap: vars.$gaps-g16;
       padding: 12px;
       width: 100%;
       border-radius: vars.$br-m;

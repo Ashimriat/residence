@@ -67,7 +67,7 @@ div(:class="$b({ account: isAccountMode })")
   background-color: var(--contentBackgroundColor);
   border-radius: vars.$br-m;
   --contentBackgroundColor: #{vars.$colors-white};
-  --contentGap: #{vars.$gaps-m};
+  --contentGap: #{vars.$gaps-g24};
   --contentFontSize: #{vars.$fs-s};
   --contentColor: #{vars.$colors-black};
   --gameColor: #{vars.$colors-black};
@@ -98,12 +98,12 @@ div(:class="$b({ account: isAccountMode })")
     color: var(--gameTitleColor);
   }
   &__gameDataBlock {
-    @include flexColumn((gap: vars.$gaps-s));
+    @include flexColumn((gap: vars.$gaps-g12));
   }
   &__dateTimeBlock {
     @include flex((
       align-items: center,
-      gap: vars.$gaps-s,
+      gap: vars.$gaps-g12,
     ));
     & span {
       font-weight: vars.$fw-midHeavy;

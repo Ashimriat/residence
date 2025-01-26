@@ -162,7 +162,7 @@
 }
 
 @mixin titleWithLink {
-  @include flex((gap: vars.$gaps-x2s));
+  @include flex((gap: vars.$gaps-g4));
   font-size: 12px;
   cursor: pointer;
   & span {
