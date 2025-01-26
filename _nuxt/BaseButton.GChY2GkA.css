@@ -1,1 +1,0 @@
-.BaseButton{max-width:var(--buttonMaxWidth)}.BaseButton svg{order:var(--iconOrder,1)}.BaseButton span{order:var(--labelOrder,2)}.BaseButton--text{--p-button-padding-x:0;--p-button-padding-y:0;--buttonLabelFontWeight:500}.BaseButton--iconless{justify-content:center;padding:0}.BaseButton--iconless span{width:100%}.BaseButton--iconRight{--iconOrder:2;--labelOrder:1}
