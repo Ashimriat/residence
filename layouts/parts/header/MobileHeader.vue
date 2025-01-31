@@ -49,7 +49,11 @@ const $b = useBEM('MobileHeader');
 <template lang="pug">
 div(:class="$b()")
   div(:class="$b('mainView')")
-    Logo(:class="$b('logo')")
+    NuxtLink(
+      to="/"
+      :class="$b('logo')"
+    )
+      Logo
     div(
       :class="$b('subcontainer')"
       @click="toggleMenu"
@@ -113,13 +117,13 @@ div(:class="$b()")
           span
             | {{ label }}
     BaseButton(
-      v-if="isAdmin"
+      v-if="!isAdmin"
       :type="EButtons.ADD_EVENT_MOBILE"
       @click="emit('addEvent')"
     )
     BaseButton(
       v-else-if="isLoggedIn"
-      :type="EButtons.ORDER_GAME_MOBILE"
+      :type="EButtons.ORDER_GAME"
       @click=""
     )
 </template>
@@ -140,8 +144,9 @@ div(:class="$b()")
   }
   &__logo {
     border-radius: 50%;
-    max-width: 40px;
-    max-height: 40px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
   }
   &__subcontainer {
     @include flex((

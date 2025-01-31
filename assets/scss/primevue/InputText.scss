@@ -9,7 +9,7 @@
 
     &,
     &::placeholder {
-      font-size: var(--inputFontSize, #{vars.$fs-static-s});
+      font-size: var(--inputFontSize, var(--staticFontSize-S-XS));
     }
 
     &::placeholder {
@@ -20,7 +20,8 @@
   @include mobile {
     .InputText {
       height: 44px;
-      --inputFontSize: #{vars.$fs-static-xs};
+      --p-inputtext-padding-x: 12px;
+      --p-inputtext-padding-y: 12px;
     }
   }
 }

@@ -62,8 +62,8 @@ PScrollPanel(:class="$b()")
     border-radius: vars.$br-s;
     &:hover {
       background-color: vars.$colors-greyLight;
+      --expelButtonOpacity: 1;
       & button {
-        opacity: 1;
         pointer-events: all;
       }
     }
@@ -71,13 +71,37 @@ PScrollPanel(:class="$b()")
   &__expelButton {
     @include absolute((right: 12px));
     @include transition(opacity);
-    opacity: 0;
+    opacity: var(--expelButtonOpacity, 0);
     pointer-events: none;
     width: 30px;
     height: 30px;
     padding: 0px;
     font-size: vars.$fs-xs;
     --p-button-border-radius: #{vars.$br-x2s};
+  }
+}
+
+@include mobile {
+  .UsersList {
+    height: 220px;
+    --expelButtonOpacity: 1;
+    & .p-scrollpanel-content {
+      padding-top: 6px;
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+    &__participant {
+      width: 100%;
+      padding: 8px 0;
+      justify-content: space-between;
+    }
+    &__expelButton {
+      position: static;
+      width: unset;
+      height: unset;
+      font-size: vars.$fs-static-xs;
+      padding: 8px 10px;
+    }
   }
 }
 </style>

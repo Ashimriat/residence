@@ -57,7 +57,7 @@ const $b = useBEM('MainPage');
 <template lang="pug">
 div(:class="$b()")
   section(:class="$b('section', ['general'])")
-    BaseCard(:orientation="isMobile ? 'column' : 'row'")
+    BaseCard
       template(#content)
         div(:class="$b('generalDataContainer')")
           div(:class="$b('textContainer')")

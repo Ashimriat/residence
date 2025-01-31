@@ -1,37 +1,37 @@
 import type { TreeNode } from 'primevue/treenode';
+import { mockOtherUsers } from './otherUsers';
 
-
-const mockRatings = (length: number): RatingData[] => Array.from({ length }, (_, i) => ({
+const mockRatingsTableData = (length: number): RatingData[] => Array.from({ length }, (_, i) => ({
   position: i,
-  userId: `${i}`,
+  user: mockOtherUsers(1)[0],
   rating: 12000,
   statistics: {
     wins: 10,
-    loses: 1,
+    losses: 1,
   },
 }));
 
-const mockRatingsTableData = (): TreeNode[] => [
+const mockRatingsTableColumns = (): RatingTableColumn[] => [
   {
-    key: 'position',
-    label: `${1}`,
+    id: crypto.randomUUID(),
+    name: '#',
+    field: 'position'
   },
   {
-    key: 'name',
-    label: 'Имя',
-    data: {
-      avatar: undefined
-    },
+    id: crypto.randomUUID(),
+    name: 'Имя',
+    field: 'user'
   },
   {
-    key: 'rating',
-    label: '12000',
+    id: crypto.randomUUID(),
+    name: 'Рейтинг',
+    field: 'rating'
   },
   {
-    key: 'statistics',
-    label: '10/1',
+    id: crypto.randomUUID(),
+    name: 'Статистика (поб/пор)',
+    field: 'statistics'
   },
-]
+];
 
-
-export { mockRatings, mockRatingsTableData };
+export { mockRatingsTableData, mockRatingsTableColumns };

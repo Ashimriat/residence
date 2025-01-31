@@ -38,9 +38,6 @@ const pt: PrimeVuePTOptions = {
   scrollpanel: {
     root: 'ScrollPanel',
   },
-  selectbutton: {
-    root: 'SelectButton',
-  },
   tablist: {
     root: 'TabList',
   },

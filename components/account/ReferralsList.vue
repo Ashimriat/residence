@@ -32,12 +32,10 @@ UsersStructureView(:class="$b()")
 
 <style lang="scss">
 .ReferralsList {
-  --usersStructureHeight: 360px;
   &__description {
     font-size: vars.$fs-static-s;
   }
   &__button {
-    --iconStroke: #{vars.$colors-black};
     width: 100%;
   }
 }

@@ -3,7 +3,7 @@ const { isMobile } = useDevice();
 
 onBeforeMount(() => {
   if (!isMobile) {
-    window.Telegram.WebApp.expand();
+    window.Telegram?.WebApp?.expand();
   } else {
     document.documentElement.style.setProperty('--docFontSize', '10px');
   }
@@ -20,6 +20,11 @@ PDynamicDialog
 <style lang="scss">
 @use 'primeicons/primeicons.css';
 @use '~scss/fonts';
+
+:root {
+  --staticFontSize-M-S: #{vars.$fs-static-m};
+  --staticFontSize-S-XS: #{vars.$fs-static-s};
+}
 
 html {
   font-size: var(--docFontSize, 20px);
@@ -82,5 +87,12 @@ p {
 a {
   text-decoration: none;
   color: var(--linkColor, vars.$colors-black);
+}
+
+@include mobile {
+  :root {
+    --staticFontSize-M-S: #{vars.$fs-static-s};
+    --staticFontSize-S-XS: #{vars.$fs-static-xs};
+  }
 }
 </style>

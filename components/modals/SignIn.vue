@@ -35,7 +35,7 @@ div(:class="$b()")
   )
   BaseButton(
     omit-icon
-    :type="EButtons.SIGN_IN"
+    :type="EButtons.SIGN_IN_MODAL"
     @click="login"
   )
 </template>

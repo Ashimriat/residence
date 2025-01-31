@@ -1,16 +1,14 @@
 <script setup lang="ts">
-/** Local Types & Variables */
 type Props = {
   value: number;
   oldValue?: number;
   isLargeFont?: boolean;
 };
 
-/** Props & Emits */
 const { value, oldValue, isLargeFont } = defineProps<Props>();
 
 
-const $b = useBEM();
+const $b = useBEM('PriceTag');
 </script>
 
 <template lang="pug">

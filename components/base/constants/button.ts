@@ -9,6 +9,7 @@ enum EButtons {
   ENTER_EVENT = 'enterEvent',
   CLOSE = 'close',
   DETAILS = 'details',
+  SIGN_IN_MODAL = 'signInModal',
   SIGN_IN = 'signIn',
   SIGN_IN_MOBILE = 'signInMobile',
   ADD_EVENT = 'addEvent',
@@ -33,7 +34,6 @@ enum EButtons {
   BUY_MERCH = 'buyMerch',
   USER_SETTINGS = 'userSettings',
   ORDER_GAME = 'orderGame',
-  ORDER_GAME_MOBILE = 'orderGameMobile',
   ADD_PLAYERS = 'addPlayers',
   LEAVE_CLAN = 'leaveClan',
   EXPEL_PLAYER = 'expelPlayer',
@@ -45,11 +45,15 @@ enum EButtons {
   ENTER_CLAN = 'enterClan',
   CLAN_PARTICIPANTS = 'clanParticipants',
   INVITE_TO_CLAN = 'inviteToClan',
+  INVITE_TO_CLAN_MOBILE = 'inviteToClanMobile',
   CLAN_APPLICATION_CONFIRM = 'clanApplicationConfirm',
   ADD_PLAYER_TO_CLAN_SELECTION = 'addPlayerToClanSelection',
   REMOVE_PLAYER_FROM_CLAN_SELECTION = 'removePlayerToClanSelection',
 
   CONFIRM = 'confirm',
+  TOGGLE_DETAILS = 'toggleDetails',
+
+  FINISH_SEASON = 'finishSeason',
 }
 
 

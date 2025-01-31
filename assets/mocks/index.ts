@@ -11,6 +11,6 @@ export { mockText, mockShortText } from './text';
 export { mockContacts, mockSocials } from './contacts';
 export { mockGalleryImages } from './images';
 export { mockClans } from './clans';
-export { mockRatings } from './rating';
+export { mockRatingsTableColumns, mockRatingsTableData } from './rating';
 export { mockOtherUsers } from './otherUsers';
 export { mockNotifications } from './notification';

@@ -123,7 +123,6 @@ form(
     @click="emit('additionalButton', button)"
   )
   BaseButton(
-    is-submit
     :disabled="withEmptyFields || !isDataChanged"
     :type="submitButton"
   )

@@ -52,7 +52,7 @@ div(:class="$b({ owned: isOwned })")
     }
   }
   &__description {
-    font-size: var(--descriptionFontSize, #{vars.$fs-static-s});
+    font-size: var(--staticFontSize-S-XS);
     color: vars.$colors-black;
   }
   &__buttonsContainer {
@@ -70,7 +70,6 @@ div(:class="$b({ owned: isOwned })")
 @include mobile {
   .Subscription {
     --subscriptionPadding: 12px;
-    --descriptionFontSize: #{vars.$fs-static-xs};
   }
 }
 </style>

@@ -1,30 +1,43 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/base';
 
+
 type Props = {
   data: ClanData;
 };
 
+const { data } = defineProps<Props>();
+const { isDesktop } = useDevice();
 
-const {
-  data
-} = defineProps<Props>();
+const isParticipantsDisplayed = ref<boolean>(isDesktop);
+
+
 
 const { checkIsClanOwner } = useUserStore();
+const isClanOwner = checkIsClanOwner(data.ownerId);
 
 const { inviteToClan } = useModalDialog();
 
-const isClanOwner = checkIsClanOwner(data.ownerId);
-
-const $b = useBEM('ClanView');
+function toggleParticipantsDisplay(): void {
+  isParticipantsDisplayed.value = !isParticipantsDisplayed.value;
+}
 
 function handleUserExpel(id: string): void {
 
 }
+
+function leaveClan(): void {
+
+}
+
+const $b = useBEM('ClanView');
 </script>
 
 <template lang="pug">
-UsersStructureView
+UsersStructureView(
+  :class="$b()"
+  v-model:show-list="isParticipantsDisplayed"
+)
   template(#texts)
     ClanDataHeader(
       :title="data.title"
@@ -36,15 +49,26 @@ UsersStructureView
     BaseButton(
       v-if="isClanOwner"
       :type="EButtons.ORDER_GAME"
+      :class="$b('gameOrderButton')"
     )
-    BaseButton(
-      :type="EButtons.ADD_PLAYERS"
-      :class="$b('addPlayersButton', { wide: !isClanOwner })"
-      @click="inviteToClan(data.id)"
-    )
+    template(v-if="isDesktop")
+      BaseButton(
+        :type="EButtons.ADD_PLAYERS"
+        @click="inviteToClan(data.id)"
+      )
+    template(v-else)
+      BaseButton(
+        :type="EButtons.INVITE_TO_CLAN_MOBILE"
+        @click="inviteToClan(data.id)"
+      )
+      BaseButton(
+        :type="EButtons.TOGGLE_DETAILS"
+        @click="toggleParticipantsDisplay"
+      )
     BaseButton(
       :type="EButtons.LEAVE_CLAN"
       :class="$b('leaveButton')"
+      @click="leaveClan"        
     )
   template(#list)
     UsersList(
@@ -57,31 +81,20 @@ UsersStructureView
 
 <style lang="scss">
 .ClanView {
-  &__addPlayersButton {
-    --p-button-contrast-background: #{vars.$colors-black};
-    --p-button-contrast-hover-background: #{vars.$colors-black};
-    --p-button-contrast-active-background: #{vars.$colors-black};
-    --p-button-contrast-border-color: #{vars.$colors-white};
-    --p-button-contrast-hover-border-color: #{vars.$colors-white};
-    --p-button-contrast-active-border-color: #{vars.$colors-white};
-    --p-button-contrast-color: #{vars.$colors-white};
-    --p-button-contrast-hover-color: #{vars.$colors-white};
-    --p-button-contrast-active-color: #{vars.$colors-white};
-    padding: 12px 9px;
-    border-width: 2px;
-    & svg {
-      fill: vars.$colors-white;
-    }
-    &--wide {
-      flex-grow: 1;
-    }
-  }
   &__leaveButton {
     flex-basis: 40px;
     padding: 0;
   }
   &__description {
     font-size: vars.$fs-static-s;
+  }
+}
+
+@include mobile {
+  .ClanView {
+    &__gameOrderButton {
+      width: 100%;
+    }
   }
 }
 </style>

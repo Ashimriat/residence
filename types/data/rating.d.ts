@@ -1,13 +1,15 @@
 declare type RatingData = {
   position: number;
-  userId: string;
+  user: Participant
   rating: number;
   statistics: {
     wins: number;
-    loses: number;
+    losses: number;
   };
 }
 
 declare type RatingTableColumn = {
-  
+  id: string;
+  name: string;
+  field: Exclude<keyof RatingData, 'userId'>
 };

@@ -19,8 +19,9 @@ const STEP = 1;
 const PAGES_AMOUNT_TO_CHOOSE = 5;
 const MAX_PAGES_SLOTS_AMOUNT = 7;
 
+const { isMobile } = useDevice();
 
-const inputRef = useTemplateRef<HTMLInputElement>('input');
+const inputRef = useTemplateRef<Array<{ $el: HTMLInputElement }>>('input');
 
 
 const inputValue = ref<string>('');
@@ -73,7 +74,7 @@ const activeSkipperInput = ref<'start' | 'end' | ''>('');
 async function setActiveSkipperInput(skipPos: SkipPosition | ''): Promise<void> {
   activeSkipperInput.value = skipPos;
   await nextTick();
-  inputRef.value?.focus();
+  if (inputRef.value?.length) inputRef.value[0].$el.focus();
 }
 
 function processPageSelect(pageNumber: number, callback?: Function): void {
@@ -87,7 +88,11 @@ function processPageSelect(pageNumber: number, callback?: Function): void {
  function processInputConfirm(): void {
   const newPage = +inputValue.value;
   resetInput();
-  if (newPage > pagesAmount.value || newPage === currentPage.value) {
+  if (
+    !newPage ||
+    newPage > pagesAmount.value ||
+    newPage === currentPage.value
+  ) {
     return;
   }
   currentPage.value = newPage;
@@ -112,7 +117,7 @@ PPaginator(
   template(#container)
     div(:class="$b()")
       PButton.p-paginator-prev(
-        :class="$b('controlButton', ['first'], { disabled: currentPage === 0 })"
+        :class="$b('controlButton', ['first'], { disabled: currentPage === 1 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
       )
         span.pi.pi-angle-left
@@ -120,8 +125,8 @@ PPaginator(
         PButton.p-paginator-page(
           v-if="displayData.withFirst"
           label="1"
-          :class="$b('pageButton', ['first'], { selected: currentPage === 0 })"
-          @click.prevent.stop="processPageSelect(0)"
+          :class="$b('pageButton', ['first'], { selected: currentPage === 1 })"
+          @click.prevent.stop="processPageSelect(1)"
         )
         PButton.p-paginator-page(
           v-for="(pageNum, i) of displayData.pages"
@@ -156,7 +161,7 @@ PPaginator(
             ref="input"
             :class="$b('skipperInput', [skipPos])"
             @blur="resetInput"
-            @confirm="processInputConfirm"
+            @keydown.enter="processInputConfirm"
           )
       PButton.p-paginator-next(
         :class="$b('controlButton', ['last'], { disabled: currentPage === pagesAmount })"

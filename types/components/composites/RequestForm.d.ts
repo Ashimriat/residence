@@ -4,7 +4,7 @@ declare type SelectOption = {
 };
 
 declare type RequestFormData = {
-  selectOption: SelectOption | null;
+  selectOption: string | null;
   name: string;
   telegram: string;
   text: string;

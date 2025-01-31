@@ -16,6 +16,7 @@ declare module 'vue' {
     PCarousel: typeof import('primevue/carousel')['default']
     PChip: typeof import('primevue/chip')['default']
     PColumn: typeof import('primevue/column')['default']
+    PDataTable: typeof import('primevue/datatable')['default']
     PDivider: typeof import('primevue/divider')['default']
     PDynamicDialog: typeof import('primevue/dynamicdialog')['default']
     PGalleria: typeof import('primevue/galleria')['default']

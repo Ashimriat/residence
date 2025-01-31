@@ -1,61 +1,50 @@
 <script setup lang="ts">
+import { type ClassesDict } from '~/composables/useBEM';
 import { type EButtons } from './constants/button';
-import { EIconsSizes } from './constants/icon';
 import useButtonData from './composables/useButton';
-
-
 
 type Props = {
   type: EButtons;
-  isSubmit?: boolean;
-  iconSize?: EIconsSizes;
-  omitIcon?: boolean;
 };
 
-const {
-  type,
-  isSubmit,
-  iconSize,
-  omitIcon = false
-} = defineProps<Props>();
-
-const { isMobile } = useDevice();
+const { type } = defineProps<Props>();
 
 const {
   label,
-  icon,
+  iconType,
   iconPos,
+  iconSize,
   variant,
-  omitIconInMobile,
-  isText,
+  isVariantInverted,
+  isTextButton,
+  htmlType,
 } = useButtonData(type);
 
-
-const withIcon = computed<boolean>(() => {
-  if (!icon) return false;
-  if (omitIcon) return false;
-  if (isMobile) return !omitIconInMobile;
-  return true;
-});
-
 const $b = useBEM('BaseButton');
+
+const classes = computed<ClassesDict>(() => ({
+  [`variant_${variant}_inverted`]: !!isVariantInverted,
+  [`icon_${iconPos}`]: !!iconType,
+  text: !!isTextButton,
+  iconless: !iconType
+}))
 </script>
 
 <template lang="pug">
 PButton(
   :label="label"
   :severity="variant"
-  :text="isText"
-  :class="$b([withIcon && `icon_${iconPos}`], { text: isText }, { iconless: !withIcon })"
-  :pt:root:type="isSubmit ? 'submit' : 'button'"
+  :text="isTextButton"
+  :class="$b(classes)"
+  :pt:root:type="htmlType"
 )
   template(
-    v-if="icon && withIcon"
+    v-if="iconType"
     #icon
   )
     BaseIcon(
-      :type="icon"
-      :size="isMobile ? EIconsSizes.S : iconSize"
+      :type="iconType"
+      :size="iconSize"
     )
 </template>
 
@@ -64,26 +53,50 @@ PButton(
   max-width: var(--buttonMaxWidth);
   --p-button-gap: var(--buttonGap, #{vars.$gaps-g8});
   & svg {
-    order: var(--iconOrder, 1);
+    order: var(--iconOrder);
   }
   & span {
-    order: var(--labelOrder, 2);
+    order: var(--labelOrder);
   }
+
   &--text {
     --p-button-padding-x: 0;
     --p-button-padding-y: 0;
     --buttonLabelFontWeight: #{vars.$fw-midHeavy};
   }
+
   &--iconless {
-    padding: 0;
+    // padding: 0;
     justify-content: center;
     & span {
       width: 100%;
     }
   }
-  &--iconRight{
-    --iconOrder: 2;
-    --labelOrder: 1;
+
+  &--icon {
+    &_left {
+      --iconOrder: 1;
+      --labelOrder: 2;
+    }
+    &_right {
+      --iconOrder: 2;
+      --labelOrder: 1;
+    }
+  }
+
+  &--variant {
+    &_contrast_inverted {
+      --iconStroke: #{vars.$colors-white};
+      --p-button-contrast-background: #{vars.$colors-black};
+      --p-button-contrast-hover-background: #{vars.$colors-black};
+      --p-button-contrast-active-background: #{vars.$colors-black};
+      --p-button-contrast-border-color: #{vars.$colors-white};
+      --p-button-contrast-hover-border-color: #{vars.$colors-white};
+      --p-button-contrast-active-border-color: #{vars.$colors-white};
+      --p-button-contrast-color: #{vars.$colors-white};
+      --p-button-contrast-hover-color: #{vars.$colors-white};
+      --p-button-contrast-active-color: #{vars.$colors-white};
+    }
   }
 }
 </style>

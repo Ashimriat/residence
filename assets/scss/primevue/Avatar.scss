@@ -4,8 +4,8 @@
 
 @layer residence {
   .Avatar {
-    min-width: var(--avatarSize, 48px);
-    min-height: var(--avatarSize, 48px);
+    width: var(--avatarSize, 48px);
+    height: var(--avatarSize, 48px);
     --p-avatar-background: var(--avatarBackground, #{vars.$colors-black});
     --p-avatar-lg-width: 9rem;
     --p-avatar-xl-width: 12rem;
@@ -18,7 +18,7 @@
 
   @include mobile {
     .Avatar {
-      --avatarLabelFontSize: #{vars.$fs-x2l};
+      font-size: var(--avatarLabelFontSize, #{vars.$fs-x2l});
     }
   }
 }

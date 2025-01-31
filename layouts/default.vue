@@ -21,7 +21,7 @@ const $b = useBEM('DefaultLayout');
 
 <template lang="pug">
 div(:class="$b()")
-  header(:class="$b('header', { desktop: !isMobile, mobile: isMobile, camelCase: true })")
+  header(:class="$b('header', { desktop: !isMobile, mobile: isMobile })")
     component(
       :is="headerComponent"
       :class="$b('headerContent')"

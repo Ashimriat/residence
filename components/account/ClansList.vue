@@ -7,8 +7,6 @@ const $b = useBEM('ClansList');
 const clansData = mockClans(2, 20, false);
 
 const { checkIsClanOwner } = useUserStore();
-
-console.log("CLANS DATA", clansData);
 </script>
 
 <template lang="pug">
@@ -24,6 +22,6 @@ div(:class="$b()")
 
 <style lang="scss">
 .ClansList {
-  @include flexColumn((gap: 0.8rem));
+  @include flexColumn((gap: vars.$gaps-g20));
 }
 </style>

@@ -48,11 +48,11 @@ div(:class="$b()")
     min-height: 115px;
     height: 100%;
     resize: none;
-    padding: 16px;
+    padding: var(--textareaPadding, 16px);
     background-color: vars.$colors-white;
     &,
     &::placeholder {
-      font-size: var(--textAreaFontSize, #{vars.$fs-static-s});
+      font-size: var(--staticFontSize-S-XS);
     }
     &::placeholder {
       opacity: 0.5;
@@ -61,6 +61,12 @@ div(:class="$b()")
   &__symbolsAmount {
     @include absolute((bottom: 10px, right: 12px));
     font-size: vars.$fs-xs;
+  }
+}
+
+@include mobile {
+  .BaseTextarea {
+    --textareaPadding: 12px;
   }
 }
 </style>

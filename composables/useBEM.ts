@@ -1,8 +1,8 @@
 type AllArgs = string | Array<string | boolean> | Record<string, boolean | undefined>;
 type NotNameArgs = Exclude<AllArgs, string>;
-type PreparedClasses = Record<string, boolean>;
+type ClassesDict = Record<string, boolean>;
 
-const bMod = (...src: NotNameArgs[]): PreparedClasses => {
+const bMod = (...src: NotNameArgs[]): ClassesDict => {
   let res: Record<string, boolean> = {};
   for (const val of src) {
     if (Array.isArray(val)) {
@@ -13,7 +13,7 @@ const bMod = (...src: NotNameArgs[]): PreparedClasses => {
             acc[mod] = true;
           }
           return acc;
-        }, <PreparedClasses>{}),
+        }, <ClassesDict>{}),
       };
     } else {
       for (const [key, value] of getEntries(val)) {
@@ -28,22 +28,37 @@ export default function useBEM(componentName: string) {
   const $b = useBem(componentName);
 
   return (...args: AllArgs[]): string => {
-    let res!: string
+    let res!: string;
+    const argsToProcessMatchesArr: string[] = [];
     if (!args.length) {
-      res =  $b();
-    } else if (typeof args[0] !== 'string') {
-      res = $b(bMod(...args as NotNameArgs[]));
+      res = $b();
     } else {
-      res = $b(args[0], bMod(...args.slice(1) as NotNameArgs[]));
+      const isFirstArgName = typeof args[0] === 'string';
+      const sliceFromIndex = !isFirstArgName ? 0 : 1;
+      const classesDict = bMod(...args.slice(sliceFromIndex) as NotNameArgs[]);
+      argsToProcessMatchesArr.push(...Object.keys(classesDict));
+      res = isFirstArgName
+        ? $b(args[0], classesDict)
+        : $b(classesDict);
     }
+    const argsToProcessMatchesDict = argsToProcessMatchesArr.reduce((acc, val) => {
+      acc[val.replaceAll('_', '-')] = true;
+      return acc;
+    }, <ClassesDict>{});
     const kebabMatches = res.match(/(\w{1,}(-\w{1,})+)/g);
     for (const match of kebabMatches ?? []) {
-      const replacement = match
-        .split('-')
-        .map((val, i) => i === 0 ? val : capitalize(val))
-        .join(''); 
+      let replacement!: string;
+      if (argsToProcessMatchesDict[match]) {
+        replacement = match.replaceAll('-', '_');
+      } else {
+        replacement = match
+          .split('-')
+          .map((val, i) => i === 0 ? val : capitalize(val))
+          .join('');
+      }
       res = res.replace(match, replacement);
     }
     return res;
   }
 }
+export type { ClassesDict };

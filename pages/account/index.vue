@@ -55,13 +55,12 @@ div(:class="$b()")
       )
         BaseButton(
           :type="EButtons.USER_SETTINGS"
-          :icon-size="EIconsSizes.S"
           :class="$b('settingsButton')"
         )
     div(:class="$b('subsection', ['rating'])")
       TitleWithLink(
         title="Рейтинг"
-        link="/account/rating"
+        link="/rating"
       )
         div(:class="$b('commonRatingContainer')")
           div(:class="$b('userRating')")
@@ -158,7 +157,7 @@ div(:class="$b()")
       }
     }
     &--birthdate {
-      font-size: var(--userBirthdayDateFontSize, #{vars.$fs-static-s});
+      font-size: vars.$fs-static-s;
       gap: vars.$gaps-g4;
       &,
       & span {
@@ -166,7 +165,7 @@ div(:class="$b()")
       }
     }
     &--statistics {
-      font-size: var(--userStatisticsFontSize, #{vars.$fs-static-xs});
+      font-size: vars.$fs-static-xs;
       gap: vars.$gaps-g12;
       & span {
         @include relative;
@@ -226,7 +225,7 @@ div(:class="$b()")
     @include flex((justify-content: space-between, align-items: center));
   }
   &__userRating {
-    font-size: var(--userRatingFontSize, #{vars.$fs-static-m});
+    font-size: var(--staticFontSize-M-S);
     & span {
       color: vars.$colors-beige;
     }
@@ -255,7 +254,7 @@ div(:class="$b()")
     border-bottom: 2px solid transparent;
     cursor: pointer;
     font-weight: vars.$fw-midHeavy;
-    font-size: vars.$fs-s;
+    font-size: var(--staticFontSize-S-XS);
     padding-bottom: 10px;
     --iconStroke: #{vars.$colors-black};
     &--active {
@@ -271,10 +270,7 @@ div(:class="$b()")
     --userDataSubsectionPadding: 12px;
     --ratingSubsectionPadding: 16px 20px;
     --settingsButtonWidth: 100%;
-    --userBirthdayDateFontSize: #{vars.$fs-static-s};
-    --userStatisticsFontSize: #{vars.$fs-static-xs};
     --badgeTranslateY: 5px;
-    --userRatingFontSize: #{vars.$fs-static-s};
   }
 }
 </style>

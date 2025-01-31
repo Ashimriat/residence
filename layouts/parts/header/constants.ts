@@ -31,9 +31,9 @@ const AUTHED_ITEMS: AuthItem[][] = [
       icon: EIcons.ZAP,
     },
     {
-      label: 'Игроки',
-      url: '/account?tab=referrals',
-      icon: EIcons.USERS,
+      label: 'Рейтинг',
+      url: '/rating',
+      icon: EIcons.HASH,
     },
   ],
   [
@@ -42,16 +42,17 @@ const AUTHED_ITEMS: AuthItem[][] = [
       url: '/account?tab=achievements',
       icon: EIcons.AWARD,
     },
-    {
-      label: 'Рейтинг',
-      url: '/account/rating',
-      icon: EIcons.HASH,
-    },
+
     {
       label: 'Кланы',
       url: '/account?tab=clans',
       icon: EIcons.SHIELD,
-    }
+    },
+    {
+      label: 'Игроки',
+      url: '/account?tab=referrals',
+      icon: EIcons.USERS,
+    },
   ],
   [
     {

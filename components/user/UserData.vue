@@ -47,6 +47,7 @@ div(:class="$b({ king: isClanOwner })")
   }
   & span {
     font-weight: vars.$fw-bold;
+    font-size: vars.$fs-static-m;
   }
 }
 </style>

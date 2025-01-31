@@ -9,13 +9,17 @@ const {
   isInverted = false,
 } = defineProps<Props>();
 
+const selectedValue = defineModel<string | null>({ default: null });
+
 const $b = useBEM('BaseSelectButtons');
 </script>
 
 <template lang="pug">
 PSelectButton(
-  :options="options"
+  v-model="selectedValue"
   option-label="label"
+  option-value="value"
+  :options="options"
   :allow-empty="false"
   :class="$b({ inverted: isInverted })"
 )
@@ -23,6 +27,8 @@ PSelectButton(
 
 <style lang="scss">
 .BaseSelectButtons {
+  @include flex((gap: var(--gap, #{vars.$gaps-g16})));
+  overflow: scroll;
   &--inverted {
     --backgroundColor: transparent;
     --hoverBackgroundColor: #{vars.$colors-black};
@@ -32,6 +38,37 @@ PSelectButton(
     --checkedBackgroundColor: #{vars.$colors-black};
     --checkedBorderColor: #{vars.$colors-black};
     --checkedColor: #{vars.$colors-white};
+  }
+  & .p-togglebutton {
+    @include flex((flex-grow: 1));
+
+      min-width: var(--toggleButtonMinWidth, unset);
+  
+      --p-togglebutton-background: var(--backgroundColor, #{vars.$colors-black});
+      --p-togglebutton-hover-background: var(--hoverBackgroundColor, #{vars.$colors-white});
+      --p-togglebutton-border-color: var(--borderColor, #{vars.$colors-white});
+      --p-togglebutton-color: var(--color, #{vars.$colors-white});
+      --p-togglebutton-hover-color: var(--hoverColor, #{vars.$colors-black});
+      --p-togglebutton-checked-background: var(--checkedBackgroundColor, #{vars.$colors-white});
+      --p-togglebutton-checked-border-color: var(--checkedBorderColor, #{vars.$colors-white});
+      --p-togglebutton-checked-color: var(--checkedColor, #{vars.$colors-black});
+
+      border-radius: var(--borderRadius, #{vars.$br-s});
+      border-width: var(--borderWidth, 3px);
+      font-size: var(--fontSize, #{vars.$fs-static-m});
+
+      &::before {
+        content: none;
+      }
+  }
+}
+
+@include mobile {
+  .BaseSelectButtons {
+    --gap: #{vars.$gaps-g12};
+    --borderRadius: #{vars.$br-x2s};
+    --borderWidth: 2px;
+    --fontSize: #{vars.$fs-static-xs};
   }
 }
 </style>

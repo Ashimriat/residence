@@ -22,9 +22,7 @@ div(:class="$b()")
   div(:class="$b('subBlock')")
     div(:class="$b('logoContainer')")
       NuxtLink(to="/")
-        Logo(
-          :class="$b('logo')"
-        )
+        Logo(:class="$b('logo')")
     div(:class="$b('locationBlock')")
       BaseIcon(:type="EIcons.LOCATION")
       span

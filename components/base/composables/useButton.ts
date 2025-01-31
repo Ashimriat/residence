@@ -1,4 +1,4 @@
-import { EIcons } from '../constants/icon';
+import { EIcons, EIconsSizes } from '../constants/icon';
 import { EButtonVariant, EButtons } from '../constants/button';
 
 
@@ -7,33 +7,40 @@ enum EIconPos {
   RIGHT = 'right'
 }
 
-type ButtonData = {
-  label?: string;
-  icon?: EIcons;
-  iconPos?: EIconPos;
-  variant?: EButtonVariant;
-  isText?: boolean;
-  omitIconInMobile?: boolean;
-};
+type ButtonData = Partial<{
+  label: string;
+  iconType: EIcons;
+  iconSize: EIconsSizes;
+  iconPos: EIconPos;
+  variant: EButtonVariant;
+  isVariantInverted: boolean;
+  isTextButton: boolean;
+  htmlType: HTMLButtonElement['type']
+  atMobile: Omit<ButtonData, 'atMobile'>
+}>;
 
 const SIGN_IN_BUTTON_DATA: ButtonData = {
   label: 'Войти',
-  icon: EIcons.LOGIN,
+  iconType: EIcons.LOGIN,
   iconPos: EIconPos.RIGHT,
 } as const;
 
 const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.ALREADY_REGISTERED]: {
     label: 'Уже есть аккаунт?',
-    isText: true,
+    isTextButton: true,
   },
   [EButtons.NO_ACCOUNT]: {
     label: 'Ещё нет аккаунта?',
-    isText: true,
+    isTextButton: true,
   },
   [EButtons.FORGOT_PASSWORD]: {
     label: 'Забыли пароль?',
-    isText: true,
+    isTextButton: true,
+  },
+  [EButtons.SIGN_IN_MODAL]: {
+    ...SIGN_IN_BUTTON_DATA,
+    iconType: undefined,
   },
   [EButtons.SIGN_IN]: SIGN_IN_BUTTON_DATA,
   [EButtons.SIGN_IN_MOBILE]: {
@@ -49,12 +56,13 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.REFERRAL]: {
     label: 'Скопировать ссылку',
-    icon: EIcons.LINK,
+    iconType: EIcons.LINK,
     variant: EButtonVariant.CONTRAST,
+    isVariantInverted: true,
   },
   [EButtons.EVENTS_CALENDAR]: {
     label: 'Открыть календарь ивентов',
-    icon: EIcons.CALENDAR,
+    iconType: EIcons.CALENDAR,
   },
   [EButtons.REQUEST_EVENT]: {
     label: 'Оставить заявку',
@@ -66,95 +74,104 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Начнём!',
     variant: EButtonVariant.CONTRAST,
     iconPos: EIconPos.RIGHT,
-    icon: EIcons.ARROW_DOWN,
+    iconType: EIcons.ARROW_DOWN,
   },
   [EButtons.DETAILS]: {
     label: 'Подробнее',
-    icon: EIcons.ARROW_DOWN,
+    iconType: EIcons.ARROW_DOWN,
     iconPos: EIconPos.RIGHT,
     variant: EButtonVariant.CONTRAST,
   },
   [EButtons.ADD_EVENT]: {
     label: 'Событие',
-    icon: EIcons.PLUS_CIRCLED,
+    iconType: EIcons.PLUS_CIRCLED,
   },
   [EButtons.ADD_EVENT_MOBILE]: {
     label: 'Создать событие',
-    icon: EIcons.PLUS_CIRCLED,
+    iconType: EIcons.PLUS_CIRCLED,
     iconPos: EIconPos.RIGHT,
   },
   [EButtons.SHARE]: {
-    icon: EIcons.LINK,
+    iconType: EIcons.LINK,
     variant: EButtonVariant.CONTRAST,
   },
   [EButtons.EDIT_RULES]: {
     label: 'Редактировать',
-    icon: EIcons.EDIT,
+    iconType: EIcons.EDIT,
     variant: EButtonVariant.SECONDARY,
   },
   [EButtons.SIGN_UP]: {
     label: 'Зарегистрироваться',
+    htmlType: 'submit',
   },
   [EButtons.ADD_RULES]: {
     label: 'Добавить правила',
-    icon: EIcons.PLUS,
+    iconType: EIcons.PLUS,
     iconPos: EIconPos.RIGHT,
   },
   [EButtons.ADD_SUBSCRIPTION]: {
     label: 'Добавить абонемент',
-    icon: EIcons.PLUS,
+    iconType: EIcons.PLUS,
     iconPos: EIconPos.RIGHT,
   },
   [EButtons.GIFT_TO_FRIEND]: {
     label: 'Подарить другу',
     variant: EButtonVariant.CONTRAST,
-    icon: EIcons.GIFT,
-    omitIconInMobile: true,
+    iconType: EIcons.GIFT,
+    atMobile: {
+      iconType: undefined,
+    },
   },
   [EButtons.BUY]: {
     label: 'Купить',
   },
   [EButtons.BUY_MERCH]: {
     label: 'Написать',
-    icon: EIcons.MERCH,
+    iconType: EIcons.MERCH,
   },
   [EButtons.USER_SETTINGS]: {
     label: 'Настройки',
     variant: EButtonVariant.CONTRAST,
-    icon: EIcons.GEAR,
+    iconType: EIcons.GEAR,
+    iconSize: EIconsSizes.S,
   },
   [EButtons.ORDER_GAME]: {
     label: 'Заказать игру',
-    icon: EIcons.PLUS_CIRCLED,
-  },
-  [EButtons.ORDER_GAME_MOBILE]: {
-    label: 'Заказать игру',
-    icon: EIcons.ARROW_UP_RIGHT,
-    iconPos: EIconPos.RIGHT,
-    variant: EButtonVariant.SECONDARY,
+    iconType: EIcons.PLUS_CIRCLED,
   },
   [EButtons.ADD_PLAYERS]: {
     label: 'Добавить игроков',
-    icon: EIcons.LINK,
+    iconType: EIcons.LINK,
     variant: EButtonVariant.CONTRAST,
+    isVariantInverted: true,
+  },
+  [EButtons.TOGGLE_DETAILS]: {
+    iconType: EIcons.LINK,
+    variant: EButtonVariant.CONTRAST,
+    isVariantInverted: true,
   },
   [EButtons.LEAVE_CLAN]: {
     variant: EButtonVariant.DANGER,
-    icon: EIcons.CROSS_CIRCLED,
+    iconType: EIcons.CROSS_CIRCLED,
   },
   [EButtons.EXPEL_PLAYER]: {
     variant: EButtonVariant.DANGER,
-    icon: EIcons.CROSS_CIRCLED,
+    iconType: EIcons.CROSS_CIRCLED,
+    iconSize: EIconsSizes.S,
+    atMobile: {
+      label: 'Выгнать',
+    }
   },
   [EButtons.SAVE_CHANGES]: {
     label: 'Сохранить изменения',
+    htmlType: 'submit',
   },
   [EButtons.SEARCH]: {
-    icon: EIcons.SEARCH,
+    iconType: EIcons.SEARCH,
   },
   [EButtons.CREATE_OWN_CLAN]: {
     label: 'Создать свой клан',
-    icon: EIcons.SHIELD,
+    iconType: EIcons.SHIELD,
     iconPos: EIconPos.LEFT,
   },
   [EButtons.ENTER_CLAN]: {
@@ -170,6 +187,10 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.INVITE_TO_CLAN]: {
     label: 'Пригласить игрока'
   },
+  [EButtons.INVITE_TO_CLAN_MOBILE]: {
+    label: 'Пригласить',
+    iconType: EIcons.PLUS_CIRCLED,
+  },
   [EButtons.CLAN_APPLICATION_CONFIRM]: {
     label: 'Отлично!'
   },
@@ -184,12 +205,28 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.CONFIRM]: {
     label: 'Подтвердить',
   },
+  [EButtons.FINISH_SEASON]: {
+    label: 'Закончить сезон',
+  }
 } as const;
 
 
-export default function useButtonData(type: EButtons): ButtonData {
-  const data = BUTTONS_DATA[type];
+
+export default function useButtonData(type: EButtons): Omit<ButtonData, 'atMobile'> {
+  const { isMobile } = useDevice();
+  let data = BUTTONS_DATA[type];
   data.variant ??= EButtonVariant.PRIMARY;
   data.iconPos ??= EIconPos.LEFT;
+  data.iconSize ??= EIconsSizes.M;
+  data.htmlType ??= 'button';
+  if (isMobile) {
+    data.iconSize = EIconsSizes.S;
+    if (data.atMobile) {
+      data = {
+        ...data,
+        ...data.atMobile,
+      }
+    }
+  }
   return data;
 }
