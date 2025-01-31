@@ -1,0 +1,1 @@
+import{G as s,K as a,c as n,L as o,M as t,o as c}from"./CLv2eXp2.js";const m=s({__name:"Directions",setup(r){const e=a("DirectionsPage");return(i,_)=>(c(),n("div",{class:o(t(e)())},"Направления",2))}});export{m as default};
