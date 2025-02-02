@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { mockAchievementsList, mockEventsBigData, mockSubscriptions } from '~assets/mocks';
+import { mockAchievementsList, mockEventsData, mockEventsBigData, mockSubscriptions } from '~assets/mocks';
 
 
 const { isMobile } = useDevice();
 
 const eventsMock = isMobile
   ? mockEventsBigData(6, 2)
-  : mockEventsBigData(3, 4)
+  : mockEventsData(12)
+console.log("OLD", mockEventsBigData(3, 4));
 const achievementsMock = mockAchievementsList(isMobile ? 2 : 6)
 
 const $b = useBEM('UserEvents');
@@ -17,16 +18,14 @@ div(:class="$b()")
   div(:class="$b('contentSection', ['events'])")
     h5
       | Предстоящие события
-    PCarousel(
-      :value="eventsMock"
-      :num-visible="1"
-      :num-scroll="1"
-      :class="$b('carousel')"
+    BaseCarousel(
+      :items="eventsMock"
+      :visible-amount="4"
     )
-      template(#item="{ data }")
+      template(#default="{ itemsData }")
         div(:class="$b('eventsPageContainer')")
           EventInfo(
-            v-for="(eventData, i) of data"
+            v-for="(eventData, i) of itemsData"
             :key="`eventCard_${i}`"
             is-account-mode
             :data="eventData"
@@ -75,37 +74,6 @@ $carouselMaxWidth: 800px;
       max-width: var(--eventsMaxWidth, 840px);
     }
   }
-  &__carousel {
-    @include relative;
-    max-width: $carouselMaxWidth;
-    & .p-carousel-content-container {
-      @include relative;
-      gap: var(--carouselContentContainerGap, #{vars.$gaps-g28});
-    }
-    & .p-carousel-content {
-      gap: vars.$gaps-g12;
-    }
-    & .p-carousel-indicator-list {
-      flex-direction: row;
-      height: 24px;
-      align-items: center;
-    }
-    & .p-carousel-indicator-button {
-      width: $dotSize;
-      height: $dotSize;
-      border-radius: 50%;
-      --p-carousel-indicator-background: #{vars.$colors-greyMuted};
-      --p-carousel-indicator-active-background: #{vars.$colors-black};
-    }
-    & .p-carousel-prev-button,
-    & .p-carousel-next-button {
-      padding: 0;
-      width: 16px;
-      height: 100%;
-      border: none;
-      display: var(--carouselButtonDisplay, flex);
-    }
-  }
   &__eventsPageContainer {
     @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
     max-width: $carouselMaxWidth;
@@ -138,8 +106,6 @@ $carouselMaxWidth: 800px;
 @include mobile {
   .UserEvents {
     --eventsMaxWidth: 100%;
-    --carouselButtonDisplay: none;
-    --carouselContentContainerGap: #{vars.$gaps-g16};
   }
 }
 </style>

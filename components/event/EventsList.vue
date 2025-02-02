@@ -20,7 +20,7 @@ const {
 } = defineProps<Props>();
 const activeTab = ref<string>(tabsList[0].id);
 
-const selectedDate = useCalendar();
+const { selectedDate } = useCalendar();
 
 const eventType = ref<'kid' | 'women' | ''>('');
 
@@ -51,9 +51,9 @@ div(:class="$b({ calendar: withCalendar })")
         is-resettable
         :options="filters"
       )
-      DatePickerCalendar(
+      DateTimeCalendar(
         v-if="withCalendar"
-        v-model="selectedDate"
+        v-model:date="selectedDate"
         :class="$b('calendar')"
       )
     template(#commonTab)

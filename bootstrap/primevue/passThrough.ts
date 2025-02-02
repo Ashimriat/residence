@@ -35,9 +35,6 @@ const pt: PrimeVuePTOptions = {
   radiobutton: {
     root: 'RadioButton',
   },
-  scrollpanel: {
-    root: 'ScrollPanel',
-  },
   tablist: {
     root: 'TabList',
   },

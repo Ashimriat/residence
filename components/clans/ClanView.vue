@@ -11,8 +11,6 @@ const { isDesktop } = useDevice();
 
 const isParticipantsDisplayed = ref<boolean>(isDesktop);
 
-
-
 const { checkIsClanOwner } = useUserStore();
 const isClanOwner = checkIsClanOwner(data.ownerId);
 

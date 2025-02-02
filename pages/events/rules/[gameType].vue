@@ -3,14 +3,12 @@ import { EButtons } from '~/components/base';
 import { GAMES_RULES, EGameTypes } from '../../constants/events';
 
 
-const userStore = useUserStore();
-const { isAdmin } = storeToRefs(userStore);
+const { isAdmin } = storeToRefs(useUserStore());
 
 const isEditMode = ref<boolean>(false);
 
 const $b = useBEM('RulesPage');
-const route = useRoute();
-const { params: { gameType } } = route;
+const { params: { gameType } } = useRoute();
 
 const {
   icon,

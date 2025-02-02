@@ -1,34 +1,42 @@
 <script setup lang="ts">
-/** Local Types & Variables */
 type Props = {
   avatar?: string;
   name?: string;
+  isLinker?: boolean
   isClanOwner?: boolean;
 };
 
-/** Props & Emits */
-const { name, avatar, isClanOwner } = defineProps<Props>();
+const { name, avatar, isLinker, isClanOwner } = defineProps<Props>();
 
 const $b = useBEM('UserData');
 </script>
 
 <template lang="pug">
-div(:class="$b({ king: isClanOwner })")
+div(:class="$b({ linker: isLinker, owner: isClanOwner })")
   PAvatar(
     label="UI"
     shape="circle"
     :image="avatar"
   )
   slot
-    span
+    span(:class="$b('name')")
       | {{ name }}
 </template>
 
 <style lang="scss">
 .UserData {
   @include flex((align-items: center, gap: vars.$gaps-g12));
-  max-width: var(--userDataMaxWidth, 139px);
-  &--king > div {
+  width: fit-content;
+  &--linker {
+    --avatarSize: 28px;
+    --avatarLabelFontSize: #{vars.$fs-static-xs};
+    border: var(--userDataBorderWidth, 3px) solid #{vars.$colors-black};
+    padding: var(--userDataPadding, 12px);
+    border-radius: vars.$br-s; 
+    height: 48px;
+    width: 100%;
+  }
+  &--owner > div {
     @include relative;
     @include withPseudoBefore((
       width: 47px,
@@ -37,17 +45,25 @@ div(:class="$b({ king: isClanOwner })")
       border: 3px solid vars.$colors-beige,
     ));
     @include withPseudoAfter((
-      top: -15px,
+      top: -13px,
       width: 44px,
+      height: 88%,
       background-color: vars.$colors-beige,
       aspect-ratio: 1,
       clip-path: vars.$figures-crown,
     ));
     border: 1px solid vars.$colors-beige;
   }
-  & span {
-    font-weight: vars.$fw-bold;
-    font-size: vars.$fs-static-m;
+  &__name {
+    font-weight: vars.$fw-heavy;
+    font-size: var(--staticFontSize-M-S);
+  }
+}
+
+@include mobile {
+  .UserData {
+    --userDataBorderWidth: 2px;
+    --userDataPadding: 6px;
   }
 }
 </style>

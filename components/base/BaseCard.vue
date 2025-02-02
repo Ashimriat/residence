@@ -13,8 +13,6 @@ const direction = computed<'row' | 'column'>(
 
 const slots = useSlots();
 
-console.log("CARD SLOTS", slots);
-
 const $b = useBEM('BaseCard');
 </script>
 

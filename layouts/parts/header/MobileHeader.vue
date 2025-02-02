@@ -116,16 +116,11 @@ div(:class="$b()")
           )
           span
             | {{ label }}
-    BaseButton(
-      v-if="!isAdmin"
-      :type="EButtons.ADD_EVENT_MOBILE"
-      @click="emit('addEvent')"
+    NuxtLink(
+      v-if="isLoggedIn"
+      :to="`/events/${isAdmin ? 'create' : 'order'}`"
     )
-    BaseButton(
-      v-else-if="isLoggedIn"
-      :type="EButtons.ORDER_GAME"
-      @click=""
-    )
+      BaseButton(:type="isAdmin ? EButtons.ADD_EVENT_MOBILE : EButtons.ORDER_GAME")
 </template>
 
 <style lang="scss">

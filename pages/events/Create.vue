@@ -22,7 +22,6 @@ div(:class="$b()")
   h1
     | Новое событие
   BaseSelectButtons(
-    is-inverted
     v-model="eventType"
     :options="EVENTS_OPTIONS"
   )

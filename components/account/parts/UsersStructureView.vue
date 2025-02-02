@@ -56,6 +56,9 @@ BaseCard(:class="$b()")
       }
     }
   }
+  &__listContainer {
+    height: 100%;
+  }
 }
 
 @include mobile {
@@ -72,7 +75,9 @@ BaseCard(:class="$b()")
         }
       }
     }
-
+    &__listContainer {
+      height: 220px;
+    }
   }
 }
 </style>

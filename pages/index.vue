@@ -131,10 +131,10 @@ div(:class="$b()")
       :num-visible="3"
       :num-scroll="3"
     )
-      template(#item="slotProps")
+      template(#item="{ data }")
         img(
-          :src="slotProps.data.thumbnailImageSrc"
-          :alt="slotProps.data.alt"
+          :src="data.thumbnailImageSrc"
+          :alt="data.alt"
           style="cursor: pointer"
         )
   section(:class="$b('section', ['events'])")

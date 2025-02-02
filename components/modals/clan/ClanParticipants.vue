@@ -19,8 +19,8 @@ div(:class="$b()")
     UserData(
       v-for="({ name, avatar }, i) of participants"
       :key="i"
-      :name="name"
-      :avatar="avatar"
+      :name
+      :avatar
     )
   BaseButton(
     :class="$b('closeButton')"

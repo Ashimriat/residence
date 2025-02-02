@@ -20,8 +20,10 @@ declare module 'vue' {
     PDivider: typeof import('primevue/divider')['default']
     PDynamicDialog: typeof import('primevue/dynamicdialog')['default']
     PGalleria: typeof import('primevue/galleria')['default']
+    PIconField: typeof import('primevue/iconfield')['default']
     PInputGroup: typeof import('primevue/inputgroup')['default']
     PInputGroupAddon: typeof import('primevue/inputgroupaddon')['default']
+    PInputIcon: typeof import('primevue/inputicon')['default']
     PInputText: typeof import('primevue/inputtext')['default']
     POverlayBadge: typeof import('primevue/overlaybadge')['default']
     PPaginator: typeof import('primevue/paginator')['default']
@@ -35,7 +37,6 @@ declare module 'vue' {
     PTabPanels: typeof import('primevue/tabpanels')['default']
     PTabs: typeof import('primevue/tabs')['default']
     PTextarea: typeof import('primevue/textarea')['default']
-    PTreeTable: typeof import('primevue/treetable')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

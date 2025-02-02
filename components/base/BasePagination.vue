@@ -117,54 +117,59 @@ PPaginator(
   template(#container)
     div(:class="$b()")
       PButton.p-paginator-prev(
-        :class="$b('controlButton', ['first'], { disabled: currentPage === 1 })"
+        :class="$b('controlButton', ['first'], { disabled: currentPage === 0 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
       )
         span.pi.pi-angle-left
-      div(:class="$b('container')")
-        PButton.p-paginator-page(
-          v-if="displayData.withFirst"
-          label="1"
-          :class="$b('pageButton', ['first'], { selected: currentPage === 1 })"
-          @click.prevent.stop="processPageSelect(1)"
-        )
-        PButton.p-paginator-page(
-          v-for="(pageNum, i) of displayData.pages"
-          :key="pageNum"
-          :class="$b('pageButton', { selected: currentPage === pageNum })"
-          :style="`--order: ${i + 2}`"
-          :label="`${pageNum}`"
-          @click.prevent.stop="processPageSelect(pageNum)"
-        )
-          | {{ pageNum }}
-        PButton.p-paginator-page(
-          v-if="displayData.withLast"
-          :label="`${pagesAmount}`"
-          :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount })"
-          @click.prevent.stop="processPageSelect(pagesAmount)"
-        )
-          | {{ pagesAmount }}
-        template(
-          v-for="skipPos in displayData.skipPos"
-          :key="skipPos"
-        )
-          span(
-            v-if="activeSkipperInput !== skipPos"
-            :class="$b('skipper', [skipPos])"
-            @dblclick="setActiveSkipperInput(skipPos)"
+      slot(
+        name="pages"
+        :activePage="currentPage"
+        :onPageClick="processPageSelect"
+      )
+        div(:class="$b('container')")
+          PButton.p-paginator-page(
+            v-if="displayData.withFirst"
+            label="1"
+            :class="$b('pageButton', ['first'], { selected: currentPage === 0 })"
+            @click.prevent.stop="processPageSelect(1)"
           )
-            | ...
-          PInputText(
-            v-else
-            v-keyfilter.int
-            v-model="inputValue"
-            ref="input"
-            :class="$b('skipperInput', [skipPos])"
-            @blur="resetInput"
-            @keydown.enter="processInputConfirm"
+          PButton.p-paginator-page(
+              v-for="(pageNum, i) of displayData.pages"
+              :key="pageNum"
+              :class="$b('pageButton', { selected: currentPage === pageNum })"
+              :style="`--order: ${i + 2}`"
+              :label="`${pageNum}`"
+              @click.prevent.stop="processPageSelect(pageNum)"
+            )
+              | {{ pageNum }}
+          PButton.p-paginator-page(
+            v-if="displayData.withLast"
+            :label="`${pagesAmount}`"
+            :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount - 1})"
+            @click.prevent.stop="processPageSelect(pagesAmount - 1)"
           )
+            | {{ pagesAmount }}
+          template(
+            v-for="skipPos in displayData.skipPos"
+            :key="skipPos"
+          )
+            span(
+              v-if="activeSkipperInput !== skipPos"
+              :class="$b('skipper', [skipPos])"
+              @dblclick="setActiveSkipperInput(skipPos)"
+            )
+              | ...
+            PInputText(
+              v-else
+              v-keyfilter.int
+              v-model="inputValue"
+              ref="input"
+              :class="$b('skipperInput', [skipPos])"
+              @blur="resetInput"
+              @keydown.enter="processInputConfirm"
+            )
       PButton.p-paginator-next(
-        :class="$b('controlButton', ['last'], { disabled: currentPage === pagesAmount })"
+        :class="$b('controlButton', ['last'], { disabled: currentPage === pagesAmount - 1 })"
         @click.prevent.stop="processPageSelect(currentPage + 1)"
       )
         span.pi.pi-angle-right
@@ -191,6 +196,10 @@ PPaginator(
       cursor: default;
       pointer-events: none;
       opacity: var(--p-disabled-opacity);
+    }
+    &:hover {
+      background-color: vars.$colors-beige;
+      color: vars.$colors-white;
     }
     & span {
       @include relative;

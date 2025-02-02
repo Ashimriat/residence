@@ -60,6 +60,7 @@ div(:class="$b()")
   div(:class="$b('requestForm')")
     BaseSelectButtons(
       v-if="selectOptions.length"
+      is-inverted
       v-model="formData.selectOption"
       :options="selectOptions"
     )

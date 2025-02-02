@@ -1,27 +1,33 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/base';
-import type { CalendarDate } from '~/components/DatePickerCalendar.vue';
+import type { CalendarDate, Time } from '~/components/DateTimeCalendar.vue';
 
 
-export type MobileCalendarModalOperators = {
-  onSelect: (date: NonNullable<CalendarDate>) => void;
+export type MobileCalendarModalData = {
+  withTimeSelect?: boolean;
+  onSelect: (date: NonNullable<CalendarDate>, time: Time) => void;
 }
 
-const selectedDate = useCalendar();
+const { selectedDate, selectedTime } = useCalendar();
 
-const { getModalData } = useModalDialog<MobileCalendarModalOperators>();
-const { onSelect } = getModalData();
+const { getModalData } = useModalDialog<MobileCalendarModalData>();
+const { onSelect, withTimeSelect } = getModalData();
 
-const confirm = () => onSelect(selectedDate.value as NonNullable<CalendarDate>);
+const confirm = () => onSelect(
+  selectedDate.value as NonNullable<CalendarDate>,
+  selectedTime.value,
+);
 
 const $b = useBEM('MobileCalendar');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  DatePickerCalendar(
+  DateTimeCalendar(
     as-desktop
-    v-model="selectedDate"
+    :with-time="withTimeSelect"
+    v-model:date="selectedDate"
+    v-model:time="selectedTime"
   )
   BaseButton(
     :type="EButtons.CONFIRM"

@@ -207,7 +207,10 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.FINISH_SEASON]: {
     label: 'Закончить сезон',
-  }
+  },
+  [EButtons.SUBMIT_GAME_ORDER]: {
+    label: 'Подать заявку',
+  },
 } as const;
 
 

@@ -37,7 +37,6 @@ div(:class="$b()")
     )
   BaseSelectButtons(
     v-model="activeType"
-    is-inverted
     :options="OPTIONS"
     :class="$b('gameSelector')"
   )
@@ -59,14 +58,11 @@ div(:class="$b()")
       :header-class="$b('tableHeaderCell')"
     )
       template(#body="{ data: { user: { name, avatar } } }")
-        div(:class="$b('userData')")
-          PAvatar(
-            :image="avatar"
-            label="UI"
-            shape="circle"
-          )
-          span
-            | {{ name }}
+        UserData(
+          is-linker
+          :avatar
+          :name
+        )
     PColumn(
       field="rating"
       header="Рейтинг"
@@ -91,7 +87,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .RatingPage {
-  @include centeredFlexColumn((gap: vars.$gaps-g48));
+  @include centeredFlexColumn((gap: vars.$gaps-g40));
   &__topContainer {
     @include flex((
       flex-direction: var(--topContainerFlexDirection, row),
@@ -124,38 +120,18 @@ div(:class="$b()")
       width: 5%;
     }
     &:not(&:first-of-type) {
-      width: calc(95% / var(--columnsAmount, 3));
+      width: calc(95% / 3);
     }
   }
   &__tableBodyCell {
     font-weight: vars.$fw-bold;
     font-size: var(--staticFontSize-M-S);
   }
-  &__userData {
-    @include flex((
-      align-items: center,
-      gap: vars.$gaps-g12,
-    ));
-    --avatarSize: 28px;
-    --avatarLabelFontSize: #{vars.$fs-static-xs};
-    border: var(--userDataBorder, 3px solid #{vars.$colors-black});
-    border-radius: vars.$br-s;
-    padding: var(--userDataPadding, 10px 12px);
-    height: 48px;
-    width: fit-content;
-    & > span {
-      font-weight: vars.$fw-heavy;
-      font-size: var(--staticFontSize-M-S);
-    }
-  }
 }
 
 @include mobile {
   .RatingPage {
     --topContainerFlexDirection: column;
-    --userDataBorder: none;
-    --userDataPadding: 0;
-    --columnsAmount: 2;
     --headerCellHeight: 42px;
   }
 }

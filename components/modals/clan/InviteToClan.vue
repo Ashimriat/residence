@@ -49,7 +49,7 @@ div(:class="$b()")
   )
     PScrollPanel(v-if="data.length")
       div(
-        v-for="(userData, k) of data"
+        v-for="({userData}, k) of data"
         :key="userData.id"
         :class="$b('userRecord')"
       )

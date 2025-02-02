@@ -53,7 +53,10 @@ enum EButtons {
   CONFIRM = 'confirm',
   TOGGLE_DETAILS = 'toggleDetails',
 
+
+
   FINISH_SEASON = 'finishSeason',
+  SUBMIT_GAME_ORDER = 'submitGameOrder',
 }
 
 

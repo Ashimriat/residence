@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { Temporal } from '@js-temporal/polyfill';
 import { EIcons, EIconsSizes } from '~/components/base';
+import BaseScrollPanel from './base/BaseScrollPanel.vue';
 
 type Props = {
   asDesktop?: boolean;
+  isDisabled?: boolean;
 }
 
 export type CalendarDate = {
   start: Temporal.PlainDate;
   end?: Temporal.PlainDate;
 } | null;
+export type Time = string;
 
 type CalendarDay = {
   day: number;
@@ -43,26 +46,34 @@ const WEEK_DAYS = [
   'ВС',
 ];
 
-const { asDesktop } = defineProps<Props>();
-const selectedDate = defineModel<CalendarDate>({ required: true });
+const { asDeskto, isDisabled } = defineProps<Props>();
+
+
+const selectedDate = defineModel<CalendarDate>('date', { required: true });
+const selectedTime = defineModel<string>('time', { default: null });
 
 const { isMobile } = useDevice();
 const { closeModal, showMobileCalendar } = useModalDialog();
 
-const selectedDateLabel = computed<string>(() => {
-    if (!selectedDate.value) return '';
+const selectedDateTimeLabel = computed<string>(() => {
+    if (!selectedDate.value) return `Выбрать дату${withTimeSelect.value ? ' и время' : ''}`;
     const { start, end } = selectedDate.value;
     let res = `${dNumber(start.day)}.${dNumber(start.month)}`;
     if (end) {
       res += ` - ${dNumber(end.day)}.${dNumber(end.month)}`;
+    }
+    if (selectedTime.value) {
+      res += ` ${selectedTime.value}`;
     }
     return res;
   });
 
 function openOnMobile(): void {
   showMobileCalendar({
-    onSelect: (date: NonNullable<CalendarDate>) => {
+    withTimeSelect: withTimeSelect.value,
+    onSelect: (date: NonNullable<CalendarDate>, time: Time) => {
       selectedDate.value = date;
+      selectedTime.value = time;
       closeModal();
     },
   });
@@ -71,6 +82,8 @@ function openOnMobile(): void {
 const processedDate = ref<Temporal.PlainDate>(
   Temporal.Now.instant().toZonedDateTimeISO(Temporal.Now.timeZoneId()).toPlainDate()
 );
+
+const withTimeSelect = computed<boolean>(() => selectedTime.value !== null);
 
 const days = computed<CalendarDay[]>(() => {
   const res: CalendarDay[] = [];
@@ -155,8 +168,12 @@ function getDayClasses(cDay: CalendarDay): string {
 }
 
 function setSelectedDate(day: number): void {
-  const daysAddedDate = processedDate.value.add({ days: day - processedDate.value.day });
-  if (selectedDate.value?.start && selectedDate.value.end || !selectedDate.value) {
+  const daysAddedDate = processedDate.value.add({ days: day - processedDate.value.day });  
+  if (
+    withTimeSelect.value ||
+    !selectedDate.value ||
+    selectedDate.value.end
+  ) {
     selectedDate.value = { start: daysAddedDate };
   } else if (day === selectedDate.value.start.day) {
     selectedDate.value = null;
@@ -165,20 +182,25 @@ function setSelectedDate(day: number): void {
   }
 }
 
-const $b = useBEM('Calendar');
+function setSelectedTime(time: string): void {
+  selectedTime.value = time;
+}
+
+const TIME_SLOTS = Array.from(({ length: 23 }), (_, i) => `${i}:30`);
+const $b = useBEM('DateTimeCalendar');
 </script>
 
 <template lang="pug">
 div(
   v-if="isMobile && !asDesktop"
-  :class="$b(['mobile'])"
+  :class="$b(['mobile'], { disabled: isDisabled })"
   @click="openOnMobile"
 )
-  | {{ selectedDateLabel || 'Выбрать дату' }}
+  | {{ selectedDateTimeLabel }}
   BaseIcon(:type="EIcons.CALENDAR")
 div(
   v-else
-  :class="$b(['desktop'])"
+  :class="$b(['desktop'], { disabled: isDisabled })"
 )
   div(:class="$b('header')")
     div(:class="$b('processedDate')")
@@ -209,7 +231,7 @@ div(
         @click="resetSelectedDate"
       )
       span
-        | {{ selectedDateLabel }}
+        | {{ selectedDateTimeLabel }}
   div(:class="$b('container')")
     div(
       v-for="day of WEEK_DAYS"
@@ -226,10 +248,23 @@ div(
       span(:class="$b('filler')")
       span(:class="$b('dayNum')")
         | {{ cDay.day }}
+  BaseScrollPanel(
+    v-if="withTimeSelect && selectedDate"
+    :gap="8"
+    :class="$b('timeSlotsList')"
+  )
+    div(
+      v-for="(timeSlot, i) of TIME_SLOTS"
+      :key="i"
+      :class="$b('timeSlot', { selected: timeSlot === selectedTime })"
+      @click="setSelectedTime(timeSlot)"
+    )
+      | {{ timeSlot }}
 </template>
 
 <style lang="scss">
-.Calendar {
+.DateTimeCalendar {
+  min-width: 320px;
   &--desktop {
     @include flexColumn((gap: 12px));
     background-color: vars.$colors-white;
@@ -248,6 +283,10 @@ div(
     padding: 10px 16px;
     border-radius: vars.$br-xs;
     color: vars.$colors-black;
+  }
+  &--disabled {
+    opacity: 0.7;
+    pointer-events: none;
   }
   &__header {
     @include flex((
@@ -322,12 +361,6 @@ div(
       @include relative;
       --dayNumColor: #{vars.$colors-white};
       pointer-events: none;
-      /*&,
-      &:hover {
-        background-color: vars.$colors-beige;
-        color: vars.$colors-white;
-        opacity: 1;
-      }*/
     }
 
     &--selected {
@@ -390,6 +423,34 @@ div(
   &__filler,
   &__dayNum {
     opacity: var(--dayOpacity);
+  }
+  &__timeSlotsList {
+    --scrollPanelBackgroundColor: #{vars.$colors-black};
+    
+    padding: 16px 8px 16px 20px;
+    height: 196px;
+    border-radius: vars.$br-s;
+    background-color: vars.$colors-black;
+  }
+  &__timeSlot {
+    @include centeredFlex;
+    border: 2px solid vars.$colors-white;
+    border-radius: vars.$br-xs;
+    font-size: vars.$fs-static-m;
+    background-color: var(--timeSlotBackgroundColor, transparent);
+    color: var(--timeSlotColor, #{vars.$colors-white});
+    max-width: 77px;
+    height: 40px;
+    cursor: pointer;
+    &:hover,
+    &--selected {
+      --timeSlotBackgroundColor: #{vars.$colors-white};
+      --timeSlotColor: #{vars.$colors-black};
+    }
+    &--selected {
+      cursor: default;
+      pointer-events: none;
+    }
   }
 }
 </style>

@@ -16,11 +16,11 @@ const $b = useBEM('UserReview');
 
 <template lang="pug">
 div(:class="$b()")
-  UserData(:avatar="avatar")
+  UserData(:avatar)
     h4(:class="$b('authorGame')")
       span
         | {{ `${username} - ` }}
-      span
+      span(:class="$b('gameType')")
         | {{ game }}
   div(:class="$b('reviewText')")
     | {{ text }}
@@ -30,38 +30,35 @@ div(:class="$b()")
 .UserReview {
   @include flexColumn((gap: vars.$gaps-g16));
   width: 100%;
-  max-width: 400px;
+  max-width: var(--reviewMaxWidth, 400px);
   min-height: 86px;
   padding: 20px;
-  border-radius: vars.$br-l;
+  border-radius: var(--reviewBorderRadius, #{vars.$br-l});
   background-color: vars.$colors-white;
   box-shadow: vars.$shadows-base;
-  --userDataMaxWidth: none;
   &__topContainer {
     @include flex((
       align-items: center,
-      gap: 12px,
+      gap: vars.$gaps-g12,
     ));
   }
   &__authorGame {
-    font-size: vars.$fs-l;
-    & > span:last-of-type {
-      color: vars.$colors-beige;
-    }
+    font-size: var(--authorFontSize, #{vars.$fs-static-l});
+  }
+  &__gameType {
+    color: vars.$colors-beige;
   }
   &__reviewText {
     color: vars.$colors-greyDark;
-    font-size: vars.$fs-static-s;
+    font-size: var(--staticFontSize-S-XS);
   }
 }
 
 @include mobile {
   .UserReview {
-    border-radius: vars.$br-s;
-    max-width: unset;
-    &__reviewText {
-      font-size: vars.$fs-static-xs;
-    }
+    --authorFontSize: #{vars.$fs-static-s};
+    --reviewBorderRadius: #{vars.$br-s};
+    --reviewMaxWidth: initial;
   }
 }
 </style>
