@@ -1,1 +1,0 @@
-import{G as s,K as a,c as n,L as o,M as r,o as t}from"./CLv2eXp2.js";const p=s({__name:"Gallery",setup(c){const e=a();return(l,_)=>(t(),n("div",{class:o(r(e)())},"Галлерея",2))}});export{p as default};
