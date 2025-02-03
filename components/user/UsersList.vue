@@ -3,14 +3,14 @@ import { EButtons } from '~/components/base';
 import { type Props as BaseScrollPanelProps } from '~/components/base/BaseScrollPanel.vue'
 
 
-type Props = BaseScrollPanelProps & {
+export type Props = BaseScrollPanelProps & {
   users: Participant[];
   isMasters?: boolean;
   withExpel?: boolean;
   ownerId?: string;
 };
 
-type Emits = {
+export type Emits = {
   expel: [userId: string];
   select: [userId: string];
 }
@@ -43,6 +43,10 @@ function handleSelection(id: string): void {
 }
 
 const $b = useBEM('UsersList');
+
+onMounted(() => {
+  console.log("GAP", gap);
+})
 </script>
 
 <template lang="pug">
@@ -73,7 +77,6 @@ BaseScrollPanel(
 
 <style lang="scss">
 .UsersList {
-  --scrollPanelItemGrow: 0;
   --scrollPanelContentPadding: 0 12px 0 0;
   &--operatable {
     --participantPointerEvents: all;
@@ -81,6 +84,7 @@ BaseScrollPanel(
   &__participant {
     @include relative;
     @include flex((
+      justify-content: var(--userListParticipantJustify, flex-start),
       align-items: center,
       gap: vars.$gaps-g8,
     ));

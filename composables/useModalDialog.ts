@@ -8,6 +8,8 @@ import ClanParticipants from '~/components/modals/clan/ClanParticipants.vue';
 import CreateClan from '~/components/modals/clan/CreateClan.vue';
 import InviteToClan from '~/components/modals/clan/InviteToClan.vue';
 import MobileCalendar, { type MobileCalendarModalData } from '~/components/modals/MobileCalendar.vue';
+import { type MasterSelectModalData } from '~/pages/events/Create.vue';
+import MasterSelect from '~/components/modals/MasterSelect.vue';
 
 type DialogRef<T> = {
   value: {
@@ -102,17 +104,26 @@ export default function useModalDialog<T>() {
   }
 
   function inviteToClan(clanId: string): void {
-    openModal<string>(InviteToClan, {
+    openModal(InviteToClan, {
       title: 'Добавить игрока',
       id: 'inviteToClan',
       data: clanId,
     });
   }
 
-  function showMobileCalendar(operators: MobileCalendarModalData): void {
-    openModal<MobileCalendarModalData>(MobileCalendar, {
+  function showMobileCalendar(data: MobileCalendarModalData): void {
+    openModal(MobileCalendar, {
       id: 'mobileCalendar',
-      data: operators,
+      data,
+      closable: true,
+    })
+  }
+
+  function showMasterSelect(data: MasterSelectModalData): void {
+    openModal(MasterSelect, {
+      title: 'Выбрать ведущего',
+      id: 'masterSelect',
+      data,
       closable: true,
     })
   }
@@ -131,5 +142,6 @@ export default function useModalDialog<T>() {
     showClanRequestSent,
     inviteToClan,
     showMobileCalendar,
+    showMasterSelect,
   };
 }

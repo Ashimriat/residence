@@ -62,22 +62,16 @@ $defaultItemBasis: calc((100% - v-bind(gapsSpace)) / v-bind(itemsInRow));
       row-gap: v-bind('sGap.y'),
       flex-wrap: wrap,
     ));
+    padding-block: var(--scrollPanelContentPaddingBlockTop, 0) calc(2* var(--p-scrollpanel-bar-size));
     background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
     & > * {
-      flex-grow: var(--scrollPanelItemGrow, 0);
-      width: #{$defaultItemBasis};
+      width: var(--scrollPanelItemWidth, #{$defaultItemBasis});
     }
   }
   &__bar {
     --p-scrollpanel-bar-background: var(--scrollPanelBarBackgroundColor, #{vars.$colors-greyMuted});
     --p-scrollpanel-bar-size: 4px;
     opacity: 1;
-  }
-}
-
-@include mobile {
-  .BaseScrollPanel {
-    --scrollPanelItemGrow: 1;
   }
 }
 </style>

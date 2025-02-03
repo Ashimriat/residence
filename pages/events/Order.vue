@@ -8,9 +8,8 @@ const game = ref<string>('');
 const masterSearch = ref<string>('');
 const master = ref<string>('');
 const desires = ref<string>('');
-const { selectedDate, selectedTime } = useCalendar();
 
-const { isDesktop } = useDevice();
+const { selectedDate, selectedTime } = useCalendar();
 
 const isOrderEnabled = computed<boolean>(
   () => !!game.value && !!master.value && !!selectedDate.value && !!selectedTime.value
@@ -28,39 +27,33 @@ div(:class="$b()")
     :options="GAMES_OPTIONS"
     :class="$b('gameSelector')"
   )
-  div(:class="$b('content')")
-    section(:class="$b('contentSection', ['master'])")
-      h3
-        | Ведущий
-      BaseSearch(
-        v-model="masterSearch"
-        :is-disabled="!game"
-        placeholder="ID или имя ведущего"
+  EventSelectionContainer(
+    v-model:date="selectedDate"
+    v-model:time="selectedTime"
+    data-section-title="Ведущий"
+    :is-calendar-disabled="!game"
+  )
+    BaseSearch(
+      v-model="masterSearch"
+      :is-disabled="!game"
+      placeholder="ID или имя ведущего"
+    )
+    div(:class="$b('mastersListContainer')")
+      span(v-if="!game")
+        | Сперва надо выбрать игру
+      UsersList(
+        v-else
+        v-model:selected="master"
+        :gap="{ x: 29, y: 20 }"
+        is-masters
+        :users="mockOtherUsers(20)"
+        :class="$b('mastersList')"
       )
-      div(:class="$b('mastersListContainer')")
-        span(v-if="!game")
-          | Сперва надо выбрать игру
-        UsersList(
-          v-else
-          v-model:selected="master"
-          :gap="{ x: 29, y: 20 }"
-          is-masters
-          :users="mockOtherUsers(20)"
-          :class="$b('mastersList')"
-        )
-      BaseTextarea(
-        v-model="desires"
-        placeholder="Ваши пожелания на игру"
-        :class="$b('desiresText')"
-      )
-    section(:class="$b('contentSection', ['calendar'])")
-      h3(v-if="isDesktop")
-        | Дата и время
-      DateTimeCalendar(
-        :is-disabled="!game"
-        v-model:date="selectedDate"
-        v-model:time="selectedTime"
-      )
+    BaseTextarea(
+      v-model="desires"
+      placeholder="Ваши пожелания на игру"
+      :class="$b('desiresText')"
+    )
   BaseButton(
     :type="EButtons.SUBMIT_GAME_ORDER"
     :disabled="!isOrderEnabled"
@@ -78,25 +71,6 @@ div(:class="$b()")
   max-width: 1160px;
   &__gameSelector {
     width: 100%;
-  }
-  &__content {
-    @include flex((
-      flex-direction: var(--contentFlexDirection, row),
-      justify-content: space-between,
-      gap: vars.$gaps-g16,
-    ));
-    width: 100%;
-  }
-  &__contentSection {
-    @include flexColumn((gap: vars.$gaps-g12));
-    &--master{
-      width: 100%;
-      max-width: 640px;
-      order: var(--masterSectionOrder, 1);
-    }
-    &--calendar {
-      order: var(--calendarSectionOrder, 2);
-    }
   }
   &__mastersListContainer {
     @include fullsize;
@@ -124,11 +98,8 @@ div(:class="$b()")
 
 @include mobile {
   .OrderPage {
-    --contentFlexDirection: column;
-    --masterSectionOrder: 2;
     --mastersListPadding: 16px 4px 20px 16px;
     --mastersListContentPadding: 0 12px 0 0;
-    --calendarSectionOrder: 1;
     --submitButtonWidth: 50%;
   }
 }

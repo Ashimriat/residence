@@ -57,6 +57,10 @@ enum EButtons {
 
   FINISH_SEASON = 'finishSeason',
   SUBMIT_GAME_ORDER = 'submitGameOrder',
+  SELECT_MASTER = 'selectMaster',
+  SELECT = 'select',
+  REMOVE = 'remove',
+  CONFIRM_MASTER = 'confirmMaster',
 }
 
 

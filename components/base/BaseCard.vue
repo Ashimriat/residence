@@ -21,7 +21,7 @@ div(:class="$b([orientation ?? 'row'])")
   div(:class="$b('subcontent')")
     slot(name="subContent")
   div(
-     v-if="slots.content"
+    v-if="slots.content"
     :class="$b('content')"
   )
     slot(name="content")

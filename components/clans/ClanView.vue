@@ -33,8 +33,12 @@ const $b = useBEM('ClanView');
 
 <template lang="pug">
 UsersStructureView(
+  with-expel
+  :users="data.participants"
+  :owner-id="data.ownerId"
   :class="$b()"
   v-model:show-list="isParticipantsDisplayed"
+  @expel="handleUserExpel"
 )
   template(#texts)
     ClanDataHeader(
@@ -67,13 +71,6 @@ UsersStructureView(
       :type="EButtons.LEAVE_CLAN"
       :class="$b('leaveButton')"
       @click="leaveClan"        
-    )
-  template(#list)
-    UsersList(
-      with-expel
-      :users="data.participants"
-      :owner-id="data.ownerId"
-      @expel="handleUserExpel"
     )
 </template>
 

@@ -46,7 +46,7 @@ const WEEK_DAYS = [
   'ВС',
 ];
 
-const { asDeskto, isDisabled } = defineProps<Props>();
+const { asDesktop, isDisabled } = defineProps<Props>();
 
 
 const selectedDate = defineModel<CalendarDate>('date', { required: true });

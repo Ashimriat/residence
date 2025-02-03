@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { type Props, type Emits } from '~/components/user/UsersList.vue';
+
+
+const props = defineProps<Omit<Props, 'itemsInRow'>>();
+const emit = defineEmits<Emits>(); 
+
+const { isMobile } = useDevice();
+
 const $b = useBEM('UsersStructureView');
 
 const showList = defineModel<boolean>('showList', { default: true });
@@ -16,7 +24,12 @@ BaseCard(:class="$b()")
     v-if="showList"
     #content
   )
-    slot(name="list")
+    UsersList(
+      v-bind="props"
+      :gap="isMobile ? { x: 0, y: 16 } : undefined"
+      :class="$b('list')"
+      @expel="emit('expel', $event)"
+    )
 </template>
 
 <style lang="scss">
@@ -26,6 +39,7 @@ BaseCard(:class="$b()")
   --cardContentWidth: 60%;
   --cardHeight: var(--usersStructureHeight, 340px);
   --subcontentFlexBasis: 43%;
+  --scrollPanelContentPaddingBlockTop: 12px;
   &__structureDataContainer {
     @include flexColumn((
       justify-content: space-between,
@@ -56,8 +70,8 @@ BaseCard(:class="$b()")
       }
     }
   }
-  &__listContainer {
-    height: 100%;
+  &__list {
+    height: var(--listHeight, 100%);
   }
 }
 
@@ -65,6 +79,10 @@ BaseCard(:class="$b()")
   .UsersStructureView {
     --usersStructureHeight: fit-content;
     --cardContentWidth: 100%;
+    --scrollPanelItemWidth: 100%;
+    --scrollPanelPadding: 15px;
+    --userListParticipantJustify: space-between;
+    --listHeight: 220px;
     &__buttonsBlock {
       flex-wrap: wrap;
       & button {
@@ -74,9 +92,6 @@ BaseCard(:class="$b()")
           flex-grow: 0;
         }
       }
-    }
-    &__listContainer {
-      height: 220px;
     }
   }
 }

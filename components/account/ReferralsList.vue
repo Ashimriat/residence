@@ -14,7 +14,10 @@ function copyToBuffer(): void {
 </script>
 
 <template lang="pug">
-UsersStructureView(:class="$b()")
+UsersStructureView(
+  :users="referrals" 
+  :class="$b()"
+)
   template(#texts)
     h3
       | Реферральная система
@@ -26,8 +29,6 @@ UsersStructureView(:class="$b()")
       :type="EButtons.REFERRAL"
       @click="copyToBuffer"
     )
-  template(#list)
-    UsersList(:users="referrals")
 </template>
 
 <style lang="scss">

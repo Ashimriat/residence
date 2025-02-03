@@ -5,6 +5,11 @@ import { mockClans } from '~/assets/mocks';
 const $b = useBEM('ClansList');
 
 const clansData = mockClans(4, 20, false);
+
+
+function test() {
+  console.log("TEST")
+}
 </script>
 
 <template lang="pug">
@@ -14,7 +19,10 @@ div(:class="$b()")
   ClanView(:data="clansData[0]")
   h3
     | Кланы
-  BaseCarousel(:items="clansData.slice(0)")
+  BaseCarousel(
+    :items="clansData.slice(1)"
+    @update:page="test"
+  )
     template(#default="{ itemsData }")
       ClanView(:data="itemsData[0]")
 </template>

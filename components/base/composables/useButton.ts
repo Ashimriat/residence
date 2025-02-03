@@ -158,9 +158,14 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     variant: EButtonVariant.DANGER,
     iconType: EIcons.CROSS_CIRCLED,
     iconSize: EIconsSizes.S,
+    iconPos: EIconPos.RIGHT,
     atMobile: {
       label: 'Выгнать',
     }
+  },
+  [EButtons.SELECT_MASTER]: {
+    label: 'Выбрать ведущего',
+    variant: EButtonVariant.CONTRAST,
   },
   [EButtons.SAVE_CHANGES]: {
     label: 'Сохранить изменения',
@@ -211,6 +216,20 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.SUBMIT_GAME_ORDER]: {
     label: 'Подать заявку',
   },
+  [EButtons.SELECT]: {
+    label: 'Выбрать',
+    variant: EButtonVariant.CONTRAST,
+  },
+  [EButtons.REMOVE]: {
+    label: 'Убрать',
+    variant: EButtonVariant.CONTRAST,
+    isVariantInverted: true,
+  },
+  [EButtons.CONFIRM_MASTER]: {
+    label: 'Подтвердить и вернуться',
+    iconType: EIcons.CHEVRON_LEFT,
+    iconPos: EIconPos.LEFT,
+  }
 } as const;
 
 

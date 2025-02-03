@@ -18,7 +18,8 @@ import User from '~assets/icons/user.svg';
 import Edit from '~assets/icons/edit.svg';
 import Gift from '~assets/icons/gift.svg';
 import Minus from '~assets/icons/minus.svg';
-import Chevron from '~assets/icons/chevron.svg';
+import ChevronLeft from '~/assets/icons/chevronLeft.svg';
+import ChevronRight from '~assets/icons/chevronRight.svg';
 import Gear from '~assets/icons/settings.svg';
 import CrossCircled from '~assets/icons/crossCircled.svg';
 import CalendarNextMonth from '~assets/icons/calendarNextMonth.svg';
@@ -35,7 +36,8 @@ import { EIcons, EIconsSizes } from '../constants/icon';
 
 const ICONS_LIST: Record<EIcons, string> = {
   [EIcons.MINUS]: Minus,
-  [EIcons.CHEVRON]: Chevron,
+  [EIcons.CHEVRON_RIGHT]: ChevronRight,
+  [EIcons.CHEVRON_LEFT]: ChevronLeft,
   [EIcons.USERS]: Users,
   [EIcons.CLOCK]: Clock,
   [EIcons.LINK]: Link,
