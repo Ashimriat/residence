@@ -14,8 +14,9 @@ function copyToBuffer(): void {
 </script>
 
 <template lang="pug">
-UsersStructureView(
-  :users="referrals" 
+UsersStructure(
+  :users="referrals"
+  :items-in-row="{ mobile: 2 }"
   :class="$b()"
 )
   template(#texts)

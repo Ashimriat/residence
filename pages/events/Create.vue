@@ -66,7 +66,7 @@ div(:class="$b()")
     :avatar="masterData.avatar"
     :name="masterData.name"
   )
-  EventSelectionContainer(
+  EventCalendarBlock(
     data-section-title="Общая информация"
     v-model:date="selectedDate"
     v-model:time="selectedTime"

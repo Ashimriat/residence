@@ -251,6 +251,7 @@ div(
   BaseScrollPanel(
     v-if="withTimeSelect && selectedDate"
     :gap="8"
+    :items-in-row="3"
     :class="$b('timeSlotsList')"
   )
     div(
@@ -285,7 +286,7 @@ div(
     color: vars.$colors-black;
   }
   &--disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     pointer-events: none;
   }
   &__header {
@@ -426,8 +427,7 @@ div(
   }
   &__timeSlotsList {
     --scrollPanelBackgroundColor: #{vars.$colors-black};
-    
-    padding: 16px 8px 16px 20px;
+    --scrollPanelPadding: 16px 8px 16px 20px;
     height: 196px;
     border-radius: vars.$br-s;
     background-color: vars.$colors-black;

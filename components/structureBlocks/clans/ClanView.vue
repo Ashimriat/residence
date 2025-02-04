@@ -32,12 +32,13 @@ const $b = useBEM('ClanView');
 </script>
 
 <template lang="pug">
-UsersStructureView(
+UsersStructure(
+  v-model:show-list="isParticipantsDisplayed"
+  :items-in-row="{ mobile: 1 }"
   with-expel
   :users="data.participants"
   :owner-id="data.ownerId"
   :class="$b()"
-  v-model:show-list="isParticipantsDisplayed"
   @expel="handleUserExpel"
 )
   template(#texts)
@@ -76,6 +77,8 @@ UsersStructureView(
 
 <style lang="scss">
 .ClanView {
+  --usersStructureListPadding: 8px 0 20px 12px;
+  --usersStructureListContentPaddingBlockStart: 12px;
   &__leaveButton {
     flex-basis: 40px;
     padding: 0;

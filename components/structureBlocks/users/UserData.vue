@@ -30,10 +30,10 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
   &--linker {
     --avatarSize: 28px;
     --avatarLabelFontSize: #{vars.$fs-static-xs};
-    border: var(--userDataBorderWidth, 3px) solid #{vars.$colors-black};
-    padding: var(--userDataPadding, 12px);
+    border: var(--linkerBorderWidth, 3px) solid #{vars.$colors-black};
+    padding: var(--linkerPadding, 12px);
     border-radius: vars.$br-s; 
-    height: 48px;
+    height: var(--linkerHeight, 48px);
     width: 100%;
   }
   &--owner > div {
@@ -62,8 +62,9 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
 
 @include mobile {
   .UserData {
-    --userDataBorderWidth: 2px;
-    --userDataPadding: 6px;
+    --linkerBorderWidth: 2px;
+    --linkerPadding: 6px;
+    --linkerHeight: 40px;
   }
 }
 </style>

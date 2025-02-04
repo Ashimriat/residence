@@ -19,7 +19,7 @@ const { isDesktop } = useDevice();
 const selectedDate = defineModel<CalendarDate>('date', { required: true });
 const selectedTime = defineModel<Time>('time', { required: true });
 
-const $b = useBEM('EventSelectionContainer');
+const $b = useBEM('EventCalendarBlock');
 </script>
 
 <template lang="pug">
@@ -39,7 +39,7 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-.EventSelectionContainer {
+.EventCalendarBlock {
   @include flex((
     flex-direction: var(--contentFlexDirection, row),
     justify-content: space-between,
@@ -60,7 +60,7 @@ div(:class="$b()")
 }
 
 @include mobile {
-  .EventSelectionContainer {
+  .EventCalendarBlock {
     --contentFlexDirection: column;
     --dataSectionOrder: 2;
     --calendarSectionOrder: 1;

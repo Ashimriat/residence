@@ -27,7 +27,7 @@ div(:class="$b()")
     :options="GAMES_OPTIONS"
     :class="$b('gameSelector')"
   )
-  EventSelectionContainer(
+  EventCalendarBlock(
     v-model:date="selectedDate"
     v-model:time="selectedTime"
     data-section-title="Ведущий"
@@ -41,8 +41,9 @@ div(:class="$b()")
     div(:class="$b('mastersListContainer')")
       span(v-if="!game")
         | Сперва надо выбрать игру
-      UsersList(
+      UsersStructure(
         v-else
+        list-only
         v-model:selected="master"
         :gap="{ x: 29, y: 20 }"
         is-masters
@@ -73,7 +74,7 @@ div(:class="$b()")
     width: 100%;
   }
   &__mastersListContainer {
-    @include fullsize;
+    width: 100%;
     height: 288px;
     background-color: vars.$colors-white;
     border-radius: vars.$br-s;
@@ -84,9 +85,7 @@ div(:class="$b()")
     }
   }
   &__mastersList {
-    --scrollPanelPadding: var(--mastersListPadding, 16px 8px 20px 16px);
-    --scrollPanelContentPadding: var(--mastersListContentPadding, 0 20px 0 0);
-    --userListParticipantPadding: 0;
+    --usersStructureListPadding: 16px 6px 16px 16px;
   }
   &__desiresText {
     height: 174px;
@@ -98,8 +97,6 @@ div(:class="$b()")
 
 @include mobile {
   .OrderPage {
-    --mastersListPadding: 16px 4px 20px 16px;
-    --mastersListContentPadding: 0 12px 0 0;
     --submitButtonWidth: 50%;
   }
 }

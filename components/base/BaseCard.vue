@@ -1,9 +1,13 @@
 <script setup lang="ts">
 type Props = {
   orientation?: 'row' | 'column';
+  preserveSubcontent?: boolean;
 };
 
-const { orientation } = defineProps<Props>();
+const {
+  orientation,
+  preserveSubcontent = true,
+} = defineProps<Props>();
 
 const { isMobile } = useDevice();
 
@@ -18,7 +22,10 @@ const $b = useBEM('BaseCard');
 
 <template lang="pug">
 div(:class="$b([orientation ?? 'row'])")
-  div(:class="$b('subcontent')")
+  div(
+    v-if="preserveSubcontent || slots.subContent"
+    :class="$b('subcontent')"
+  )
     slot(name="subContent")
   div(
     v-if="slots.content"
@@ -44,7 +51,7 @@ div(:class="$b([orientation ?? 'row'])")
     --cardContentMinHeight: fit-content;
   }
   &__subcontent {
-    flex-basis: var(--subcontentFlexBasis, 56%);
+    flex-basis: var(--cardSubcontentFlexBasis, 56%);
   }
   &__content {
     width: var(--cardContentWidth, fit-content);
@@ -59,7 +66,7 @@ div(:class="$b([orientation ?? 'row'])")
   .BaseCard {
     --cardWidth: 100%;
     --cardContentWidth: 100%;
-    --subcontentFlexBasis: 45%;
+    --cardSubcontentFlexBasis: 45%;
   }
 }
 </style>

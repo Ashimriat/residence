@@ -4,32 +4,53 @@ type ByAxis<T> = {
   y: T;
 }
 
+type ByDevice<T> = {
+  desktop: number;
+  mobile: number;
+}
+
 export type Props = {
-  itemsInRow?: number;
+  itemsInRow?: number | Partial<ByDevice<number>>;
   gap?: number | Partial<ByAxis<number>>;
 }
 
 const {
-  itemsInRow = 3,
+  itemsInRow,
   gap = 40,
 } = defineProps<Props>();
+
+const { isDesktop } = useDevice();
 
 const usedGap = computed<ByAxis<number>>(() => {
   if (typeof gap === 'number' || typeof gap === 'string') {
     return { x: gap, y: gap };
   }
-  return {
-    x: gap.x ?? 40,
-    y: gap.y ?? 40,
+  let x = gap.x ?? 40;
+  let y = gap.y ?? 40;
+  if (!isDesktop) {
+    x /= 2;
+    y /= 2;
   }
+  return { x, y };
 })
 
-const sGap = computed<ByAxis<string>>(() => ({
+
+const fGap = computed<ByAxis<string>>(() => ({
   x: `${usedGap.value.x}px`,
   y: `${usedGap.value.y}px`,
-}))
+}));
 
-const gapsSpace = computed<string>(() => `${usedGap.value.x * (itemsInRow - 1)}px`);
+const fItemsInRow = computed<number>(() => {
+  if (typeof itemsInRow === 'number') {
+    return itemsInRow;
+  }
+  if (isDesktop) {
+    return itemsInRow?.desktop ?? 3;
+  }
+  return itemsInRow?.mobile ?? 2;
+});
+
+const gapsSpace = computed<string>(() => `${usedGap.value.x * (fItemsInRow.value - 1)}px`);
 
 const $b = useBEM('BaseScrollPanel');
 </script>
@@ -45,24 +66,26 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-$defaultItemBasis: calc((100% - v-bind(gapsSpace)) / v-bind(itemsInRow));
+$defaultItemBasis: calc((100% - v-bind(gapsSpace)) / v-bind(fItemsInRow));
 
 .BaseScrollPanel {
   @include fullsize;
   padding: var(--scrollPanelPadding, 6px);
+  padding-right: 8px;
   background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
   overflow: hidden;
   &__panel {
     @include fullsize;
-    padding: var(--scrollPanelContentPadding, 0);
+    padding: var(--scrollPanelContentContainerPadding, 0);
+    padding-right: 15px;
   }
   &__content {
     @include flex((
-      column-gap: v-bind('sGap.x'),
-      row-gap: v-bind('sGap.y'),
+      column-gap: v-bind('fGap.x'),
+      row-gap: v-bind('fGap.y'),
       flex-wrap: wrap,
     ));
-    padding-block: var(--scrollPanelContentPaddingBlockTop, 0) calc(2* var(--p-scrollpanel-bar-size));
+    padding-block-start: var(--scrollPanelContentPaddingBlockStart, 0);
     background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
     & > * {
       width: var(--scrollPanelItemWidth, #{$defaultItemBasis});
@@ -70,8 +93,14 @@ $defaultItemBasis: calc((100% - v-bind(gapsSpace)) / v-bind(itemsInRow));
   }
   &__bar {
     --p-scrollpanel-bar-background: var(--scrollPanelBarBackgroundColor, #{vars.$colors-greyMuted});
-    --p-scrollpanel-bar-size: 4px;
+    --p-scrollpanel-bar-size: 6px;
     opacity: 1;
+  }
+}
+
+@include mobile {
+  .BaseScrollPanel {
+    --p-scrollpanel-bar-size: 6px;
   }
 }
 </style>
