@@ -1,1 +1,0 @@
-import{f as s,i as a,c as n,n as o,p as t,o as c}from"./DCJqdLXD.js";const l=s({__name:"Directions",setup(r){const e=a("DirectionsPage");return(i,p)=>(c(),n("div",{class:o(t(e)())},"Направления",2))}});export{l as default};

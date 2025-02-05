@@ -1,0 +1,1 @@
+import{d as s,a,c as n,n as o,f as t,o as c}from"./Di6wo0dh.js";const m=s({__name:"Directions",setup(r){const e=a("DirectionsPage");return(i,_)=>(c(),n("div",{class:o(t(e)())},"Направления",2))}});export{m as default};

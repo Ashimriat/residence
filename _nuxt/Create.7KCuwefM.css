@@ -1,0 +1,1 @@
+.BaseFileSelect{display:flex;flex-direction:column;gap:4px}.BaseFileSelect__fileSelector{align-items:center;border:1px dashed #cdaa74;border-radius:12px;cursor:pointer;display:flex;justify-content:center;min-height:55px}.BaseFileSelect__fileSelector span{color:#cdaa74;margin-right:8px}.CreatePage__topContainer{display:flex;flex-direction:column;gap:20px}

@@ -1,1 +1,0 @@
-import{f as s,i as a,c as n,n as o,p as r,o as t}from"./DCJqdLXD.js";const m=s({__name:"Gallery",setup(c){const e=a();return(l,p)=>(t(),n("div",{class:o(r(e)())},"Галлерея",2))}});export{m as default};
