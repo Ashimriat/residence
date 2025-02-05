@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type ClassesDict } from '~/composables/useBEM';
-import { type EButtons } from './constants/button';
-import useButtonData from './composables/useButton';
+import { type EButtons } from '~/constants/components/base/button';
+import useButtonData from '~/composables/components/useButton';
 
 type Props = {
   type: EButtons;

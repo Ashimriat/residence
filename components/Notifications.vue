@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EIcons } from '~/components/base';
+import { EIcons } from '~/constants/components';
 
 type Props = {
   withBg?: boolean;

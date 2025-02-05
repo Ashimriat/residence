@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Temporal } from '@js-temporal/polyfill';
-import { EIcons, EIconsSizes } from '~/components/base';
+import { EIcons, EIconsSizes } from '~/constants/components';
 import BaseScrollPanel from './base/BaseScrollPanel.vue';
 
 type Props = {

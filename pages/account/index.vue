@@ -3,14 +3,14 @@ import {
   EButtons,
   EIcons,
   EIconsSizes,
-} from '~/components/base';
-import { TABS, GAMES_ICONS } from '../constants/account';
+} from '~/constants/components';
+import { ACCOUNT_TABS, ACCOUNT_GAMES_ICONS } from '~/constants/pages';
 
 
 const route = useRoute();
 const router = useRouter();
 
-const tab = toRef(() => route.query.tab ?? TABS[0].id);
+const tab = toRef(() => route.query.tab ?? ACCOUNT_TABS[0].id);
 
 watchEffect(() => {
   router.push({ path: route.path, query: { tab: tab.value }});
@@ -69,7 +69,7 @@ div(:class="$b()")
               | 24600
       div(:class="$b('gamesRatingContainer')")
         div(
-          v-for="(icon, i) of GAMES_ICONS"
+          v-for="(icon, i) of ACCOUNT_GAMES_ICONS"
           :key="`gameIcon_${i}`"
           :class="$b('gameRating')"
         )
@@ -77,9 +77,9 @@ div(:class="$b()")
           span
             | 6150
   section(:class="$b('section', ['content'])")
-    div(:class="$b('tabsContainer')")
+    div(:class="$b('ACCOUNT_TABSContainer')")
       NuxtLink(
-        v-for="({ id, label, icon }) of TABS"
+        v-for="({ id, label, icon }) of ACCOUNT_TABS"
         :key="id"
         :class="$b('tab', { active: id === tab })"
         :to="`/account?tab=${id}`"
@@ -246,7 +246,7 @@ div(:class="$b()")
       font-size: vars.$fs-static-xs;
     }
   }
-  &__tabsContainer {
+  &__ACCOUNT_TABSContainer {
     @include flex((justify-content: center, gap: 24px));
   }
   &__tab {

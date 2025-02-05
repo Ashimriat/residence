@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockClans } from '~/assets/mocks';
-import { EButtons, EIcons } from '~/components/base';
+import { EButtons, EIcons } from '~/constants/components';
 
 
 const AMOUNT_ON_PAGE = 4;

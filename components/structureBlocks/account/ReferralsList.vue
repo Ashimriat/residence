@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockOtherUsers, mockText } from '~/assets/mocks';
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 
 const referrals = mockOtherUsers(20);

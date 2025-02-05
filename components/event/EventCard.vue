@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons, EIcons, EIconsSizes } from '~/components/base';
+import { EButtons, EIcons, EIconsSizes } from '~/constants/components';
 
 /** Local Types & Variables */
 type Props = {

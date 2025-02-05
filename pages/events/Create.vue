@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 import {
-  GAMES_OPTIONS as BASE_GAMES_OPTIONS,
+  EVENTS_GAMES_OPTIONS as BASE_GAMES_OPTIONS,
   EVENTS_OPTIONS
-} from '../constants/events';
+} from '~/constants/pages';
 
 
 export type MasterSelectModalData = {
@@ -34,17 +34,21 @@ function openMasterSelectModal(): void {
 }
 
 const $b = useBEM('CreatePage');
+
+definePageMeta({
+  layout: 'event-manage',
+});
 </script>
 
 <template lang="pug">
 div(:class="$b()")
   h1
     | Новое событие
-  BaseSelectButtons(
-    v-model="eventType"
-    :options="EVENTS_OPTIONS"
-  )
-  div(:class="$b('radioContainer')")
+  div(:class="$b('topContainer')")
+    BaseSelectButtons(
+      v-model="eventType"
+      :options="EVENTS_OPTIONS"
+    )
     BaseRadios(
       :options="GAMES_OPTIONS"
       v-model="event"
@@ -75,8 +79,8 @@ div(:class="$b()")
 
 <style lang="scss">
 .CreatePage {
-  &__radioContainer {
-    @include flex;
+  &__topContainer {
+    @include flexColumn((gap: vars.$gaps-g20));
   }
 }
 </style>

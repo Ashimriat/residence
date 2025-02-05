@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { mockRatingsTableData } from '~/assets/mocks';
-import { OPTIONS } from './constants/rating';
-import { EButtons } from '~/components/base';
+import { RATING_OPTIONS } from '~/constants/pages';
+import { EButtons } from '~/constants/components';
 
 
-const activeType = ref<string>(OPTIONS[0].value);
+const activeType = ref<string>(RATING_OPTIONS[0].value);
 
 const tableData = mockRatingsTableData(500);
 

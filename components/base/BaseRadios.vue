@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Props = { 
+type Props = {
   options: RadioOption[];
   isResettable?: boolean;
 };
@@ -54,6 +54,7 @@ $border: 1px solid vars.$colors-black;
   &__label {
     color: vars.$colors-black;
     font-weight: vars.$fw-midHeavy;
+    font-size: var(--staticFontSize-S-XS);
   }
 }
 

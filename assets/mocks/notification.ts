@@ -1,4 +1,4 @@
-import type { NotificationType, NotificationData } from '~/types/data/notification';
+import { type NotificationType, type NotificationData } from '~/types/data/notification';
 import { Temporal } from '@js-temporal/polyfill';
 import { mockShortText } from './text';
 

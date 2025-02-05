@@ -9,7 +9,7 @@ import tsEslint from 'typescript-eslint';
 import vueParser from 'vue-eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';
 import pluginVue from 'eslint-plugin-vue';
-
+import withNuxt from './.nuxt/eslint.config.mjs'
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 });
 
 
-export default [
+export default withNuxt(
   jsEslint.configs.recommended,
   ...tsEslint.configs.recommended,
   nodePlugin.configs['flat/recommended-script'],
@@ -50,19 +50,19 @@ export default [
     plugins: {
       '@stylistic': stylisticPlugin,
     },
-    settings: {
-      'import/resolver': {
-        alias: {
-          map: [
-            ['~assets', './assets/'],
-            ['@/interfaces', './src/tools/interfaces.ts'],
-            ['@/utils', './src/tools/utils.ts'],
-            ['@', './src/'],
-          ],
-          extensions: ['.vue', '.ts', '.svg'],
-        },
-      },
-    },
+    // settings: {
+    //   'import/resolver': {
+    //     alias: {
+    //       map: [
+    //         ['~assets', './assets/'],
+    //         ['@/interfaces', './src/tools/interfaces.ts'],
+    //         ['@/utils', './src/tools/utils.ts'],
+    //         ['@', './src/'],
+    //       ],
+    //       extensions: ['.vue', '.ts', '.svg'],
+    //     },
+    //   },
+    // },
     rules: {
       // eslint
       'accessor-pairs': 'off',
@@ -1135,4 +1135,4 @@ export default [
       'vue/multi-word-component-names': 'warn',
     },
   },
-];
+);

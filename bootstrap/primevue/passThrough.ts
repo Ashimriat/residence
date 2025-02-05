@@ -1,4 +1,4 @@
-import type { PrimeVuePTOptions } from 'primevue/config';
+import { type PrimeVuePTOptions } from 'primevue/config';
 
 
 const pt: PrimeVuePTOptions = {

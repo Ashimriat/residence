@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockOtherUsers } from '~/assets/mocks';
 import { type MasterSelectModalData } from '~/pages/events/Create.vue';
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 
 const { getModalData } = useModalDialog<MasterSelectModalData>();
@@ -37,8 +37,8 @@ const $b = useBEM('MasterSelect');
 <template lang="pug">
 div(:class="$b()")
   BaseSearch(
-    placeholder="ID или имя ведущего"
     v-model="search"
+    placeholder="ID или имя ведущего"
   )
   BaseScrollPanel
     div(

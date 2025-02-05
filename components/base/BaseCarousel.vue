@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CarouselProps } from 'primevue';
+import { type CarouselProps } from 'primevue';
 import BasePagination from './BasePagination.vue';
 
 /** Local Types & Variables */

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { EButtons } from '~/components/base';
-import type { CalendarDate, Time } from '~/components/DateTimeCalendar.vue';
+import { EButtons } from '~/constants/components';
+import { type CalendarDate, type Time } from '~/components/DateTimeCalendar.vue';
 
 
 export type MobileCalendarModalData = {

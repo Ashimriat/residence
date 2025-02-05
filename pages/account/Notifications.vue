@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NotificationData, NotificationType } from '~/types/data/notification';
+import { type NotificationData, type NotificationType } from '~/types/data/notification';
 import { mockNotifications } from '~/assets/mocks';
 
 

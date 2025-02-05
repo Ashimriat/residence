@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockOtherUsers } from '~/assets/mocks';
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 
 const { getModalData, closeModal } = useModalDialog<string>();

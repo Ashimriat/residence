@@ -1,20 +1,5 @@
 <script setup lang="ts">
-import DesktopHeader from './parts/header/DesktopHeader.vue';
-import MobileHeader from './parts/header/MobileHeader.vue';
-import FooterContent from './parts/FooterContent.vue';
-
-
 const { isMobile } = useDevice();
-const { openSignIn } = useModalDialog();
-
-const headerComponent = computed(() => (
-  !isMobile ? DesktopHeader : MobileHeader
-));
-
-/** Methods */
-function addEvent(): void {
-  
-}
 
 const $b = useBEM('DefaultLayout');
 </script>
@@ -22,12 +7,8 @@ const $b = useBEM('DefaultLayout');
 <template lang="pug">
 div(:class="$b()")
   header(:class="$b('header', { desktop: !isMobile, mobile: isMobile })")
-    component(
-      :is="headerComponent"
-      :class="$b('headerContent')"
-      @login="openSignIn"
-      @add-event="addEvent"
-    )
+    MobileHeader(v-if="isMobile")
+    DesktopHeader(v-else)
   main(:class="$b('content')")
     slot
   footer(:class="$b('footer')")
@@ -60,12 +41,12 @@ div(:class="$b()")
     }
   }
   &__header,
-  &__headerContent,
   &__footer {
     width: 100%;
   }
 
-  &__headerContent {
+  &__header > * {
+    width: 100%;
     max-width: 1280px;
   }
 

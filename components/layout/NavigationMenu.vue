@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { EIconsSizes } from '~/components/base';
-import { MENU_STRUCTURE } from './constants';
+import { EIconsSizes } from '~/constants/components';
+import { MENU_STRUCTURE } from '~/constants/components/layout/navigationMenu';
 
 
-/** Local Types & Variables */
 type Props = {
   isFooterMenu?: boolean;
 };

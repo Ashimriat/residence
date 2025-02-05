@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { EIcons, EIconsSizes } from './constants/icon';
-import useIcon from './composables/useIcon';
+import { EIcons, EIconsSizes } from '~/constants/components';
+import useIcon from '~/composables/components/useIcon';
 
 
 type Props = {

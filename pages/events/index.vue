@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockEventsBigData, mockSubscriptions } from '~assets/mocks';
-import { EButtons } from '~/components/base';
-import { GAMES_DESCRIPTIONS } from '../constants/events';
+import { EButtons } from '~/constants/components';
+import { EVENTS_GAMES_DESCRIPTIONS } from '~/constants/pages';
 
 
 /** Props & Emits */
@@ -32,7 +32,7 @@ div(:class="$b()")
       | Правила игр
     div(:class="$b('sectionContent')")
       NuxtLink(
-        v-for="({ logo, name, description, gameType }) of GAMES_DESCRIPTIONS"
+        v-for="({ logo, name, description, gameType }) of EVENTS_GAMES_DESCRIPTIONS"
         :key="gameType"
         :class="$b('game')"
         :to="`events/rules/${gameType}`"

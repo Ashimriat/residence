@@ -1,4 +1,5 @@
-import { EIcons } from '~/components/base';
+import { EIcons } from '~/constants/components';
+
 
 type MenuItem = {
   title: string;

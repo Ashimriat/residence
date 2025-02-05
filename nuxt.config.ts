@@ -8,13 +8,13 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  nitro: {
-    hooks: {
-      'prerender:generate'(route) {
-        route.skip = route.route.indexOf('constants') !== -1;
-      },
-    },
-  },
+  // nitro: {
+  //   hooks: {
+  //     'prerender:generate'(route) {
+  //       route.skip = route.route.indexOf('constants') !== -1;
+  //     },
+  //   },
+  // },
   app: {
     baseURL: '/residence/',
     head: {
@@ -46,8 +46,14 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     '@nuxtjs/device',
     '@pinia/nuxt',
-    'nuxt-time'
+    'nuxt-time',
+    '@nuxt/eslint',
   ],
+  eslint: {
+    config: {
+      standalone: false,
+    },
+  },
   css: [
     '~scss/primevue/index.scss',
   ],
@@ -70,9 +76,6 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  appConfig: {
-    
-  },
   primevue: {
     importTheme: {
       from: '~/bootstrap/primevue/theme.ts',
@@ -87,13 +90,10 @@ export default defineNuxtConfig({
     },
     options: {
       ripple: false,
-    }
+    },
   },
   svgo: {
     defaultImport: 'component',
     global: false,
   },
-  vBemTransformer: {
-
-  }
-})
+});

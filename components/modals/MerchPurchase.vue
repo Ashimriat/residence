@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 /** State & Composables */
-const $b = useBEM();
+const $b = useBEM('MerchPurchase');
 </script>
 
 <template lang="pug">

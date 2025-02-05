@@ -3,12 +3,12 @@ import Logo from '~assets/images/logo/light.svg';
 import {
   EIcons,
   EButtons,
-} from '~/components/base';
-import { SECTIONS } from './constants/faq';
+} from '~/constants/components';
+import { FAQ_SECTIONS } from '~/constants/pages';
 
 
 const openingStatuses = ref<Record<string, boolean>>(
-  SECTIONS.reduce((acc, { type, contents }) => {
+  FAQ_SECTIONS.reduce((acc, { type, contents }) => {
     acc[type] = false;
     for (let i = 0; i < contents.length; i += 1) {
       acc[`${type}_${i}`] = false;
@@ -51,7 +51,7 @@ const $b = useBEM('PageFAQ');
 <template lang="pug">
 div(:class="$b()")
   section(
-    v-for="({ type, title, contents }, i) in SECTIONS"
+    v-for="({ type, title, contents }, i) in FAQ_SECTIONS"
     :key="`faqSection_${i}`"
     :ref="(elem) => handleSectionRef(type, elem)"
     :class="$b('section', { open: openingStatuses[type] })"
@@ -67,7 +67,7 @@ div(:class="$b()")
       h3(:class="$b('title')")
         | {{ title }}
       BaseIcon(
-        :type="EIcons.CHEVRON"
+        :type="EIcons.CHEVRON_RIGHT"
         :class="$b('sectionArrow', { facingUp: openingStatuses[type] })"
       )
     div(

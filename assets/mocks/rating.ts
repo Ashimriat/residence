@@ -1,4 +1,3 @@
-import type { TreeNode } from 'primevue/treenode';
 import { mockOtherUsers } from './otherUsers';
 
 const mockRatingsTableData = (length: number): RatingData[] => Array.from({ length }, (_, i) => ({

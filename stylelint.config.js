@@ -12,7 +12,7 @@ export default {
   syntax: 'scss',
   rules: {
     'plugin/no-unsupported-browser-features': [true, {
-      browsers: ['> 1%', 'Last 2 versions'],
+      browsers: ['last 2 Chrome versions'],//, 'Last 2 versions'],
       ignore: ['rem'],
       ignorePartialSupport: true,
       severity: 'warning'

@@ -1,30 +1,26 @@
 <script setup lang="ts">
-import type { AccordionContent } from '~/components/base/BaseAccordion.vue';
-import type { Emits } from './types';
 import Logo from '~assets/images/logo/light.svg';
 import {
   EIcons,
   EButtons,
   EIconsSizes,
-} from '~/components/base';
-import { CONTENT_IDS, ACCORDION_CONTENT, AUTHED_ITEMS } from './constants';
-import { MENU_STRUCTURE } from '../NavigationMenu/constants';
+  CONTENT_IDS,
+  ACCORDION_CONTENT,
+  AUTHED_ITEMS,
+  MENU_STRUCTURE
+} from '~/constants/components';
 
 
-/** Props & Emits */
-const emit = defineEmits<Emits>();
 const userStore = useUserStore();
 const { isLoggedIn, isAdmin, userData } = storeToRefs(userStore);
 
-
-/** State & Composables */
+const { openSignIn } = useModalDialog();
 const route = useRoute();
+
+
 const isOpen = ref<boolean>(false);
 
-/** Computeds */
 
-
-/** Methods */
 function toggleMenu(): void {
   isOpen.value = !isOpen.value;
 }
@@ -35,10 +31,6 @@ function isLinkBordered(
   return blockIndex !== AUTHED_ITEMS.length - 1 && linkIndex === AUTHED_ITEMS[blockIndex].length - 1;
 }
 
-/** Watchers */
-
-
-/** Lifecycle Hooks */
 watch(() => route.path, () => {
   isOpen.value = false;
 });
@@ -67,7 +59,7 @@ div(:class="$b()")
     BaseButton(
       v-if="!isLoggedIn"
       :type="EButtons.SIGN_IN_MOBILE"
-      @click="emit('login')"
+      @click="openSignIn"
     )
     div(
       v-else

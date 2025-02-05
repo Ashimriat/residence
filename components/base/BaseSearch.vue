@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EIcons } from './constants/icon';
+import { EIcons } from '~/constants/components';
 
 
 type Props = {

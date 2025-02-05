@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { EButtons } from '~/components/base';
-import { GAMES_RULES, EGameTypes } from '../../constants/events';
+import { EButtons } from '~/constants/components';;
+import { EVENTS_GAMES_RULES, EGameTypes } from '~/constants/pages';
 
 
 const { isAdmin } = storeToRefs(useUserStore());
@@ -14,7 +14,7 @@ const {
   icon,
   title,
   sections
-} = GAMES_RULES[gameType as EGameTypes];
+} = EVENTS_GAMES_RULES[gameType as EGameTypes];
 
 function turnEditModeOn(): void {
   isEditMode.value = true;

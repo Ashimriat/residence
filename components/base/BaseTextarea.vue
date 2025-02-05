@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TextareaProps } from 'primevue';
+import { type TextareaProps } from 'primevue';
 
 
 type Props = {

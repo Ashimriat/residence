@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons } from '../base';
+import { EButtons } from '~/constants/components';
 
 
 type Props = {

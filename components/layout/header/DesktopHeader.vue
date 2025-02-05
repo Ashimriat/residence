@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { Emits } from './types';
 import {
   EIcons,
   EButtons,
-} from '~/components/base';
+} from '~/constants/components';
 import Logo from '~/assets/images/logo/small.svg';
-import NavigationMenu from '../NavigationMenu/NavigationMenu.vue';
 
-
-const emit = defineEmits<Emits>();
 
 const userStore = useUserStore();
 const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
+const { openSignIn } = useModalDialog();
 
+function addEvent(): void {
+  
+}
 
 const $b = useBEM('DesktopHeader');
 </script>
@@ -33,15 +33,18 @@ div(:class="$b()")
       v-if="!isLoggedIn"
       :type="EButtons.SIGN_IN"
       :class="$b('userButton')"
-      @click="emit('login')"
+      @click="openSignIn"
     )
     template(v-else)
-      BaseButton(
+      NuxtLink(
         v-if="!isCommonUser"
-        :type="EButtons.ADD_EVENT"
-        :class="$b('userButton')"
-        @click="emit('addEvent')"
+        to="/events/create"
       )
+        BaseButton(
+          :type="EButtons.ADD_EVENT"
+          :class="$b('userButton')"
+          @click="addEvent"
+        )
       Notifications
       NuxtLink(to="/account")
         PAvatar(label="UI")

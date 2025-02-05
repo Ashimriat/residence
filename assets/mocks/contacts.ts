@@ -1,4 +1,4 @@
-import { EIcons } from '~/components/base';
+import { EIcons } from '~/constants/components';
 
 
 const CONTACT: ContactData = {

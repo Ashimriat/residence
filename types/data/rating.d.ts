@@ -6,7 +6,7 @@ declare type RatingData = {
     wins: number;
     losses: number;
   };
-}
+};
 
 declare type RatingTableColumn = {
   id: string;

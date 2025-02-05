@@ -1,5 +1,5 @@
-import type { EditableUserData, ProvidedUserData } from '~/types/stores/user';
-import { EUserRoles } from './constants/user';
+import { type EditableUserData, type ProvidedUserData } from '~/types/stores/user';
+import { EUserRoles } from '~/constants/stores';
 
 
 const useUserStore = defineStore('user', () => {

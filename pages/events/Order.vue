@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockOtherUsers } from '~/assets/mocks';
-import { GAMES_OPTIONS } from '../constants/events';
-import { EButtons } from '~/components/base';
+import { EVENTS_GAMES_OPTIONS } from '~/constants/pages';
+import { EButtons } from '~/constants/components';
 
 
 const game = ref<string>('');
@@ -16,6 +16,10 @@ const isOrderEnabled = computed<boolean>(
 );
 
 const $b = useBEM('OrderPage');
+
+definePageMeta({
+  layout: 'event-manage',
+});
 </script>
 
 <template lang="pug">
@@ -24,7 +28,7 @@ div(:class="$b()")
     | Заказ игры
   BaseSelectButtons(
     v-model="game"
-    :options="GAMES_OPTIONS"
+    :options="EVENTS_GAMES_OPTIONS"
     :class="$b('gameSelector')"
   )
   EventCalendarBlock(
@@ -65,11 +69,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .OrderPage {
-  @include flexColumn((
-    align-items: center,
-    gap: vars.$gaps-g32,
-  ));
-  max-width: 1160px;
+  align-items: center;
   &__gameSelector {
     width: 100%;
   }

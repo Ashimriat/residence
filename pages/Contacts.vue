@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockContacts, mockSocials } from '~assets/mocks';
-import { EIconsSizes } from '~/components/base';
+import { EIconsSizes } from '~/constants/components';
 
 
 const $b = useBEM('ContactsPage');

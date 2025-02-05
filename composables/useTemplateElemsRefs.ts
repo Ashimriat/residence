@@ -1,4 +1,4 @@
-import type { VNodeRef } from 'vue';
+import { type VNodeRef } from 'vue';
 
 
 export default function useTemplateElemsRefs<T extends Record<string, Element>>() {

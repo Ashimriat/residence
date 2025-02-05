@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { EditableUserData } from '~/types/stores/user';
+import { type EditableUserData } from '~/types/stores/user';
 import {
   EButtons,
   EIcons,
   EIconsSizes,
-} from '~/components/base';
+} from '~/constants/components';
 
 type Props = {
   withoutSex?: boolean;

@@ -1,5 +1,9 @@
-import { EIcons, EIconsSizes } from '../constants/icon';
-import { EButtonVariant, EButtons } from '../constants/button';
+import {
+  EIcons,
+  EIconsSizes,
+  EButtonVariant,
+  EButtons
+} from '~/constants/components';
 
 
 enum EIconPos {

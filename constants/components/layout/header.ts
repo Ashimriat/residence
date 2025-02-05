@@ -1,5 +1,5 @@
-import { EIcons } from '~/components/base';
-import type { AccordionContent } from '~/components/base/BaseAccordion.vue';
+import { EIcons } from '~/constants/components';
+import { type AccordionContent } from '~/components/base/BaseAccordion.vue';
 
 type AuthItem = {
   label: string;

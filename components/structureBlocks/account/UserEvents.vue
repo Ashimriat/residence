@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { mockAchievementsList, mockEventsData, mockEventsBigData, mockSubscriptions } from '~assets/mocks';
+import { mockAchievementsList, mockEventsData,  mockSubscriptions } from '~assets/mocks';
 
 
 const { isMobile } = useDevice();
 
-const eventsMock = isMobile
-  ? mockEventsBigData(6, 2)
-  : mockEventsData(12)
-console.log("OLD", mockEventsBigData(3, 4));
+const eventsMock = mockEventsData(12)
 const achievementsMock = mockAchievementsList(isMobile ? 2 : 6)
 
 const $b = useBEM('UserEvents');
@@ -20,7 +17,7 @@ div(:class="$b()")
       | Предстоящие события
     BaseCarousel(
       :items="eventsMock"
-      :visible-amount="4"
+      :visible-amount="isMobile ? 2 : 4"
     )
       template(#default="{ itemsData }")
         div(:class="$b('eventsPageContainer')")

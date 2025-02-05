@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {
   EIcons, EIconsSizes, EButtons,
-} from '~/components/base';
+} from '~/constants/components';
 import {
   mockText, mockEventsBigData, mockGalleryImages, mockReviews,
 } from '~/assets/mocks';
-import { GAMES_OPTIONS } from './constants/events';
+import { EVENTS_GAMES_OPTIONS } from '~/constants/pages';
 
 
 const aboutRef = useTemplateRef<HTMLDivElement>('about');
@@ -163,7 +163,7 @@ div(:class="$b()")
     subtext="Оставьте заявку - мы напишем!"
     request-text-placeholder="Опишите пожелания на игру"
     :button-type="EButtons.REQUEST_EVENT"
-    :select-options="GAMES_OPTIONS"
+    :select-options="EVENTS_GAMES_OPTIONS"
     @submit="handleEventRequestSubmit"
   )
 </template>

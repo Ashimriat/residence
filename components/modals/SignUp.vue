@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { EditableUserData } from '~/types/stores/user';
+import { type EditableUserData } from '~/types/stores/user';
 import { mockUserData } from '~/assets/mocks';
-import { EButtons } from '~/components/base';
-import UserDataForm from '~/components/forms/UserDataForm.vue';
+import { EButtons } from '~/constants/components';
 
 
 const { openSignIn, closeModal } = useModalDialog();

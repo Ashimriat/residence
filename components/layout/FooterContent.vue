@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { EIcons, EIconsSizes } from '~/components/base';
-import NavigationMenu from './NavigationMenu';
+import { EIcons, EIconsSizes } from '~/constants/components';
 
-const $b = useBEM();
+
+const $b = useBEM('FooterContent');
 </script>
 
 <template lang="pug">

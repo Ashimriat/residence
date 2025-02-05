@@ -4,7 +4,7 @@ type ClassesDict = Record<string, boolean>;
 
 const bMod = (...src: NotNameArgs[]): ClassesDict => {
   let res: Record<string, boolean> = {};
-  for (const val of src) {
+  src.forEach((val) => {
     if (Array.isArray(val)) {
       res = {
         ...res,
@@ -16,11 +16,11 @@ const bMod = (...src: NotNameArgs[]): ClassesDict => {
         }, <ClassesDict>{}),
       };
     } else {
-      for (const [key, value] of getEntries(val)) {
+      getEntries(val).forEach(([key, value]) => {
         res[key] = !!value;
-      }
+      });
     }
-  }
+  });
   return res;
 };
 

@@ -31,7 +31,7 @@ import Award from '~assets/icons/award.svg';
 import Grid from '~assets/icons/grid.svg';
 import Zap from '~assets/icons/zap.svg';
 import Hash from '~assets/icons/hash.svg';
-import { EIcons, EIconsSizes } from '../constants/icon';
+import { EIcons, EIconsSizes } from '~/constants/components';
 
 
 const ICONS_LIST: Record<EIcons, string> = {

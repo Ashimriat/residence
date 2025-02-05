@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 const { getModalData, closeModal } = useModalDialog<ClanData>();
 const { title, participants } = getModalData();

@@ -1,0 +1,10 @@
+export { GAMES_ICONS as ACCOUNT_GAMES_ICONS, TABS as ACCOUNT_TABS } from './account';
+export {
+  GAMES_RULES as EVENTS_GAMES_RULES,
+  GAMES_DESCRIPTIONS as EVENTS_GAMES_DESCRIPTIONS,
+  GAMES_OPTIONS as EVENTS_GAMES_OPTIONS,
+  EVENTS_OPTIONS,
+  EGameTypes
+} from './events';
+export { SECTIONS as FAQ_SECTIONS } from './faq';
+export { OPTIONS as RATING_OPTIONS } from './rating';

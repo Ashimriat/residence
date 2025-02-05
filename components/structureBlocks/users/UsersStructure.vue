@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type Props as BaseScrollPanelProps } from '~/components/base/BaseScrollPanel.vue'
-import { EButtons } from '~/components/base';
+import { EButtons } from '~/constants/components';
 
 
 type Props = BaseScrollPanelProps & {
