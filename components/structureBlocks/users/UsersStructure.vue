@@ -14,7 +14,7 @@ type Props = BaseScrollPanelProps & {
 type Emits = {
   expel: [userId: string];
   select: [userId: string];
-}
+};
 
 const {
   users,
@@ -100,14 +100,12 @@ BaseCard(
   --usersStructureParticipantPadding
   --usersStructureParticipantWidth
 */
-
-
 .UsersStructure {
   --cardBackgroundColor: #{vars.$colors-black};
   --cardMaxWidth: 100%;
   --cardContentWidth: 60%;
   --cardHeight: var(--usersStructureHeight, 100%);
-  --cardSubcontentFlexBasis: 43%;
+  --cardSubcontentFlexBasis: 40%;
   --scrollPanelPadding: var(--usersStructureListPadding);
   --scrollPanelContentContainerPadding: 0;
   --scrollPanelItemWidth: var(--usersStructureParticipantWidth, inherit);
@@ -119,11 +117,11 @@ BaseCard(
     --cardPadding: 0;
     --cardContentWidth: 100%;
     --cardSubcontentFlexBasis: 100%;
-    
     --usersStructureHeight: inherit;
     --usersStructureListPadding: 0;
     --usersStructureParticipantPadding: 0;
   }
+
   &--operatable,
   &--selectable {
     --participantPointerEvents: all;
@@ -135,30 +133,39 @@ BaseCard(
       flex: 40%,
       gap: vars.$gaps-g12
     ));
-    padding: 14px;
+
     height: 100%;
+    padding: 14px;
   }
+
   &__textsContainer {
     @include flex((align-items: center, flex-wrap: wrap, gap: 12px));
+
     & h3,
     & span {
       color: vars.$colors-white;
     }
-    & span {
+
+    & > span {
       flex: 100%;
     }
   }
+
   &__buttonsBlock {
     @include flex((align-items: center, gap: 8px));
+
     & button {
       --buttonLabelFontSize: #{vars.$fs-static-s};
-      height: 40px;
+
       flex-grow: 1;
+      height: 40px;
+
       &:last-child {
         flex-grow: 0;
       }
     }
   }
+
   &__participant {
     @include relative;
     @include flex((
@@ -167,34 +174,43 @@ BaseCard(
       gap: vars.$gaps-g8,
     ));
     @include transition(background-color);
+
     padding: var(--usersStructureParticipantPadding, 12px);
-    border-radius: vars.$br-s;
     pointer-events: var(--participantPointerEvents, none);
     cursor: pointer;
+    border-radius: vars.$br-s;
+
+
     &:hover {
       --expelButtonOpacity: 1;
+
       & button {
         pointer-events: all;
       }
     }
+
     &:hover,
     &--selected {
       background-color: vars.$colors-greyLight;
     }
+
     &--selected {
       pointer-events: none;
     }
   }
+
   &__expelButton {
     @include absolute((right: 12px));
     @include transition(opacity);
-    opacity: var(--expelButtonOpacity, 0);
-    pointer-events: none;
+
+    --p-button-border-radius: #{vars.$br-x2s};
+
     width: 30px;
     height: 30px;
-    padding: 0px;
+    padding: 0;
     font-size: vars.$fs-static-xs;
-    --p-button-border-radius: #{vars.$br-x2s};
+    pointer-events: none;
+    opacity: var(--expelButtonOpacity, 0);
   }
 
   &__list {
@@ -211,20 +227,25 @@ BaseCard(
     --usersStructureListHeight: 220px;
     --usersStructureParticipantPadding: 0;
     --usersStructureListPadding: 20px 0 20px 12px;
+
     &--list {
       --usersStructureHeight: inherit;
       --usersStructureListHeight: inherit;
     }
+
     &__buttonsBlock {
       flex-wrap: wrap;
+
       & button {
         justify-content: center;
+
         &:nth-last-child(2) {
-          width: 40px;
           flex-grow: 0;
+          width: 40px;
         }
       }
     }
+
     &__expelButton {
       position: static;
       width: unset;

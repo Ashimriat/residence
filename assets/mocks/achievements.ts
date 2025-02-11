@@ -1,14 +1,14 @@
 import { mockText } from './text';
 
 
-const ACHIEVEMNT: AchievementData = {
+const ACHIEVEMENT: AchievementData = {
   title: 'Достижение',
   isObtained: false,
   description: mockText(),
 }
 
 const mockAchievementsList = (length: number, isObtained = true) => Array.from({ length }, () => ({
-  ...ACHIEVEMNT,
+  ...ACHIEVEMENT,
   isObtained,
 }));
 

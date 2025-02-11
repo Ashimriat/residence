@@ -1,49 +1,39 @@
 <script setup lang="ts">
-import { type CSSProperties } from 'vue';
+import type { SubwayData } from '~/types/data/subway';
+import { SUBWAY_BRANCHES_COLORS_DICT } from '~/constants/components';
 
 
-type Branch = `standard${number}` | 'mcc' | `mcd${number}`;
+const { branchType, stationName } = defineProps<SubwayData>();
 
-
-/** Local Types & Variables */
-/** @todo: использовать SubwayData */
-type Props = {
-  branchType: Branch;
-  station: string;
-};
-
-
-/** Props & Emits */
-const { branchType, station } = defineProps<Props>();
-
-const styles = computed<CSSProperties>(() => ({
-  '--backgroundColor': '#805441',
-}));
-
+const backgroundColor = computed<string>(
+  () => SUBWAY_BRANCHES_COLORS_DICT[branchType]
+);
 
 const $b = useBEM('SubwayStation');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  span(:style="styles")
+  span(:class="$b('marker')")
   span
-    | {{ station }}
+    | {{ stationName }}
 </template>
 
 <style lang="scss">
 .SubwayStation {
   @include centeredFlex((gap: 6px));
-  & > span:first-of-type {
+
+  &__marker {
     width: 10px;
     height: 10px;
+    background-color: v-bind(backgroundColor);
     border-radius: 50%;
-    background-color: var(--backgroundColor);
   }
+
   & > span:last-of-type {
     font-size: vars.$fs-m;
     font-weight: vars.$fw-midHeavy;
-    line-height: 140%; /* 28px */
+    line-height: 140%;
   }
 }
 </style>

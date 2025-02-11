@@ -165,7 +165,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     iconPos: EIconPos.RIGHT,
     atMobile: {
       label: 'Выгнать',
-    }
+    },
   },
   [EButtons.SELECT_MASTER]: {
     label: 'Выбрать ведущего',
@@ -233,9 +233,17 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Подтвердить и вернуться',
     iconType: EIcons.CHEVRON_LEFT,
     iconPos: EIconPos.LEFT,
-  }
+  },
+  [EButtons.CREATE_EVENT]: {
+    label: 'Создать событие',
+  },
+  [EButtons.FINISH_GAME]: {
+    label: 'Закончить игру',
+  },
+  [EButtons.MASTER_RATING]: {
+    label: 'Оценить',
+  },
 } as const;
-
 
 
 export default function useButtonData(type: EButtons): Omit<ButtonData, 'atMobile'> {

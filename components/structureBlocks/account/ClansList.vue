@@ -19,10 +19,7 @@ div(:class="$b()")
   ClanView(:data="clansData[0]")
   h3
     | Кланы
-  BaseCarousel(
-    :items="clansData.slice(1)"
-    @update:page="test"
-  )
+  BaseCarousel(:items="clansData.slice(1)")
     template(#default="{ itemsData }")
       ClanView(:data="itemsData[0]")
 </template>

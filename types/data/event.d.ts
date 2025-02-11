@@ -2,7 +2,7 @@ declare type EventData = {
   isAbonWorks: boolean;
   price: number;
   oldPrice?: number;
-  currentPlayers: string[];
+  participants: Participant[];
   gameData: GameData;
   locationData: LocationData;
 };

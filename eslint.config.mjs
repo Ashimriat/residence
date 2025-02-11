@@ -39,6 +39,7 @@ export default withNuxt(
     },
   })),
   {
+    ignores: ['.nuxt/*'],
     languageOptions: {
       parser: vueParser,
       parserOptions: {

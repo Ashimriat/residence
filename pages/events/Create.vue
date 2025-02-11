@@ -2,8 +2,9 @@
 import { EButtons } from '~/constants/components';
 import {
   EVENTS_GAMES_OPTIONS as BASE_GAMES_OPTIONS,
-  EVENTS_OPTIONS
+  EVENTS_OPTIONS,
 } from '~/constants/pages';
+import { type FormData } from '~/components/forms/EventCreationForm.vue';
 
 
 export type MasterSelectModalData = {
@@ -29,11 +30,20 @@ function openMasterSelectModal(): void {
   showMasterSelect({
     onSelect: (master) => {
       masterData.value = master;
-    }
-  })
+    },
+  });
 }
 
 const $b = useBEM('CreatePage');
+
+const formData = ref<FormData>({
+  name: '',
+  price: '',
+  address: '',
+  subwayId: '',
+  description: '',
+  params: [],
+});
 
 definePageMeta({
   layout: 'event-manage',
@@ -50,8 +60,8 @@ div(:class="$b()")
       :options="EVENTS_OPTIONS"
     )
     BaseRadios(
-      :options="GAMES_OPTIONS"
       v-model="event"
+      :options="GAMES_OPTIONS"
     )
   h4
     | Обложка
@@ -63,6 +73,7 @@ div(:class="$b()")
   BaseButton(
     v-if="!masterData"
     :type="EButtons.SELECT_MASTER"
+    :class="$b('masterSelectButton')"
     @click="openMasterSelectModal"
   )
   UserData(
@@ -71,16 +82,26 @@ div(:class="$b()")
     :name="masterData.name"
   )
   EventCalendarBlock(
-    data-section-title="Общая информация"
     v-model:date="selectedDate"
     v-model:time="selectedTime"
+    data-section-title="Общая информация"
   )
+    EventCreationForm(v-model="formData")
+    BaseButton(
+      :type="EButtons.CREATE_EVENT"
+      disabled
+      @click=""
+    )
 </template>
 
 <style lang="scss">
 .CreatePage {
   &__topContainer {
     @include flexColumn((gap: vars.$gaps-g20));
+  }
+
+  &__masterSelectButton {
+    max-width: 225px;
   }
 }
 </style>

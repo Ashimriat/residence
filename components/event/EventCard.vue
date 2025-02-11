@@ -24,7 +24,7 @@ const isShowingDetails = ref<boolean>(false);
 const {
   gameData,
   isAbonWorks,
-  currentPlayers,
+  participants,
 } = eventData;
 
 /** Computeds */
@@ -59,7 +59,7 @@ BaseCard(
           | {{ gameData.master }}
       div(:class="$b('playersAmount')")
         span
-          | {{ `${currentPlayers.length}/${gameData.maxPlayersAmount}` }}
+          | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
         BaseIcon(
           :type="EIcons.USERS"
           :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
@@ -79,7 +79,7 @@ BaseCard(
             | {{ gameData.description }}
           div(:class="$b('playersBlock')")
             PAvatar(
-              v-for="player in currentPlayers"
+              v-for="player in participants"
               :key="player"
               label="UI"
             )

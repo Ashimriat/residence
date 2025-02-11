@@ -9,7 +9,6 @@ const referrals = mockOtherUsers(20);
 const $b = useBEM('ReferralsList');
 
 function copyToBuffer(): void {
-  alert("COPY REFERRAL LINK TO BUFFER");
 }
 </script>
 
@@ -37,6 +36,7 @@ UsersStructure(
   &__description {
     font-size: vars.$fs-static-s;
   }
+  
   &__button {
     width: 100%;
   }

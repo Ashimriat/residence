@@ -79,10 +79,12 @@ UsersStructure(
 .ClanView {
   --usersStructureListPadding: 8px 0 20px 12px;
   --usersStructureListContentPaddingBlockStart: 12px;
+
   &__leaveButton {
     flex-basis: 40px;
     padding: 0;
   }
+
   &__description {
     font-size: vars.$fs-static-s;
   }

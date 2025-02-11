@@ -19,8 +19,6 @@ const STEP = 1;
 const PAGES_AMOUNT_TO_CHOOSE = 5;
 const MAX_PAGES_SLOTS_AMOUNT = 7;
 
-const { isMobile } = useDevice();
-
 const inputRef = useTemplateRef<Array<{ $el: HTMLInputElement }>>('input');
 
 
@@ -64,7 +62,7 @@ const displayData = computed<DisplayData>(() => {
     withFirst: skipPos[0] === 'start',
     withLast: skipPos.at(-1) === 'end',
     pages,
-    skipPos
+    skipPos,
   };
   return res;
 });
@@ -85,7 +83,7 @@ function processPageSelect(pageNumber: number, callback?: Function): void {
 /**
  * 
  */
- function processInputConfirm(): void {
+function processInputConfirm(): void {
   const newPage = +inputValue.value;
   resetInput();
   if (
@@ -161,9 +159,9 @@ PPaginator(
               | ...
             PInputText(
               v-else
-              v-keyfilter.int
-              v-model="inputValue"
               ref="input"
+              v-model="inputValue"
+              v-keyfilter.int
               :class="$b('skipperInput', [skipPos])"
               @blur="resetInput"
               @keydown.enter="processInputConfirm"

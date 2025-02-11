@@ -1,4 +1,8 @@
-declare type SubwayData = {
+type Branch = `standard${number}${string}` | 'mcc' | `mcd${number}${string}`;
+
+
+export type SubwayData = {
   branchType: Branch;
-  station: string;
+  stationName: string;
+  id: string;
 };

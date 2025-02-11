@@ -23,13 +23,15 @@ const displayedItems = computed(() => {
   return res;
 });
 
-const indicatorListClass = computed<string>(
-  () => isMobile ? $b('indicatorList') : $b('originalIndicatorList')
-);
-
 const { page, itemsAmount } = usePagination(displayedItems, 1);
 
+const indicatorListClass = computed<string>(
+  () => (isMobile ? 'indicatorList' : 'originalIndicatorList')
+);
+
 const $b = useBEM('BaseCarousel');
+
+onMounted(() => console.log(displayedItems.value))
 </script>
 
 <template lang="pug">
@@ -39,9 +41,9 @@ PCarousel(
   :num-visible="1"
   :num-scroll="1"
   :pt:root:class="$b()"
-  :pt:content-container:class="$b('contentContainer')"  
+  :pt:content-container:class="$b('contentContainer')"
   :pt:content:class="$b('content')"
-  :pt:indicator-list:class="indicatorListClass"
+  :pt:indicator-list:class="$b(indicatorListClass)"
   :pt:indicator-button:class="$b('indicatorButton')"
   :pt:pc-prev-button:root:class="$b('originalControlButton')"
   :pt:pc-next-button:root:class="$b('originalControlButton')"

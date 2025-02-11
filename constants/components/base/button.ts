@@ -54,13 +54,15 @@ enum EButtons {
   TOGGLE_DETAILS = 'toggleDetails',
 
 
-
+  FINISH_GAME = 'finishGame',
+  MASTER_RATING = 'masterRating',
   FINISH_SEASON = 'finishSeason',
   SUBMIT_GAME_ORDER = 'submitGameOrder',
   SELECT_MASTER = 'selectMaster',
   SELECT = 'select',
   REMOVE = 'remove',
   CONFIRM_MASTER = 'confirmMaster',
+  CREATE_EVENT = 'createEvent'
 }
 
 

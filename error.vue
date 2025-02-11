@@ -10,7 +10,7 @@ type TextsDict = Record<NuxtError['statusCode'] | 'default', string>;
 type ErrorTexts = {
   title: string;
   details: string;
-}
+};
 
 const TITLES_DICT: TextsDict = {
   404: 'Упс, страница не найдена',
@@ -34,7 +34,7 @@ const $b = useBEM('Error');
 
 onMounted(() => {
   setTimeout(() => clearError({ redirect: '/' }), 5_000);
-})
+});
 </script>
 
 <template lang="pug">

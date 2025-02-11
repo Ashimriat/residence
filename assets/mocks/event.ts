@@ -1,3 +1,5 @@
+import { mockOtherUsers } from './otherUsers';
+
 const EVENT_DATA: EventData = {
   isAbonWorks: true,
   oldPrice: 400,
@@ -10,21 +12,13 @@ const EVENT_DATA: EventData = {
     date: '10 марта',
     time: '18:00',
   },
-  currentPlayers: [
-    'фывфыв',
-    'йцайцайц',
-    'фыайцайца',
-    'ывафафы',
-    'цукпцукп',
-    'ывапывап',
-    'авпвапва',
-    'пывапывуа',
-  ],
+  participants: mockOtherUsers(8),
   locationData: {
     address: 'Ул. Пушкина, д. Колотушкина 14 кв. 88',
     subway: {
       branchType: 'standard5',
-      station: 'Октябрьская',
+      stationName: 'Октябрьская',
+      id: crypto.randomUUID(),
     },
     mapLink: 'https://ololo.ru',
   },

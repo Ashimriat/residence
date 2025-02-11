@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type CalendarDate, type Time } from './DateTimeCalendar.vue';
+import { type CalendarDate, type Time } from '../DateTimeCalendar.vue';
 
 
 type Props = {
@@ -32,10 +32,11 @@ div(:class="$b()")
     h3(v-if="isDesktop")
       | Дата и время
     DateTimeCalendar(
-      :is-disabled="isCalendarDisabled"
       v-model:date="selectedDate"
       v-model:time="selectedTime"
+      :is-disabled="isCalendarDisabled"
     )
+       
 </template>
 
 <style lang="scss">
@@ -45,14 +46,18 @@ div(:class="$b()")
     justify-content: space-between,
     gap: vars.$gaps-g16,
   ));
+
   width: 100%;
+
   &__contentSection {
     @include flexColumn((gap: vars.$gaps-g12));
+
     &--data {
+      order: var(--dataSectionOrder, 1);
       width: 100%;
       max-width: 640px;
-      order: var(--dataSectionOrder, 1);
     }
+
     &--calendar {
       order: var(--calendarSectionOrder, 2);
     }
