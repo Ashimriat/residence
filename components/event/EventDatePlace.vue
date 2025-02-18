@@ -47,6 +47,7 @@ div(:class="$b()")
   --iconStroke: #{vars.$colors-white};
 
   width: 100%;
+  font-size: vars.$fs-static-s;
   color: vars.$colors-white;
 
   &__dateTimeBlock {

@@ -62,7 +62,12 @@ enum EButtons {
   SELECT = 'select',
   REMOVE = 'remove',
   CONFIRM_MASTER = 'confirmMaster',
-  CREATE_EVENT = 'createEvent'
+  CREATE_EVENT = 'createEvent',
+  ADD_GAME_ROUND = 'addGameRound',
+
+
+  // Мафия
+  SAVE_RATINGS = 'saveRatings'
 }
 
 

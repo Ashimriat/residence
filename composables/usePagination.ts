@@ -1,11 +1,16 @@
 export default function usePagination<T>(
   items: T[] | Ref<T[]>,
-  initialItemsPerPage: number
+  initialItemsPerPage: number,
+  modelledPage?: Ref<number>
 ) {
   const page = ref<number>(0);
   const itemsPerPage = ref<number>(initialItemsPerPage);
 
-  const firstDisplayedItemIndex = computed<number>(() => page.value * itemsPerPage.value);
+  const usedPage = computed<number>(() => toValue(modelledPage ?? page));
+
+  const firstDisplayedItemIndex = computed<number>(
+    () => usedPage.value * itemsPerPage.value
+  );
   const lastDisplayedItemIndex = computed<number>(
     () => firstDisplayedItemIndex.value + itemsPerPage.value
   );
@@ -17,7 +22,7 @@ export default function usePagination<T>(
   ));
 
   return {
-    page,
+    page: modelledPage ?? page,
     itemsPerPage,
     itemsAmount,
     displayedItems,

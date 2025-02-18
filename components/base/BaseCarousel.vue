@@ -2,14 +2,13 @@
 import { type CarouselProps } from 'primevue';
 import BasePagination from './BasePagination.vue';
 
-/** Local Types & Variables */
+
 type Props = {
   items: CarouselProps['value'][] | CarouselProps['value'][][];
   visibleAmount?: CarouselProps['numVisible'];
 };
 
 
-/** Props & Emits */
 const { items, visibleAmount = 1 } = defineProps<Props>();
 
 const { isDesktop, isMobile } = useDevice();
@@ -23,15 +22,15 @@ const displayedItems = computed(() => {
   return res;
 });
 
-const { page, itemsAmount } = usePagination(displayedItems, 1);
+const mPage = defineModel<number>('page', { required: false, default: 0 });
+
+const { page, itemsAmount } = usePagination(displayedItems, 1, mPage);
 
 const indicatorListClass = computed<string>(
   () => (isMobile ? 'indicatorList' : 'originalIndicatorList')
 );
 
 const $b = useBEM('BaseCarousel');
-
-onMounted(() => console.log(displayedItems.value))
 </script>
 
 <template lang="pug">

@@ -46,19 +46,19 @@ export default function useBEM(componentName: string) {
       return acc;
     }, <ClassesDict>{});
     const kebabMatches = res.match(/(\w{1,}(-\w{1,})+)/g);
-    for (const match of kebabMatches ?? []) {
+    (kebabMatches ?? []).forEach((match) => {
       let replacement!: string;
       if (argsToProcessMatchesDict[match]) {
         replacement = match.replaceAll('-', '_');
       } else {
         replacement = match
           .split('-')
-          .map((val, i) => i === 0 ? val : capitalize(val))
+          .map((val, i) => (i === 0 ? val : capitalize(val)))
           .join('');
       }
       res = res.replace(match, replacement);
-    }
+    });
     return res;
-  }
+  };
 }
 export type { ClassesDict };

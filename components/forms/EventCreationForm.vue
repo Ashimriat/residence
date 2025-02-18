@@ -38,7 +38,6 @@ div(:class="$b()")
   )
   PSelect(
     v-model="formData.subwayId"
-    variant="filled"
     :options="SUBWAY_STATIONS"
     option-label="stationName"
     option-value="id"

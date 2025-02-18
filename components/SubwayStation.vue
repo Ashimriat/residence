@@ -15,7 +15,7 @@ const $b = useBEM('SubwayStation');
 <template lang="pug">
 div(:class="$b()")
   span(:class="$b('marker')")
-  span
+  span(:class="$b('station')")
     | {{ stationName }}
 </template>
 
@@ -26,12 +26,11 @@ div(:class="$b()")
   &__marker {
     width: 10px;
     height: 10px;
-    background-color: v-bind(backgroundColor);
+    background-color: v-bind('backgroundColor');
     border-radius: 50%;
   }
 
-  & > span:last-of-type {
-    font-size: vars.$fs-m;
+  &__station {
     font-weight: vars.$fw-midHeavy;
     line-height: 140%;
   }

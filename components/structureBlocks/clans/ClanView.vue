@@ -71,7 +71,7 @@ UsersStructure(
     BaseButton(
       :type="EButtons.LEAVE_CLAN"
       :class="$b('leaveButton')"
-      @click="leaveClan"        
+      @click="leaveClan"
     )
 </template>
 
@@ -81,6 +81,7 @@ UsersStructure(
   --usersStructureListContentPaddingBlockStart: 12px;
 
   &__leaveButton {
+    flex-grow: 0;
     flex-basis: 40px;
     padding: 0;
   }

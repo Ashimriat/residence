@@ -2,17 +2,17 @@
 type ByAxis<T> = {
   x: T;
   y: T;
-}
+};
 
-type ByDevice<T> = {
+type ByDevice = {
   desktop: number;
   mobile: number;
-}
+};
 
 export type Props = {
-  itemsInRow?: number | Partial<ByDevice<number>>;
+  itemsInRow?: number | Partial<ByDevice>;
   gap?: number | Partial<ByAxis<number>>;
-}
+};
 
 const {
   itemsInRow,
@@ -60,40 +60,48 @@ div(:class="$b()")
   PScrollPanel(
     :pt:root:class="$b('panel')"
     :pt:content:class="$b('content')"
-    :pt:barY:class="$b('bar')"
+    :pt:bar-y:class="$b('bar')"
   )
     slot
 </template>
 
 <style lang="scss">
-$defaultItemBasis: calc((100% - v-bind(gapsSpace)) / v-bind(fItemsInRow));
+$defaultItemBasis: calc((100% - v-bind('gapsSpace')) / v-bind('fItemsInRow'));
 
 .BaseScrollPanel {
   @include fullsize;
+
   padding: var(--scrollPanelPadding, 6px);
   padding-right: 8px;
-  background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
   overflow: hidden;
+  background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
+
   &__panel {
     @include fullsize;
+
     padding: var(--scrollPanelContentContainerPadding, 0);
     padding-right: 15px;
   }
+
   &__content {
     @include flex((
       column-gap: v-bind('fGap.x'),
       row-gap: v-bind('fGap.y'),
       flex-wrap: wrap,
     ));
+
     padding-block-start: var(--scrollPanelContentPaddingBlockStart, 0);
     background-color: var(--scrollPanelBackgroundColor, #{vars.$colors-white});
+
     & > * {
       width: var(--scrollPanelItemWidth, #{$defaultItemBasis});
     }
   }
+
   &__bar {
     --p-scrollpanel-bar-background: var(--scrollPanelBarBackgroundColor, #{vars.$colors-greyMuted});
     --p-scrollpanel-bar-size: 6px;
+
     opacity: 1;
   }
 }

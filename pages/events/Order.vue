@@ -47,8 +47,8 @@ div(:class="$b()")
         | Сперва надо выбрать игру
       UsersStructure(
         v-else
-        list-only
         v-model:selected="master"
+        list-only
         :gap="{ x: 29, y: 20 }"
         is-masters
         :users="mockOtherUsers(20)"

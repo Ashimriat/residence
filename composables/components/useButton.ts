@@ -147,7 +147,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Добавить игроков',
     iconType: EIcons.LINK,
     variant: EButtonVariant.CONTRAST,
-    isVariantInverted: true,
+    // isVariantInverted: true,
   },
   [EButtons.TOGGLE_DETAILS]: {
     iconType: EIcons.LINK,
@@ -232,7 +232,6 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.CONFIRM_MASTER]: {
     label: 'Подтвердить и вернуться',
     iconType: EIcons.CHEVRON_LEFT,
-    iconPos: EIconPos.LEFT,
   },
   [EButtons.CREATE_EVENT]: {
     label: 'Создать событие',
@@ -242,6 +241,13 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.MASTER_RATING]: {
     label: 'Оценить',
+  },
+  [EButtons.ADD_GAME_ROUND]: {
+    label: 'Добавить партию',
+    iconType: EIcons.PLUS_CIRCLED,
+  },
+  [EButtons.SAVE_RATINGS]: {
+    label: 'Сохранить оценки',
   },
 } as const;
 
@@ -259,7 +265,7 @@ export default function useButtonData(type: EButtons): Omit<ButtonData, 'atMobil
       data = {
         ...data,
         ...data.atMobile,
-      }
+      };
     }
   }
   return data;

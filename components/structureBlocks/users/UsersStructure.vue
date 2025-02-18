@@ -159,10 +159,6 @@ BaseCard(
 
       flex-grow: 1;
       height: 40px;
-
-      &:last-child {
-        flex-grow: 0;
-      }
     }
   }
 

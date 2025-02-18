@@ -1,3 +1,4 @@
+import { type MasterSelectModalData } from '~/pages/events/Create.vue';
 import SignIn from '~/components/modals/SignIn.vue';
 import SignUp from '~/components/modals/SignUp.vue';
 import MerchPurchase from '~/components/modals/MerchPurchase.vue';
@@ -8,8 +9,9 @@ import ClanParticipants from '~/components/modals/clan/ClanParticipants.vue';
 import CreateClan from '~/components/modals/clan/CreateClan.vue';
 import InviteToClan from '~/components/modals/clan/InviteToClan.vue';
 import MobileCalendar, { type MobileCalendarModalData } from '~/components/modals/MobileCalendar.vue';
-import { type MasterSelectModalData } from '~/pages/events/Create.vue';
 import MasterSelect from '~/components/modals/MasterSelect.vue';
+import MafiaRating from '~/components/modals/rating/MafiaRating.vue';
+
 
 type DialogRef<T> = {
   value: {
@@ -25,11 +27,26 @@ type OpenParams<T> = {
   id?: string;
 };
 
+const GAMES_RATINGS = {
+  mafia: {
+    component: MafiaRating,
+    name: 'Мафия',
+  },
+};
+
 export default function useModalDialog<T>() {
   const dialog = useDialog();
   const dialogRef = inject<DialogRef<T>>('dialogRef');
 
-  function openModal<P>(content: any, params?: OpenParams<P>): void {
+  function closeModal(): void {
+    dialogRef?.value.close();
+  }
+
+  function openModal<P>(
+    content: any,
+    params?: OpenParams<P>,
+    omitModalClose = false
+  ): void {
     dialog.open(content, {
       props: {
         header: params?.title ?? '',
@@ -46,15 +63,11 @@ export default function useModalDialog<T>() {
       },
       data: params?.data,
     });
-    closeModal();
+    if (!omitModalClose) closeModal();
   }
 
   function getModalData(): T {
     return (dialogRef as DialogRef<T>).value.data;
-  }
-
-  function closeModal(): void {
-    dialogRef?.value.close();
   }
 
   function openSignIn(): void {
@@ -116,7 +129,7 @@ export default function useModalDialog<T>() {
       id: 'mobileCalendar',
       data,
       closable: true,
-    })
+    });
   }
 
   function showMasterSelect(data: MasterSelectModalData): void {
@@ -125,7 +138,20 @@ export default function useModalDialog<T>() {
       id: 'masterSelect',
       data,
       closable: true,
-    })
+    });
+  }
+
+  function openGameRating(
+    gameType: keyof typeof GAMES_RATINGS,
+    data: EventData,
+  ): void {
+    const { component, name } = GAMES_RATINGS[gameType];
+    openModal(component, {
+      title: `Расбалловка - ${name}`,
+      id: 'gameRating',
+      data,
+      closable: true,
+    });
   }
 
   return {
@@ -143,5 +169,6 @@ export default function useModalDialog<T>() {
     inviteToClan,
     showMobileCalendar,
     showMasterSelect,
+    openGameRating,
   };
 }

@@ -26,7 +26,9 @@ const EVENT_DATA: EventData = {
 
 const mockEventsData = (length: number): EventData[] => Array.from({ length }, () => EVENT_DATA);
 
-const mockEventsBigData = (sets: number, setLength: number): EventData[][] => Array.from({ length: sets }, () => mockEventsData(setLength));
+const mockEventsBigData = (sets: number, setLength: number): EventData[][] => (
+  Array.from({ length: sets }, () => mockEventsData(setLength))
+);
 
 
 export {
