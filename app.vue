@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import { init, expandViewport, isTMA } from '@telegram-apps/sdk-vue';
+
 const { isMobile } = useDevice();
 
 onBeforeMount(() => {
-  if (!isMobile) {
-    // window.Telegram?.WebApp?.expand();
-  } else {
+  if (isTMA()) {
+    init();
+    if (!isMobile) {
+      expandViewport();
+    }
+  }
+  if (isMobile) {
     document.documentElement.style.setProperty('--docFontSize', '10px');
   }
 });
@@ -13,7 +19,7 @@ onBeforeMount(() => {
 <template lang="pug">
 NuxtRouteAnnouncer
 NuxtLayout
-  NuxtPage 
+  NuxtPage
 PDynamicDialog
 </template>
 

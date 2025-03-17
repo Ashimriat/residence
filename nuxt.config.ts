@@ -21,11 +21,6 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Твоё главное комьюнити' },
         // { name: 'format-detection', content: 'telephone=no' }
       ],
-      script: [
-        {
-          src: 'https://telegram.org/js/telegram-web-app.js',
-        },
-      ],
     },
     pageTransition: false,
     layoutTransition: false,
