@@ -1,8 +1,4 @@
 import path from 'node:path';
-import url from 'node:url';
-
-
-const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -22,7 +18,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'Твоё главное комьюнити' },
+        { name: 'description', content: 'Твоё главное комьюнити' },
         // { name: 'format-detection', content: 'telephone=no' }
       ],
       script: [
@@ -36,8 +32,8 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   alias: {
-    '~assets': path.resolve(dirname, 'assets'),
-    '~scss': path.resolve(dirname, 'assets/scss'),
+    '~assets': path.resolve(import.meta.dirname, 'assets'),
+    '~scss': path.resolve(import.meta.dirname, 'assets/scss'),
   },
   devtools: { enabled: true },
   modules: [
@@ -49,11 +45,6 @@ export default defineNuxtConfig({
     'nuxt-time',
     '@nuxt/eslint',
   ],
-  eslint: {
-    config: {
-      standalone: false,
-    },
-  },
   css: [
     '~scss/primevue/index.scss',
   ],
@@ -73,6 +64,7 @@ export default defineNuxtConfig({
   components: [
     {
       path: '~/components',
+      extensions: ['.vue'],
       pathPrefix: false,
     },
   ],

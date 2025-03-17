@@ -1,4 +1,3 @@
-
 import MafiaLogo from '~assets/images/games/mafia.svg';
 import DndLogo from '~assets/images/games/dnd.svg';
 import BunkerLogo from '~assets/images/games/bunker.svg';

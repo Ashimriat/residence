@@ -3,11 +3,11 @@ import { EIcons } from '~/constants/components';
 
 type Props = {
   withBg?: boolean;
-}
+};
 /** State & Composables */
 const { withBg } = defineProps<Props>();
 const userStore = useUserStore();
-const { providedData  } = storeToRefs(userStore);
+const { providedData } = storeToRefs(userStore);
 
 /** Computeds */
 
@@ -24,10 +24,11 @@ const $b = useBEM('Notifications');
 
 <template lang="pug">
 NuxtLink(
+  v-if="false"
   :class="$b({ colored: withBg })"
   to="/account/notifications"
 )
-  BaseIcon(
+  RzdIcon(
     v-if="!providedData.notifications.length"
     :type="EIcons.BELL"
   )
@@ -35,7 +36,7 @@ NuxtLink(
     v-else
     :value="providedData.notifications.length"
   )
-    BaseIcon(:type="EIcons.BELL")
+    RzdIcon(:type="EIcons.BELL")
 </template>
 
 <style lang="scss">

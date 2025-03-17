@@ -19,7 +19,7 @@ const $b = useBEM('ClansPage');
 div(:class="$b()")
   h1(:class="$b('title')")
     | Кланы
-  BaseButton(
+  RzdButton(
     v-if="!providedData.clans.owner.length"
     :class="$b('createClanButton')"
     :type="EButtons.CREATE_OWN_CLAN"
@@ -38,12 +38,12 @@ div(:class="$b()")
       :data="data"
     )   
   div(:class="$b('topContainer')")
-    BaseSearch(     
+    RzdSearch(     
       v-model="search"
       :class="$b('search')"
       placeholder="Название клана"
     )
-    BaseButton(
+    RzdButton(
       v-if="providedData.clans.owner.length"
       :class="$b('createClanButton')"
       :type="EButtons.CREATE_CLAN"
@@ -66,15 +66,15 @@ div(:class="$b()")
       span(:class="$b('description')")
           | {{ clan.description }}
       div(:class="$b('buttonsContainer')")
-        BaseButton(
+        RzdButton(
           :type="EButtons.ENTER_CLAN"
           @click="showClanRequestSent"
         )
-        BaseButton(
+        RzdButton(
           :type="EButtons.CLAN_PARTICIPANTS"
           @click="seeClanParticipants(clan)"
         )
-  BasePagination(
+  RzdPagination(
     v-model:page="page"
     :amount-on-page="AMOUNT_ON_PAGE"
     :items-amount="clans.length"

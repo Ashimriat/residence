@@ -22,7 +22,7 @@ div(:class="$b()")
       :name
       :avatar
     )
-  BaseButton(
+  RzdButton(
     :class="$b('closeButton')"
     :type="EButtons.CLOSE"
     @click="closeModal"

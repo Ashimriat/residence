@@ -20,7 +20,7 @@ function setValue(value: string): void {
   selectedOption.value = newValue;
 }
 
-const $b = useBEM('BaseRadios');
+const $b = useBEM('RzdRadios');
 </script>
 
 <template lang="pug">
@@ -43,7 +43,7 @@ div(:class="$b()")
 <style lang="scss">
 $border: 1px solid vars.$colors-black;
 
-.BaseRadios {
+.RzdRadios {
   @include flex((
     flex-direction: var(--radiosFlexDirection, row)
   ));
@@ -93,7 +93,7 @@ $border: 1px solid vars.$colors-black;
 }
 
 @include mobile {
-  .BaseRadios {
+  .RzdRadios {
     --radiosFlexDirection: column;
     --radiosOptionBorderRight: none;
     --radiosOptionBorderBottom: #{$border};

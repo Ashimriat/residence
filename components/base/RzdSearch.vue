@@ -11,13 +11,13 @@ const { placeholder, isDisabled } = defineProps<Props>();
 
 const value = defineModel<string>({ required: true });
 
-const $b = useBEM('BaseSearch');
+const $b = useBEM('RzdSearch');
 </script>
 
 <template lang="pug">
 PIconField(:pt:root:class="$b()")
   PInputIcon(:pt:root:class="$b('searchIconContainer')")
-    BaseIcon(:type="EIcons.SEARCH")
+    RzdIcon(:type="EIcons.SEARCH")
   PInputText(
     v-model="value"
     :disabled="isDisabled"
@@ -27,7 +27,7 @@ PIconField(:pt:root:class="$b()")
 </template>
 
 <style lang="scss">
-.BaseSearch {
+.RzdSearch {
   --p-inputtext-border-radius: #{vars.$br-s};
   --p-inputtext-focus-border-color: none;
   --p-icon-size: 24px;
@@ -49,7 +49,7 @@ PIconField(:pt:root:class="$b()")
 }
 
 @include mobile {
-  .BaseSearch {
+  .RzdSearch {
     --p-form-field-padding-x: 10px;
   }
 }

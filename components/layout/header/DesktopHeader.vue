@@ -24,12 +24,12 @@ div(:class="$b()")
       NuxtLink(to="/")
         Logo(:class="$b('logo')")
     div(:class="$b('locationBlock')")
-      BaseIcon(:type="EIcons.LOCATION")
+      RzdIcon(:type="EIcons.LOCATION")
       span
         | Москва
   NavigationMenu
   div(:class="$b('userBlock')")
-    BaseButton(
+    RzdButton(
       v-if="!isLoggedIn"
       :type="EButtons.SIGN_IN"
       :class="$b('userButton')"
@@ -37,10 +37,10 @@ div(:class="$b()")
     )
     template(v-else)
       NuxtLink(
-        v-if="!isCommonUser"
+        v-if="false && !isCommonUser"
         to="/events/create"
       )
-        BaseButton(
+        RzdButton(
           :type="EButtons.ADD_EVENT"
           :class="$b('userButton')"
           @click="addEvent"

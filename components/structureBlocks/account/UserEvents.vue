@@ -15,7 +15,8 @@ div(:class="$b()")
   div(:class="$b('contentSection', ['events'])")
     h5
       | Предстоящие события
-    BaseCarousel(
+    RzdCarousel(
+      :class="$b('eventsCarousel')"
       :items="eventsMock"
       :visible-amount="isMobile ? 2 : 4"
     )
@@ -29,7 +30,10 @@ div(:class="$b()")
             :with-abon="false"
             :class="$b('eventData')"
           )
-  div(:class="$b('contentSection')")
+  div(
+    v-if="false"
+    :class="$b('contentSection')"
+  )
     TitleWithLink(
       title="Все достижения"
       link="/account/achievements"
@@ -68,8 +72,12 @@ $carouselMaxWidth: 800px;
     border-radius: vars.$br-l;
     flex-grow: 1;
     &--events {
-      max-width: var(--eventsMaxWidth, 840px);
+      max-width: 100%;
     }
+  }
+  &__eventsCarousel {
+    max-width: var(--eventsMaxWidth, 840px);
+    align-self: center;
   }
   &__eventsPageContainer {
     @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));

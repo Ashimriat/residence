@@ -3,7 +3,7 @@
 export type AccordionContent = {
   header: string;
   id: string;
-}
+};
 
 type Props = {
   content: AccordionContent[];
@@ -13,15 +13,15 @@ type Props = {
 /** Props & Emits */
 const { content } = defineProps<Props>();
 
-const $b = useBEM('BaseAccordion');
+const $b = useBEM('RzdAccordion');
 </script>
 
 <template lang="pug">
 PAccordion(
   :value="0"
   :pt:root:class="$b()"
-  expandIcon="pi pi-angle-right"
-  collapseIcon="pi pi-angle-down"
+  expand-icon="pi pi-angle-right"
+  collapse-icon="pi pi-angle-down"
 )
   PAccordionPanel(
     v-for="({ header, id }) of content"
@@ -39,7 +39,7 @@ PAccordion(
 
 <style lang="scss">
 
-.BaseAccordion {
+.RzdAccordion {
   @include flexColumn((gap: vars.$gaps-g12));
   --p-accordion-header-toggle-icon-active-color: var(--p-accordion-header-toggle-icon-color);
   &__panel {

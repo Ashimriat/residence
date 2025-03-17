@@ -49,26 +49,26 @@ UsersStructure(
     span(:class="$b('description')")
       | {{ data.description }}
   template(#buttons)
-    BaseButton(
+    RzdButton(
       v-if="isClanOwner"
       :type="EButtons.ORDER_GAME"
       :class="$b('gameOrderButton')"
     )
     template(v-if="isDesktop")
-      BaseButton(
+      RzdButton(
         :type="EButtons.ADD_PLAYERS"
         @click="inviteToClan(data.id)"
       )
     template(v-else)
-      BaseButton(
+      RzdButton(
         :type="EButtons.INVITE_TO_CLAN_MOBILE"
         @click="inviteToClan(data.id)"
       )
-      BaseButton(
+      RzdButton(
         :type="EButtons.TOGGLE_DETAILS"
         @click="toggleParticipantsDisplay"
       )
-    BaseButton(
+    RzdButton(
       :type="EButtons.LEAVE_CLAN"
       :class="$b('leaveButton')"
       @click="leaveClan"

@@ -14,11 +14,11 @@ const $b = useBEM('ClanCreated');
 div(:class="$b()")
   div(:class="$b('text')")
     | Приглашайте других игрококов и покоряйте рейтинг!
-  BaseButton(
+  RzdButton(
     :type="EButtons.INVITE_TO_CLAN"
     @click="processInvite"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.CLOSE"
     @click="closeModal"
   )

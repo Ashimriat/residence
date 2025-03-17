@@ -24,7 +24,7 @@ UsersStructure(
     span(:class="$b('description')")
       | {{ mockText() }}
   template(#buttons)
-    BaseButton(
+    RzdButton(
       :class="$b('button')"
       :type="EButtons.REFERRAL"
       @click="copyToBuffer"

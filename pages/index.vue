@@ -37,14 +37,6 @@ const openEventsCalendar = () => {};
 
 const handleEventRequestSubmit = () => {};
 
-const tabsList: TabData[] = [
-  { label: 'Игры', id: 'games'},
-  { label: 'Поездки', id: 'trips' },
-  { label: 'Встречи', id: 'meets' },
-  { label: 'Kids', id: 'kids' },
-  { label: 'Women', id: 'women' },
-];
-
 const { isMobile } = useDevice();
 
 function goToDetails(): void {
@@ -57,7 +49,7 @@ const $b = useBEM('MainPage');
 <template lang="pug">
 div(:class="$b()")
   section(:class="$b('section', ['general'])")
-    BaseCard
+    RzdCard
       template(#content)
         div(:class="$b('generalDataContainer')")
           div(:class="$b('textContainer')")
@@ -69,7 +61,7 @@ div(:class="$b()")
             div
               | {{ mockText() }}
           div(:class="$b('topButtonsContainer')")
-            BaseButton(
+            RzdButton(
               :type="EButtons.WELCOME_BEGINNING"
               @click="goToDetails"
             )
@@ -89,11 +81,11 @@ div(:class="$b()")
         span
           | Основатель Резиденции
       div
-        BaseIcon(
+        RzdIcon(
           :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.TELEGRAM"
         )
-        BaseIcon(
+        RzdIcon(
           :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.INSTAGRAM"
         )
@@ -141,11 +133,10 @@ div(:class="$b()")
     h2
       | Ближайшие ивенты
     EventsList(
-      :tabs-list="tabsList"
       :events-data="mockEventsBigData(5, 6)"
       :events-on-page-amount="6"
     )
-    BaseButton(
+    RzdButton(
       :type="EButtons.EVENTS_CALENDAR"
       @click="openEventsCalendar"
     )

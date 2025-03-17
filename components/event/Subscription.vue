@@ -28,8 +28,8 @@ div(:class="$b({ owned: isOwned })")
     v-if="!isOwned"
     :class="$b('buttonsContainer')"
   )
-    BaseButton(:type="EButtons.BUY")
-    BaseButton(:type="EButtons.GIFT_TO_FRIEND")
+    RzdButton(:type="EButtons.BUY")
+    RzdButton(:type="EButtons.GIFT_TO_FRIEND")
 </template>
 
 <style lang="scss">

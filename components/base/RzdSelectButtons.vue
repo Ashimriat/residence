@@ -11,7 +11,7 @@ const {
 
 const selectedValue = defineModel<string | null>({ default: null });
 
-const $b = useBEM('BaseSelectButtons');
+const $b = useBEM('RzdSelectButtons');
 </script>
 
 <template lang="pug">
@@ -26,10 +26,8 @@ PSelectButton(
 </template>
 
 <style lang="scss">
-.BaseSelectButtons {
+.RzdSelectButtons {
   @include flex((gap: var(--gap, #{vars.$gaps-g16})));
-
-  overflow: scroll;
 
   &--inverted {
     --backgroundColor: #{vars.$colors-black};
@@ -66,7 +64,7 @@ PSelectButton(
 }
 
 @include mobile {
-  .BaseSelectButtons {
+  .RzdSelectButtons {
     --gap: #{vars.$gaps-g12};
     --borderRadius: #{vars.$br-x2s};
     --borderWidth: 2px;

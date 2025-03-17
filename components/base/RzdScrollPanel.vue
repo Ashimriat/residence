@@ -52,7 +52,7 @@ const fItemsInRow = computed<number>(() => {
 
 const gapsSpace = computed<string>(() => `${usedGap.value.x * (fItemsInRow.value - 1)}px`);
 
-const $b = useBEM('BaseScrollPanel');
+const $b = useBEM('RzdScrollPanel');
 </script>
 
 <template lang="pug">
@@ -68,7 +68,7 @@ div(:class="$b()")
 <style lang="scss">
 $defaultItemBasis: calc((100% - v-bind('gapsSpace')) / v-bind('fItemsInRow'));
 
-.BaseScrollPanel {
+.RzdScrollPanel {
   @include fullsize;
 
   padding: var(--scrollPanelPadding, 6px);
@@ -107,7 +107,7 @@ $defaultItemBasis: calc((100% - v-bind('gapsSpace')) / v-bind('fItemsInRow'));
 }
 
 @include mobile {
-  .BaseScrollPanel {
+  .RzdScrollPanel {
     --p-scrollpanel-bar-size: 6px;
   }
 }

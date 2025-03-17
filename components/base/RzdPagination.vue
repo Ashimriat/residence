@@ -12,15 +12,21 @@ type Props = {
 };
 
 const { itemsAmount } = defineProps<Props>();
-const currentPage = defineModel<number>('page', { required: true  });
+
+const innerPage = defineModel<number>('page', { required: true });
+const currentPage = computed<number>({
+  get: () => innerPage.value + 1,
+  set: (val) => {
+    innerPage.value = val - 1;
+  },
+});
 const amountOnPage = defineModel<number>('amountOnPage', { required: true });
 
 const STEP = 1;
 const PAGES_AMOUNT_TO_CHOOSE = 5;
 const MAX_PAGES_SLOTS_AMOUNT = 7;
 
-const inputRef = useTemplateRef<Array<{ $el: HTMLInputElement }>>('input');
-
+const inputRef = useTemplateRef<{ $el: HTMLInputElement }[]>('input');
 
 const inputValue = ref<string>('');
 
@@ -55,16 +61,15 @@ const displayData = computed<DisplayData>(() => {
     skipPos.length = 0;
   }
   const pages: number[] = [];
-  for (let i = from; i <= to; i++) {
+  for (let i = from; i <= to; i += 1) {
     pages.push(i);
   }
-  const res = {
+  return {
     withFirst: skipPos[0] === 'start',
     withLast: skipPos.at(-1) === 'end',
     pages,
     skipPos,
   };
-  return res;
 });
 
 const activeSkipperInput = ref<'start' | 'end' | ''>('');
@@ -75,35 +80,34 @@ async function setActiveSkipperInput(skipPos: SkipPosition | ''): Promise<void> 
   if (inputRef.value?.length) inputRef.value[0].$el.focus();
 }
 
-function processPageSelect(pageNumber: number, callback?: Function): void {
+function processPageSelect(pageNumber: number): void {
   if (pageNumber === currentPage.value) return;
   currentPage.value = pageNumber;
-  if (callback) callback();
 }
 /**
- * 
+ *
  */
 function processInputConfirm(): void {
   const newPage = +inputValue.value;
   resetInput();
   if (
-    !newPage ||
-    newPage > pagesAmount.value ||
-    newPage === currentPage.value
+    !newPage
+    || newPage > pagesAmount.value
+    || newPage === currentPage.value
   ) {
     return;
   }
   currentPage.value = newPage;
 }
 /**
- * 
+ *
  */
 function resetInput(): void {
   activeSkipperInput.value = '';
   inputValue.value = '';
 }
 
-const $b = useBEM('BasePagination');
+const $b = useBEM('RzdPagination');
 </script>
 
 <template lang="pug">
@@ -115,36 +119,36 @@ PPaginator(
   template(#container)
     div(:class="$b()")
       PButton.p-paginator-prev(
-        :class="$b('controlButton', ['first'], { disabled: currentPage === 0 })"
+        :class="$b('controlButton', ['prev'], { disabled: currentPage === 1 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
       )
         span.pi.pi-angle-left
       slot(
         name="pages"
-        :activePage="currentPage"
-        :onPageClick="processPageSelect"
+        :active-page="innerPage"
+        :on-page-click="processPageSelect"
       )
         div(:class="$b('container')")
           PButton.p-paginator-page(
             v-if="displayData.withFirst"
             label="1"
-            :class="$b('pageButton', ['first'], { selected: currentPage === 0 })"
+            :class="$b('pageButton', ['first'], { selected: currentPage === 1 })"
             @click.prevent.stop="processPageSelect(1)"
           )
           PButton.p-paginator-page(
-              v-for="(pageNum, i) of displayData.pages"
-              :key="pageNum"
-              :class="$b('pageButton', { selected: currentPage === pageNum })"
-              :style="`--order: ${i + 2}`"
-              :label="`${pageNum}`"
-              @click.prevent.stop="processPageSelect(pageNum)"
-            )
-              | {{ pageNum }}
+            v-for="(pageNum, i) of displayData.pages"
+            :key="pageNum"
+            :class="$b('pageButton', { selected: currentPage === pageNum })"
+            :style="`--order: ${i + 2}`"
+            :label="`${pageNum}`"
+            @click.prevent.stop="processPageSelect(pageNum)"
+          )
+            | {{ pageNum }}
           PButton.p-paginator-page(
             v-if="displayData.withLast"
             :label="`${pagesAmount}`"
-            :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount - 1})"
-            @click.prevent.stop="processPageSelect(pagesAmount - 1)"
+            :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount })"
+            @click.prevent.stop="processPageSelect(pagesAmount)"
           )
             | {{ pagesAmount }}
           template(
@@ -167,14 +171,14 @@ PPaginator(
               @keydown.enter="processInputConfirm"
             )
       PButton.p-paginator-next(
-        :class="$b('controlButton', ['last'], { disabled: currentPage === pagesAmount - 1 })"
+        :class="$b('controlButton', ['next'], { disabled: currentPage === pagesAmount })"
         @click.prevent.stop="processPageSelect(currentPage + 1)"
       )
         span.pi.pi-angle-right
 </template>
 
 <style lang="scss">
-.BasePagination {
+.RzdPagination {
   @include flex((gap: 4px));
   &__container {
     @include flex((

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type NotificationData, type NotificationType } from '~/types/data/notification';
+import type { NotificationData, NotificationType } from '~/types/data/notification';
 import { mockNotifications } from '~/assets/mocks';
 
 
@@ -10,7 +10,7 @@ function getIcon(type: NotificationType): string {
     rate: 'thumbs-up',
     paymentSuccess: 'credit-card',
     paymentFail: 'times-circle',
-    social: 'telegram'
+    social: 'telegram',
   }[type];
 }
 
@@ -21,8 +21,6 @@ function deleteAllNotifications(): void {
 }
 
 function removeNotification(nId: string): void {
-  console.log(nId);
-  console.log([...notifications.value]);
   notifications.value = notifications.value.filter(({ id }) => id !== nId);
 }
 
@@ -30,7 +28,10 @@ const $b = useBEM('NotificationsPage');
 </script>
 
 <template lang="pug">
-div(:class="$b()")
+div(
+  v-if="false"
+  :class="$b()"
+)
   div
     div(:class="$b('titleContainer')")
       h6
@@ -62,7 +63,7 @@ div(:class="$b()")
           | {{ description }}
         div(:class="$b('iconContainer')")
           span.pi.pi-trash(@click="removeNotification(id)")
-  BasePagination(
+  RzdPagination(
     v-model:page="page"
     :amount-on-page="6"
     :items-amount="notifications.length"

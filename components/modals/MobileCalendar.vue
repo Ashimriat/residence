@@ -29,7 +29,7 @@ div(:class="$b()")
     v-model:date="selectedDate"
     v-model:time="selectedTime"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.CONFIRM"
     :disabled="!selectedDate"
     @click="confirm"

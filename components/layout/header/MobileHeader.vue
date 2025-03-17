@@ -51,12 +51,12 @@ div(:class="$b()")
       @click="toggleMenu"
     )
       Notifications(v-if="isLoggedIn")
-      BaseIcon(:type="EIcons.BURGER")
+      RzdIcon(:type="EIcons.BURGER")
   div(
     v-if="isOpen"
     :class="$b('innerMenu')"
   )
-    BaseButton(
+    RzdButton(
       v-if="!isLoggedIn"
       :type="EButtons.SIGN_IN_MOBILE"
       @click="openSignIn"
@@ -79,7 +79,7 @@ div(:class="$b()")
         with-bg
         :class="$b('notificationsLink')"
       )
-    BaseAccordion(:content="ACCORDION_CONTENT")
+    RzdAccordion(:content="ACCORDION_CONTENT")
       template(#[CONTENT_IDS.pages])
         NuxtLink(
           v-for="({ section }, i) of MENU_STRUCTURE"
@@ -102,7 +102,7 @@ div(:class="$b()")
           :to="url"
           :class="$b('authPageLink', { bordered: isLinkBordered(i, j)})"
         )
-          BaseIcon(
+          RzdIcon(
             :type="icon"
             :size="EIconsSizes.S"
           )
@@ -112,7 +112,7 @@ div(:class="$b()")
       v-if="isLoggedIn"
       :to="`/events/${isAdmin ? 'create' : 'order'}`"
     )
-      BaseButton(:type="isAdmin ? EButtons.ADD_EVENT_MOBILE : EButtons.ORDER_GAME")
+      RzdButton(:type="isAdmin ? EButtons.ADD_EVENT_MOBILE : EButtons.ORDER_GAME")
 </template>
 
 <style lang="scss">

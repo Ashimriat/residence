@@ -7,7 +7,7 @@ const $b = useBEM('ClanApplication');
 </script>
 
 <template lang="pug">
-BaseButton(
+RzdButton(
   :class="$b()"
   :type="EButtons.CLAN_APPLICATION_CONFIRM"
   @click="closeModal"

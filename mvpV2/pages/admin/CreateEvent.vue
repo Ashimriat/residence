@@ -34,7 +34,7 @@ function openMasterSelectModal(): void {
   });
 }
 
-const $b = useBEM('CreatePage');
+const $b = useBEM('CreateEventPage');
 
 const formData = ref<FormData>({
   name: '',
@@ -55,22 +55,22 @@ div(:class="$b()")
   h1
     | Новое событие
   div(:class="$b('topContainer')")
-    BaseSelectButtons(
+    RzdSelectButtons(
       v-model="eventType"
       :options="EVENTS_OPTIONS"
     )
-    BaseRadios(
+    RzdRadios(
       v-model="event"
       :options="GAMES_OPTIONS"
     )
   h4
     | Обложка
-  BaseFileSelect(
+  RzdFileSelect(
     v-model="cover"
   )
   h4
     | Ведущий
-  BaseButton(
+  RzdButton(
     v-if="!masterData"
     :type="EButtons.SELECT_MASTER"
     :class="$b('masterSelectButton')"
@@ -87,7 +87,7 @@ div(:class="$b()")
     data-section-title="Общая информация"
   )
     EventCreationForm(v-model="formData")
-    BaseButton(
+    RzdButton(
       :type="EButtons.CREATE_EVENT"
       disabled
       @click=""
@@ -95,7 +95,7 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-.CreatePage {
+.CreateEventPage {
   &__topContainer {
     @include flexColumn((gap: vars.$gaps-g20));
   }

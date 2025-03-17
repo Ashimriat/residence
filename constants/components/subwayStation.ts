@@ -1,4 +1,4 @@
-import { type SubwayData } from '~/types/data/subway';
+import type { SubwayData } from '~/types/data/subway';
 
 
 const SUBWAY_BRANCHES_COLORS_DICT: Record<SubwayData['branchType'], string> = {

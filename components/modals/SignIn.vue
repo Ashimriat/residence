@@ -24,16 +24,16 @@ div(:class="$b()")
     placeholder="Пароль"
     :class="$b('input')"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.NO_ACCOUNT"
     :class="$b('textButton')"
     @click="openSignUp"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.FORGOT_PASSWORD"
     :class="$b('textButton')"
   )
-  BaseButton(
+  RzdButton(
     omit-icon
     :type="EButtons.SIGN_IN_MODAL"
     @click="login"

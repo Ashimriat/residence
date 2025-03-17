@@ -21,7 +21,7 @@ div(:class="$b()")
   )
     span
       | {{ title }}
-    BaseIcon(
+    RzdIcon(
       :type="EIcons.ARROW_UP_RIGHT"
       :size="EIconsSizes.S"
     )

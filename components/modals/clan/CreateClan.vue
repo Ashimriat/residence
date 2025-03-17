@@ -26,17 +26,17 @@ div(:class="$b()")
       v-if="!data.image"
       #icon
     )
-      BaseIcon(
+      RzdIcon(
         :type="EIcons.USER"
         :size="EIconsSizes.L"
       )
-  BaseTextarea(
+  RzdTextarea(
     v-model="data.description"
     :class="$b('textarea')"
     placeholder="Описание клана"
     :max-length="40"
   )
-  BaseButton(
+  RzdButton(
     :class="$b('button')"
     :type="EButtons.CREATE_CLAN"
     @click="showClanCreated"

@@ -60,22 +60,22 @@ div(:class="$b()")
       :subway="eventData.locationData.subway"
     )
     div(:class="$b('controls', { multiple: ratings.length > 1 })")
-      BaseButton(
+      RzdButton(
         :type="EButtons.ADD_GAME_ROUND"
         @click="generateGameRating(page + 1)"
       )
-      BaseCarousel(
+      RzdCarousel(
         v-if="ratings.length > 1"
         v-model:page="page"
         :items="ratings"
         :pt:footer:class="$b('carousel')"
       )
   div(:class="$b('ratingsContainer')")
-    BaseButton(
+    RzdButton(
       :type="EButtons.ADD_PLAYERS"
       @click=""
     )
-    BaseScrollPanel(
+    RzdScrollPanel(
       :items-in-row="1"
       :gap="14"
       :class="$b('participantsList', { small: currentGameData.participants.length < 5 })"
@@ -111,15 +111,15 @@ div(:class="$b()")
           )
           label(:for="`isLeft-${i}`")
             | Ушел
-        BaseButton(
+        RzdButton(
           :type="EButtons.EXPEL_PLAYER"
           @click="removeParticipant(playerRating.id)"
         )
-  BaseSelectButtons(
+  RzdSelectButtons(
     v-model="currentGameData.winnersTeam"
     :options="MAFIA_TEAM_OPTIONS_TOWN"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.SAVE_RATINGS"
     @click=""
   )

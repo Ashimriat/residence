@@ -11,11 +11,11 @@ div(:class="$b()")
     div(:class="$b('companyDataBlock')")
       img(src="~assets/images/logo/logo.png")
       div(:class="$b('companyContactsBlock')")
-        BaseIcon(
+        RzdIcon(
           :type="EIcons.TELEGRAM"
           :size="EIconsSizes.XL"
         )
-        BaseIcon(
+        RzdIcon(
           :type="EIcons.INSTAGRAM"
           :size="EIconsSizes.XL"
         )

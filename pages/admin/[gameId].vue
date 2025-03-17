@@ -13,7 +13,7 @@ const $b = useBEM('EventManagePage');
 </script>
 
 <template lang="pug">
-BaseCarousel(
+RzdCarousel(
   v-slot="{ itemsData: [event] }"
   :items="events"
 )
@@ -35,12 +35,12 @@ BaseCarousel(
             :subway="event.locationData.subway"
           )
       template(#buttons)
-        BaseButton(
+        RzdButton(
           :type="EButtons.FINISH_GAME"
           :class="$b('button')"
           @click="openGameRating('mafia', event)"
         )
-        BaseButton(
+        RzdButton(
           :type="EButtons.MASTER_RATING"
           :class="$b('button')"
           @click=""

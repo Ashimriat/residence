@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons } from '~/constants/components';
+import type { EButtons } from '~/constants/components';
 
 
 type Props = {
@@ -19,7 +19,7 @@ const {
   subtext,
   requestTextPlaceholder,
   buttonType,
-  selectOptions = []
+  selectOptions = [],
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
@@ -43,10 +43,6 @@ const isRequestFormFilled = computed<boolean>(() => (
   }, true)
 ));
 
-function test(val: any) {
-  console.log("INPUT UPDATE EVENT", val);
-}
-
 const $b = useBEM('RequestForm');
 </script>
 
@@ -58,10 +54,10 @@ div(:class="$b()")
     span
       | {{ subtext }}
   div(:class="$b('requestForm')")
-    BaseSelectButtons(
+    RzdSelectButtons(
       v-if="selectOptions.length"
-      is-inverted
       v-model="formData.selectOption"
+      is-inverted
       :options="selectOptions"
     )
     div(:class="$b('inputsContainer')")
@@ -73,11 +69,11 @@ div(:class="$b()")
         v-model="formData.telegram"
         placeholder="Ник телеграм"
       )
-    BaseTextarea(
+    RzdTextarea(
       v-model="formData.text"
       :placeholder="requestTextPlaceholder"
     )
-    BaseButton(
+    RzdButton(
       :type="buttonType"
       :disabled="!isRequestFormFilled"
       @click="emit('submit', formData)"

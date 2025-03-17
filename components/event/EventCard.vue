@@ -41,7 +41,7 @@ const $b = useBEM('EventCard');
 </script>
 
 <template lang="pug">
-BaseCard(
+RzdCard(
   orientation="column"
   :class="$b({ account: isAccountMode })"
 )
@@ -60,7 +60,7 @@ BaseCard(
       div(:class="$b('playersAmount')")
         span
           | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
-        BaseIcon(
+        RzdIcon(
           :type="EIcons.USERS"
           :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
         )
@@ -84,16 +84,16 @@ BaseCard(
               label="UI"
             )
         div(:class="$b('buttonsBlock')")
-          BaseButton(
+          RzdButton(
             :type="EButtons.ENTER_EVENT"
             @click="emit('signUp')"
           )
-          BaseButton(
+          RzdButton(
             :type="secondButtonType"
             omit-icon
             @click="toggleDetails"
           )
-          BaseButton(
+          RzdButton(
             v-if="isShowingDetails"
             :type="EButtons.SHARE"
           )

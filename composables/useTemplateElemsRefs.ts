@@ -1,9 +1,9 @@
-import { type VNodeRef } from 'vue';
+import type { VNodeRef } from 'vue';
 
 
 export default function useTemplateElemsRefs<T extends Record<string, Element>>() {
   const templateElems = ref<T>({} as T);
-  
+
   function setRefOriginal(refName: keyof T, elem?: Element | ComponentPublicInstance | null): void {
     if (!elem) return;
     templateElems.value[refName] = elem;
@@ -11,5 +11,5 @@ export default function useTemplateElemsRefs<T extends Record<string, Element>>(
 
   const setRef = (refName: string): VNodeRef => setRefOriginal.bind(null, refName);
 
-  return { templateElems, setRef }
+  return { templateElems, setRef };
 };

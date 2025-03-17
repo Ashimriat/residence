@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { type EditableUserData } from '~/types/stores/user';
+import type { EButtons } from '~/constants/components';
+import type { EditableUserData } from '~/types/stores/user';
 import {
-  EButtons,
   EIcons,
   EIconsSizes,
 } from '~/constants/components';
@@ -62,7 +62,7 @@ form(
         v-if="!data.avatar"
         #icon
       )
-        BaseIcon(
+        RzdIcon(
           :type="EIcons.USER"
           :size="EIconsSizes.L"
         )
@@ -105,24 +105,24 @@ form(
     v-model="data.password2"
     placeholder="Подтвердите пароль"
   )
-  BaseTextarea(
+  RzdTextarea(
     v-model="data.about"
     placeholder="Кратко о себе"
     :max-length="100"
   )
-  BaseRadios(
+  RzdRadios(
     v-if="!withoutSex"
     v-model="data.sex"
     :options="[{ label: 'Мужчина', value: 'male' }, { label: 'Женщина', value: 'female' }]"
   )
-  BaseButton(
+  RzdButton(
     v-for="button of additionalButtons"
     :key="button"
     :type="button"
     :class="$b('textButton')"
     @click="emit('additionalButton', button)"
   )
-  BaseButton(
+  RzdButton(
     :disabled="withEmptyFields || !isDataChanged"
     :type="submitButton"
   )

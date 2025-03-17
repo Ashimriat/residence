@@ -30,12 +30,12 @@ div(:class="$b()")
   div(:class="$b('topContainer', { admin: isAdmin })")
     h1(:class="$b('pageHeader')")
       | Рейтинг - Сезон 1
-    BaseButton(
+    RzdButton(
       v-if="isAdmin"
       :type="EButtons.FINISH_SEASON"
       @click="finishSeason"
     )
-  BaseSelectButtons(
+  RzdSelectButtons(
     v-model="activeType"
     :options="OPTIONS"
     :class="$b('gameSelector')"
@@ -78,7 +78,7 @@ div(:class="$b()")
     )
       template(#body="{ data: { statistics: { wins, losses } } }")
         | {{ `${wins}/${losses}` }}
-  BasePagination(
+  RzdPagination(
     v-model:page="page"
     :amount-on-page="10"
     :items-amount="itemsAmount"

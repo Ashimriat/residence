@@ -1,4 +1,4 @@
-import { type MasterSelectModalData } from '~/pages/events/Create.vue';
+import { type MasterSelectModalData } from '~/mvpV2/pages/admin/CreateEvent.vue';
 import SignIn from '~/components/modals/SignIn.vue';
 import SignUp from '~/components/modals/SignUp.vue';
 import MerchPurchase from '~/components/modals/MerchPurchase.vue';

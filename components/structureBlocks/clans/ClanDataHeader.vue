@@ -32,7 +32,7 @@ div(:class="$b()")
       v-if="participantsAmount !== null"
       :class="$b('participants')"
     )
-      BaseIcon(
+      RzdIcon(
         :class="$b('participantsIcon')"
         :size="EIconsSizes.S"
         :type="EIcons.USERS"

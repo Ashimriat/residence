@@ -24,10 +24,9 @@ PTabs(v-model:value="activeTab")
       :value="id"
     )
       slot(
-        v-for="({ id }) of tabs"
         :key="id"
         :name="`tab-${id}`"
       )
-      slot(name="commonTab")
+      slot(name="tab")
     slot
 </template>

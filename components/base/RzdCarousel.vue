@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type CarouselProps } from 'primevue';
-import BasePagination from './BasePagination.vue';
+import RzdPagination from './RzdPagination.vue';
 
 
 type Props = {
@@ -27,10 +27,10 @@ const mPage = defineModel<number>('page', { required: false, default: 0 });
 const { page, itemsAmount } = usePagination(displayedItems, 1, mPage);
 
 const indicatorListClass = computed<string>(
-  () => (isMobile ? 'indicatorList' : 'originalIndicatorList')
+  () => (isMobile ? 'indicatorList' : 'originalIndicatorList'),
 );
 
-const $b = useBEM('BaseCarousel');
+const $b = useBEM('RzdCarousel');
 </script>
 
 <template lang="pug">
@@ -53,7 +53,7 @@ PCarousel(
     v-if="isDesktop"
     #footer
   )
-    BasePagination(
+    RzdPagination(
       v-model:page="page"
       :amount-on-page="1"
       :items-amount="itemsAmount"
@@ -74,7 +74,7 @@ PCarousel(
 </template>
 
 <style lang="scss">
-.BaseCarousel {
+.RzdCarousel {
   @include relative;
   max-width: var(--carouselMaxWidth);
   &__contentContainer {
@@ -105,7 +105,7 @@ PCarousel(
 }
 
 @include mobile {
-  .BaseCarousel {
+  .RzdCarousel {
     --carouselContentContainerGap: #{vars.$gaps-g16};
   }
 }

@@ -28,7 +28,7 @@ div(:class="$b()")
           div(:Class="$b('contactTopic')")
             | {{ contact.topic }}
         div(:class="$b('contactSocialsContainer')")
-          BaseIcon(
+          RzdIcon(
             v-for="(social, j) of contact.socials"
             :key="`social_${i}_${j}`"
             :type="social.icon"
@@ -38,7 +38,7 @@ div(:class="$b()")
     h2
       | Соцсети
     div(:class="$b('socialsContainer')")
-      BaseIcon(
+      RzdIcon(
         v-for="(social, i) of mockSocials()"
         :key="`social_${i}`"
         :type="social.icon"

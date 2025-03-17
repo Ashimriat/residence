@@ -20,7 +20,7 @@ const {
   finalSize,
 } = useIcon(type, size);
 
-const $b = useBEM('BaseIcon');
+const $b = useBEM('RzdIcon');
 </script>
 
 <template lang="pug">
@@ -31,7 +31,7 @@ component(
 </template>
 
 <style lang="scss">
-.BaseIcon {
+.RzdIcon {
   min-width: v-bind(finalSize);
   min-height: v-bind(finalSize);
   width: v-bind(finalSize);

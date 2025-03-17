@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockOtherUsers } from '~/assets/mocks';
-import { type MasterSelectModalData } from '~/pages/events/Create.vue';
+import type { MasterSelectModalData } from '~/mvpV2/pages/admin/CreateEvent.vue';
 import { EButtons } from '~/constants/components';
 
 
@@ -36,11 +36,11 @@ const $b = useBEM('MasterSelect');
 
 <template lang="pug">
 div(:class="$b()")
-  BaseSearch(
+  RzdSearch(
     v-model="search"
     placeholder="ID или имя ведущего"
   )
-  BaseScrollPanel
+  RzdScrollPanel
     div(
       v-for="({ id, name, avatar }) of processedMasters"
       :key="id"
@@ -49,7 +49,7 @@ div(:class="$b()")
         :avatar
         :name
       )
-      BaseButton(
+      RzdButton(
         :type="EButtons.SELECT"
         @click="selectMaster(id)"
       )
@@ -58,11 +58,11 @@ div(:class="$b()")
       :avatar="selectedMaster.avatar"
       :name="selectedMaster.name"
     )
-    BaseButton(
+    RzdButton(
       :type="EButtons.REMOVE"
       @click="removeMaster"
     )
-  BaseButton(
+  RzdButton(
     :type="EButtons.CONFIRM_MASTER"
     :disabled="!masterId"
     @click="onSelect(selectedMaster)"

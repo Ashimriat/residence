@@ -1,31 +1,34 @@
 <script setup lang="ts">
 type Props = {
-  tabsList: TabData[];
   eventsData: EventData[][];
-  filters?: RadioOption[];
   eventsOnPageAmount: number;
   withCalendar?: boolean;
   withPagination?: boolean;
 };
 
-
-/** Props & Emits */
 const {
-  tabsList,
   eventsData,
-  filters,
   eventsOnPageAmount,
   withCalendar,
   withPagination
 } = defineProps<Props>();
-const activeTab = ref<string>(tabsList[0].id);
+
+const TABS_LIST: TabData[] = [
+  { label: 'Мафия', id: 'mafia' },
+  { label: 'Игротеки', id: 'tabletop' },
+  { label: 'Dungeons & Dragons', id: 'dnd' },
+  { label: 'Путешествия', id: 'travel' },
+  { label: 'Women', id: 'womenEvents' },
+  { label: 'Покер', id: 'poker' },
+  { label: 'Активности', id: 'activity' },
+  { label: 'Вечеринки', id: 'party' },
+]
+const activeTab = ref<string>(TABS_LIST[0].id);
 
 const { selectedDate } = useCalendar();
 
-const eventType = ref<'kid' | 'women' | ''>('');
-
-const activeEvents = computed(() => {
-  const activeTabIndex = tabsList.findIndex(({ id }) => id === activeTab.value);
+const activeEvents = computed<EventData[]>(() => {
+  const activeTabIndex = TABS_LIST.findIndex(({ id }) => id === activeTab.value);
   return eventsData[activeTabIndex];
 });
 
@@ -34,37 +37,30 @@ const { page, itemsAmount, displayedItems } = usePagination(activeEvents, events
 const $b = useBEM('EventsList');
 
 watch(activeTab, () => {
-  page.value = 1;
+  page.value = 0;
 });
 </script>
 
 <template lang="pug">
 div(:class="$b({ calendar: withCalendar })")
-  BaseTabs(
+  RzdTabs(
     v-model:tab="activeTab"
-    :tabs="tabsList"
+    :tabs="TABS_LIST"
   )
     template(#tabsCommon)
-      BaseRadios(
-        v-if="filters?.length"
-        v-model="eventType"
-        is-resettable
-        :options="filters"
-      )
       DateTimeCalendar(
         v-if="withCalendar"
         v-model:date="selectedDate"
         :class="$b('calendar')"
       )
-    template(#commonTab)
-      div(:class="$b('eventsCardsContainer', { calendar: withCalendar })")
+    template(#tab)
+      div(:class="$b('eventsCardsContainer')")
         EventCard(
           v-for="(data, j) in displayedItems"
           :key="`eventData_${j}`"
           :event-data="data"
-          :class="$b('eventCard', { calendar: withCalendar })"
         )
-  BasePagination(
+  RzdPagination(
     v-if="withPagination"
     v-model:page="page"
     :amount-on-page="eventsOnPageAmount"
@@ -73,7 +69,7 @@ div(:class="$b({ calendar: withCalendar })")
 </template>
 
 <style lang="scss">
-$paddingTop: 28px;
+$paddingTop: 6px;
 
 .EventsList {
   --cardMaxWidth: 400px;
@@ -81,16 +77,15 @@ $paddingTop: 28px;
     --cardsContainerMaxWidth: 932px;
     --cardMaxWidth: 446px;
     --cardMaxHeight: 394px;
-    --cardContainerPaddingTop: 28px;
   }
   &__eventsCardsContainer {
     @include flex((gap: 40px, flex-wrap: wrap));
-    padding: var(--cardContainerPaddingTop, 0) 0 28px;
+    padding: $paddingTop 0 26px;
     min-height: 340px;
     max-width: var(--cardsContainerMaxWidth, initial);
   }
   &__calendar {
-    @include absolute((right: 0, top: calc(20px + 49px + 28px)));
+    @include absolute((right: 0, top: calc(20px + #{$paddingTop})));
   }
 }
 

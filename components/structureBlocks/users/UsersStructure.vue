@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { type Props as BaseScrollPanelProps } from '~/components/base/BaseScrollPanel.vue'
+import { type Props as RzdScrollPanelProps } from '~/components/base/RzdScrollPanel.vue'
 import { EButtons } from '~/constants/components';
 
 
-type Props = BaseScrollPanelProps & {
+type Props = RzdScrollPanelProps & {
   users: Participant[];
   isMasters?: boolean;
   withExpel?: boolean;
@@ -47,7 +47,7 @@ const $b = useBEM('UsersStructure');
 </script>
 
 <template lang="pug">
-BaseCard(
+RzdCard(
   :preserve-subcontent="false"
   :class="$b({ list: listOnly, operatable: withExpel, selectable: isSelectableUser })"
 )
@@ -64,7 +64,7 @@ BaseCard(
     v-if="showList"
     #content
   )
-    BaseScrollPanel(
+    RzdScrollPanel(
       :gap
       :items-in-row="itemsInRow"
       :class="$b('list')"
@@ -81,7 +81,7 @@ BaseCard(
           :is-linker="isMasters"
           :is-clan-owner="user.id === ownerId"
         )
-        BaseButton(
+        RzdButton(
           v-if="withExpel && isClanOwner && user.id !== providedData.id"
           :type="EButtons.EXPEL_PLAYER"
           :class="$b('expelButton')"

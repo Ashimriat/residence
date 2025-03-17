@@ -66,7 +66,7 @@ div(:class="$b()")
     )
       h3(:class="$b('title')")
         | {{ title }}
-      BaseIcon(
+      RzdIcon(
         :type="EIcons.CHEVRON_RIGHT"
         :class="$b('sectionArrow', { facingUp: openingStatuses[type] })"
       )
@@ -91,12 +91,12 @@ div(:class="$b()")
           div(:class="$b('question')")
             span
               | {{ question }}
-            BaseIcon(
+            RzdIcon(
               v-if="openingStatuses[`${type}_${j}`]"
               :type="EIcons.MINUS"
               :class="$b('questionIcon')"
             )
-            BaseIcon(
+            RzdIcon(
               v-else
               :type="EIcons.PLUS"
               :class="$b('questionIcon')"

@@ -10,7 +10,7 @@ div(:class="$b()")
   div(:class="$b('image')")
   div(:class="$b('text')")
     | Для оформления заказа - напишите нам в Телеграмм
-  BaseButton(
+  RzdButton(
     :type="EButtons.BUY_MERCH"
     :class="$b('button')"
   )

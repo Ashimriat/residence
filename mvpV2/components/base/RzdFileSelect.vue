@@ -2,7 +2,7 @@
 
 const filesList = defineModel<File[]>({ required: true });
 
-const $b = useBEM('BaseFileSelect');
+const $b = useBEM('RzdFileSelect');
 </script>
 
 <template lang="pug">
@@ -20,7 +20,7 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-.BaseFileSelect {
+.RzdFileSelect {
   @include flexColumn((gap: vars.$gaps-g4));
   &__fileSelector {
     @include centeredFlex;

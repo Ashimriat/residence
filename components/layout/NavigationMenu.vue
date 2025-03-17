@@ -38,7 +38,7 @@ div(:class="$b({ footer: isFooterMenu })")
           :class="$b('sectionItem')"
           :to="url"
         )
-          BaseIcon(
+          RzdIcon(
             v-if="icon"
             :type="icon"
             :size="EIconsSizes.L"

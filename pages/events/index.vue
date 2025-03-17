@@ -7,18 +7,6 @@ import { EVENTS_GAMES_DESCRIPTIONS } from '~/constants/pages';
 /** Props & Emits */
 const userStore = useUserStore();
 const { isAdmin } = storeToRefs(userStore);
-
-const tabsList: TabData[] = [
-  { label: 'Игры', id: 'games'},
-  { label: 'Поездки', id: 'trips' },
-  { label: 'Встречи', id: 'meets' },
-  { label: 'Активности', id: 'activities' },
-];
-const filters: RadioOption[] = [
-  { label: 'Детские ивенты', value: 'kids' },
-  { label: 'Женские ивенты', value: 'women' },
-];
-
 const { isMobile } = useDevice();
 
 /** State & Composables */
@@ -44,7 +32,7 @@ div(:class="$b()")
             | {{ name }}
           span(v-if="!isMobile")
             | {{ description }}
-    BaseButton(
+    RzdButton(
       v-if="isAdmin"
       :type="EButtons.ADD_RULES"
     )
@@ -57,7 +45,7 @@ div(:class="$b()")
         :key="i"
         :data="data"
       )
-    BaseButton(
+    RzdButton(
       v-if="isAdmin"
       :type="EButtons.ADD_SUBSCRIPTION"
     )
@@ -68,9 +56,7 @@ div(:class="$b()")
       with-calendar
       with-pagination
       :events-on-page-amount="4"
-      :tabs-list="tabsList"
       :events-data="mockEventsBigData(4, 8)"
-      :filters="filters"
     )
 </template>
 

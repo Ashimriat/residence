@@ -31,7 +31,7 @@ div(:class="$b()")
       layout="horizontal"
       :class="$b('divider')"
     )
-    BaseIcon(:type="EIcons.CLOCK")
+    RzdIcon(:type="EIcons.CLOCK")
     div
       | {{ time }}
   div(:class="$b('locationBlock')")

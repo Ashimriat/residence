@@ -20,7 +20,7 @@ const {
   htmlType,
 } = useButtonData(type);
 
-const $b = useBEM('BaseButton');
+const $b = useBEM('RzdButton');
 
 const classes = computed<ClassesDict>(() => ({
   [`variant_${variant}_inverted`]: !!isVariantInverted,
@@ -42,14 +42,14 @@ PButton(
     v-if="iconType"
     #icon
   )
-    BaseIcon(
+    RzdIcon(
       :type="iconType"
       :size="iconSize"
     )
 </template>
 
 <style lang="scss">
-.BaseButton {
+.RzdButton {
   max-width: var(--buttonMaxWidth);
   --p-button-gap: var(--buttonGap, #{vars.$gaps-g8});
   & svg {

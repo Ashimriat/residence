@@ -1,5 +1,5 @@
 export default function usePagination<T>(
-  items: T[] | Ref<T[]>,
+  items: MaybeRefOrGetter<T[]>,
   initialItemsPerPage: number,
   modelledPage?: Ref<number>
 ) {

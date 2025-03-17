@@ -1,4 +1,4 @@
-import { type EUserRoles } from '~/stores/constants/user';
+import type { EUserRoles } from '~/stores/constants/user';
 
 
 declare type EditableUserData = {

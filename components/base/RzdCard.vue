@@ -17,7 +17,7 @@ const direction = computed<'row' | 'column'>(
 
 const slots = useSlots();
 
-const $b = useBEM('BaseCard');
+const $b = useBEM('RzdCard');
 </script>
 
 <template lang="pug">
@@ -35,7 +35,7 @@ div(:class="$b([orientation ?? 'row'])")
 </template>
 
 <style lang="scss">
-.BaseCard {
+.RzdCard {
   @include flex((
     flex-direction: v-bind(direction),
   ));
@@ -63,7 +63,7 @@ div(:class="$b([orientation ?? 'row'])")
 }
 
 @include mobile {
-  .BaseCard {
+  .RzdCard {
     --cardWidth: 100%;
     --cardContentWidth: 100%;
     --cardSubcontentFlexBasis: 45%;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Temporal } from '@js-temporal/polyfill';
 import { EIcons, EIconsSizes } from '~/constants/components';
-import BaseScrollPanel from './base/BaseScrollPanel.vue';
+import RzdScrollPanel from './base/RzdScrollPanel.vue';
 
 type Props = {
   asDesktop?: boolean;
@@ -197,7 +197,7 @@ div(
   @click="openOnMobile"
 )
   | {{ selectedDateTimeLabel }}
-  BaseIcon(:type="EIcons.CALENDAR")
+  RzdIcon(:type="EIcons.CALENDAR")
 div(
   v-else
   :class="$b(['desktop'], { disabled: isDisabled })"
@@ -208,13 +208,13 @@ div(
         | {{ MONTHS[processedDate.month - 1] }}
       span
         | {{ processedDate.year }}
-      BaseIcon(
+      RzdIcon(
         is-clickable
         :type="EIcons.CALENDAR_PREV_MONTH"
         :size="EIconsSizes.S"
         @click="changeMonth(-1)"
       )
-      BaseIcon(
+      RzdIcon(
         is-clickable
         :type="EIcons.CALENDAR_NEXT_MONTH"
         :size="EIconsSizes.S"
@@ -224,7 +224,7 @@ div(
       v-if="selectedDate"
       :class="$b('selectedDate')"
     )
-      BaseIcon(
+      RzdIcon(
         is-clickable
         :type="EIcons.CROSS"
         :size="EIconsSizes.S"
@@ -248,7 +248,7 @@ div(
       span(:class="$b('filler')")
       span(:class="$b('dayNum')")
         | {{ cDay.day }}
-  BaseScrollPanel(
+  RzdScrollPanel(
     v-if="withTimeSelect && selectedDate"
     :gap="8"
     :items-in-row="3"

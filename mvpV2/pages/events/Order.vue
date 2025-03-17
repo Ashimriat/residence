@@ -26,7 +26,7 @@ definePageMeta({
 div(:class="$b()")
   h1
     | Заказ игры
-  BaseSelectButtons(
+  RzdSelectButtons(
     v-model="game"
     :options="EVENTS_GAMES_OPTIONS"
     :class="$b('gameSelector')"
@@ -37,7 +37,7 @@ div(:class="$b()")
     data-section-title="Ведущий"
     :is-calendar-disabled="!game"
   )
-    BaseSearch(
+    RzdSearch(
       v-model="masterSearch"
       :is-disabled="!game"
       placeholder="ID или имя ведущего"
@@ -54,12 +54,12 @@ div(:class="$b()")
         :users="mockOtherUsers(20)"
         :class="$b('mastersList')"
       )
-    BaseTextarea(
+    RzdTextarea(
       v-model="desires"
       placeholder="Ваши пожелания на игру"
       :class="$b('desiresText')"
     )
-  BaseButton(
+  RzdButton(
     :type="EButtons.SUBMIT_GAME_ORDER"
     :disabled="!isOrderEnabled"
     :class="$b('submitButton')"

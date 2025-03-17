@@ -36,7 +36,7 @@ div(:class="$b()")
             )
               | Никита
           div(:class="$b('dataContainer', ['birthdate'])")
-            BaseIcon(
+            RzdIcon(
               :type="EIcons.GIFT"
               :size="EIconsSizes.S"
             )
@@ -44,7 +44,7 @@ div(:class="$b()")
               | 11.01.2000
           div(:class="$b('dataContainer', ['statistics'])")
             span
-              | Топ #1 
+              | Топ #1
             span 
               | Рейтинг 24600
             span
@@ -53,7 +53,7 @@ div(:class="$b()")
         to="/account/settings"
         :class="$b('settingsLink')"
       )
-        BaseButton(
+        RzdButton(
           :type="EButtons.USER_SETTINGS"
           :class="$b('settingsButton')"
         )
@@ -77,14 +77,17 @@ div(:class="$b()")
           span
             | 6150
   section(:class="$b('section', ['content'])")
-    div(:class="$b('ACCOUNT_TABSContainer')")
+    div(
+      v-if="false"
+      :class="$b('accountTabsContainer')"
+    )
       NuxtLink(
         v-for="({ id, label, icon }) of ACCOUNT_TABS"
         :key="id"
         :class="$b('tab', { active: id === tab })"
         :to="`/account?tab=${id}`"
       )
-        BaseIcon(:type="icon")
+        RzdIcon(:type="icon")
         span
           | {{ label }}
     UserEvents(v-if="tab === 'events'")
@@ -246,7 +249,7 @@ div(:class="$b()")
       font-size: vars.$fs-static-xs;
     }
   }
-  &__ACCOUNT_TABSContainer {
+  &__accountTabsContainer {
     @include flex((justify-content: center, gap: 24px));
   }
   &__tab {

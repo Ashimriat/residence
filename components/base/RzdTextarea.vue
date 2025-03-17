@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type TextareaProps } from 'primevue';
+import type { TextareaProps } from 'primevue';
 
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const {
   placeholder = '',
-  maxLength = 0
+  maxLength = 0,
 } = defineProps<Props>();
 
 const text = defineModel<string>({ required: true });
@@ -19,7 +19,7 @@ const passedProps = computed<TextareaProps>(() => {
   return { maxlength: maxLength };
 });
 
-const $b = useBEM('BaseTextarea');
+const $b = useBEM('RzdTextarea');
 </script>
 
 <template lang="pug">
@@ -39,7 +39,7 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-.BaseTextarea {
+.RzdTextarea {
   @include relative;
   width: 100%;
   &__text {

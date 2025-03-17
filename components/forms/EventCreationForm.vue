@@ -45,17 +45,17 @@ div(:class="$b()")
   )
     template(#option="{ option }")
       SubwayStation(v-bind="option")
-  BaseTextarea(
+  RzdTextarea(
     v-model="formData.description"
     placeholder="Описание"
     :max-length="123"
   )
-  BaseRadios(
+  RzdRadios(
     v-model="audienceParam"
     :options="AUDIENCE_TYPE_OPTIONS"
     is-resettable
   )
-  BaseRadios(
+  RzdRadios(
     v-model="specialParams"
     :options="SPECIAL_OPTIONS"
     is-resettable

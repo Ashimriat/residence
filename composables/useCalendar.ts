@@ -1,4 +1,4 @@
-import { type CalendarDate, type Time } from '~/components/DateTimeCalendar.vue';
+import type { CalendarDate, Time } from '~/components/DateTimeCalendar.vue';
 
 
 export default function useCalendar() {

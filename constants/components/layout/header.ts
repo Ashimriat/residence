@@ -1,11 +1,11 @@
 import { EIcons } from '~/constants/components';
-import { type AccordionContent } from '~/components/base/BaseAccordion.vue';
+import type { AccordionContent } from '~/components/base/RzdAccordion.vue';
 
 type AuthItem = {
   label: string;
   url: string;
   icon: EIcons;
-}
+};
 
 const CONTENT_IDS = {
   pages: crypto.randomUUID(),
@@ -14,8 +14,8 @@ const ACCORDION_CONTENT: AccordionContent[] = [
   {
     header: 'Страницы',
     id: CONTENT_IDS.pages,
-  }
-]
+  },
+];
 const AUTHED_ITEMS: AuthItem[][] = [
   [
     {
@@ -25,11 +25,11 @@ const AUTHED_ITEMS: AuthItem[][] = [
     },
   ],
   [
-    {
-      label: 'Рейтинг ведущих',
-      url: '/rating/masters',
-      icon: EIcons.ZAP,
-    },
+    // {
+    //   label: 'Рейтинг ведущих',
+    //   url: '/rating/masters',
+    //   icon: EIcons.ZAP,
+    // },
     {
       label: 'Рейтинг',
       url: '/rating',
@@ -37,30 +37,29 @@ const AUTHED_ITEMS: AuthItem[][] = [
     },
   ],
   [
-    {
-      label: 'Достижения',
-      url: '/account?tab=achievements',
-      icon: EIcons.AWARD,
-    },
-
-    {
-      label: 'Кланы',
-      url: '/account?tab=clans',
-      icon: EIcons.SHIELD,
-    },
-    {
-      label: 'Игроки',
-      url: '/account?tab=referrals',
-      icon: EIcons.USERS,
-    },
+    // {
+    //   label: 'Достижения',
+    //   url: '/account?tab=achievements',
+    //   icon: EIcons.AWARD,
+    // },
+    // {
+    //   label: 'Кланы',
+    //   url: '/account?tab=clans',
+    //   icon: EIcons.SHIELD,
+    // },
+    // {
+    //   label: 'Игроки',
+    //   url: '/account?tab=referrals',
+    //   icon: EIcons.USERS,
+    // },
   ],
   [
     {
       label: 'Настройки',
       url: '/account/settings',
       icon: EIcons.GEAR,
-    }
-  ]
+    },
+  ],
 ] as const;
 
 

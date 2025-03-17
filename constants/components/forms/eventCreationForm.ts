@@ -1,4 +1,4 @@
-import { type RadioOption } from '~/components/base/BaseRadios.vue';
+import { type RadioOption } from '~/components/base/RzdRadios.vue';
 import { type SpecialParams } from '~/components/forms/EventCreationForm.vue';
 
 

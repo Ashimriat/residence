@@ -39,7 +39,7 @@ const $b = useBEM('InviteToClan');
 
 <template lang="pug">
 div(:class="$b()")
-  BaseSearch(
+  RzdSearch(
     v-model="search"
     placeholder="ID игрока"
   )
@@ -57,16 +57,16 @@ div(:class="$b()")
           :avatar="userData.avatar"
           :name="userData.name"
         )
-        BaseButton(
+        RzdButton(
           :class="$b('userControlButton')"
           :type="i === 0 ? EButtons.ADD_PLAYER_TO_CLAN_SELECTION : EButtons.REMOVE_PLAYER_FROM_CLAN_SELECTION"
           @click="processSelection(userData)"
         )
-  BaseButton(
+  RzdButton(
     :type="EButtons.CONFIRM"
     @click="addSelectedPlayers"
   )
-  BaseButton(
+  RzdButton(
     :type="EButtons.CLOSE"
     @click="closeModal"
   )
