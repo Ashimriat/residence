@@ -1,1 +1,0 @@
-import{d as n,a as s,h as o,o as r,w as _,b as c,n as u,f as l,r as d,bh as f}from"./Di6wo0dh.js";const h=n({__name:"EventManage",setup(m){const a=s("EventManageLayout");return(e,p)=>{const t=f;return r(),o(t,{name:"default"},{default:_(()=>[c("div",{class:u(l(a)(""))},[d(e.$slots,"default")],2)]),_:3})}}});export{h as default};
