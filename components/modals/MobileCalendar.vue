@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { EButtons } from '~/constants/components';
-import { type CalendarDate, type Time } from '~/components/DateTimeCalendar.vue';
+import { EButtons } from '~/components/constants';
 
 
 export type MobileCalendarModalData = {
   withTimeSelect?: boolean;
   onSelect: (date: NonNullable<CalendarDate>, time: Time) => void;
-}
+};
+
 
 const { selectedDate, selectedTime } = useCalendar();
 
@@ -14,7 +14,7 @@ const { getModalData } = useModalDialog<MobileCalendarModalData>();
 const { onSelect, withTimeSelect } = getModalData();
 
 const confirm = () => onSelect(
-  selectedDate.value as NonNullable<CalendarDate>,
+  selectedDate.value,
   selectedTime.value,
 );
 
@@ -24,10 +24,10 @@ const $b = useBEM('MobileCalendar');
 <template lang="pug">
 div(:class="$b()")
   DateTimeCalendar(
-    as-desktop
-    :with-time="withTimeSelect"
     v-model:date="selectedDate"
     v-model:time="selectedTime"
+    as-desktop
+    :with-time="withTimeSelect"
   )
   RzdButton(
     :type="EButtons.CONFIRM"

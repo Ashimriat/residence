@@ -45,7 +45,7 @@ div(:class="$b()")
     h5
       | Абонементы
     div(:class="$b('subscriptionsContainer')")
-      Subscription(
+      EventSubscription(
         v-for="(data, i) of mockSubscriptions(2)"
         :key="`sub_${i}`"
         is-owned

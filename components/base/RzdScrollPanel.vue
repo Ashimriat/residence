@@ -3,7 +3,6 @@ type ByAxis<T> = {
   x: T;
   y: T;
 };
-
 type ByDevice = {
   desktop: number;
   mobile: number;
@@ -13,6 +12,7 @@ export type Props = {
   itemsInRow?: number | Partial<ByDevice>;
   gap?: number | Partial<ByAxis<number>>;
 };
+
 
 const {
   itemsInRow,

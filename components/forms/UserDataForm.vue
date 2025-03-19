@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import type { EButtons } from '~/constants/components';
-import type { EditableUserData } from '~/types/stores/user';
-import {
-  EIcons,
-  EIconsSizes,
-} from '~/constants/components';
+import type { EButtons } from '~/components/constants';
+import { EIcons, EIconsSizes } from '~/components/constants';
+
 
 type Props = {
   withoutSex?: boolean;
@@ -14,7 +11,8 @@ type Props = {
 type Emits = {
   additionalButton: [type: EButtons];
   dataSubmit: [data: EditableUserData];
-}
+};
+
 
 const {
   submitButton,

@@ -3,7 +3,7 @@ import {
   EButtons,
   EIcons,
   EIconsSizes,
-} from '~/constants/components';
+} from '~/components/constants';
 import { ACCOUNT_TABS, ACCOUNT_GAMES_ICONS } from '~/constants/pages';
 
 

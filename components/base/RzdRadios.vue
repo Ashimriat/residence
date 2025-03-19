@@ -9,6 +9,7 @@ type Props = {
   isResettable?: boolean;
 };
 
+
 const { options, isResettable } = defineProps<Props>();
 const selectedOption = defineModel<string>({ required: true });
 

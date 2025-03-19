@@ -4,6 +4,7 @@ type Props = {
   preserveSubcontent?: boolean;
 };
 
+
 const {
   orientation,
   preserveSubcontent = true,
@@ -12,7 +13,7 @@ const {
 const { isMobile } = useDevice();
 
 const direction = computed<'row' | 'column'>(
-  () => orientation ?? isMobile ? 'column' : 'row'
+  () => orientation ?? isMobile ? 'column' : 'row',
 );
 
 const slots = useSlots();

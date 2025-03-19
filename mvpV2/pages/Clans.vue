@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockClans } from '~/assets/mocks';
-import { EButtons, EIcons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 
 
 const AMOUNT_ON_PAGE = 4;
@@ -36,9 +36,9 @@ div(:class="$b()")
       :key="data.id"
       :is-clan-owner="true"
       :data="data"
-    )   
+    )
   div(:class="$b('topContainer')")
-    RzdSearch(     
+    RzdSearch(
       v-model="search"
       :class="$b('search')"
       placeholder="Название клана"

@@ -2,9 +2,10 @@
 type Props = {
   avatar?: string;
   name?: string;
-  isLinker?: boolean
+  isLinker?: boolean;
   isClanOwner?: boolean;
 };
+
 
 const { name, avatar, isLinker, isClanOwner } = defineProps<Props>();
 

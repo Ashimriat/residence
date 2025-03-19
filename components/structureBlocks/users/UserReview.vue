@@ -6,8 +6,9 @@ type Props = {
   text: string;
 };
 
+
 const {
-  username, avatar, game, text
+  username, avatar, game, text,
 } = defineProps<Props>();
 
 

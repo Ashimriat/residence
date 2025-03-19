@@ -6,7 +6,6 @@ type Props = {
 };
 
 
-/** Props & Emits */
 const { data, withAbon, isAccountMode } = defineProps<Props>();
 
 const {

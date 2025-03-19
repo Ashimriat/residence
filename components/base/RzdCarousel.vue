@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { type CarouselProps } from 'primevue';
-import RzdPagination from './RzdPagination.vue';
+import type { CarouselProps } from 'primevue';
 
 
 type Props = {

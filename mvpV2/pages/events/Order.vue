@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockOtherUsers } from '~/assets/mocks';
 import { EVENTS_GAMES_OPTIONS } from '~/constants/pages';
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 
 
 const game = ref<string>('');

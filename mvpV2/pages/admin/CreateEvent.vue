@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 import {
   EVENTS_GAMES_OPTIONS as BASE_GAMES_OPTIONS,
   EVENTS_OPTIONS,

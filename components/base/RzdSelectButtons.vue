@@ -1,8 +1,14 @@
 <script setup lang="ts">
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+
 type Props = {
   isInverted?: boolean;
   options: SelectOption[];
 };
+
 
 const {
   options,

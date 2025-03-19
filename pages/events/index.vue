@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mockEventsBigData, mockSubscriptions } from '~assets/mocks';
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 import { EVENTS_GAMES_DESCRIPTIONS } from '~/constants/pages';
 
 
@@ -40,7 +40,7 @@ div(:class="$b()")
     h2
       | Абонементы
     div(:class="$b('sectionContent')")
-      Subscription(
+      EventSubscription(
         v-for="(data, i) of mockSubscriptions(2)"
         :key="i"
         :data="data"

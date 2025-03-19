@@ -1,6 +1,6 @@
-type AllArgs = string | Array<string | boolean> | Record<string, boolean | undefined>;
+type AllArgs = string | (string | boolean)[] | Record<string, boolean | undefined>;
 type NotNameArgs = Exclude<AllArgs, string>;
-type ClassesDict = Record<string, boolean>;
+export type ClassesDict = Record<string, boolean>;
 
 const bMod = (...src: NotNameArgs[]): ClassesDict => {
   let res: Record<string, boolean> = {};
@@ -8,12 +8,12 @@ const bMod = (...src: NotNameArgs[]): ClassesDict => {
     if (Array.isArray(val)) {
       res = {
         ...res,
-        ...val.reduce((acc, mod) => {
+        ...val.reduce<ClassesDict>((acc, mod) => {
           if (typeof mod === 'string') {
             acc[mod] = true;
           }
           return acc;
-        }, <ClassesDict>{}),
+        }, {}),
       };
     } else {
       getEntries(val).forEach(([key, value]) => {
@@ -41,10 +41,10 @@ export default function useBEM(componentName: string) {
         ? $b(args[0], classesDict)
         : $b(classesDict);
     }
-    const argsToProcessMatchesDict = argsToProcessMatchesArr.reduce((acc, val) => {
+    const argsToProcessMatchesDict = argsToProcessMatchesArr.reduce<ClassesDict>((acc, val) => {
       acc[val.replaceAll('_', '-')] = true;
       return acc;
-    }, <ClassesDict>{});
+    }, {});
     const kebabMatches = res.match(/(\w{1,}(-\w{1,})+)/g);
     (kebabMatches ?? []).forEach((match) => {
       let replacement!: string;
@@ -61,4 +61,3 @@ export default function useBEM(componentName: string) {
     return res;
   };
 }
-export type { ClassesDict };

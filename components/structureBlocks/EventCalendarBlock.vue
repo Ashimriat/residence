@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { type CalendarDate, type Time } from '../DateTimeCalendar.vue';
-
-
 type Props = {
   dataSectionTitle: string;
   isCalendarDisabled?: boolean;

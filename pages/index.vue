@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   EIcons, EIconsSizes, EButtons,
-} from '~/constants/components';
+} from '~/components/constants';
 import {
   mockText, mockEventsBigData, mockGalleryImages, mockReviews,
 } from '~/assets/mocks';

@@ -6,11 +6,12 @@ type Props = {
   withPagination?: boolean;
 };
 
+
 const {
   eventsData,
   eventsOnPageAmount,
   withCalendar,
-  withPagination
+  withPagination,
 } = defineProps<Props>();
 
 const TABS_LIST: TabData[] = [
@@ -22,7 +23,7 @@ const TABS_LIST: TabData[] = [
   { label: 'Покер', id: 'poker' },
   { label: 'Активности', id: 'activity' },
   { label: 'Вечеринки', id: 'party' },
-]
+];
 const activeTab = ref<string>(TABS_LIST[0].id);
 
 const { selectedDate } = useCalendar();

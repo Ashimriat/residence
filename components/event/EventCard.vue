@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { EButtons, EIcons, EIconsSizes } from '~/constants/components';
+import { EButtons, EIcons, EIconsSizes } from '~/components/constants';
 
-/** Local Types & Variables */
+
 type Props = {
   withDetails?: boolean;
   isAccountMode?: boolean;
   eventData: EventData;
 };
 type Emits = {
-  signUp: [void]
+  signUp: [];
 };
 
 

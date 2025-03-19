@@ -1,23 +1,23 @@
-import { type MasterSelectModalData } from '~/mvpV2/pages/admin/CreateEvent.vue';
 import SignIn from '~/components/modals/SignIn.vue';
 import SignUp from '~/components/modals/SignUp.vue';
-import MerchPurchase from '~/components/modals/MerchPurchase.vue';
-import AchievementDetails from '~/components/modals/AchievementDetails.vue';
-import ClanApplication from '~/components/modals/clan/ClanApplication.vue';
-import ClanCreated from '~/components/modals/clan/ClanCreated.vue';
-import ClanParticipants from '~/components/modals/clan/ClanParticipants.vue';
-import CreateClan from '~/components/modals/clan/CreateClan.vue';
-import InviteToClan from '~/components/modals/clan/InviteToClan.vue';
-import MobileCalendar, { type MobileCalendarModalData } from '~/components/modals/MobileCalendar.vue';
-import MasterSelect from '~/components/modals/MasterSelect.vue';
-import MafiaRating from '~/components/modals/rating/MafiaRating.vue';
+import MobileCalendar from '~/components/modals/MobileCalendar.vue';
+import MafiaRating from '~/components/modals/rating/MafiaRating/MafiaRating.vue';
+
+import MerchPurchase from '~/mvpV2/components/modals/MerchPurchase.vue';
+import AchievementDetails from '~/mvpV2/components/modals/AchievementDetails.vue';
+import ClanApplication from '~/mvpV2/components/modals/clan/ClanApplication.vue';
+import ClanCreated from '~/mvpV2/components/modals/clan/ClanCreated.vue';
+import ClanParticipants from '~/mvpV2/components/modals/clan/ClanParticipants.vue';
+import CreateClan from '~/mvpV2/components/modals/clan/CreateClan.vue';
+import InviteToClan from '~/mvpV2/components/modals/clan/InviteToClan.vue';
+import MasterSelect from '~/mvpV2/components/modals/MasterSelect.vue';
 
 
 type DialogRef<T> = {
   value: {
     close: () => void;
     data: T;
-  }
+  };
 };
 
 type OpenParams<T> = {
@@ -45,7 +45,7 @@ export default function useModalDialog<T>() {
   function openModal<P>(
     content: any,
     params?: OpenParams<P>,
-    omitModalClose = false
+    omitModalClose = false,
   ): void {
     dialog.open(content, {
       props: {
@@ -67,7 +67,7 @@ export default function useModalDialog<T>() {
   }
 
   function getModalData(): T {
-    return (dialogRef as DialogRef<T>).value.data;
+    return (dialogRef!).value.data;
   }
 
   function openSignIn(): void {

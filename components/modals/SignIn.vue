@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { mockUserData } from '~/assets/mocks';
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
+
 
 const $b = useBEM('SignIn');
 const userStore = useUserStore();

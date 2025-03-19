@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { type Props as RzdScrollPanelProps } from '~/components/base/RzdScrollPanel.vue'
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 
 
 type Props = RzdScrollPanelProps & {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-/** Local Types & Variables */
 export type AccordionContent = {
   header: string;
   id: string;
@@ -10,7 +9,6 @@ type Props = {
 };
 
 
-/** Props & Emits */
 const { content } = defineProps<Props>();
 
 const $b = useBEM('RzdAccordion');

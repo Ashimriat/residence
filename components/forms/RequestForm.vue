@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import type { EButtons } from '~/constants/components';
+import type { EButtons } from '~/components/constants';
 
+
+export type FormData = {
+  selectOption: string | null;
+  name: string;
+  telegram: string;
+  text: string;
+};
 
 type Props = {
   title: string;
@@ -10,8 +17,9 @@ type Props = {
   buttonType: EButtons;
 };
 type Emits = {
-  submit: [data: RequestFormData];
+  submit: [data: FormData];
 };
+
 
 /** Props & Emits */
 const {

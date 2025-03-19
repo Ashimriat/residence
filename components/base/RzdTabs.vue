@@ -1,4 +1,10 @@
 <script setup lang="ts">
+export type TabData = {
+  label: string;
+  id: string;
+};
+
+
 type Props = {
   tabs: TabData[];
 };

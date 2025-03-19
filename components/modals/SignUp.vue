@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { EditableUserData } from '~/types/stores/user';
 import { mockUserData } from '~/assets/mocks';
-import { EButtons } from '~/constants/components';
+import { EButtons } from '~/components/constants';
 
 
 const { openSignIn, closeModal } = useModalDialog();

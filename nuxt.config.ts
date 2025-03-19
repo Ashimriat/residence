@@ -25,6 +25,14 @@ export default defineNuxtConfig({
     pageTransition: false,
     layoutTransition: false,
   },
+  imports: {
+    dirs: [
+      'composables',
+      'utils',
+      'types/**',
+      'stores/**/store.ts',
+    ],
+  },
   compatibilityDate: '2024-11-01',
   alias: {
     '~assets': path.resolve(import.meta.dirname, 'assets'),

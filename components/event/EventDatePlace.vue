@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { SubwayData } from '~/types/data/subway';
-import type { Time } from '../DateTimeCalendar.vue';
-import { EIcons } from '~/constants/components';
+import { EIcons } from '~/components/constants';
 
 
 type Props = {

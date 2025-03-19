@@ -3,7 +3,7 @@ import Logo from '~assets/images/logo/light.svg';
 import {
   EIcons,
   EButtons,
-} from '~/constants/components';
+} from '~/components/constants';
 import { FAQ_SECTIONS } from '~/constants/pages';
 
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { EButtons } from '~/constants/components';;
-import { EVENTS_GAMES_RULES, EGameTypes } from '~/constants/pages';
+import type { EGameTypes } from '~/constants/pages';
+import { EButtons } from '~/components/constants';
+import { EVENTS_GAMES_RULES } from '~/constants/pages';
 
 
 const { isAdmin } = storeToRefs(useUserStore());
