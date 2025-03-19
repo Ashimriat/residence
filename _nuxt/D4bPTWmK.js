@@ -1,1 +1,0 @@
-import t from"./NGdog2sp.js";import"./Lrk-fiIZ.js";import"./CMDZYUtB.js";var r={name:"InputSwitch",extends:t,mounted:function(){console.warn("Deprecated since v4. Use ToggleSwitch component instead.")}};export{r as default};

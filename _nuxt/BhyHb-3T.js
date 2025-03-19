@@ -1,0 +1,1 @@
+import{d as a,u as s,c as n,n as o,a as r,o as t}from"./Dmc01CeK.js";const p=a({__name:"Gallery",setup(c){const e=s("Gallery");return(l,_)=>(t(),n("div",{class:o(r(e)())},"Галлерея",2))}});export{p as default};
