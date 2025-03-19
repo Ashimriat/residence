@@ -5,7 +5,7 @@ import { EIcons } from '~/components/constants';
 type Props = {
   date: string;
   time: Time;
-  subway: SubwayData;
+  subway: SubwayStationProps;
 };
 
 

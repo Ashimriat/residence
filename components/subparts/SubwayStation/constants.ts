@@ -1,7 +1,4 @@
-import type { SubwayData } from '~/types/data/subway';
-
-
-const SUBWAY_BRANCHES_COLORS_DICT: Record<SubwayData['branchType'], string> = {
+const SUBWAY_BRANCHES_COLORS_DICT: Record<SubwayStationProps['branchType'], string> = {
   standard1: '#E42313',
   standard2: '#4BAF4F',
   standard3: '#0071B9',
@@ -25,7 +22,7 @@ const SUBWAY_BRANCHES_COLORS_DICT: Record<SubwayData['branchType'], string> = {
   mcd4b: '#41B384',
 } as const;
 
-const SUBWAY_STATIONS: SubwayData[] = [
+const SUBWAY_STATIONS: SubwayStationProps[] = [
   {
     branchType: 'standard1',
     stationName: 'Красные ворота',

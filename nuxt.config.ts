@@ -29,8 +29,8 @@ export default defineNuxtConfig({
     dirs: [
       'composables',
       'utils',
+      'stores',
       'types/**',
-      'stores/**/store.ts',
     ],
   },
   compatibilityDate: '2024-11-01',

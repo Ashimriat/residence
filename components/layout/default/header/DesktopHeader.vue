@@ -20,7 +20,10 @@ div(:class="$b()")
     div(:class="$b('logoContainer')")
       NuxtLink(to="/")
         Logo(:class="$b('logo')")
-    div(:class="$b('locationBlock')")
+    div(
+      v-if="false"
+      :class="$b('locationBlock')"
+    )
       RzdIcon(:type="EIcons.LOCATION")
       span
         | Москва

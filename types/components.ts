@@ -10,5 +10,7 @@ export type { FormData as EventCreationFormData, SpecialParams } from '~/mvpV2/c
 
 // modals
 export type { MobileCalendarModalData } from '~/components/modals/MobileCalendar.vue';
-// rest
+// composites
 export type { CalendarDate, Time } from '~/components/composites/DateTimeCalendar/DateTimeCalendar.vue';
+// subparts
+export type { Props as SubwayStationProps } from '~/components/subparts/SubwayStation/SubwayStation.vue';

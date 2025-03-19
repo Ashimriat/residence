@@ -2,7 +2,15 @@
 import { SUBWAY_BRANCHES_COLORS_DICT } from './constants';
 
 
-const { branchType, stationName } = defineProps<SubwayData>();
+type Branch = `standard${number}${string}` | 'mcc' | `mcd${number}${string}`;
+
+export type Props = {
+  branchType: Branch;
+  stationName: string;
+  id: string;
+};
+
+const { branchType, stationName } = defineProps<Props>();
 
 const backgroundColor = computed<string>(
   () => SUBWAY_BRANCHES_COLORS_DICT[branchType],

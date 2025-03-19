@@ -1,13 +1,13 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
-import pluginStylistic from '@stylistic/eslint-plugin'
+import pluginStylistic from '@stylistic/eslint-plugin';
 import tsEslint from 'typescript-eslint';
-import pluginCompat from 'eslint-plugin-compat'
-import pluginImportX from 'eslint-plugin-import-x'
+import pluginCompat from 'eslint-plugin-compat';
+import pluginImportX from 'eslint-plugin-import-x';
 import vueParser from 'vue-eslint-parser';
 import pluginVue from 'eslint-plugin-vue';
 import { deepmerge } from 'deepmerge-ts';
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from './.nuxt/eslint.config.mjs';
 
 
 const compat = new FlatCompat({
@@ -71,7 +71,7 @@ export default withNuxt(
         {
           properties: 'never',
           ignoreDestructuring: false,
-        }
+        },
       ],
       'capitalized-comments': ['off', 'never', {
         line: {

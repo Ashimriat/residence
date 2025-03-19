@@ -1,5 +1,5 @@
 export type LocationData = {
-  subway: SubwayData;
+  subway: SubwayStationProps;
   address: string;
   mapLink: string;
 };

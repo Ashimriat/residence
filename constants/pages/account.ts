@@ -2,7 +2,7 @@ import MafiaLogo from '~assets/images/games/mafia.svg';
 import DndLogo from '~assets/images/games/dnd.svg';
 import BunkerLogo from '~assets/images/games/bunker.svg';
 import PokerLogo from '~assets/images/games/poker.svg';
-import { EIcons } from '~/constants/components';
+import { EIcons } from '~/components/constants';
 
 
 const GAMES_ICONS = [MafiaLogo, BunkerLogo, DndLogo, PokerLogo];
