@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { RzdScrollPanelProps } from '#imports';
 import { EButtons } from '~/components/constants';
 
-
-type Props = RzdScrollPanelProps & {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+interface Props extends RzdScrollPanelProps {
   users: Participant[];
   isMasters?: boolean;
   withExpel?: boolean;
@@ -25,13 +26,13 @@ const {
   itemsInRow,
   gap,
 } = defineProps<Props>();
-const emit = defineEmits<Emits>(); 
+const emit = defineEmits<Emits>();
 
 
 const { providedData, checkIsClanOwner } = useUserStore();
 
 const showList = defineModel<boolean>('showList', { default: true });
-const selectedUser = defineModel<string>('selected', { default: null });
+const selectedUser = defineModel<string | null>('selected', { default: 'null' });
 
 const isSelectableUser = computed<boolean>(() => selectedUser.value !== null);
 
@@ -65,7 +66,7 @@ RzdCard(
   )
     RzdScrollPanel(
       :gap
-      :items-in-row="itemsInRow"
+      :items-in-row
       :class="$b('list')"
     )
       div(

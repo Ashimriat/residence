@@ -7,7 +7,7 @@ const users = mockOtherUsers(40);
 
 const events = mockEventsData(3);
 
-const { openGameRating } = useModalDialog();
+const { openGameRating } = useModal();
 
 const $b = useBEM('EventManagePage');
 </script>

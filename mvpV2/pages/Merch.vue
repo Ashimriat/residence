@@ -2,7 +2,7 @@
 import { mockMerchData } from '~assets/mocks';
 
 
-const { seeMerch } = useModalDialog();
+const { seeMerch } = useModal();
 const $b = useBEM('MerchPage');
 </script>
 

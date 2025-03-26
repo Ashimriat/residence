@@ -32,7 +32,7 @@ const {
 const emit = defineEmits<Emits>();
 
 
-const formData = ref<RequestFormData>({
+const formData = ref<FormData>({
   selectOption: null,
   name: '',
   telegram: '',

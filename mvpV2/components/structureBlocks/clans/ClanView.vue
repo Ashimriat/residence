@@ -14,7 +14,7 @@ const isParticipantsDisplayed = ref<boolean>(isDesktop);
 const { checkIsClanOwner } = useUserStore();
 const isClanOwner = checkIsClanOwner(data.ownerId);
 
-const { inviteToClan } = useModalDialog();
+const { inviteToClan } = useModal();
 
 function toggleParticipantsDisplay(): void {
   isParticipantsDisplayed.value = !isParticipantsDisplayed.value;

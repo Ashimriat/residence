@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/constants';
 
-const { getModalData, closeModal } = useModalDialog<ClanData>();
+const { getModalData, closeModal } = useModal<ClanData>();
 const { title, participants } = getModalData();
 
 

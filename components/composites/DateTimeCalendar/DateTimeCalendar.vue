@@ -27,7 +27,7 @@ const selectedDate = defineModel<CalendarDate>('date', { required: true });
 const selectedTime = defineModel<string>('time', { default: null });
 
 const { isMobile } = useDevice();
-const { closeModal, showMobileCalendar } = useModalDialog();
+const { closeModal, showMobileCalendar } = useModal();
 
 const selectedDateTimeLabel = computed<string>(() => {
   if (!selectedDate.value) return `Выбрать дату${withTimeSelect.value ? ' и время' : ''}`;

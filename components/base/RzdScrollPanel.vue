@@ -7,7 +7,6 @@ type ByDevice = {
   desktop: number;
   mobile: number;
 };
-
 export type Props = {
   itemsInRow?: number | Partial<ByDevice>;
   gap?: number | Partial<ByAxis<number>>;
@@ -32,8 +31,7 @@ const usedGap = computed<ByAxis<number>>(() => {
     y /= 2;
   }
   return { x, y };
-})
-
+});
 
 const fGap = computed<ByAxis<string>>(() => ({
   x: `${usedGap.value.x}px`,

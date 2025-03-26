@@ -7,7 +7,7 @@ const data = ref<ClanCreationData>({
   image: undefined,
 });
 
-const { showClanCreated } = useModalDialog();
+const { showClanCreated } = useModal();
 
 const $b = useBEM('CreateClan');
 </script>

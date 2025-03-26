@@ -5,7 +5,7 @@ import Logo from '~/assets/images/logo/small.svg';
 
 const userStore = useUserStore();
 const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
-const { openSignIn } = useModalDialog();
+const { openSignIn } = useModal();
 
 function addEvent(): void {
   
@@ -45,7 +45,7 @@ div(:class="$b()")
           :class="$b('userButton')"
           @click="addEvent"
         )
-      Notifications
+      //- Notifications
       NuxtLink(to="/account")
         PAvatar(label="UI")
 </template>

@@ -6,7 +6,8 @@ import { EButtons } from '~/components/constants';
 const $b = useBEM('SignIn');
 const userStore = useUserStore();
 const { setUserData } = userStore;
-const { openSignUp, closeModal } = useModalDialog();
+const { isDesktop } = useDevice();
+const { openSignUp, closeModal } = useModal();
 
 function login(): void {
   setUserData(mockUserData());
@@ -15,7 +16,7 @@ function login(): void {
 </script>
 
 <template lang="pug">
-div(:class="$b()")
+div(:class="$b({ desktop: isDesktop })")
   PInputText(
     v-keyfilter.int
     placeholder="Телефон"
@@ -44,10 +45,11 @@ div(:class="$b()")
 <style lang="scss">
 .SignIn {
   @include flexColumn((gap: vars.$gaps-g16));
-
-  width: 460px;
-  background-color: vars.$colors-bg;
+  
   box-sizing: content-box;
+  &--desktop {
+    max-width: 460px;
+  }
   &__input {
     border-radius: vars.$br-s;
     border: 1px solid vars.$colors-greyLight;

@@ -9,7 +9,7 @@ const {
   itemsInRow = 3,
 } = defineProps<Props>();
 
-const { seeAchievement } = useModalDialog();
+const { seeAchievement } = useModal();
 const $b = useBEM('AchievementsList');
 </script>
 

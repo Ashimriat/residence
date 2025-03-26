@@ -4,7 +4,7 @@ import type { MasterSelectModalData } from '~/mvpV2/pages/admin/CreateEvent.vue'
 import { EButtons } from '~/components/constants';
 
 
-const { getModalData } = useModalDialog<MasterSelectModalData>();
+const { getModalData } = useModal<MasterSelectModalData>();
 const { onSelect } = getModalData();
 
 const search = ref<string>('');

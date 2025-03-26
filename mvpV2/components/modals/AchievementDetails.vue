@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { getModalData } = useModalDialog<AchievementData>();
+const { getModalData } = useModal<AchievementData>();
 const { title, description } = getModalData();
 
 const $b = useBEM('AchievementDetails');

@@ -20,7 +20,7 @@ onBeforeMount(() => {
 NuxtRouteAnnouncer
 NuxtLayout
   NuxtPage
-PDynamicDialog
+RzdModals
 </template>
 
 <style lang="scss">

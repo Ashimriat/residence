@@ -10,7 +10,7 @@ const search = ref<string>('');
 
 const { providedData } = useUserStore();
 const { page, displayedItems } = usePagination(clans, AMOUNT_ON_PAGE);
-const { createClan, showClanRequestSent, seeClanParticipants } = useModalDialog();
+const { createClan, showClanRequestSent, seeClanParticipants } = useModal();
 
 const $b = useBEM('ClansPage');
 </script>

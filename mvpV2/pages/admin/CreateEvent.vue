@@ -24,7 +24,7 @@ const masterData = ref<Participant | null>(null);
 
 const { selectedDate, selectedTime } = useCalendar();
 
-const { showMasterSelect } = useModalDialog();
+const { showMasterSelect } = useModal();
 
 function openMasterSelectModal(): void {
   showMasterSelect({

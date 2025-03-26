@@ -21,8 +21,8 @@ export default withNuxt(
   //   name: 'eslint-recommended'
   // },
   [
-    ...tsEslint.configs.recommendedTypeChecked,
-    ...tsEslint.configs.stylisticTypeChecked,
+    ...tsEslint.configs.strict,
+    ...tsEslint.configs.stylistic,
   ].reduce((acc, val) => {
     if (val.name === 'typescript-eslint/base') return acc;
     const objIndex = acc.findIndex(({ name }) => name === val.name);
@@ -44,9 +44,12 @@ export default withNuxt(
       jsx: false,
     }),
     name: '@stylistic/rules',
+    rules: {
+      '@stylistic/brace-style': ['error', '1tbs'],
+    }
   },
-  // pluginVue.configs['flat/recommended'],
-  fixupConfigRules({
+  ...pluginVue.configs['flat/recommended'],
+  ...fixupConfigRules({
     ...compat.config({
       extends: [
         'plugin:vue-pug/vue3-recommended',
@@ -498,7 +501,7 @@ export default withNuxt(
   //     '@typescript-eslint/consistent-indexed-object-style': 'off', // ||
   //     '@typescript-eslint/consistent-return': 'off', // ||
   //     '@typescript-eslint/consistent-type-assertions': 'off', // ||
-    '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
+          '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
   //     '@typescript-eslint/consistent-type-exports': 'off', // ||
   //     '@typescript-eslint/consistent-type-imports': 'off', // ||
   //     '@typescript-eslint/default-param-last': 'error',

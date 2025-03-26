@@ -18,7 +18,7 @@ import {
 const userStore = useUserStore();
 const { isLoggedIn, isAdmin, userData } = storeToRefs(userStore);
 
-const { openSignIn } = useModalDialog();
+const { openSignIn } = useModal();
 const route = useRoute();
 
 
@@ -54,7 +54,7 @@ div(:class="$b()")
       :class="$b('subcontainer')"
       @click="toggleMenu"
     )
-      Notifications(v-if="isLoggedIn")
+      //- Notifications(v-if="isLoggedIn")
       RzdIcon(:type="EIcons.BURGER")
   div(
     v-if="isOpen"
@@ -79,10 +79,10 @@ div(:class="$b()")
         )
         span
           | {{ userData.name }}
-      Notifications(
-        with-bg
-        :class="$b('notificationsLink')"
-      )
+      //- Notifications(
+      //-   with-bg
+      //-   :class="$b('notificationsLink')"
+      //- )
     RzdAccordion(:content="ACCORDION_CONTENT")
       template(#[CONTENT_IDS.pages])
         NuxtLink(

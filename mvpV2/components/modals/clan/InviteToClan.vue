@@ -3,7 +3,7 @@ import { mockOtherUsers } from '~/assets/mocks';
 import { EButtons } from '~/components/constants';
 
 
-const { getModalData, closeModal } = useModalDialog<string>();
+const { getModalData, closeModal } = useModal<string>();
 
 const search = ref<string>('');
 

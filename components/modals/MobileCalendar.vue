@@ -10,13 +10,15 @@ export type MobileCalendarModalData = {
 
 const { selectedDate, selectedTime } = useCalendar();
 
-const { getModalData } = useModalDialog<MobileCalendarModalData>();
+const { getModalData } = useModal<MobileCalendarModalData>();
 const { onSelect, withTimeSelect } = getModalData();
 
-const confirm = () => onSelect(
-  selectedDate.value,
-  selectedTime.value,
-);
+const confirm = () => {
+  onSelect(
+    selectedDate.value,
+    selectedTime.value,
+  );
+};
 
 const $b = useBEM('MobileCalendar');
 </script>

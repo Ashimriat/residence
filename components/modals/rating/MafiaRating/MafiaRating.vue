@@ -15,7 +15,7 @@ type GameRating = {
 };
 
 
-const { getModalData } = useModalDialog<EventData>();
+const { getModalData } = useModal<EventData>();
 
 const eventData = getModalData();
 

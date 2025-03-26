@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/constants';
 
-const { closeModal } = useModalDialog();
+const { closeModal } = useModal();
 
 function processInvite(): void {
   closeModal();
