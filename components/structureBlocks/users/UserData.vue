@@ -2,18 +2,22 @@
 type Props = {
   avatar?: string;
   name?: string;
-  isLinker?: boolean;
+  isR?: boolean;
   isClanOwner?: boolean;
 };
 
 
-const { name, avatar, isLinker, isClanOwner } = defineProps<Props>();
+const route = useRoute()
+
+const { name, avatar, isClanOwner } = defineProps<Props>();
+
+const isRating = computed<boolean>(() => route.fullPath.includes('rating'));
 
 const $b = useBEM('UserData');
 </script>
 
 <template lang="pug">
-div(:class="$b({ linker: isLinker, owner: isClanOwner })")
+div(:class="$b({ ranked: isRating, owner: isClanOwner })")
   RzdAvatar(
     label="UI"
     shape="circle"
@@ -28,14 +32,16 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
 .UserData {
   @include flex((align-items: center, gap: vars.$gaps-g12));
   width: fit-content;
-  &--linker {
+  &--ranked {
     --rzd-avatar-size: 28px;
-    --rzd-avatar-label-fontsize: #{vars.$fs-xs};
+    --rzd-avatar-label-fontsize: #{vars.$fs-x2s};
     border: var(--linkerBorderWidth, 3px) solid #{vars.$colors-black};
     padding: var(--linkerPadding, 12px);
     border-radius: vars.$br-s; 
     height: var(--linkerHeight, 48px);
     width: 100%;
+
+    font: vars.$fonts-buttonL;
   }
   &--owner > div {
     @include relative;

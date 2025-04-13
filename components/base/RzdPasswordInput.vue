@@ -5,8 +5,6 @@ import type { PasswordProps } from 'primevue';
 const props = defineProps<PasswordProps>()
 const value = defineModel<string>({ required: true })
 
-
-
 const $b = useBEM('RzdPasswordInput');
 </script>
 
@@ -14,7 +12,7 @@ const $b = useBEM('RzdPasswordInput');
 PPassword(
   v-bind="props"
   v-model="value"
-  :pt:root:class="$b()"
+  :pt:root:class="$b([`size_${props.size}`])"
   :pt:pc-input-text:root:class="$b('input')"
   toggle-mask
   :feedback="false"
@@ -23,9 +21,17 @@ PPassword(
 
 <style lang="scss">
 .RzdPasswordInput {
+  &--size {
+    &_m {
+      --input-height: 44px;
+    }
+    &_l {
+      --input-height: 48px;
+    }
+  }
   &__input {
     @include fullsize;
-    @include component-input;
+    @include component-input(var(--input-height));
   }
 }
 

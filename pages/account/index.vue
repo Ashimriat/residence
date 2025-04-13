@@ -26,17 +26,15 @@ div(:class="$b()")
   section(:class="$b('section', ['user'])")
     div(:class="$b('subsection', ['data'])")
       div(:class="$b('userDataWrapper')")
-        RzdAvatar(
-          label="UI"
-          :class="$b('avatar')"
-        )
+        RzdAvatar(label="UI")
         div(:class="$b('userData')")
           div(:class="$b('dataContainer', ['user'])")
             RzdOverlayBadge(
               severity="contrast"
               value="Постоялец"
             )
-              | {{ userData.name }}
+              span
+                | {{ userData.name }}
           div(:class="$b('dataContainer', ['birthdate'])")
             RzdIcon(
               :type="EIcons.GIFT"
@@ -51,14 +49,11 @@ div(:class="$b()")
               | Рейтинг 24600
             span
               | 300 баллов
-      NuxtLink(
-        to="/account/settings"
+      RzdLinkButton(
+        :type="EButtons.USER_SETTINGS"
+        link="/account/settings"
         :class="$b('settingsLink')"
       )
-        RzdButton(
-          :type="EButtons.USER_SETTINGS"
-          :class="$b('settingsButton')"
-        )
     div(:class="$b('subsection', ['rating'])")
       TitleWithLink(
         title="Рейтинг"
@@ -101,9 +96,11 @@ div(:class="$b()")
 <style lang="scss">
 .AccountPage {
   @include flex-column((gap: 2.5rem));
-  --badgeTranslateX: calc(100% + #{vars.$gaps-g8});
-  --badgeTranslateY: 2px;
-  --badgeFontSize: #{vars.$fs-x2s};
+  --rzd-badge-translateX: calc(100% + #{vars.$gaps-g8});
+  --rzd-badge-translateY: 0px;
+  --rzd-avatar-size: 96px;
+  --rzd-avatar-label-fontsize: 40px;
+  
   &__section {
     @include flex((gap: 1rem));
     &--user {
@@ -119,9 +116,6 @@ div(:class="$b()")
     border-radius: vars.$br-l;
     flex-grow: 1;
     min-height: 120px;
-    & * {
-      font-weight: vars.$fw-bold;
-    }
     &--data {
       @include flex((
         justify-content: space-between,
@@ -138,10 +132,6 @@ div(:class="$b()")
       flex-basis: 32%;
     }
   }
-  &__avatar {
-    --rzd-avatar-size: 96px;
-    --rzd-avatar-label-fontsize: 40px;
-  }
   &__userDataWrapper {
     @include flex((
       align-items: center,
@@ -154,24 +144,21 @@ div(:class="$b()")
     height: 70px;
   }
   &__dataContainer {
-    @include flex((align-items: center, ));
-    &--user {
-      font-size: var(--userFontSize, #{vars.$fs-s});
-      & > div {
+    @include flex((align-items: center));
+    &--user,
+    &--birthdate {
+      font: vars.$fonts-textBoldM;
+      & > span {
         color: vars.$colors-black;
       }
     }
     &--birthdate {
-      font-size: vars.$fs-s;
       gap: vars.$gaps-g4;
-      &,
-      & span {
-        color: vars.$colors-black;
-      }
     }
     &--statistics {
-      font-size: vars.$fs-xs;
+      font: vars.$fonts-textBoldS;
       gap: vars.$gaps-g12;
+      color: vars.$colors-black;
       & span {
         @include relative;
         &:first-of-type,
@@ -181,22 +168,15 @@ div(:class="$b()")
             background-color: vars.$colors-black,
             width: 4px,
             height: 4px,
-            top: 5px,
+            top: 4px,
             right: -9px,
           ));
-          & span {
-            color: vars.$colors-black;
-          }
         }
         &:last-of-type {
           color: vars.$colors-beige;
         }
       }
     }
-  }
-  &__userName {
-    font-size: vars.$fs-s;
-    font-weight: vars.$fw-bold;
   }
   &__userTitle {
     font-size: vars.$fs-x2s;
@@ -210,37 +190,15 @@ div(:class="$b()")
   }
   &__settingsLink {
     width: var(--settingsButtonWidth, initial);
-  }
-  &__settingsButton {
-    --buttonGap: 0;
-    --buttonLabelFontSize: #{vars.$fs-xs};
-    width: 112px;
-    min-width: var(--settingsButtonMinWidth, initial);
     height: 24px;
-    border-radius: vars.$br-x2s;
-    border-width: 1px;
-    justify-content: center;
-    & span {
-      margin-left: 4px;
-      font-size: vars.$fs-xs;
-    }
   }
-
   &__commonRatingContainer {
     @include flex((justify-content: space-between, align-items: center));
   }
   &__userRating {
-    font-size: var(--static-fontSize-m-s);
+    font: vars.$fonts-textBoldM;
     & span {
       color: vars.$colors-beige;
-    }
-  }
-  &__ratingLink {
-    @include flex((gap: vars.$gaps-g4));
-    font-size: 12px;
-    cursor: pointer;
-    & span {
-      text-decoration: underline;
     }
   }
   &__gamesRatingContainer {
@@ -248,12 +206,10 @@ div(:class="$b()")
   }
   &__gameRating {
     @include flex-column((align-items: center, gap: 4px));
+    font: vars.$fonts-textBoldS;
     & svg {
       width: 32px;
       height: 32px;
-    }
-    & span {
-      font-size: vars.$fs-xs;
     }
   }
   &__accountTabsContainer {
@@ -266,7 +222,7 @@ div(:class="$b()")
     font-weight: vars.$fw-midHeavy;
     font-size: var(--static-fontSize-s-xs);
     padding-bottom: 10px;
-    --iconStroke: #{vars.$colors-black};
+    --rzd-icon-color: #{vars.$colors-black};
     &--active {
       border-color: vars.$colors-beige;
     }

@@ -37,7 +37,7 @@ component(
   min-height: v-bind('finalSize');
   width: v-bind('finalSize');
   height: v-bind('finalSize');
-  stroke: var(--iconStroke);
+  stroke: var(--rzd-icon-color);
   &--clickable {
     cursor: pointer;
   }

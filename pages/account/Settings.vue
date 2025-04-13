@@ -15,7 +15,6 @@ function handleSubmit(data: EditableUserData): void {
 <template lang="pug">
 div(:class="$b()")
   UserDataForm(
-    type="settings"
     :submit-button="EButtons.SAVE_CHANGES"
     @data-submit="handleSubmit"
   )

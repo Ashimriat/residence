@@ -4,8 +4,6 @@ import { EIcons, EIconsSizes } from '~/components/constants';
 
 
 type Props = {
-  type: 'registration' | 'settings'
-  withoutSex?: boolean;
   submitButton: EButtons;
   additionalButtons?: EButtons[];
 };
@@ -15,20 +13,23 @@ type Emits = {
 };
 
 
+
 const {
-  type,
   submitButton,
   additionalButtons = [],
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const { userData } = useUserStore();
 
-const data = ref<EditableUserData>({ ...userData });
+const route = useRoute()
+const { userData } = storeToRefs(useUserStore());
+
+const data = ref<EditableUserData>({ ...userData.value });
+const isPrivateData = ref<boolean>(false)
 
 const isDataChanged = computed<boolean>(() => {
   for (const [key, value] of getEntries(data.value)) {
-    if (value !== userData[key]) {
+    if (value !== userData.value[key]) {
       return true;
     }
   }
@@ -45,8 +46,12 @@ const withEmptyFields = computed<boolean>(() => {
 });
 
 
-const isSettings = computed(() => type === 'settings')
+const isSettings = computed<boolean>(() => route.path.includes('settings'))
 const $b = useBEM('UserDataForm');
+
+onMounted(() => {
+  console.log(userData.value)
+})
 </script>
 
 <template lang="pug">
@@ -127,6 +132,11 @@ form(
     v-if="!isSettings"
     v-model="data.sex"
     :options="[{ label: 'Мужчина', value: 'male' }, { label: 'Женщина', value: 'female' }]"
+  )
+  RzdToggle(
+    v-if="isSettings"
+    v-model="isPrivateData"
+    label="Скрывать личную информацию от других пользователей?"
   )
   RzdButton(
     v-for="button of additionalButtons"

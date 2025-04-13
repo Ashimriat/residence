@@ -7,10 +7,6 @@ const userStore = useUserStore();
 const { isLoggedIn, isCommonUser } = storeToRefs(userStore);
 const { openLogin } = useModal();
 
-function addEvent(): void {
-  
-}
-
 const $b = useBEM('DHeader');
 </script>
 
@@ -35,14 +31,11 @@ div(:class="$b()")
       @click="openLogin"
     )
     template(v-else)
-      NuxtLink(
+      RzdLinkButton(
         v-if="false && !isCommonUser"
-        to="/events/create"
+        link="/events/create"
+        :type="EButtons.ADD_EVENT"
       )
-        RzdButton(
-          :type="EButtons.ADD_EVENT"
-          @click="addEvent"
-        )
       //- Notifications
       NuxtLink(to="/account")
         RzdAvatar(label="UI")

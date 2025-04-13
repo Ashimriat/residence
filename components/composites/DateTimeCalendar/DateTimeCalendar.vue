@@ -248,7 +248,7 @@ div(
     box-sizing: border-box;
   }
   &--mobile {
-    --iconStroke: #{vars.$colors-black};
+    --rzd-icon-color: #{vars.$colors-black};
     @include flex((justify-content: space-between, align-items: center));
     height: 40px;
     background-color: vars.$colors-white;

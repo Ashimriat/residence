@@ -53,7 +53,7 @@ NuxtLink(
 
 @include mobile {
   .Notifications {
-    --badgeTranslateX: 2px;
+    --rzd-badge-translateX: 2px;
     --badgeTranslateY: -4px;
   }
 }

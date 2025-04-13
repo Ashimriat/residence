@@ -59,6 +59,10 @@ div(:class="$b({ calendar: withCalendar })")
         EventCard(
           v-for="(data, j) in displayedItems"
           :key="`eventData_${j}`"
+          show-subscription
+          coloring="light"
+          mode="full"
+          :label="data.isSubscriptionWorks ? 'Действует абонемент' : ''"
           :event-data="data"
         )
   RzdPagination(
@@ -73,17 +77,18 @@ div(:class="$b({ calendar: withCalendar })")
 $paddingTop: 6px;
 
 .EventsList {
-  --cardMaxWidth: 400px;
+  --cards-container-max-width: initial;
+  --rzd-card-maxwidth: 400px;
+  --rzd-card-height: 394px;
   &--calendar {
-    --cardsContainerMaxWidth: 932px;
-    --cardMaxWidth: 446px;
-    --cardMaxHeight: 394px;
+    --cards-container-max-width: 932px;
+    --rzd-card-maxwidth: 446px;
   }
   &__eventsCardsContainer {
     @include flex((gap: 40px, flex-wrap: wrap));
     padding: $paddingTop 0 26px;
     min-height: 340px;
-    max-width: var(--cardsContainerMaxWidth, initial);
+    max-width: var(--cards-container-max-width);
   }
   &__calendar {
     @include absolute((right: 0, top: calc(20px + #{$paddingTop})));
@@ -92,8 +97,7 @@ $paddingTop: 6px;
 
 @include mobile {
   .EventsList {
-    --cardMaxWidth: unset;
-    --cardContainerPaddingTop: 0;
+    --rzd-card-maxwidth: unset;
     &__filtersContainer {
       flex-direction: column;
       & > div {

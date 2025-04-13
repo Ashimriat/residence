@@ -98,6 +98,7 @@ Wrapper(
 
   &__dialogHeader {
     @include relative;
+    font: vars.$fonts-desktopH5;
   }
 
   &__dialogHeaderActions {

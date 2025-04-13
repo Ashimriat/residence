@@ -1,0 +1,288 @@
+<script setup lang="ts">
+import { EButtons, EIcons, EIconsSizes } from '~/components/constants';
+
+
+type Props = {
+  eventData: EventData;
+  coloring: 'light' | 'grey' | 'dark'
+  mode: 'light' | 'full';
+  label?: string;
+  withDetails?: boolean;
+};
+type Emits = {
+  signUp: [];
+};
+
+
+const {
+  eventData,
+  coloring,
+  mode,
+  /** optional */
+  label = '',
+  withDetails,
+} = defineProps<Props>();
+const emit = defineEmits<Emits>();
+
+const { isMobile } = useDevice();
+const $b = useBEM('EventCard');
+
+const isShowingDetails = ref<boolean>(false);
+
+
+
+/** Computeds */
+const secondButtonType = computed<EButtons>(() => (
+  isShowingDetails.value ? EButtons.CLOSE : EButtons.DETAILS
+));
+const isLightMode = computed<boolean>(() => mode === 'light');
+
+const {
+  gameData,
+  participants,
+} = eventData;
+
+/** Methods */
+function toggleDetails(): void {
+  isShowingDetails.value = !isShowingDetails.value;
+}
+
+
+</script>
+
+<template lang="pug">
+RzdCard(
+  orientation="column"
+  :preserve-subcontent="!isLightMode"
+  :class="$b([`mode_${mode}`, `coloring_${coloring}`])"
+)
+  template(
+    v-if="!isLightMode"
+    #subContent
+  )
+    div(
+      v-if="!isLightMode"
+      :class="$b('topContainer')"
+    )
+      div(:class="$b('masterDataBlock')")
+        RzdAvatar(
+          label="UI"
+          shape="circle"
+        )
+        div(:class="$b('masterName')")
+          | {{ gameData.master }}
+      div(:class="$b('players')")
+        span(:class="$b('amount')")
+          | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
+        RzdIcon(
+          :type="EIcons.USERS"
+          :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
+        )
+  template(#content)
+    div(:class="$b('eventDetails')")
+      slot(name="gameHeader")
+        RzdChip(
+          v-if="label"
+          :label
+        )
+        div(:class="$b('gameNamePriceBlock')")
+          component(
+            :is="isLightMode ? 'h5' : 'h4'"
+            :class="$b('gameTitle')"
+          )
+            | {{ gameData.title }}
+          PriceTag(
+            v-if="!isLightMode"
+            :value="eventData.price"
+            :old-value="eventData.oldPrice"
+          )
+      div(:class="$b('eventDatePlace')")
+        div(:class="$b('dateTimeBlock')")
+          span
+            | {{ gameData.date }}
+          RzdDivider(
+            layout="horizontal"
+            :class="$b('divider')"
+          )
+          RzdIcon(:type="EIcons.CLOCK")
+          span
+            | {{ gameData.time }}
+        div(:class="$b('locationBlock')")
+          span(v-tooltip.top="gameData.address")
+            | Адрес
+          SubwayStation(v-bind="eventData.locationData.subway")
+      template(v-if="withDetails")
+        div(
+          v-if="isShowingDetails"
+          :class="$b('detailsBlock')"
+        )
+          div
+            | {{ gameData.description }}
+          div(:class="$b('playersBlock')")
+            RzdAvatar(
+              v-for="player in participants"
+              :key="player.id"
+              label="UI"
+            )
+        div(:class="$b('buttonsBlock')")
+          RzdButton(
+            :type="EButtons.ENTER_EVENT"
+            @click="emit('signUp')"
+          )
+          RzdButton(
+            :type="secondButtonType"
+            omit-icon
+            @click="toggleDetails"
+          )
+          RzdButton(
+            v-if="isShowingDetails"
+            :type="EButtons.SHARE"
+          )
+</template>
+
+
+<style lang="scss">
+.EventCard {
+  &--mode {
+    &_light {
+      --rzd-card-padding: 0;
+      --rzd-card-width: fit-content;
+      --rzd-card-content-width: 100%;
+      --rzd-card-boxshadow: none;
+      --rzd-card-height: fit-content;
+    }
+    &_full {
+      --rzd-card-padding: 24px 12px 12px;
+      --rzd-card-width: 400px;
+      --rzd-card-height: 440px;
+    }
+  }
+  &--coloring {
+    &_light {
+      --coloring-background: #{vars.$colors-white};
+      --coloring-game-color: #{vars.$colors-black};
+      --coloring-game-title-color: #{vars.$colors-black};
+    }
+    &_grey,
+    &_dark {
+      --coloring-game-color: #{vars.$colors-white};
+      --coloring-game-title-color: #{vars.$colors-beige};
+      --rzd-icon-color: #{vars.$colors-white};
+    }
+    &_grey {
+      --coloring-background: #{vars.$colors-greyDark};
+    }
+    &_dark {
+      --rzd-card-background: #{vars.$colors-black};
+      --rzd-card-content-background: #{vars.$colors-black};
+      --coloring-background: #{vars.$colors-black};
+    }
+  }
+  &__topContainer {
+    @include flex((
+      align-items: center,
+      justify-content: space-between,
+    ));
+  }
+  &__masterDataBlock {
+    @include centered-flex((gap: 8px));
+    font-weight: vars.$fw-bold;
+    font-size: vars.$fs-m;
+  }
+  &__masterName {
+    color: vars.$colors-white;
+    font: vars.$fonts-textBoldM;
+  }
+  &__players {
+    @include centered-flex((gap: vars.$gaps-g12));
+    width: 93px;
+    height: 32px;
+    background-color: vars.$colors-white;
+    color: vars.$colors-black;
+    font: vars.$fonts-textM;
+    padding: 4px 12px;
+    border-radius: vars.$br-xs;
+  }
+  &__amount {
+    font: vars.$fonts-textM;
+  }
+  &__detailsBlock {
+    @include flex((gap: vars.$gaps-g48));
+  }
+  &__playersBlock {
+    @include flex((
+      gap: vars.$gaps-g16,
+      flex-wrap: wrap,
+    ));
+    min-width: 240px;
+  }
+  &__buttonsBlock {
+    @include flex((gap: vars.$gaps-g8));
+  }
+
+
+  &__eventDetails {
+    @include flex-column((gap: vars.$gaps-g16));
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    background: var(--coloring-background);
+    border-radius: vars.$br-m;
+  }
+
+  &__gameNamePriceBlock {
+    @include centered-flex((justify-content: space-between));
+  }
+
+  &__gameTitle {
+    color: var(--coloring-game-title-color);
+  }
+
+  &__eventDatePlace {
+    @include flex-column((gap: vars.$gaps-g12));
+
+    width: 100%;
+    font-size: vars.$fs-s;
+
+    & span {
+      font: vars.$fonts-textM;
+      white-space: nowrap;
+    }
+  }
+
+  &__dateTimeBlock {
+    @include flex((
+      align-items: center,
+      gap: vars.$gaps-g8,
+    ));
+    color: var(--coloring-game-color);
+  }
+
+  &__divider {
+    flex-shrink: 10;
+  }
+
+  &__locationBlock {
+    @include flex((
+      justify-content: space-between,
+      align-items: center,
+    ));
+    color: var(--coloring-game-color);
+
+    & > span {
+      line-height: 140%;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+@include mobile {
+  .EventCard {
+    max-height: 320px;
+    &__divider {
+      max-width: 194px;
+    }
+  }
+}
+</style>

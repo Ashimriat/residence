@@ -135,6 +135,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
   },
   [EButtons.USER_SETTINGS]: {
     label: 'Настройки',
+    size: EButtonSize.S,
     variant: EButtonVariant.TERTIARY,
     iconType: EIcons.GEAR,
     iconSize: EIconsSizes.S,
@@ -145,9 +146,8 @@ const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
   },
   [EButtons.ADD_PLAYERS]: {
     label: 'Добавить игроков',
-    iconType: EIcons.LINK,
+    iconType: EIcons.PLUS_CIRCLED,
     variant: EButtonVariant.TERTIARY,
-    // isVariantInverted: true,
   },
   [EButtons.TOGGLE_DETAILS]: {
     iconType: EIcons.LINK,
@@ -207,13 +207,16 @@ const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
   [EButtons.CLAN_APPLICATION_CONFIRM]: {
     label: 'Отлично!',
   },
-  [EButtons.ADD_PLAYER_TO_CLAN_SELECTION]: {
+  [EButtons.ADD_PLAYER_TO_SELECTION]: {
     label: 'Добавить',
+    size: EButtonSize.M,
     variant: EButtonVariant.TERTIARY,
   },
-  [EButtons.REMOVE_PLAYER_FROM_CLAN_SELECTION]: {
+  [EButtons.REMOVE_PLAYER_FROM_SELECTION]: {
     label: 'Убрать',
+    size: EButtonSize.M,
     variant: EButtonVariant.TERTIARY,
+    isVariantInverted: true,
   },
   [EButtons.CONFIRM]: {
     label: 'Подтвердить',
@@ -249,6 +252,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
   [EButtons.ADD_GAME_ROUND]: {
     label: 'Добавить партию',
     iconType: EIcons.PLUS_CIRCLED,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.SAVE_RATINGS]: {
     label: 'Сохранить оценки',

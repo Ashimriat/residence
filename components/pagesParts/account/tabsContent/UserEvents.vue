@@ -21,13 +21,13 @@ div(:class="$b()")
       :visible-amount="isMobile ? 2 : 4"
     )
       template(#default="{ itemsData }")
-        div(:class="$b('eventsPageContainer')")
-          EventInfo(
+        div(:class="$b('eventsContainer')")
+          EventCard(
             v-for="(eventData, i) of itemsData"
             :key="`eventCard_${i}`"
-            is-account-mode
-            :data="eventData"
-            :with-abon="false"
+            mode="light"
+            coloring="grey"
+            :event-data="eventData"
             :class="$b('eventData')"
           )
   div(
@@ -60,8 +60,6 @@ div(:class="$b()")
 $dotsGap: 4px;
 $dotSize: 8px;
 $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
-$carouselMaxWidth: 800px;
-
 
 .UserEvents {
   @include flex((justify-content: space-between, flex-wrap: wrap, gap: 1rem));
@@ -79,14 +77,11 @@ $carouselMaxWidth: 800px;
     max-width: var(--eventsMaxWidth, 840px);
     align-self: center;
   }
-  &__eventsPageContainer {
+  &__eventsContainer {
     @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
-    max-width: $carouselMaxWidth;
   }
   &__eventData {
     flex-basis: calc((100% - 16px) / 2);
-    gap: vars.$gaps-g8;
-    flex-grow: 1;
   }
   &__subscriptionsContainer {
     @include flex((flex-wrap: wrap, gap: 0.8rem));

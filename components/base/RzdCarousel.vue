@@ -12,7 +12,7 @@ const { items, visibleAmount = 1 } = defineProps<Props>();
 
 const { isDesktop, isMobile } = useDevice();
 
-const displayedItems = computed(() => {
+const displayedItems = computed<CarouselProps['value'][]>(() => {
   if (Array.isArray(items[0])) return items;
   const res: any[][] = [];
   for (let i = 0; i < items.length; i += visibleAmount) {
@@ -41,6 +41,7 @@ PCarousel(
   :pt:root:class="$b()"
   :pt:content-container:class="$b('contentContainer')"
   :pt:content:class="$b('content')"
+  :pt:item:class="$b('item')"
   :pt:indicator-list:class="$b(indicatorListClass)"
   :pt:indicator-button:class="$b('indicatorButton')"
   :pt:pc-prev-button:root:class="$b('originalControlButton')"
@@ -75,13 +76,19 @@ PCarousel(
 <style lang="scss">
 .RzdCarousel {
   @include relative;
-  max-width: var(--carouselMaxWidth);
+  max-width: var(--rzd-carousel-maxwidth);
   &__contentContainer {
     @include relative;
     gap: var(--carouselContentContainerGap, #{vars.$gaps-g28});
   }
   &__content {
     gap: vars.$gaps-g12;
+  }
+  &__item {
+    @include centered-flex;
+    & > * {
+      width: 98%;
+    }
   }
   &__originalIndicatorList {
     display: none;

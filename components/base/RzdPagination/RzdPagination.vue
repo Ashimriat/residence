@@ -194,7 +194,7 @@ PPaginator(
   --p-paginator-nav-button-selected-background: #{vars.$colors-beige};
   --p-paginator-nav-button-selected-color: #{vars.$colors-white};
   & button {
-    font: vars.$fonts-textS;
+    font: vars.$fonts-textBoldS;
   }
   &__content {
     @include flex((gap: 4px));

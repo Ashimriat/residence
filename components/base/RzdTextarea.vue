@@ -16,7 +16,7 @@ const text = defineModel<string>({ required: true });
 
 const passedProps = computed<TextareaProps>(() => {
   if (maxLength === 0) return {};
-  return { maxlength: maxLength };
+  return { maxlength: maxLength } as TextareaProps;
 });
 
 const $b = useBEM('RzdTextarea');
@@ -46,7 +46,7 @@ div(:class="$b()")
     --p-textarea-focus-border-color: none;
     --p-textarea-padding-x: 16px 12px;
     --p-textarea-padding-y: 16px;
-    --p-textarea-border-color: none;
+    --p-textarea-border-color: #{vars.$colors-greyMuted};
 
     box-sizing: border-box;
     min-height: 115px;

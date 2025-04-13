@@ -16,7 +16,6 @@ const $b = useBEM('Registration')
 
 <template lang="pug">
 UserDataForm(
-  type="registration"
   :additional-buttons="[EButtons.ALREADY_REGISTERED]"
   :submit-button="EButtons.SIGN_UP"
   :class="$b()"

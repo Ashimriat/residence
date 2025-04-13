@@ -15,7 +15,7 @@ type GameRating = {
 };
 
 
-const { getModalData } = useModal<EventData>();
+const { getModalData, addPlayers } = useModal<EventData>();
 
 const eventData = getModalData();
 
@@ -24,10 +24,22 @@ const page = ref<number>(0);
 const $b = useBEM('MafiaRating');
 
 const ratings = ref<GameRating[]>([]);
-const currentGameData = computed<GameRating>(() => ratings.value[page.value]);
 
-function generateGameRating(index = page.value): void {
-  ratings.value[index] = {
+const currentGameData = computed<GameRating>(() => ratings.value[page.value]);
+const canProcessSave = computed<boolean>(() => {
+  for (const gameRating of ratings.value) {
+    if (!gameRating.winnersTeam) return false;
+    for (const participant of gameRating.participants) {
+      if (!participant.role && !participant.isLeft) {
+        return false;
+      }
+    }
+  }
+  return true;
+});
+
+function generateGameRating(): void {
+  ratings.value[ratings.value.length] = {
     winnersTeam: '',
     participants: eventData.participants.map((p) => ({
       ...p,
@@ -48,21 +60,29 @@ watch(page, () => {
   if (currentGameData.value) return;
   generateGameRating();
 }, { immediate: true });
+
+watch(canProcessSave, () => {
+  console.log(canProcessSave.value);
+})
 </script>
 
 <template lang="pug">
 div(:class="$b()")
   div(:class="$b('upperContainer')")
-    EventDatePlace(
-      :class="$b('eventDatePlace')"
-      :date="eventData.gameData.date"
-      :time="eventData.gameData.time"
-      :subway="eventData.locationData.subway"
+    EventCard(
+      mode="light"
+      coloring="light"
+      :event-data="eventData"
+      :class="$b('eventCard')"
     )
+      template(#gameHeader)
+        div(:class="$b('gameHeader')")
+          h5
+            | {{ `${eventData.gameData.title} - ${page + 1}/${ratings.length}` }}
     div(:class="$b('controls', { multiple: ratings.length > 1 })")
       RzdButton(
         :type="EButtons.ADD_GAME_ROUND"
-        @click="generateGameRating(page + 1)"
+        @click="generateGameRating"
       )
       RzdCarousel(
         v-if="ratings.length > 1"
@@ -73,7 +93,7 @@ div(:class="$b()")
   div(:class="$b('ratingsContainer')")
     RzdButton(
       :type="EButtons.ADD_PLAYERS"
-      @click=""
+      @click="addPlayers"
     )
     RzdScrollPanel(
       :items-in-row="1"
@@ -89,7 +109,7 @@ div(:class="$b()")
           :avatar="playerRating.avatar"
           :name="playerRating.name"
         )
-        PSelect(
+        RzdSelect(
           v-model="playerRating.role"
           :options="MAFIA_ROLES_TOWN"
           option-label="label"
@@ -100,19 +120,20 @@ div(:class="$b()")
         RzdTextInput(
           v-model="playerRating.additionalScores"
           v-keyfilter.int
+          size="m"
           placeholder="Доп баллы"
           :class="$b('scores')"
         )
         div(:class="$b('checkbox')")
-          PCheckbox(
+          RzdCheckbox(
             v-model="playerRating.isLeft"
-            :input-id="`isLeft-${i}`"
+            :input-id="`isPlayerLeft-${i}`"
             binary
+            label="Ушел"
           )
-          label(:for="`isLeft-${i}`")
-            | Ушел
         RzdButton(
           :type="EButtons.EXPEL_PLAYER"
+          :class="$b('expelButton')"
           @click="removeParticipant(playerRating.id)"
         )
   RzdSelectButtons(
@@ -121,6 +142,7 @@ div(:class="$b()")
   )
   RzdButton(
     :type="EButtons.SAVE_RATINGS"
+    :disabled="!canProcessSave"
     @click=""
   )
 </template>
@@ -137,14 +159,17 @@ div(:class="$b()")
       justify-content: space-between,
       gap: vars.$gaps-g12
     ));
+    padding-top: 8px;
   }
 
-  &__eventDatePlace {
-    flex-basis: 74%;
-    padding: 20px;
-    color: vars.$colors-black;
-    background-color: vars.$colors-white;
-    border-radius: vars.$br-s;
+  &__eventCard {
+    flex-basis: 65%;
+  }
+
+  &__gameHeader {
+    & > h5 {
+      color: vars.$colors-beige;
+    }
   }
 
   &__controls {
@@ -181,8 +206,13 @@ div(:class="$b()")
   }
 
   &__participant {
-    @include flex((justify-content: space-between));
-
+    @include flex((
+      justify-content: space-between,
+      align-items: center,
+    ));
+    &:first-child {
+      padding-top: 10px;
+    }
     &:not(&:last-child) {
       padding-bottom: 14px;
       border-bottom: 2px solid vars.$colors-greyLight;
@@ -190,15 +220,21 @@ div(:class="$b()")
   }
 
   &__roleSelect {
-    width: 196px;
+    width: 150px;
+    height: 44px;
   }
 
   &__scores {
-    width: 120px;
+    width: 140px;
   }
 
   &__checkbox {
     @include flex((align-items: center, gap: vars.$gaps-g12));
+  }
+
+  &__expelButton {
+    width: 40px;
+    height: 40px;
   }
 }
 </style>

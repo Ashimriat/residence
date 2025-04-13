@@ -69,7 +69,7 @@ PButton(
 
   &--variant {
     &_primary {
-      --iconStroke: #{vars.$colors-white};
+      --rzd-icon-color: #{vars.$colors-white};
       --p-button-primary-background: #{vars.$colors-beige};
       --p-button-primary-hover-background: #{vars.$colors-beige};
       --p-button-primary-active-background: #{vars.$colors-beige};
@@ -85,7 +85,7 @@ PButton(
     }
     
     &_secondary {
-      --iconStroke: #{vars.$colors-beige};
+      --rzd-icon-color: #{vars.$colors-beige};
       --p-button-secondary-background: #{vars.$colors-white};
       --p-button-secondary-hover-background: #{vars.$colors-white};
       --p-button-secondary-active-background: #{vars.$colors-white};
@@ -100,6 +100,7 @@ PButton(
     }
 
     &_contrast {
+      --rzd-icon-color: #{vars.$colors-black};
       --p-button-contrast-background: #{vars.$colors-white};
       --p-button-contrast-hover-background: #{vars.$colors-white};
       --p-button-contrast-active-background: #{vars.$colors-white};
@@ -112,7 +113,7 @@ PButton(
     }
 
     &_contrast_inverted {
-      --iconStroke: #{vars.$colors-white};
+      --rzd-icon-color: #{vars.$colors-white};
       --p-button-contrast-background: #{vars.$colors-black};
       --p-button-contrast-hover-background: #{vars.$colors-black};
       --p-button-contrast-active-background: #{vars.$colors-black};

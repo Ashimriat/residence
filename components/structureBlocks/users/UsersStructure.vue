@@ -101,11 +101,11 @@ RzdCard(
   --usersStructureParticipantWidth
 */
 .UsersStructure {
-  --cardBackgroundColor: #{vars.$colors-black};
-  --cardMaxWidth: 100%;
-  --cardContentWidth: 60%;
-  --cardHeight: var(--usersStructureHeight, 100%);
-  --cardSubcontentFlexBasis: 40%;
+  --rzd-card-background: #{vars.$colors-black};
+  --rzd-card-maxwidth: 100%;
+  --rzd-card-content-width: 60%;
+  --rzd-card-height: var(--usersStructureHeight, 100%);
+  --rzd-card-subcontent-flexbasis: 40%;
   --scrollPanelPadding: var(--usersStructureListPadding);
   --scrollPanelContentContainerPadding: 0;
   --scrollPanelItemWidth: var(--usersStructureParticipantWidth, inherit);
@@ -114,9 +114,9 @@ RzdCard(
   --usersStructureHeight: 320px;
 
   &--list {
-    --cardPadding: 0;
-    --cardContentWidth: 100%;
-    --cardSubcontentFlexBasis: 100%;
+    --rzd-card-padding: 0;
+    --rzd-card-content-width: 100%;
+    --rzd-card-subcontent-flexbasis: 100%;
     --usersStructureHeight: inherit;
     --usersStructureListPadding: 0;
     --usersStructureParticipantPadding: 0;
@@ -218,7 +218,7 @@ RzdCard(
   .UsersStructure {
     --participantJustify: space-between;
     --expelButtonOpacity: 1;
-    --cardContentWidth: 100%;
+    --rzd-card-content-width: 100%;
     --usersStructureHeight: fit-content;
     --usersStructureListHeight: 220px;
     --usersStructureParticipantPadding: 0;

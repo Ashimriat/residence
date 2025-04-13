@@ -21,6 +21,8 @@ declare module 'vue' {
     PDataTable: typeof import('primevue/datatable')['default']
     PDivider: typeof import('primevue/divider')['default']
     PGalleria: typeof import('primevue/galleria')['default']
+    PIconField: typeof import('primevue/iconfield')['default']
+    PInputIcon: typeof import('primevue/inputicon')['default']
     PInputText: typeof import('primevue/inputtext')['default']
     POverlayBadge: typeof import('primevue/overlaybadge')['default']
     PPaginator: typeof import('primevue/paginator')['default']

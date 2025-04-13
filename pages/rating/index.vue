@@ -27,11 +27,11 @@ watch(activeType, () => {
 
 <template lang="pug">
 div(:class="$b()")
-  div(:class="$b('topContainer', { admin: isAdmin })")
+  div(:class="$b('topContainer', { admin: false && isAdmin })")
     h1(:class="$b('pageHeader')")
       | Рейтинг - Сезон 1
     RzdButton(
-      v-if="isAdmin"
+      v-if="false && isAdmin"
       :type="EButtons.FINISH_SEASON"
       @click="finishSeason"
     )
@@ -59,7 +59,6 @@ div(:class="$b()")
     )
       template(#body="{ data: { user: { name, avatar } } }")
         UserData(
-          is-linker
           :avatar
           :name
         )
@@ -107,21 +106,19 @@ div(:class="$b()")
   &__tableContainer {
     border-radius: vars.$br-s;
   }
+  &__tableBodyCell {
+    font: vars.$fonts-textBoldM;
+  }
   &__tableHeaderCell {
-    font-size: var(--static-fontSize-s-xs);
-    font-weight: vars.$fw-bold;
     color: vars.$colors-greyMuted;
     height: var(--headerCellHeight, 64px);
+    width: calc(95% / 3);
     &:first-of-type {
       width: 5%;
     }
-    &:not(&:first-of-type) {
-      width: calc(95% / 3);
+    & * {
+      font: vars.$fonts-textBoldM;
     }
-  }
-  &__tableBodyCell {
-    font-weight: vars.$fw-bold;
-    font-size: var(--static-fontSize-m-s);
   }
 }
 

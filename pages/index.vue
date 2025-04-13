@@ -177,10 +177,10 @@ div(:class="$b()")
       @include flex-column((gap: vars.$gaps-g24));
     }
     &--general {
-      --cardMinWidth: 100%;
-      --cardHeight: var(--generalCardHeight);
-      --cardBorderRadius: #{vars.$br-xl};
-      --cardContentBorderRadius: #{vars.$br-xl};
+      --rzd-card-minwidth: 100%;
+      --rzd-card-height: var(--generalCardHeight);
+      --rzd-card-border-radius: #{vars.$br-xl};
+      --rzd-card-content-border-radius: #{vars.$br-xl};
     }
     &--founder {
       @include centered-flex((gap: vars.$gaps-adaptive-m));
@@ -256,7 +256,7 @@ div(:class="$b()")
         justify-content: center;
         align-items: flex-end;
         height: 470px;
-        --cardBorderRadius: #{vars.$br-l};
+        --rzd-card-border-radius: #{vars.$br-l};
       }
     }
     &__generalDataContainer {

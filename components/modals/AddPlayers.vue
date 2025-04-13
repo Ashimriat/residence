@@ -3,11 +3,11 @@ import { mockOtherUsers } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 
-const { getModalData, closeModal } = useModal<string>();
+const { closeModal } = useModal<string>();
+const $b = useBEM('AddPlayers');
 
 const search = ref<string>('');
 
-const clanId = getModalData();
 const allUsers = mockOtherUsers(20);
 const selectedUsers = ref<OtherUserData[]>([]);
 
@@ -22,7 +22,7 @@ const availableUsers = computed<OtherUserData[]>(() => (
 ));
 
 function addSelectedPlayers(): void {
-
+  closeModal();
 }
 
 function processSelection(data: OtherUserData): void {
@@ -34,7 +34,6 @@ function processSelection(data: OtherUserData): void {
   }
 }
 
-const $b = useBEM('InviteToClan');
 </script>
 
 <template lang="pug">
@@ -47,9 +46,14 @@ div(:class="$b()")
     v-for="(data, i) of [availableUsers, selectedUsers]"
     :key="`panel_${i}`"
   )
-    PScrollPanel(v-if="data.length")
+    RzdScrollPanel(
+      v-if="data.length"
+      :items-in-row="1"
+      :gap="0"
+      :class="$b('panel', { small: data.length < 4 })"
+    )
       div(
-        v-for="({userData}, k) of data"
+        v-for="userData of data"
         :key="userData.id"
         :class="$b('userRecord')"
       )
@@ -59,11 +63,12 @@ div(:class="$b()")
         )
         RzdButton(
           :class="$b('userControlButton')"
-          :type="i === 0 ? EButtons.ADD_PLAYER_TO_CLAN_SELECTION : EButtons.REMOVE_PLAYER_FROM_CLAN_SELECTION"
+          :type="i === 0 ? EButtons.ADD_PLAYER_TO_SELECTION : EButtons.REMOVE_PLAYER_FROM_SELECTION"
           @click="processSelection(userData)"
         )
   RzdButton(
     :type="EButtons.CONFIRM"
+    :disabled="!selectedUsers.length"
     @click="addSelectedPlayers"
   )
   RzdButton(
@@ -73,17 +78,31 @@ div(:class="$b()")
 </template>
 
 <style lang="scss">
-.InviteToClan {
-  @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
-  max-width: 600px;
-  --scrollPanelGap: 0;
+.AddPlayers {
+  @include flex-column((gap: vars.$gaps-g16));
+  &__panel {
+    --scrollPanelPadding: 20px 0 20px 20px;
+    border-radius: vars.$br-s;
+    height: 340px;
+    &--small {
+      height: fit-content;
+      --p-scrollpanel-bar-size: 0;
+    }
+  }
   &__userRecord {
     @include flex((align-items: center, justify-content: space-between));
     padding: 12px 0;
+    &:first-child {
+      padding-top: 0;
+    }
     &:not(&:last-child) {
       border-bottom: 2px solid vars.$colors-greyLight;
     }
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
+
   & > button {
     flex-grow: 1;
   }

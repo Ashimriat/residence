@@ -10,26 +10,44 @@ const $b = useBEM('RzdOverlayBadge');
 <template lang="pug">
 POverlayBadge(
   v-bind="props"
-  :pt:pc-badge:root:class="$b()"
+  :pt:root:class="$b([`type_${props.severity}`])"
 )
   slot
 </template>
+
+<style lang="scss" scoped>
+.RzdOverlayBadge {
+  --scoped-height: 18px;
+  --scoped-minwidth: 18px;
+  
+  &--type {
+    &_contrast {
+      --scoped-font: #{vars.$fonts-textBoldXS};
+    }
+  }
+}
+
+@include mobile {
+  .RzdOverlayBadge {
+    --scoped-height: 12px;
+    --scoped-minwidth: 12px;
+  }
+}
+</style>
 
 <style lang="scss">
 .RzdOverlayBadge {
   --p-overlaybadge-outline-width: 0;
   --p-badge-primary-background: #{vars.$colors-beige};
-  --p-badge-height: var(--badgeHeight, 18px);
-  --p-badge-min-width: var(--badgeMinWidth, 18px);
-  --p-badge-font-size: var(--badgeFontSize, #{vars.$fs-xs});
-  transform: translate(var(--badgeTranslateX, 50%), var(--badgeTranslateY, -50%));
-}
+  --p-badge-primary-color: #{vars.$colors-white};
+  --p-badge-contrast-background: #{vars.$colors-greyDark};
+  --p-badge-contrast-color: #{vars.$colors-white};
+  --p-badge-height: var(--scoped-height);
+  --p-badge-min-width: var(--scoped-minwidth);
 
-@include mobile {
-  .RzdOverlayBadge {
-    --badgeHeight: 12px;
-    --badgeFontSize: #{vars.$fs-x2s};
-    --badgeMinWidth: 12px;
+  & > span:last-child {
+    font: var(--scoped-font);
+    transform: translate(var(--rzd-badge-translateX, 50%), var(--rzd-badge-translateY, -50%));
   }
 }
 </style>

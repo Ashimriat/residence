@@ -71,8 +71,8 @@ div(:class="$b()")
   --scoped-game-height: 204px;
   --scoped-logo-maxwidth: 173px;
   --scoped-logo-maxheight: 200px;
-  --scoped-logo-translate-x: 5%;
-  --scoped-gamedata-translate-x: 0; 
+  --scoped-logo-translateX: 5%;
+  --scoped-gamedata-translateX: 0; 
 }
 
 @include mobile {
@@ -82,8 +82,8 @@ div(:class="$b()")
     --scoped-game-height: 154px;
     --scoped-logo-maxwidth: 115px;
     --scoped-logo-maxheight: 125px;
-    --scoped-logo-translate-x: -35%;
-    --scoped-gamedata-translate-x: -55%;
+    --scoped-logo-translateX: -35%;
+    --scoped-gamedata-translateX: -55%;
   }
 }
 </style>
@@ -130,7 +130,7 @@ div(:class="$b()")
     min-height: 125px;
     max-width: var(--scoped-logo-maxwidth, 173px);
     max-height: var(--scoped-logo-maxheight);
-    transform: translateX(var(--scoped-logo-translate-x));
+    transform: translateX(var(--scoped-logo-translateX));
     &,
     & svg {
       @include fullsize;
@@ -138,7 +138,7 @@ div(:class="$b()")
   }
   &__gameData {
     @include flex-column((gap: vars.$gaps-g12, justify-content: center));
-    transform: translateX(var(--scoped-gamedata-translate-x));
+    transform: translateX(var(--scoped-gamedata-translateX));
   }
 }
 </style>

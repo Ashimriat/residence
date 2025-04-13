@@ -47,8 +47,8 @@ enum EButtons {
   INVITE_TO_CLAN = 'inviteToClan',
   INVITE_TO_CLAN_MOBILE = 'inviteToClanMobile',
   CLAN_APPLICATION_CONFIRM = 'clanApplicationConfirm',
-  ADD_PLAYER_TO_CLAN_SELECTION = 'addPlayerToClanSelection',
-  REMOVE_PLAYER_FROM_CLAN_SELECTION = 'removePlayerToClanSelection',
+  ADD_PLAYER_TO_SELECTION = 'addPlayerToSelection',
+  REMOVE_PLAYER_FROM_SELECTION = 'removePlayerFromSelection',
 
   CONFIRM = 'confirm',
   TOGGLE_DETAILS = 'toggleDetails',

@@ -13,6 +13,8 @@ PAvatar(
   :pt:root:class="$b()"
   :pt:label:class="$b('label')"
 )
+  template(#icon)
+    slot(name="icon")
 </template>
 
 <style lang="scss">

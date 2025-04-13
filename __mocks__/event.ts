@@ -1,7 +1,7 @@
 import { mockOtherUsers } from './otherUsers';
 
 const EVENT_DATA: EventData = {
-  isAbonWorks: true,
+  isSubscriptionWorks: true,
   oldPrice: 400,
   price: 300,
   gameData: {

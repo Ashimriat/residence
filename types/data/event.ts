@@ -1,5 +1,5 @@
 export type EventData = {
-  isAbonWorks: boolean;
+  isSubscriptionWorks: boolean;
   price: number;
   oldPrice?: number;
   participants: Participant[];

@@ -3,7 +3,8 @@ import {
   LazyRegistration,
   LazyMCalendar,
   LazyMafiaRating,
-  LazyPasswordRecovery
+  LazyPasswordRecovery,
+  LazyAddPlayers
 } from '#components'
 // import MerchPurchase from '~/mvpV2/components/modals/MerchPurchase.vue';
 // import AchievementDetails from '~/mvpV2/components/modals/AchievementDetails.vue';
@@ -69,6 +70,10 @@ export default function useModal<T>() {
     openModal(LazyMCalendar, { data });
   }
 
+  function addPlayers(): void {
+    openModal(LazyAddPlayers, { title: 'Добавить игроков', size: 'm', layer: 1 })
+  }
+
   function openGameRating(
     gameType: keyof typeof GAMES_RATINGS,
     data: EventData,
@@ -83,6 +88,7 @@ export default function useModal<T>() {
     openPasswordRecovery,
     showMobileCalendar,
     openGameRating,
+    addPlayers,
     closeModal,
     getModalData,
   }
