@@ -1,21 +1,15 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/constants';
 import {
-  EVENTS_GAMES_OPTIONS as BASE_GAMES_OPTIONS,
+  BIGGER_GAMES_OPTIONS as GAMES_OPTIONS,
   EVENTS_OPTIONS,
-} from '~/constants/pages';
-import { type FormData } from '~/components/forms/EventCreationForm.vue';
+} from '~/constants/events';
+import type { FormData } from '~/components/forms/EventCreationForm.vue';
 
 
 export type MasterSelectModalData = {
   onSelect: (master: Participant) => void;
 }
-
-const GAMES_OPTIONS = [
-  ...BASE_GAMES_OPTIONS,
-  { label: 'Покер', value: 'poker' },
-  { label: 'Другое', value: 'other' },
-]
 
 const eventType = ref<string>('game');
 const event = ref<string>('');
@@ -97,7 +91,7 @@ div(:class="$b()")
 <style lang="scss">
 .CreateEventPage {
   &__topContainer {
-    @include flexColumn((gap: vars.$gaps-g20));
+    @include flex-column((gap: vars.$gaps-g20));
   }
 
   &__masterSelectButton {

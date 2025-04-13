@@ -8,7 +8,7 @@ export type { Props as RzdScrollPanelProps } from '~/components/base/RzdScrollPa
 export type { FormData as RequestFormData } from '~/components/forms/RequestForm.vue';
 export type { FormData as EventCreationFormData, SpecialParams } from '~/mvpV2/components/forms/EventCreationForm/EventCreationForm.vue';
 // modals
-export type { MobileCalendarModalData } from '~/components/modals/MobileCalendar.vue';
+export type { MobileCalendarModalData } from '~/components/modals/MCalendar.vue';
 // composites
 export type { CalendarDate, Time } from '~/components/composites/DateTimeCalendar/DateTimeCalendar.vue';
 // subparts

@@ -33,7 +33,7 @@ const errorTexts = computed<ErrorTexts>(() => ({
 const $b = useBEM('Error');
 
 onMounted(() => {
-  setTimeout(() => clearError({ redirect: '/' }), 5_000);
+  // setTimeout(() => clearError({ redirect: '/' }), 5_000);
 });
 </script>
 
@@ -45,9 +45,10 @@ div(:class="$b()")
     div(
       v-for="(symb, i) of String(error.statusCode)"
       :key="i"
-      :class="$b('triangle', { empty: symb === '0' })"
+      :class="$b('triangleContainer', { empty: symb === '0' })"
     )
-      div
+      div(:class="$b('triangle')")
+      span
         | {{ symb }}
   div(:class="$b('details')")
     | {{ errorTexts.details }}
@@ -63,7 +64,7 @@ div(:class="$b()")
 
 .Error {
   @include fullsize;
-  @include centeredFlexColumn((gap: vars.$gaps-g24));
+  @include centered-flex-column((gap: vars.$gaps-g24));
   background-color: vars.$colors-black;
   color: vars.$colors-white;
   &__title,
@@ -76,35 +77,38 @@ div(:class="$b()")
       gap: vars.$gaps-g24,
     ));
   }
-  &__triangle {
-    @include triangle(9rem, 7.5rem, vars.$colors-beige);
+  &__triangleContainer {
+    @include centered-flex;
     @include relative;
-    @include centeredFlex;
-    & > div {
+    width: 150px;
+    height: 150px;
+    & > span {
       @include relative((
-        bottom: -10%,
-        right: 4%,
+        bottom: -8%,
+        right: 2%,
       ));
-      font-size: vars.$fs-x3l;
+      font-size: 60px;
       color: vars.$colors-black;
       font-weight: vars.$fw-bold;
     }
     &--empty {
-      & > div {
-        @include triangle(6.5rem, 5.5rem, vars.$colors-black);
+      & > span {
+        @include triangle(104px, 88px, vars.$colors-black);
         @include absolute((
-          right: 13.5%,
-          bottom: 8%,
+          right: 15.5%,
+          bottom: 16%,
         ));
-        font-size: 0;
       }
     }
   }
+  &__triangle {
+    @include triangle(140px, 120px, vars.$colors-beige);
+    @include absolute;
+  }
   &__details {
-    font-size: vars.$fs-s;
+    font: vars.$fonts-textM;
     max-width: 500px;
     text-align: center;
-    font-weight: vars.$fw-midHeavy;
   }
 }
 </style>

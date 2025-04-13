@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockAchievementsList } from '~assets/mocks';
+import { mockAchievementsList } from '~/__mocks__';
 
 const { isMobile } = useDevice();
 const itemsAmount = isMobile ? 9 : 8;
@@ -28,7 +28,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .Achievements {
-  @include flexColumn((
+  @include flex-column((
     align-items: center,
     gap: vars.$gaps-g48,
   ));

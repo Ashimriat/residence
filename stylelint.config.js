@@ -16,6 +16,10 @@ export default {
       ignore: ['rem'],
       ignorePartialSupport: true,
       severity: 'warning'
-    }]
+    }],
+    'at-rule-no-unknown': [true, {
+      ignoreAtRules: [/include/]
+    }],
+    'selector-class-pattern': false,
   },
 };

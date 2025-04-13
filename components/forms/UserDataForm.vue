@@ -4,6 +4,7 @@ import { EIcons, EIconsSizes } from '~/components/constants';
 
 
 type Props = {
+  type: 'registration' | 'settings'
   withoutSex?: boolean;
   submitButton: EButtons;
   additionalButtons?: EButtons[];
@@ -15,8 +16,8 @@ type Emits = {
 
 
 const {
+  type,
   submitButton,
-  withoutSex,
   additionalButtons = [],
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -43,6 +44,8 @@ const withEmptyFields = computed<boolean>(() => {
   return false;
 });
 
+
+const isSettings = computed(() => type === 'settings')
 const $b = useBEM('UserDataForm');
 </script>
 
@@ -52,7 +55,8 @@ form(
   @submit.prevent.stop="emit('dataSubmit', data)"
 )
   div(:class="$b('container')")
-    PAvatar(
+    RzdAvatar(
+      v-if="isSettings"
       :class="$b('avatar')"
       :image="data.avatar"
     )
@@ -65,51 +69,62 @@ form(
           :size="EIconsSizes.L"
         )
     div
-      PInputText(
+      RzdTextInput(
         v-model="data.name"
         placeholder="Имя"
       )
-      PInputText(
+      RzdTextInput(
         v-model="data.surname"
         placeholder="Фамилия"
       )
   div(:class="$b('container')")
-    PInputText(
+    RzdTextInput(
       v-model="data.birthdate"
       placeholder="Дата рождения"
     )
-    PInputText(
+    RzdTextInput(
       v-model="data.telegram"
       placeholder="Ник Телеграм"
     )
-    PInputText(
-      v-model="data.instagram"
-      placeholder="Ник Инстаграм"
-    )
-  div(:class="$b('container')")
-    PInputText(
+    template(v-if="isSettings")
+      RzdTextInput(
+        v-if="isSettings"
+        v-model="data.instagram"
+        placeholder="Ник Инстаграм"
+      )
+      RzdTextInput(
+        v-else
+        v-model="data.email"
+        placeholder="Почта"
+      )
+  div(
+    v-if="isSettings"
+    :class="$b('container')"
+  )
+    RzdTextInput(
       v-model="data.email"
       placeholder="Почта"
     )
-    PInputText(
+    RzdTextInput(
       v-model="data.phone"
       placeholder="Телефон"
     )
-  PPassword(
+  RzdPasswordInput(
     v-model="data.password1"
     placeholder="Пароль"
   )
-  PPassword(
+  RzdPasswordInput(
     v-model="data.password2"
     placeholder="Подтвердите пароль"
   )
   RzdTextarea(
+    v-if="isSettings"
     v-model="data.about"
     placeholder="Кратко о себе"
     :max-length="100"
   )
   RzdRadios(
-    v-if="!withoutSex"
+    v-if="!isSettings"
     v-model="data.sex"
     :options="[{ label: 'Мужчина', value: 'male' }, { label: 'Женщина', value: 'female' }]"
   )
@@ -128,7 +143,7 @@ form(
 
 <style lang="scss">
 .UserDataForm {
-  @include flexColumn((gap: vars.$gaps-g16));
+  @include flex-column((gap: vars.$gaps-g16));
   box-sizing: content-box;
   & input {
     height: 48px;
@@ -138,7 +153,7 @@ form(
   &__container {
     @include flex((gap: vars.$gaps-g16));
     & > div:last-child {
-      @include flexColumn((gap: vars.$gaps-g16));
+      @include flex-column((gap: vars.$gaps-g16));
       width: 100%;
     }
   }
@@ -160,9 +175,6 @@ form(
       @include absolute((bottom: 10px, right: 12px));
       font-size: vars.$fs-xs;
     }
-  }
-  &__textButton {
-    justify-content: flex-start;
   }
 }
 </style>

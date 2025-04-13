@@ -9,16 +9,17 @@ const data = ref<ClanCreationData>({
 
 const { showClanCreated } = useModal();
 
+
 const $b = useBEM('CreateClan');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  PInputText(
+  RzdTextInput(
     :class="$b('input')"
     placeholder="Название клана"
   )
-  PAvatar(
+  RzdAvatar(
     :class="$b('avatar')"
     :image="data.image"
   )
@@ -68,7 +69,7 @@ div(:class="$b()")
   }
   &__button {
     width: 100%;
-    --buttonLabelFontSize: #{vars.$fs-static-s};
+    --buttonLabelFontSize: #{vars.$fs-s};
   }
 }
 </style>

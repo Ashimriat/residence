@@ -19,7 +19,7 @@ div(:class="$b()")
 
 <style module lang="scss">
 .MerchPurchase {
-  @include flexColumn((
+  @include flex-column((
     align-items: center,
     gap: vars.$gaps-g16,
   ));

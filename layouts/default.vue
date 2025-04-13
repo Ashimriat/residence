@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const { isMobile } = useDevice();
+const { platform, isMobile } = usePlatform();
 
 const $b = useBEM('DefaultLayout');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  header(:class="$b('header', { desktop: !isMobile, mobile: isMobile })")
-    MobileHeader(v-if="isMobile")
-    DesktopHeader(v-else)
+  header(:class="$b('header', [platform])")
+    MHeaderContent(v-if="isMobile")
+    DHeaderContent(v-else)
   main(:class="$b('content')")
     slot
   footer(:class="$b('footer')")
@@ -17,7 +17,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .DefaultLayout {
-  @include flexColumn;
+  @include flex-column;
   --headerHeight: 100px;
   --footerHeight: 276px;
   --mobileHeaderOffset: 0;
@@ -35,7 +35,7 @@ div(:class="$b()")
     }
     &--mobile {
       @include fixed((top: 58px));
-      @include centeredFlex;
+      @include centered-flex;
       background-color: transparent;
       padding: 0 24px;
     }
@@ -55,7 +55,7 @@ div(:class="$b()")
   }
 
   &__content {
-    @include flexColumn((align-items: center));
+    @include flex-column((align-items: center));
     background-color: vars.$colors-bg;
     min-height: calc(
       100vh - var(--headerHeight) - var(--footerHeight)

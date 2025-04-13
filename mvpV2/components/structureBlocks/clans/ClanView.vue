@@ -87,7 +87,7 @@ UsersStructure(
   }
 
   &__description {
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
   }
 }
 

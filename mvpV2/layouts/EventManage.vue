@@ -12,7 +12,7 @@ NuxtLayout(name="default")
 .EventManageLayout {
   max-width: 1160px;
   & > * {
-    @include flexColumn((gap: vars.$gaps-g32));
+    @include flex-column((gap: vars.$gaps-g32));
     width: 100%;
   }
 }

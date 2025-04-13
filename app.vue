@@ -4,14 +4,10 @@ import { init, expandViewport, isTMA } from '@telegram-apps/sdk-vue';
 const { isMobile } = useDevice();
 
 onBeforeMount(() => {
-  if (isTMA()) {
-    init();
-    if (!isMobile) {
-      expandViewport();
-    }
-  }
-  if (isMobile) {
-    document.documentElement.style.setProperty('--docFontSize', '10px');
+  if (!isTMA()) return;
+  init();
+  if (!isMobile) {
+    expandViewport();
   }
 });
 </script>
@@ -26,15 +22,6 @@ RzdModals
 <style lang="scss">
 @use 'primeicons/primeicons.css';
 @use '~scss/fonts';
-
-:root {
-  --staticFontSize-M-S: #{vars.$fs-static-m};
-  --staticFontSize-S-XS: #{vars.$fs-static-s};
-}
-
-html {
-  font-size: var(--docFontSize, 20px);
-}
 
 body {
   margin: 0;
@@ -55,35 +42,29 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
   margin: 0;
   color: vars.$colors-black;
-  font-weight: vars.$fw-extraBold;
 }
 
 h1 {
-  font-size: vars.$fs-header-x2l;
+  font: vars.$fonts-desktopH1;
 }
 
 h2 {
-  font-size: vars.$fs-header-xl;
+  font: vars.$fonts-desktopH2;
 }
 
 h3 {
-  font-size: vars.$fs-header-l;
+  font: vars.$fonts-desktopH3;
 }
 
 h4 {
-  font-size: vars.$fs-header-m;
+  font: vars.$fonts-desktopH4;
 }
 
 h5 {
-  font-size: vars.$fs-header-s;
-}
-
-h6 {
-  font-size: vars.$fs-header-xs;
+  font: vars.$fonts-desktopH5;
 }
 
 p {
@@ -96,9 +77,24 @@ a {
 }
 
 @include mobile {
-  :root {
-    --staticFontSize-M-S: #{vars.$fs-static-s};
-    --staticFontSize-S-XS: #{vars.$fs-static-xs};
+  h1 {
+    font: vars.$fonts-mobileH1;
+  }
+
+  h2 {
+    font: vars.$fonts-mobileH2;
+  }
+
+  h3 {
+    font: vars.$fonts-mobileH3;
+  }
+
+  h4 {
+    font: vars.$fonts-mobileH4;
+  }
+
+  h4 {
+    font: vars.$fonts-mobileH5;
   }
 }
 </style>

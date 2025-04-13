@@ -29,7 +29,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .UserReview {
-  @include flexColumn((gap: vars.$gaps-g16));
+  @include flex-column((gap: vars.$gaps-g16));
   width: 100%;
   max-width: var(--reviewMaxWidth, 400px);
   min-height: 86px;
@@ -43,21 +43,17 @@ div(:class="$b()")
       gap: vars.$gaps-g12,
     ));
   }
-  &__authorGame {
-    font-size: var(--authorFontSize, #{vars.$fs-static-l});
-  }
   &__gameType {
     color: vars.$colors-beige;
   }
   &__reviewText {
     color: vars.$colors-greyDark;
-    font-size: var(--staticFontSize-S-XS);
+    font: vars.$fonts-textM;
   }
 }
 
 @include mobile {
   .UserReview {
-    --authorFontSize: #{vars.$fs-static-s};
     --reviewBorderRadius: #{vars.$br-s};
     --reviewMaxWidth: initial;
   }

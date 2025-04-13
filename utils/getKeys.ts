@@ -1,3 +1,3 @@
-export default <T extends object>(src: T): Array<keyof T> => (
-  Object.keys(src) as Array<keyof T>
+export default <T extends object>(src: T): (keyof T)[] => (
+  Object.keys(src) as (keyof T)[]
 );

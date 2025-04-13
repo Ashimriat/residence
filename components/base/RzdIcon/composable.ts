@@ -66,7 +66,6 @@ const ICONS_LIST: Record<EIcons, string> = {
   [EIcons.ZAP]: Zap,
   [EIcons.HASH]: Hash,
   // socials
-
   [EIcons.WHATSAPP]: WhatsApp,
   [EIcons.TELEGRAM]: Telegram,
   [EIcons.INSTAGRAM]: Instagram,
@@ -81,13 +80,8 @@ const ICONS_SIZES: Record<EIconsSizes, number> = {
 
 
 export default function useIcon(iconType: EIcons, iconSize: EIconsSizes) {
-  const res = {
+  return {
     image: ICONS_LIST[iconType],
     finalSize: `${ICONS_SIZES[iconSize]}px`,
   };
-
-  if (iconType === EIcons.USERS && iconSize !== EIconsSizes.M) {
-    // res.finalSize = '28px';
-  }
-  return res;
 };

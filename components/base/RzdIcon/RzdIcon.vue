@@ -33,10 +33,11 @@ component(
 
 <style lang="scss">
 .RzdIcon {
-  min-width: v-bind(finalSize);
-  min-height: v-bind(finalSize);
-  width: v-bind(finalSize);
-  height: v-bind(finalSize);
+  min-width: v-bind('finalSize');
+  min-height: v-bind('finalSize');
+  width: v-bind('finalSize');
+  height: v-bind('finalSize');
+  stroke: var(--iconStroke);
   &--clickable {
     cursor: pointer;
   }

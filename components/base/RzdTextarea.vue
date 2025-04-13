@@ -44,18 +44,22 @@ div(:class="$b()")
   width: 100%;
   &__text {
     --p-textarea-focus-border-color: none;
+    --p-textarea-padding-x: 16px 12px;
+    --p-textarea-padding-y: 16px;
+    --p-textarea-border-color: none;
+
     box-sizing: border-box;
     min-height: 115px;
     height: 100%;
     resize: none;
-    padding: var(--textareaPadding, 16px);
     background-color: vars.$colors-white;
+    color: vars.$colors-black;
     &,
     &::placeholder {
-      font-size: var(--staticFontSize-S-XS);
+      font: vars.$fonts-textM;
     }
     &::placeholder {
-      opacity: 0.5;
+      color: vars.$colors-greyMuted;
     }
   }
   &__symbolsAmount {
@@ -65,8 +69,16 @@ div(:class="$b()")
 }
 
 @include mobile {
-  .BaseTextarea {
-    --textareaPadding: 12px;
+  .RzdTextarea {
+    &__text {
+      --p-textarea-padding-x: 12px;
+      --p-textarea-padding-y: 8px;
+
+      &,
+      &::placeholder {
+        font: vars.$fonts-textS;
+      }
+    }
   }
 }
 </style>

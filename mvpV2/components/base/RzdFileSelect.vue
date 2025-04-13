@@ -21,9 +21,9 @@ div(:class="$b()")
 
 <style lang="scss">
 .RzdFileSelect {
-  @include flexColumn((gap: vars.$gaps-g4));
+  @include flex-column((gap: vars.$gaps-g4));
   &__fileSelector {
-    @include centeredFlex;
+    @include centered-flex;
     border: 1px dashed vars.$colors-beige;
     cursor: pointer;
     min-height: 55px;

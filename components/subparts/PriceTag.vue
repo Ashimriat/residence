@@ -2,17 +2,16 @@
 type Props = {
   value: number;
   oldValue?: number;
-  isLargeFont?: boolean;
 };
 
 
-const { value, oldValue, isLargeFont } = defineProps<Props>();
+const { value, oldValue } = defineProps<Props>();
 
 const $b = useBEM('PriceTag');
 </script>
 
 <template lang="pug">
-div(:class="$b({ large: isLargeFont })")
+div(:class="$b()")
   span(:class="$b(oldValue ? 'oldValue' : 'value')")
     | {{ `${oldValue ?? value}₽` }}
   span(
@@ -22,30 +21,33 @@ div(:class="$b({ large: isLargeFont })")
     | {{ `${value}₽` }}
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .PriceTag {
   @include flex((
     align-items: flex-end,
     gap: 5px,
   ));
-  --priceFontSize: #{vars.$fs-l};
-  --oldPriceFontSize: #{vars.$fs-m};
-  &--large {
-    --priceFontSize: #{vars.$fs-xl};
-    --oldPriceFontSize: #{vars.$fs-l};
-  }
   &__value {
     color: vars.$colors-beige;
-    font-size: var(--priceFontSize);
-    font-weight: vars.$fw-bold;
+    font: vars.$fonts-textExtraBoldXL;
     order: 1;
   }
   &__oldValue {
+    font: vars.$fonts-textExtraBoldL;
     color: vars.$colors-beigeMuted;
-    font-size: var(--oldPriceFontSize);
-    font-weight: vars.$fw-bold;
     text-decoration: line-through;
     order: 2;
+  }
+}
+
+@include mobile {
+  .PriceTag {
+    &__value {
+      font: vars.$fonts-textBoldL;
+    }
+    &__oldValue {
+      font: vars.$fonts-textBoldM;
+    }
   }
 }
 </style>

@@ -128,7 +128,7 @@ RzdCard(
   }
 
   &__structureDataContainer {
-    @include flexColumn((
+    @include flex-column((
       justify-content: space-between,
       flex: 40%,
       gap: vars.$gaps-g12
@@ -141,7 +141,7 @@ RzdCard(
   &__textsContainer {
     @include flex((align-items: center, flex-wrap: wrap, gap: 12px));
 
-    & h3,
+    & h4,
     & span {
       color: vars.$colors-white;
     }
@@ -155,7 +155,7 @@ RzdCard(
     @include flex((align-items: center, gap: 8px));
 
     & button {
-      --buttonLabelFontSize: #{vars.$fs-static-s};
+      --buttonLabelFontSize: #{vars.$fs-s};
 
       flex-grow: 1;
       height: 40px;
@@ -204,7 +204,7 @@ RzdCard(
     width: 30px;
     height: 30px;
     padding: 0;
-    font-size: vars.$fs-static-xs;
+    font-size: vars.$fs-xs;
     pointer-events: none;
     opacity: var(--expelButtonOpacity, 0);
   }

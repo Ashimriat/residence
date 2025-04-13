@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockClans } from '~/assets/mocks';
+import { mockClans } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 
@@ -29,7 +29,7 @@ div(:class="$b()")
     v-else
     :class="$b('userClans')"
   )
-    h3
+    h4
       | Ваши кланы
     ClanView(
       v-for="data of mockClans(1, 20, false)"
@@ -83,13 +83,13 @@ div(:class="$b()")
 
 <style lang="scss">
 .ClansPage {
-  @include flexColumn((gap: vars.$gaps-g48));
+  @include flex-column((gap: vars.$gaps-g48));
   --searchMaxWidth: 360px;
   &__title {
     text-align: center;
   }
   &__userClans {
-    @include flexColumn((gap: 2.4rem));
+    @include flex-column((gap: 2.4rem));
   }
   &__topContainer {
     @include flex((justify-content: space-between));
@@ -97,7 +97,7 @@ div(:class="$b()")
   &__createClanButton {
     width: 100%;
     --buttonMaxWidth: 250px;
-    --buttonLabelFontSize: #{vars.$fs-static-m};
+    --buttonLabelFontSize: #{vars.$fs-m};
   }
   &__search {
     --searchMaxWidth: 360px;

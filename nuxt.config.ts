@@ -4,13 +4,6 @@ import path from 'node:path';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  // nitro: {
-  //   hooks: {
-  //     'prerender:generate'(route) {
-  //       route.skip = route.route.indexOf('constants') !== -1;
-  //     },
-  //   },
-  // },
   app: {
     baseURL: '/residence/',
     head: {
@@ -48,9 +41,6 @@ export default defineNuxtConfig({
     'nuxt-time',
     '@nuxt/eslint',
   ],
-  css: [
-    '~scss/primevue/index.scss',
-  ],
   vite: {
     css: {
       preprocessorOptions: {
@@ -75,10 +65,6 @@ export default defineNuxtConfig({
     importTheme: {
       from: '~/bootstrap/primevue/theme.ts',
       as: 'residenceTheme',
-    },
-    importPT: {
-      from: '~/bootstrap/primevue/passThrough.ts',
-      as: 'passThrough',
     },
     components: {
       prefix: 'P',

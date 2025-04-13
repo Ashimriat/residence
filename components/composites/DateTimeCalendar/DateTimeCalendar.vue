@@ -240,7 +240,7 @@ div(
 .DateTimeCalendar {
   min-width: 320px;
   &--desktop {
-    @include flexColumn((gap: 12px));
+    @include flex-column((gap: 12px));
     background-color: vars.$colors-white;
     padding: 16px;
     width: 320px;
@@ -270,23 +270,23 @@ div(
     height: 24px;
   }
   &__processedDate {
-    @include centeredFlex((gap: 4px));
-    font-weight: vars.$fw-bold;
-    font-size: 16px;
+    @include centered-flex((gap: 4px));
+    & > span {
+      font: vars.$fonts-textBoldM;
+    }
     & > span:last-of-type {
       color: vars.$colors-beige;
     }
   }
   &__selectedDate {
-    @include centeredFlex((gap: 8px));
+    @include centered-flex((gap: 8px));
     border-radius: vars.$br-x2s;
     background-color: vars.$colors-greyDark;
     color: vars.$colors-white;
-    font-size: 12px;
     height: 24px;
     padding: 4px 8px;
-    & span {
-      height: 16px;
+    & > span {
+      font: vars.$fonts-textBoldS;
     }
   }
   &__container {
@@ -294,9 +294,10 @@ div(
   }
   &__weekDay,
   &__day {
-    @include centeredFlex;
+    @include centered-flex;
     width: 41px;
     height: 36px;
+    font: vars.$fonts-textS;
   }
   &__weekDay {
     color: vars.$colors-beigeMuted;
@@ -345,7 +346,7 @@ div(
     &--firstSelected {
       --fillerLeft: 0;
       border-radius: vars.$br-xs 0 0 vars.$br-xs;
-      @include withPseudoAfter((
+      @include with-pseudo-after((
         transform: rotate(180deg),
         right: 0,
       ));
@@ -353,7 +354,7 @@ div(
     &--lastSelected {
       --fillerRight: 0;
       border-radius: 0 vars.$br-xs vars.$br-xs 0;
-      @include withPseudoBefore((
+      @include with-pseudo-before((
         left: 0,
       ));
     }
@@ -390,7 +391,7 @@ div(
   }
   &__dayNum {
     @include fullsize;
-    @include centeredFlex;
+    @include centered-flex;
     color: var(--dayNumColor);
     z-index: 1;
   }
@@ -406,10 +407,10 @@ div(
     background-color: vars.$colors-black;
   }
   &__timeSlot {
-    @include centeredFlex;
+    @include centered-flex;
     border: 2px solid vars.$colors-white;
     border-radius: vars.$br-xs;
-    font-size: vars.$fs-static-m;
+    font-size: vars.$fs-m;
     background-color: var(--timeSlotBackgroundColor, transparent);
     color: var(--timeSlotColor, #{vars.$colors-white});
     max-width: 77px;

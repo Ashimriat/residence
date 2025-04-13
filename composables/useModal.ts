@@ -1,8 +1,9 @@
 import { 
-  LazySignIn,
-  LazySignUp,
-  LazyMobileCalendar,
-  LazyMafiaRating
+  LazyLogin,
+  LazyRegistration,
+  LazyMCalendar,
+  LazyMafiaRating,
+  LazyPasswordRecovery
 } from '#components'
 // import MerchPurchase from '~/mvpV2/components/modals/MerchPurchase.vue';
 // import AchievementDetails from '~/mvpV2/components/modals/AchievementDetails.vue';
@@ -13,6 +14,12 @@ import {
 // import InviteToClan from '~/mvpV2/components/modals/clan/InviteToClan.vue';
 // import MasterSelect from '~/mvpV2/components/modals/MasterSelect.vue';
 
+type ModalOpenParams<P> = {
+  layer: number
+  title: string
+  size: 'm' | 's'
+  data: P
+}
 
 const GAMES_RATINGS: Record<string, Component> = {
   mafia: LazyMafiaRating,
@@ -21,15 +28,17 @@ const GAMES_RATINGS: Record<string, Component> = {
 export default function useModal<T>() {
   const { $displayedModalData } = useNuxtApp()
 
-  const openModal = <P>(component: Component, params: { layer?: number, title?: string, data?: P }): void => {
+  const openModal = <P>(component: Component, params: Partial<ModalOpenParams<P>>): void => {
     const layer = params?.layer ?? 0
     const data = params?.data
     const title = params?.title ?? '';
+    const size = params?.size ?? 'm';
     const newState = [...$displayedModalData.value];
     newState[layer] = {
       component,
       data,
-      title
+      title,
+      size,
     }
     $displayedModalData.value = newState
   }
@@ -44,16 +53,20 @@ export default function useModal<T>() {
     return $displayedModalData.value[$displayedModalData.value.length - 1].data as T;
   }
 
-  function openSignIn(): void {
-    openModal(LazySignIn, { title: 'Вход' })
+  function openLogin(): void {
+    openModal(LazyLogin, { title: 'Вход', size: 's' });
   }
 
-  function openSignUp(): void {
-    openModal(LazySignUp, { title: 'Регистрация' })
+  function openRegistration(): void {
+    openModal(LazyRegistration, { title: 'Регистрация', size: 'm' });
+  }
+
+  function openPasswordRecovery(): void {
+    openModal(LazyPasswordRecovery, { title: 'Восстановление пароля', size: 's' });
   }
 
   function showMobileCalendar(data: MobileCalendarModalData): void {
-    openModal(LazyMobileCalendar, { data });
+    openModal(LazyMCalendar, { data });
   }
 
   function openGameRating(
@@ -65,8 +78,9 @@ export default function useModal<T>() {
 
 
   return {
-    openSignIn,
-    openSignUp,
+    openLogin,
+    openRegistration,
+    openPasswordRecovery,
     showMobileCalendar,
     openGameRating,
     closeModal,

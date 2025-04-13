@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/constants';
-import { mockUserData } from '~/assets/mocks';
+import { mockUserData } from '~/__mocks__';
 
 
 const { setUserData } = useUserStore();
@@ -15,7 +15,7 @@ function handleSubmit(data: EditableUserData): void {
 <template lang="pug">
 div(:class="$b()")
   UserDataForm(
-    without-sex
+    type="settings"
     :submit-button="EButtons.SAVE_CHANGES"
     @data-submit="handleSubmit"
   )
@@ -23,6 +23,6 @@ div(:class="$b()")
 
 <style lang="scss">
 .SettingsPage {
-  @include centeredFlex;
+  @include centered-flex;
 }
 </style>

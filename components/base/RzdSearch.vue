@@ -18,7 +18,7 @@ const $b = useBEM('RzdSearch');
 PIconField(:pt:root:class="$b()")
   PInputIcon(:pt:root:class="$b('searchIconContainer')")
     RzdIcon(:type="EIcons.SEARCH")
-  PInputText(
+  RzdTextInput(
     v-model="value"
     :disabled="isDisabled"
     :placeholder="placeholder"
@@ -40,7 +40,7 @@ PIconField(:pt:root:class="$b()")
   }
   &__searchInput {
     @include fullsize;
-    font-size: var(--staticFontSize-S-XS);
+    font-size: var(--static-fontSize-s-xs);
     background-color: vars.$colors-white;
     &:disabled {
       opacity: 0.5;

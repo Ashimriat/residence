@@ -11,18 +11,24 @@ type Props = {
 
 const { tabs } = defineProps<Props>();
 const activeTab = defineModel<string>('tab', { required: true });
+
+const $b = useBEM('RzdTabs');
 </script>
 
 <template lang="pug">
-PTabs(v-model:value="activeTab")
-  PTabList
+PTabs(
+  v-model:value="activeTab"
+  :pt:root:class="'TEST'"
+)
+  PTabList(:pt:root:class="$b('list')")
     PTab(
       v-for="({ label, id }) of tabs"
       :key="id"
       :value="id"
+      :pt:root:class="$b('tab')"
     )
       | {{ label }}
-  PTabPanels
+  PTabPanels(:pt:root:class="$b('panels')")
     slot(name="tabsCommon")
     PTabPanel(
       v-for="({ id }) of tabs"
@@ -36,3 +42,50 @@ PTabs(v-model:value="activeTab")
       slot(name="tab")
     slot
 </template>
+
+<style lang="scss">
+.RzdTabs {
+  &__list {
+    --p-tabs-tablist-background: transparent;
+    --p-tabs-tablist-border-color: transparent;
+    --p-tabs-active-bar-height: 0;
+
+    overflow: auto;
+
+    & .p-tablist-tab-list {
+      gap: vars.$gaps-g16;
+    }
+  }
+  &__tab {
+    @include centered-flex;
+    font: vars.$fonts-buttonL;
+    border-radius: vars.$br-s;
+    height: 48px;
+
+    --p-tabs-tab-background: transparent;
+    --p-tabs-tab-active-background: #{vars.$colors-black};
+    --p-tabs-tab-border-color: #{vars.$colors-black};
+    --p-tabs-tab-padding: 12px 16px;
+    --p-tabs-tab-hover-color: #{vars.$colors-black};
+    --p-tabs-tab-hover-border-color: #{vars.$colors-black};
+    --p-tabs-tab-active-border-color: #{vars.$colors-black};
+    --p-tabs-tab-color: #{vars.$colors-black};
+    --p-tabs-tab-active-color: #{vars.$colors-white};
+    --p-tabs-tab-border-width: 3px;
+  }
+  &__panels {
+    @include relative;
+    --p-tabs-tabpanel-background: transparent;
+    padding: 20px 0 0;
+  }
+}
+
+@include mobile {
+  .RzdTabs {
+    &__tab {
+      height: 16px;
+      --p-tabs-tab-padding: 8px 12px;
+    }
+  }
+}
+</style>

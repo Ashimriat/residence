@@ -1,1 +1,1 @@
-export type { EditableUserData } from '~/stores/user/types';
+export type { EditableUserData, ProvidedUserData } from '~/stores/user/types';

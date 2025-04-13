@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { mockOtherUsers } from '~/assets/mocks';
-import { EVENTS_GAMES_OPTIONS } from '~/constants/pages';
+import { mockOtherUsers } from '~/__mocks__';
+import { LESSER_GAMES_OPTIONS } from '~/constants/events';
 import { EButtons } from '~/components/constants';
 
 
@@ -28,7 +28,7 @@ div(:class="$b()")
     | Заказ игры
   RzdSelectButtons(
     v-model="game"
-    :options="EVENTS_GAMES_OPTIONS"
+    :options="LESSER_GAMES_OPTIONS"
     :class="$b('gameSelector')"
   )
   EventCalendarBlock(
@@ -81,7 +81,7 @@ div(:class="$b()")
     overflow: hidden;
     & > span {
       @include fullsize;
-      @include centeredFlex;
+      @include centered-flex;
     }
   }
   &__mastersList {

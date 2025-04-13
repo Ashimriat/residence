@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockMerchData } from '~assets/mocks';
+import { mockMerchData } from '~/__mocks__';
 
 
 const { seeMerch } = useModal();
@@ -25,7 +25,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .MerchPage {
-  @include flexColumn((gap: 1.5rem));
+  @include flex-column((gap: 1.5rem));
   &__container {
     @include flex((
       gap: 2rem,

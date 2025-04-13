@@ -2,7 +2,7 @@
 @use './vars';
 
 
-@mixin allStyles($styles) {
+@mixin all-styles($styles) {
   @each $property, $value in $styles {
     #{$property}: $value;
   }
@@ -13,55 +13,55 @@
   height: 100%;
 }
 
-@mixin borderedFullsize {
-  @include fullsize;
-  box-sizing: border-box;
-}
-
 @mixin flex($styles: ()) {
   display: flex;
-  @include allStyles($styles);
+
+  @include all-styles($styles);
 }
 
-@mixin flexColumn($styles: ()) {
+@mixin flex-column($styles: ()) {
   @include flex((flex-direction: column));
-  @include allStyles($styles);
+  @include all-styles($styles);
 }
 
-@mixin centeredFlex($styles: ()) {
+@mixin centered-flex($styles: ()) {
   @include flex((justify-content: center, align-items: center));
-  @include allStyles($styles);
+  @include all-styles($styles);
 }
 
-@mixin centeredFlexColumn($styles: ()) {
-  @include centeredFlex((flex-direction: column));
-  @include allStyles($styles);
+@mixin centered-flex-column($styles: ()) {
+  @include centered-flex((flex-direction: column));
+  @include all-styles($styles);
 }
 
 @mixin absolute($styles: ()) {
   position: absolute;
-  @include allStyles($styles);
+
+  @include all-styles($styles);
 }
 
 @mixin relative($styles: ()) {
   position: relative;
-  @include allStyles($styles);
+
+  @include all-styles($styles);
 }
 
 @mixin fixed($styles: ()) {
   position: fixed;
-  @include allStyles($styles);
+
+  @include all-styles($styles);
 }
 
 @mixin sticky($styles: ()) {
   position: sticky;
-  @include allStyles($styles);
+
+  @include all-styles($styles);
 }
 
 @mixin disabled($opacity: 0.5) {
-  opacity: $opacity;
-  cursor: default;
   pointer-events: none;
+  cursor: default;
+  opacity: $opacity;
 }
 
 @mixin laptop($bottom: 760px, $upper: 1024px) {
@@ -76,12 +76,8 @@
   }
 }
 
-@mixin media($type, $size, $firstSize, $secondSize: 0px) {
-  @if $type == between {
-    @media (min-#{$size}: #{$firstSize}) and (#{max-$size}: #{$secondSize}) {
-      @content;
-    }
-  } @else if $type == under {
+@mixin media($type, $size, $firstSize, $secondSize: 0) {
+  @if $type == under {
     @media (max-#{$size}: #{$firstSize}) {
       @content;
     }
@@ -89,17 +85,17 @@
     @media (min-#{size}: #{$firstSize}) {
       @content;
     }
+  } @else {
+    @media (min-#{$size}: #{$firstSize}) and (#{max-$size}: #{$secondSize}) {
+      @content;
+    }
   }
-}
-
-@mixin title($fontSize: vars.$fs-_2xl, $fontWeight: vars.$fw-bold) {
-  font-weight: $fontWeight;
-  font-size: $fontSize;
 }
 
 @mixin transition($args...) {
   $res: '';
   $default: vars.$rest-defaultTransitionDuration ease-out;
+
   // проходимся по каждому из переданных свойств
   @for $i from 0 to list.length($args) {
     // проходимся по каждому аргументу как по мапе
@@ -119,53 +115,90 @@
        *   ));
        */
       $val: $value;
+      
       @if $value == null {
         $val: $default;
       }
+
       $res: #{$res} + #{$prop} + ' ' + #{$val};
     }
+
     @if $i != list.length($args) - 1 {
       $res: #{$res} + ', ';
     }
   }
+
   transition: $res;
 }
 
-@mixin withPseudoBefore($styles) {
+@mixin with-pseudo-before($styles) {
   &::before {
     @include fullsize;
     @include absolute;
+
     content: '';
-    @include allStyles($styles);
+
+    @include all-styles($styles);
   }
 }
 
-@mixin withPseudoAfter($styles) {
+@mixin with-pseudo-after($styles) {
   &::after {
     @include fullsize;
     @include absolute;
+
     content: '';
-    @include allStyles($styles);
+
+    @include all-styles($styles);
   }
 }
 
-@mixin withEllipsis($maxWidth: 100%) {
-  overflow: hidden;
-  white-space: pre;
-  text-overflow: ellipsis;
+@mixin with-ellipsis($maxWidth: 100%) {
   max-width: $maxWidth;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
 }
 
-@mixin containerQueryBase($name, $type) {
+@mixin container-query-base($name, $type) {
   container: #{$name} / #{$type};
   box-sizing: unset;
 }
 
-@mixin titleWithLink {
-  @include flex((gap: vars.$gaps-g4));
-  font-size: 12px;
-  cursor: pointer;
-  & span {
-    text-decoration: underline;
+// компоненты
+// @TODO разделить
+
+@mixin component-input {
+  --p-inputtext-border-color: #{vars.$colors-white};
+  --p-inputtext-hover-border-color: #{vars.$colors-white};
+  --p-inputtext-focus-border-color: #{vars.$colors-white};
+  --p-inputtext-padding-x: 16px 24px;
+  --p-inputtext-padding-y: 12px;
+  --p-inputtext-background: #{vars.$colors-white};
+  --p-inputtext-color: #{vars.$colors-black};
+
+  height: 48px;
+
+  box-shadow: vars.$shadows-base;
+
+  &,
+  &::placeholder {
+    font: vars.$fonts-textM;
+  }
+
+  &::placeholder {
+    color: vars.$colors-greyMuted;
+  }
+}
+
+@mixin component-mobile-input {
+  --p-inputtext-padding-x: 12px;
+  --p-inputtext-padding-y: 8px;
+
+  height: 36px;
+
+  &,
+  &::placeholder {
+    font: vars.$fonts-textS;
   }
 }

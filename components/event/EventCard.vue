@@ -51,14 +51,14 @@ RzdCard(
       :class="$b('topContainer')"
     )
       div(:class="$b('masterDataBlock')")
-        PAvatar(
+        RzdAvatar(
           label="UI"
           shape="circle"
         )
         div(:class="$b('masterName')")
           | {{ gameData.master }}
-      div(:class="$b('playersAmount')")
-        span
+      div(:class="$b('players')")
+        span(:class="$b('amount')")
           | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
         RzdIcon(
           :type="EIcons.USERS"
@@ -78,9 +78,9 @@ RzdCard(
           div
             | {{ gameData.description }}
           div(:class="$b('playersBlock')")
-            PAvatar(
+            RzdAvatar(
               v-for="player in participants"
-              :key="player"
+              :key="player.id"
               label="UI"
             )
         div(:class="$b('buttonsBlock')")
@@ -115,22 +115,26 @@ RzdCard(
     ));
   }
   &__masterDataBlock {
-    @include centeredFlex((gap: 8px));
+    @include centered-flex((gap: 8px));
     font-weight: vars.$fw-bold;
     font-size: vars.$fs-m;
   }
   &__masterName {
     color: vars.$colors-white;
+    font: vars.$fonts-textBoldM;
   }
-  &__playersAmount {
-    @include centeredFlex((gap: vars.$gaps-g12));
+  &__players {
+    @include centered-flex((gap: vars.$gaps-g12));
     width: 93px;
     height: 32px;
     background-color: vars.$colors-white;
     color: vars.$colors-black;
+    font: vars.$fonts-textM;
     padding: 4px 12px;
     border-radius: vars.$br-xs;
-    font-size: vars.$fs-static-s;
+  }
+  &__amount {
+    font: vars.$fonts-textM;
   }
   &__detailsBlock {
     @include flex((gap: vars.$gaps-g48));

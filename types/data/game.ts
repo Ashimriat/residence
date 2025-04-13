@@ -5,4 +5,5 @@ export type GameData = {
   maxPlayersAmount: number;
   date: string;
   time: string;
+  address: string;
 };

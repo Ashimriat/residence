@@ -21,12 +21,12 @@ const $b = useBEM('ClanDataHeader');
 
 <template lang="pug">
 div(:class="$b()")
-  PAvatar(
+  RzdAvatar(
     shape="circle"
     :image="image"
   )
   div(:class="$b('innerContainer')")
-    component(:is="headerSize === 'big' ? 'h3' : 'h6'")
+    component(:is="headerSize === 'big' ? 'h4' : 'h5'")
       | {{ title }}
     div(
       v-if="participantsAmount !== null"
@@ -48,10 +48,10 @@ div(:class="$b()")
   --p-avatar-height: 64px;
   --avatarBackground: #{vars.$colors-grey};
   &__innerContainer {
-    @include flexColumn((justify-content: center));
+    @include flex-column((justify-content: center));
   }
   &__participants {
-    @include centeredFlex((gap: 4px));
+    @include centered-flex((gap: 4px));
     background-color: vars.$colors-greyDark;
     color: vars.$colors-white;
     border-radius: vars.$br-x2s;

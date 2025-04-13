@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockEventsData, mockOtherUsers } from '~/assets/mocks';
+import { mockEventsData, mockOtherUsers } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 
@@ -54,13 +54,13 @@ RzdCarousel(
   --usersStructureContentWidth: 62%;
 
   &__eventInfo {
-    @include flexColumn((gap: vars.$gaps-g16));
+    @include flex-column((gap: vars.$gaps-g16));
 
     width: 100%;
   }
 
   &__nameParty {
-    @include flexColumn((gap: vars.$gaps-g12));
+    @include flex-column((gap: vars.$gaps-g12));
 
     & > h6 {
       color: vars.$colors-beige;

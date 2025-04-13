@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockClans } from '~/assets/mocks';
+import { mockClans } from '~/__mocks__';
 
 
 const $b = useBEM('ClansList');
@@ -14,10 +14,10 @@ function test() {
 
 <template lang="pug">
 div(:class="$b()")
-  h3
+  h4
     | Ваш клан
   ClanView(:data="clansData[0]")
-  h3
+  h4
     | Кланы
   RzdCarousel(:items="clansData.slice(1)")
     template(#default="{ itemsData }")
@@ -26,6 +26,6 @@ div(:class="$b()")
 
 <style lang="scss">
 .ClansList {
-  @include flexColumn((gap: vars.$gaps-g20));
+  @include flex-column((gap: vars.$gaps-g20));
 }
 </style>

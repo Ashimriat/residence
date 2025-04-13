@@ -13,7 +13,7 @@ const {
 } = defineProps<Props>()
 
 
-const { platform, isDesktop, isMobile } = usePlatform()
+const { platform, isDesktop } = usePlatform()
 const { closeModal } = useModal()
 const { $displayedModalData } = useNuxtApp()
 
@@ -26,7 +26,7 @@ const isVisible = computed<boolean>({
 const hasLayers = computed<boolean>(() => isVisible.value && $displayedModalData.value.length - 1 > layer)
 
 const style = computed<CSSProperties>(() => ({
-  '--styles-drawerHeight': `${100 - 10 * (layer + 1)}%`
+  '--rzd-modals-styles-drawerheight': `${100 - 10 * (layer + 1)}%`
 }))
 
 const Wrapper = computed<Component>(() => isDesktop ? PDialog : PDrawer)
@@ -70,27 +70,25 @@ Wrapper(
   block-scroll
   :base-z-index="layer"
   :header="$displayedModalData[layer]?.title"
-  :pt:title="$b('title')"
+  :pt:title:class="$b('title')"
   :style
 )
-  div(:class="$b('contentContainer', [platform])")
-    component(
-      :is="$displayedModalData[layer].component"
-    )
-    RzdModals(
-      v-if="hasLayers"
-      :layer="layer + 1"
-    )
+  div(:class="$b('contentContainer', [platform, `size_${$displayedModalData[layer]?.size}_${platform}`])")
+    component(:is="$displayedModalData[layer].component")
+  RzdModals(
+    v-if="hasLayers"
+    :layer="layer + 1"
+  )
 </template>
 
 <style lang="scss">
 .RzdModals {
-  &__dialog {
-    background-color: vars.$colors-bg;
-    box-shadow: vars.$shadows-popup;
-    border-radius: vars.$br-m;
+  &__dialog {   
     gap: vars.$gaps-g16;
     padding: 32px;
+    background-color: vars.$colors-bg;
+    border-radius: vars.$br-m;  
+    box-shadow: vars.$shadows-popup;
   }
 
   &__dialogHeader,
@@ -103,13 +101,13 @@ Wrapper(
   }
 
   &__dialogHeaderActions {
-    @include absolute((right: -16px));
+    @include absolute((right: -12px));
   }
 
   &__drawer {
-    height: var(--styles-drawerHeight);
-    padding: 16px 4px;
     gap: vars.$gaps-g16;
+    height: var(--rzd-modals-styles-drawerheight);
+    padding: 16px 4px;
     background-color: vars.$colors-bg;
   }
 
@@ -125,31 +123,29 @@ Wrapper(
     width: 30px;
     height: 30px;
     background-color: transparent;
+
     & > svg {
-      width: 100%;
-      height: 100%;
+      @include fullsize;
     }
   }
 
 
   &__title {
-    font-weight: vars.$fw-extraBold;
-    font-size: vars.$fs-static-l;
+    font: vars.$fonts-desktopH4;
+    color: vars.$colors-black;
   }
 
   &__contentContainer {
-    &--desktop {
-      max-width: fit-content;
-      & > * {
-        width: 100vw;
-      }
+    & > * {
+      width: 100%;
     }
 
-    &--mobile {
-
-      &,
-      & > * {
-        width: 100%;
+    &--size {
+      &_m_desktop {
+        width: 771px;
+      }
+      &_s_desktop {
+        width: 462px;
       }
     }
   }

@@ -35,7 +35,7 @@ NuxtLink(
     v-if="!providedData.notifications.length"
     :type="EIcons.BELL"
   )
-  POverlayBadge(
+  RzdOverlayBadge(
     v-else
     :value="providedData.notifications.length"
   )

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockOtherUsers } from '~/assets/mocks';
+import { mockOtherUsers } from '~/__mocks__';
 import type { MasterSelectModalData } from '~/mvpV2/pages/admin/CreateEvent.vue';
 import { EButtons } from '~/components/constants';
 

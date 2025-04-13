@@ -20,11 +20,7 @@ declare module 'vue' {
     PColumn: typeof import('primevue/column')['default']
     PDataTable: typeof import('primevue/datatable')['default']
     PDivider: typeof import('primevue/divider')['default']
-    PDrawer: typeof import('primevue/drawer')['default']
-    PDynamicDialog: typeof import('primevue/dynamicdialog')['default']
     PGalleria: typeof import('primevue/galleria')['default']
-    PIconField: typeof import('primevue/iconfield')['default']
-    PInputIcon: typeof import('primevue/inputicon')['default']
     PInputText: typeof import('primevue/inputtext')['default']
     POverlayBadge: typeof import('primevue/overlaybadge')['default']
     PPaginator: typeof import('primevue/paginator')['default']
@@ -44,5 +40,6 @@ declare module 'vue' {
   }
   export interface ComponentCustomProperties {
     KeyFilter: typeof import('primevue/keyfilter')['default']
+    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }

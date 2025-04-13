@@ -34,7 +34,7 @@ div(:class="$b()")
   }
   & button {
     flex: 1 0;
-    --buttonLabelFontSize: #{vars.$fs-static-s};
+    --buttonLabelFontSize: #{vars.$fs-s};
   }
 }
 </style>

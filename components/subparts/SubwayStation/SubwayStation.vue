@@ -28,7 +28,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .SubwayStation {
-  @include centeredFlex((gap: 6px));
+  @include centered-flex((gap: 6px));
 
   &__marker {
     width: 10px;

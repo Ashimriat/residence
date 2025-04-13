@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockOtherUsers } from '~/assets/mocks';
+import { mockOtherUsers } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 

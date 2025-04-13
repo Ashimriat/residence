@@ -56,12 +56,12 @@ const $b = useBEM('RequestForm');
 
 <template lang="pug">
 div(:class="$b()")
-  div(:class="$b('requestQuestion')")
+  div(:class="$b('text')")
     h1
       | {{ title }}
-    span
+    span(:class="$b('question')")
       | {{ subtext }}
-  div(:class="$b('requestForm')")
+  form(:class="$b('requestForm')")
     RzdSelectButtons(
       v-if="selectOptions.length"
       v-model="formData.selectOption"
@@ -69,11 +69,11 @@ div(:class="$b()")
       :options="selectOptions"
     )
     div(:class="$b('inputsContainer')")
-      PInputText(
+      RzdTextInput(
         v-model="formData.name"
         placeholder="Имя"
       )
-      PInputText(
+      RzdTextInput(
         v-model="formData.telegram"
         placeholder="Ник телеграм"
       )
@@ -94,19 +94,20 @@ div(:class="$b()")
   background-color: vars.$colors-black;
   border-radius: vars.$br-x2l;
   overflow: hidden;
-  &__requestQuestion {
-    @include flexColumn((gap: 20px));
+  &__text {
+    @include flex-column((gap: 20px));
     box-sizing: content-box;
     max-width: 450px;
     padding: 40px;
     background-color: vars.$colors-white;
     border-radius: 0 vars.$br-x2l vars.$br-x2l 0;
-    & > span {
-      color: vars.$colors-greyDark;
-    }
+  }
+  &__question {
+    color: vars.$colors-greyDark;
+    font: vars.$fonts-textL;
   }
   &__requestForm {
-    @include flexColumn((gap: 20px));
+    @include flex-column((gap: 20px));
     box-sizing: content-box;
     width: 670px;
     padding: 40px;
@@ -118,7 +119,6 @@ div(:class="$b()")
       box-sizing: border-box;
       width: 100%;
       max-width: 325px;
-      background-color: vars.$colors-white;
     }
   }
 }
@@ -134,7 +134,7 @@ div(:class="$b()")
       padding: 20px;
       max-width: unset;
       & span {
-        font-size: vars.$fs-xl;
+        font: vars.$fonts-textM;
       }
     }
     &__requestForm {

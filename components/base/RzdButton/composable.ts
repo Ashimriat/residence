@@ -1,5 +1,5 @@
 import { EIcons, EIconsSizes } from '~/components/constants';
-import { EButtons, EButtonVariant } from './constants';
+import { EButtons, EButtonVariant, EButtonSize } from './constants';
 
 
 enum EIconPos {
@@ -9,24 +9,26 @@ enum EIconPos {
 
 type ButtonData = Partial<{
   label: string;
-  iconType: EIcons;
+  size: EButtonSize;
+  iconType: EIcons | null;
   iconSize: EIconsSizes;
   iconPos: EIconPos;
   variant: EButtonVariant;
   isVariantInverted: boolean;
   isTextButton: boolean;
   htmlType: HTMLButtonElement['type'];
-  atMobile: Omit<ButtonData, 'atMobile'>;
 }>;
 
 
 const SIGN_IN_BUTTON_DATA: ButtonData = {
   label: 'Войти',
+  size: EButtonSize.M,
   iconType: EIcons.LOGIN,
   iconPos: EIconPos.RIGHT,
+  iconSize: EIconsSizes.S,
 } as const;
 
-const BUTTONS_DATA: Record<EButtons, ButtonData> = {
+const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
   [EButtons.ALREADY_REGISTERED]: {
     label: 'Уже есть аккаунт?',
     isTextButton: true,
@@ -41,7 +43,8 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.SIGN_IN_MODAL]: {
     ...SIGN_IN_BUTTON_DATA,
-    iconType: undefined,
+    size: EButtonSize.L,
+    iconType: null,
   },
   [EButtons.SIGN_IN]: SIGN_IN_BUTTON_DATA,
   [EButtons.SIGN_IN_MOBILE]: {
@@ -53,12 +56,12 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.CLOSE]: {
     label: 'Закрыть',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.REFERRAL]: {
     label: 'Скопировать ссылку',
     iconType: EIcons.LINK,
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     isVariantInverted: true,
   },
   [EButtons.EVENTS_CALENDAR]: {
@@ -73,7 +76,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.WELCOME_BEGINNING]: {
     label: 'Начнём!',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     iconPos: EIconPos.RIGHT,
     iconType: EIcons.ARROW_DOWN,
   },
@@ -81,7 +84,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
     label: 'Подробнее',
     iconType: EIcons.ARROW_DOWN,
     iconPos: EIconPos.RIGHT,
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.ADD_EVENT]: {
     label: 'Событие',
@@ -94,7 +97,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.SHARE]: {
     iconType: EIcons.LINK,
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.EDIT_RULES]: {
     label: 'Редактировать',
@@ -117,7 +120,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.GIFT_TO_FRIEND]: {
     label: 'Подарить другу',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     iconType: EIcons.GIFT,
     atMobile: {
       iconType: undefined,
@@ -132,7 +135,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.USER_SETTINGS]: {
     label: 'Настройки',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     iconType: EIcons.GEAR,
     iconSize: EIconsSizes.S,
   },
@@ -143,12 +146,12 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.ADD_PLAYERS]: {
     label: 'Добавить игроков',
     iconType: EIcons.LINK,
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     // isVariantInverted: true,
   },
   [EButtons.TOGGLE_DETAILS]: {
     iconType: EIcons.LINK,
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     isVariantInverted: true,
   },
   [EButtons.LEAVE_CLAN]: {
@@ -164,9 +167,13 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
       label: 'Выгнать',
     },
   },
+  [EButtons.BACK]: {
+    label: 'Назад',
+    variant: EButtonVariant.SECONDARY,
+  },
   [EButtons.SELECT_MASTER]: {
     label: 'Выбрать ведущего',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.SAVE_CHANGES]: {
     label: 'Сохранить изменения',
@@ -185,7 +192,7 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.CLAN_PARTICIPANTS]: {
     label: 'Участники',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.CREATE_CLAN]: {
     label: 'Создать клан',
@@ -202,11 +209,11 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.ADD_PLAYER_TO_CLAN_SELECTION]: {
     label: 'Добавить',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.REMOVE_PLAYER_FROM_CLAN_SELECTION]: {
     label: 'Убрать',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.CONFIRM]: {
     label: 'Подтвердить',
@@ -219,11 +226,11 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   },
   [EButtons.SELECT]: {
     label: 'Выбрать',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
   },
   [EButtons.REMOVE]: {
     label: 'Убрать',
-    variant: EButtonVariant.CONTRAST,
+    variant: EButtonVariant.TERTIARY,
     isVariantInverted: true,
   },
   [EButtons.CONFIRM_MASTER]: {
@@ -246,16 +253,31 @@ const BUTTONS_DATA: Record<EButtons, ButtonData> = {
   [EButtons.SAVE_RATINGS]: {
     label: 'Сохранить оценки',
   },
+  [EButtons.RECOVER_PASSWORD]: {
+    label: 'Подтвердить',
+    htmlType: 'submit',
+  }
 } as const;
 
+const DEFAULT_PARAMS: Required<ButtonData> = {
+  label: '',
+  size: EButtonSize.L,
+  iconType: null,
+  iconSize: EIconsSizes.M,
+  iconPos: EIconPos.LEFT,
+  variant: EButtonVariant.PRIMARY,
+  isVariantInverted: false,
+  isTextButton: false,
+  htmlType: 'button'
+}
 
-export default function useButtonData(type: EButtons): Omit<ButtonData, 'atMobile'> {
+
+export default function useButtonData(type: EButtons): Required<ButtonData> {
   const { isMobile } = useDevice();
-  let data = BUTTONS_DATA[type];
-  data.variant ??= EButtonVariant.PRIMARY;
-  data.iconPos ??= EIconPos.LEFT;
-  data.iconSize ??= EIconsSizes.M;
-  data.htmlType ??= 'button';
+  let data = {
+    ...DEFAULT_PARAMS,
+    ...BUTTONS_DATA[type],
+  };
   if (isMobile) {
     data.iconSize = EIconsSizes.S;
     if (data.atMobile) {

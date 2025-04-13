@@ -115,9 +115,10 @@ PPaginator(
   v-model:rows="amountOnPage"
   :total-records="itemsAmount"
   :always-show="false"
+  :pt:paginator-container:class="$b()"
 )
   template(#container)
-    div(:class="$b()")
+    div(:class="$b('content')")
       PButton.p-paginator-prev(
         :class="$b('controlButton', ['prev'], { disabled: currentPage === 1 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
@@ -161,7 +162,7 @@ PPaginator(
               @dblclick="setActiveSkipperInput(skipPos)"
             )
               | ...
-            PInputText(
+            RzdTextInput(
               v-else
               ref="input"
               v-model="inputValue"
@@ -179,7 +180,25 @@ PPaginator(
 
 <style lang="scss">
 .RzdPagination {
-  @include flex((gap: 4px));
+  --p-paginator-nav-button-width: 32px;
+  --p-paginator-nav-button-height: 32px;
+  --p-paginator-background: transparent;
+  --p-paginator-nav-button-border-radius: #{vars.$br-xs};
+  
+  --p-paginator-nav-button-background: transparent;
+  --p-paginator-nav-button-color: #{vars.$colors-black};
+
+  --p-paginator-nav-button-hover-background: #{vars.$colors-beigeMuted};
+  --p-paginator-nav-button-hover-color: #{vars.$colors-white};
+
+  --p-paginator-nav-button-selected-background: #{vars.$colors-beige};
+  --p-paginator-nav-button-selected-color: #{vars.$colors-white};
+  & button {
+    font: vars.$fonts-textS;
+  }
+  &__content {
+    @include flex((gap: 4px));
+  }
   &__container {
     @include flex((
       align-items: center,
@@ -191,7 +210,6 @@ PPaginator(
     height: var(--p-paginator-nav-button-height);
     border: none;
     justify-content: center;
-    --buttonLabelFontSize: #{vars.$fs-static-s};
   }
   &__controlButton {
     &--disabled {
@@ -243,12 +261,12 @@ PPaginator(
     }
   }
   &__skipper {
-    @include centeredFlex;
+    @include centered-flex;
     cursor: pointer;
   }
   &__skipperInput {
     padding: 8px;
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
   }
 }
 </style>

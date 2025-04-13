@@ -25,11 +25,11 @@ const $b = useBEM('EventCalendarBlock');
 <template lang="pug">
 div(:class="$b()")
   section(:class="$b('contentSection', ['data'])")
-    h3
+    h5
       | {{ dataSectionTitle }}
     slot
   section(:class="$b('contentSection', ['calendar'])")
-    h3(v-if="isDesktop")
+    h4(v-if="isDesktop")
       | Дата и время
     DateTimeCalendar(
       v-model:date="selectedDate"
@@ -50,7 +50,7 @@ div(:class="$b()")
   width: 100%;
 
   &__contentSection {
-    @include flexColumn((gap: vars.$gaps-g12));
+    @include flex-column((gap: vars.$gaps-g12));
 
     &--data {
       order: var(--dataSectionOrder, 1);

@@ -14,7 +14,7 @@ const $b = useBEM('UserData');
 
 <template lang="pug">
 div(:class="$b({ linker: isLinker, owner: isClanOwner })")
-  PAvatar(
+  RzdAvatar(
     label="UI"
     shape="circle"
     :image="avatar"
@@ -29,8 +29,8 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
   @include flex((align-items: center, gap: vars.$gaps-g12));
   width: fit-content;
   &--linker {
-    --avatarSize: 28px;
-    --avatarLabelFontSize: #{vars.$fs-static-xs};
+    --rzd-avatar-size: 28px;
+    --rzd-avatar-label-fontsize: #{vars.$fs-xs};
     border: var(--linkerBorderWidth, 3px) solid #{vars.$colors-black};
     padding: var(--linkerPadding, 12px);
     border-radius: vars.$br-s; 
@@ -39,13 +39,13 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
   }
   &--owner > div {
     @include relative;
-    @include withPseudoBefore((
+    @include with-pseudo-before((
       width: 47px,
       height: 47px,
       border-radius: 50%,
       border: 3px solid vars.$colors-beige,
     ));
-    @include withPseudoAfter((
+    @include with-pseudo-after((
       top: -13px,
       width: 44px,
       height: 88%,
@@ -57,7 +57,7 @@ div(:class="$b({ linker: isLinker, owner: isClanOwner })")
   }
   &__name {
     font-weight: vars.$fw-heavy;
-    font-size: var(--staticFontSize-M-S);
+    font-size: var(--static-fontSize-m-s);
   }
 }
 

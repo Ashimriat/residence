@@ -68,7 +68,7 @@ $border: 1px solid vars.$colors-black;
   }
 
   &__label {
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
     font-weight: vars.$fw-midHeavy;
     color: vars.$colors-black;
     cursor: pointer;

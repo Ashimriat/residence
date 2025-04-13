@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { mockEventsBigData, mockSubscriptions } from '~assets/mocks';
+import { mockEventsBigData, mockSubscriptions } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
-import { EVENTS_GAMES_DESCRIPTIONS } from '~/constants/pages';
+import { GAMES_DESCRIPTIONS } from './constants';
 
 
 /** Props & Emits */
@@ -20,7 +20,7 @@ div(:class="$b()")
       | Правила игр
     div(:class="$b('sectionContent')")
       NuxtLink(
-        v-for="({ logo, name, description, gameType }) of EVENTS_GAMES_DESCRIPTIONS"
+        v-for="({ logo, name, description, gameType }) of GAMES_DESCRIPTIONS"
         :key="gameType"
         :class="$b('game')"
         :to="`events/rules/${gameType}`"
@@ -30,7 +30,10 @@ div(:class="$b()")
         div(:class="$b('gameData')")
           h3
             | {{ name }}
-          span(v-if="!isMobile")
+          span(
+            v-if="!isMobile"
+            :class="$b('description')"
+          )
             | {{ description }}
     RzdButton(
       v-if="isAdmin"
@@ -60,11 +63,36 @@ div(:class="$b()")
     )
 </template>
 
+
+<style lang="scss" scoped>
+.EventsPage {
+  --scoped-sectioncontent-gap: #{vars.$gaps-g40};
+  --scoped-game-gap: #{vars.$gaps-g40};
+  --scoped-game-height: 204px;
+  --scoped-logo-maxwidth: 173px;
+  --scoped-logo-maxheight: 200px;
+  --scoped-logo-translate-x: 5%;
+  --scoped-gamedata-translate-x: 0; 
+}
+
+@include mobile {
+  .EventsPage{
+    --scoped-sectioncontent-gap: #{vars.$gaps-g12};
+    --scoped-game-gap: 0;
+    --scoped-game-height: 154px;
+    --scoped-logo-maxwidth: 115px;
+    --scoped-logo-maxheight: 125px;
+    --scoped-logo-translate-x: -35%;
+    --scoped-gamedata-translate-x: -55%;
+  }
+}
+</style>
+
 <style lang="scss">
 .EventsPage {
-  @include flexColumn((gap: 4rem));
+  @include flex-column((gap: 4rem));
   &__section {
-    @include flexColumn((gap: 26px));
+    @include flex-column((gap: 26px));
     & > button {
       max-width: 275px;
       justify-content: space-between;
@@ -76,53 +104,41 @@ div(:class="$b()")
   }
   &__sectionContent {
     @include flex((
-      gap: var(--sectionContentGap, #{vars.$gaps-g40}),
+      gap: var(--scoped-sectioncontent-gap),
       flex-wrap: wrap
     ));
   }
   &__game {
     @include flex((
       align-items: center,
-      gap: var(--gameGap, #{vars.$gaps-g40}),
+      gap: var(--scoped-game-gap),
     ));
-    max-width: calc((100% - var(--sectionContentGap, #{vars.$gaps-g40})) / 2);
-    height: var(--gameHeight, 204px);
+    max-width: calc((100% - var(--scoped-sectioncontent-gap, #{vars.$gaps-g40})) / 2);
+    height: var(--scoped-game-height, 204px);
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
     flex-grow: 1;
     cursor: pointer;
     overflow: hidden;
-    & span {
-      font-size: vars.$fs-m;
-    }
+  }
+  &__description {
+    font: vars.$fonts-textM;
   }
   &__logoContainer {
     @include fullsize;
     min-width: 115px;
     min-height: 125px;
-    max-width: var(--logoMaxWidth, 173px);
-    max-height: var(--logoMaxHeight, 200px);
-    transform: translateX(var(--logoTranslateX, 5%));
+    max-width: var(--scoped-logo-maxwidth, 173px);
+    max-height: var(--scoped-logo-maxheight);
+    transform: translateX(var(--scoped-logo-translate-x));
     &,
     & svg {
       @include fullsize;
     }
   }
   &__gameData {
-    @include flexColumn((gap: vars.$gaps-g12, justify-content: center));
-    transform: translateX(var(--gameDataTranslateX, 0));
-  }
-}
-
-@include mobile {
-  .EventsPage {
-    --sectionContentGap: #{vars.$gaps-g12};
-    --gameGap: 0;
-    --gameHeight: 154px;
-    --logoTranslateX: -35%;
-    --logoMaxWidth: 115px;
-    --logoMaxHeight: 125px;
-    --gameDataTranslateX: -55%;
+    @include flex-column((gap: vars.$gaps-g12, justify-content: center));
+    transform: translateX(var(--scoped-gamedata-translate-x));
   }
 }
 </style>

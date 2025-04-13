@@ -4,13 +4,15 @@ import {
   EIcons,
   EIconsSizes,
 } from '~/components/constants';
-import { ACCOUNT_TABS, ACCOUNT_GAMES_ICONS } from '~/constants/pages';
+import { TABS, GAMES_ICONS } from './constants';
 
 
 const route = useRoute();
 const router = useRouter();
 
-const tab = toRef(() => route.query.tab ?? ACCOUNT_TABS[0].id);
+const tab = toRef(() => route.query.tab ?? TABS[0].id);
+
+const { userData } = storeToRefs(useUserStore())
 
 watchEffect(() => {
   router.push({ path: route.path, query: { tab: tab.value }});
@@ -24,17 +26,17 @@ div(:class="$b()")
   section(:class="$b('section', ['user'])")
     div(:class="$b('subsection', ['data'])")
       div(:class="$b('userDataWrapper')")
-        PAvatar(
+        RzdAvatar(
           label="UI"
           :class="$b('avatar')"
         )
         div(:class="$b('userData')")
           div(:class="$b('dataContainer', ['user'])")
-            POverlayBadge(
+            RzdOverlayBadge(
               severity="contrast"
               value="Постоялец"
             )
-              | Никита
+              | {{ userData.name }}
           div(:class="$b('dataContainer', ['birthdate'])")
             RzdIcon(
               :type="EIcons.GIFT"
@@ -69,7 +71,7 @@ div(:class="$b()")
               | 24600
       div(:class="$b('gamesRatingContainer')")
         div(
-          v-for="(icon, i) of ACCOUNT_GAMES_ICONS"
+          v-for="(icon, i) of GAMES_ICONS"
           :key="`gameIcon_${i}`"
           :class="$b('gameRating')"
         )
@@ -82,7 +84,7 @@ div(:class="$b()")
       :class="$b('accountTabsContainer')"
     )
       NuxtLink(
-        v-for="({ id, label, icon }) of ACCOUNT_TABS"
+        v-for="({ id, label, icon }) of TABS"
         :key="id"
         :class="$b('tab', { active: id === tab })"
         :to="`/account?tab=${id}`"
@@ -91,16 +93,17 @@ div(:class="$b()")
         span
           | {{ label }}
     UserEvents(v-if="tab === 'events'")
-    ClansList(v-else-if="tab === 'clans'")
-    ReferralsList(v-else)
+    template(v-else)
+      ClansList(v-if="tab === 'clans'")
+      ReferralsList(v-else)
 </template>
 
 <style lang="scss">
 .AccountPage {
-  @include flexColumn((gap: 2.5rem));
+  @include flex-column((gap: 2.5rem));
   --badgeTranslateX: calc(100% + #{vars.$gaps-g8});
   --badgeTranslateY: 2px;
-  --badgeFontSize: #{vars.$fs-static-x2s};
+  --badgeFontSize: #{vars.$fs-x2s};
   &__section {
     @include flex((gap: 1rem));
     &--user {
@@ -130,15 +133,14 @@ div(:class="$b()")
       flex-direction: var(--userDataSubsectionFlexDirection, row);
     }
     &--rating {
-      @include flexColumn((justify-content: space-between));
+      @include flex-column((justify-content: space-between));
       padding: var(--ratingSubsectionPadding, 16px 28px);
       flex-basis: 32%;
     }
   }
   &__avatar {
-    width: 5rem;
-    height: 5rem;
-    border-radius: vars.$br-l;
+    --rzd-avatar-size: 96px;
+    --rzd-avatar-label-fontsize: 40px;
   }
   &__userDataWrapper {
     @include flex((
@@ -148,19 +150,19 @@ div(:class="$b()")
     width: 100%;
   }
   &__userData {
-    @include flexColumn((justify-content: space-between));
+    @include flex-column((justify-content: space-between));
     height: 70px;
   }
   &__dataContainer {
     @include flex((align-items: center, ));
     &--user {
-      font-size: var(--userFontSize, #{vars.$fs-static-s});
+      font-size: var(--userFontSize, #{vars.$fs-s});
       & > div {
         color: vars.$colors-black;
       }
     }
     &--birthdate {
-      font-size: vars.$fs-static-s;
+      font-size: vars.$fs-s;
       gap: vars.$gaps-g4;
       &,
       & span {
@@ -168,13 +170,13 @@ div(:class="$b()")
       }
     }
     &--statistics {
-      font-size: vars.$fs-static-xs;
+      font-size: vars.$fs-xs;
       gap: vars.$gaps-g12;
       & span {
         @include relative;
         &:first-of-type,
         &:nth-of-type(2) {
-          @include withPseudoAfter((
+          @include with-pseudo-after((
             border-radius: 50%,
             background-color: vars.$colors-black,
             width: 4px,
@@ -197,7 +199,7 @@ div(:class="$b()")
     font-weight: vars.$fw-bold;
   }
   &__userTitle {
-    font-size: vars.$fs-static-x2s;
+    font-size: vars.$fs-x2s;
     font-weight: vars.$fw-bold;
     width: 53px;
     height: 14px;
@@ -211,7 +213,7 @@ div(:class="$b()")
   }
   &__settingsButton {
     --buttonGap: 0;
-    --buttonLabelFontSize: #{vars.$fs-static-xs};
+    --buttonLabelFontSize: #{vars.$fs-xs};
     width: 112px;
     min-width: var(--settingsButtonMinWidth, initial);
     height: 24px;
@@ -220,7 +222,7 @@ div(:class="$b()")
     justify-content: center;
     & span {
       margin-left: 4px;
-      font-size: vars.$fs-static-xs;
+      font-size: vars.$fs-xs;
     }
   }
 
@@ -228,25 +230,30 @@ div(:class="$b()")
     @include flex((justify-content: space-between, align-items: center));
   }
   &__userRating {
-    font-size: var(--staticFontSize-M-S);
+    font-size: var(--static-fontSize-m-s);
     & span {
       color: vars.$colors-beige;
     }
   }
   &__ratingLink {
-    @include titleWithLink;
+    @include flex((gap: vars.$gaps-g4));
+    font-size: 12px;
+    cursor: pointer;
+    & span {
+      text-decoration: underline;
+    }
   }
   &__gamesRatingContainer {
     @include flex((justify-content: space-between));
   }
   &__gameRating {
-    @include flexColumn((align-items: center, gap: 4px));
+    @include flex-column((align-items: center, gap: 4px));
     & svg {
       width: 32px;
       height: 32px;
     }
     & span {
-      font-size: vars.$fs-static-xs;
+      font-size: vars.$fs-xs;
     }
   }
   &__accountTabsContainer {
@@ -257,7 +264,7 @@ div(:class="$b()")
     border-bottom: 2px solid transparent;
     cursor: pointer;
     font-weight: vars.$fw-midHeavy;
-    font-size: var(--staticFontSize-S-XS);
+    font-size: var(--static-fontSize-s-xs);
     padding-bottom: 10px;
     --iconStroke: #{vars.$colors-black};
     &--active {

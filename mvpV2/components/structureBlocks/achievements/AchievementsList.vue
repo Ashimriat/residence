@@ -38,7 +38,7 @@ $gap: 2rem;
   gap: $gap;
   max-width: calc(v-bind(itemsInRow) * $figureWidth + $gap * (v-bind(itemsInRow) - 1));
   &__achievement {
-    @include centeredFlexColumn((gap: 8px));
+    @include centered-flex-column((gap: 8px));
     width: 100px;
     --color: #{vars.$colors-beige};
     --cursor: pointer;

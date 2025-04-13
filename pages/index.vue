@@ -4,12 +4,11 @@ import {
 } from '~/components/constants';
 import {
   mockText, mockEventsBigData, mockGalleryImages, mockReviews,
-} from '~/assets/mocks';
-import { EVENTS_GAMES_OPTIONS } from '~/constants/pages';
+} from '~/__mocks__';
+import { LESSER_GAMES_OPTIONS } from '~/constants/events';
 
 
 const aboutRef = useTemplateRef<HTMLDivElement>('about');
-
 
 
 const activeIndex = ref(0);
@@ -33,7 +32,10 @@ const responsiveOptions = ref([
   },
 ]);
 
-const openEventsCalendar = () => {};
+
+const openEventsCalendar = () => {
+  navigateTo('/events');  
+};
 
 const handleEventRequestSubmit = () => {};
 
@@ -58,7 +60,7 @@ div(:class="$b()")
                 | Что такое
               span
                 | Резиденция?
-            div
+            div(:class="$b('descriptionText')")
               | {{ mockText() }}
           div(:class="$b('topButtonsContainer')")
             RzdButton(
@@ -69,18 +71,18 @@ div(:class="$b()")
     ref="about"
     :class="$b('section', ['founder'])"
   )
-    PAvatar(
+    RzdAvatar(
       size="xlarge"
       shape="circle"
       :class="$b('founderAvatar')"
     )
-    div(:class="$b('founderData')")
-      div
+    div(:class="$b('founderDataContainer')")
+      div(:class="$b('founderData')")
         h2
           | Никита Цуканов
         span
           | Основатель Резиденции
-      div
+      div(:class="$b('founderContacts')")
         RzdIcon(
           :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
           :type="EIcons.TELEGRAM"
@@ -93,7 +95,7 @@ div(:class="$b()")
     h2
       | Посмотрите на наши ивенты!
     PGalleria(
-      v-model:activeIndex="activeIndex"
+      v-model:active-index="activeIndex"
       v-model:visible="displayCustom"
       :value="mockGalleryImages(10)"
       :responsive-options="responsiveOptions"
@@ -154,14 +156,14 @@ div(:class="$b()")
     subtext="Оставьте заявку - мы напишем!"
     request-text-placeholder="Опишите пожелания на игру"
     :button-type="EButtons.REQUEST_EVENT"
-    :select-options="EVENTS_GAMES_OPTIONS"
+    :select-options="LESSER_GAMES_OPTIONS"
     @submit="handleEventRequestSubmit"
   )
 </template>
 
 <style lang="scss">
 .MainPage {
-  @include centeredFlexColumn((gap: vars.$gaps-adaptive-l));
+  @include centered-flex-column((gap: vars.$gaps-adaptive-l));
 
   --generalCardHeight: 720px;
 
@@ -172,67 +174,65 @@ div(:class="$b()")
     &--reviews,
     &--gallery,
     &--events {
-      @include flexColumn((gap: vars.$gaps-g24));
+      @include flex-column((gap: vars.$gaps-g24));
     }
     &--general {
       --cardMinWidth: 100%;
       --cardHeight: var(--generalCardHeight);
-      --cardPadding: 12px;
-      --cardBorderRadius: #{vars.$br-x2l};
+      --cardBorderRadius: #{vars.$br-xl};
       --cardContentBorderRadius: #{vars.$br-xl};
     }
     &--founder {
-      @include centeredFlex((gap: vars.$gaps-adaptive-m));
+      @include centered-flex((gap: vars.$gaps-adaptive-m));
     }
     &--events {
       & button {
-        --buttonMaxWidth: 357px;
-        --iconStroke: #{vars.$colors-white};
         align-self: center;
       }
     }
   }
   &__generalDataContainer {
-    @include flexColumn((justify-content: space-between));
+    @include flex-column((justify-content: space-between));
     width: 560px;
     padding: 54px 48px 60px 48px;
     height: 100%;
   }
   &__textContainer {
-    @include flexColumn((gap: 1rem));
+    @include flex-column((gap: 1rem));
     & > h1 {
-      @include flexColumn((gap: 4px));
+      @include flex-column((gap: 4px));
       & > span:last-child  {
         color: vars.$colors-beige;
       }
     }
-    & > div {
-      color: vars.$colors-black;
-    }
+  }
+  &__descriptionText {
+    color: vars.$colors-black;
+    font: vars.$fonts-textM;
   }
   &__topButtonsContainer {
-    @include centeredFlex((gap: vars.$gaps-g16));
+    @include centered-flex((gap: vars.$gaps-g16));
     & > button {
       width: 50%;
     }
   }
   &__founderAvatar {
     border: 6px solid vars.$colors-beige;
-    --avatarSize: 12rem;
+    --rzd-avatar-size: 120px;
+  }
+  &__founderDataContainer {
+    @include flex-column((gap: 1.5rem));
   }
   &__founderData {
-    @include flexColumn((gap: 1.5rem));
-    & > div:first-child {
-      & > span {
-        display: block;
-        margin-top: 4px;
-        font-size: vars.$fs-m;
-        color: vars.$colors-greyMuted;
-      }
+    & > span {
+      display: block;
+      margin-top: 4px;
+      color: vars.$colors-greyMuted;
+      font: vars.$fonts-textBoldL;
     }
-    & > div:last-child {
-      @include flex((gap: #{vars.$gaps-adaptive-s}));
-    }
+  }
+  &__founderContacts {
+    @include flex((gap: #{vars.$gaps-adaptive-s}));
   }
   &__galleryPreview {
     display: grid;
@@ -256,7 +256,7 @@ div(:class="$b()")
         justify-content: center;
         align-items: flex-end;
         height: 470px;
-        border-radius: vars.$br-l;
+        --cardBorderRadius: #{vars.$br-l};
       }
     }
     &__generalDataContainer {
@@ -266,6 +266,17 @@ div(:class="$b()")
       width: 100%;
       border-radius: vars.$br-m;
     }
+
+    &__descriptionText {
+      font: vars.$fonts-textS;
+    }
+
+    &__founderData {
+      & > span {
+        font: vars.$fonts-textBoldS;
+      }
+    }
+
     &__eventsCardsContainer {
       flex-direction: column;
       width: 100%;

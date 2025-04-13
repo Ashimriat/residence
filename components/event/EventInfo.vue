@@ -21,13 +21,13 @@ const $b = useBEM('EventInfo');
 
 <template lang="pug">
 div(:class="$b({ account: isAccountMode })")
-  PChip(
-    v-if="withAbon"
+  RzdChip(
+    v-if="withAbon && isAbonWorks"
     label="Действует абонемент"
   )
   div(:class="$b('gameNamePriceBlock')")
     component(
-      :is="isAccountMode ? 'h6' : 'h4'"
+      :is="isAccountMode ? 'h5' : 'h4'"
       :class="$b('gameTitle')"
     )
       | {{ gameData.title }}
@@ -39,6 +39,7 @@ div(:class="$b({ account: isAccountMode })")
   EventDatePlace(
     :date="gameData.date"
     :time="gameData.time"
+    :address="gameData.address"
     :subway="locationData.subway"
   )
   slot
@@ -46,7 +47,7 @@ div(:class="$b({ account: isAccountMode })")
 
 <style lang="scss">
 .EventInfo {
-  @include flexColumn((gap: var(--contentGap)));
+  @include flex-column((gap: var(--contentGap)));
 
   --contentBackgroundColor: #{vars.$colors-white};
   --contentGap: #{vars.$gaps-g24};
@@ -69,23 +70,8 @@ div(:class="$b({ account: isAccountMode })")
     --gameTitleColor: #{vars.$colors-beige};
   }
 
-  & span {
-    color: var(--contentColor);
-    white-space: nowrap;
-  }
-
-  & svg {
-    --stroke: var(--contentColor);
-  }
-
-  & > div {
-    &:last-of-type * {
-      font-size: var(--contentFontSize);
-    }
-  }
-
   &__gameNamePriceBlock {
-    @include centeredFlex((justify-content: space-between));
+    @include centered-flex((justify-content: space-between));
   }
 
   &__gameTitle {

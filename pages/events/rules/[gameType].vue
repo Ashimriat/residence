@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EGameTypes } from '~/constants/pages';
+import type { EGameTypes } from '../constants';
 import { EButtons } from '~/components/constants';
-import { EVENTS_GAMES_RULES } from '~/constants/pages';
+import { GAMES_RULES } from './constants';
 
 
 const { isAdmin } = storeToRefs(useUserStore());
@@ -15,7 +15,7 @@ const {
   icon,
   title,
   sections
-} = EVENTS_GAMES_RULES[gameType as EGameTypes];
+} = GAMES_RULES[gameType as EGameTypes];
 
 function turnEditModeOn(): void {
   isEditMode.value = true;
@@ -77,7 +77,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .RulesPage {
-  @include flexColumn((gap: 22px));
+  @include flex-column((gap: 22px));
   padding: 60px 80px;
   &__backButton {
     @include flex((align-items: center, gap: 12px));
@@ -97,7 +97,7 @@ div(:class="$b()")
     }
   }
   &__content {
-    @include flexColumn((gap: 28px));
+    @include flex-column((gap: 28px));
     background-color: vars.$colors-white;
     padding: 40px 120px;
     border-radius: vars.$br-l;
@@ -109,13 +109,13 @@ div(:class="$b()")
     }
   }
   &__section {
-    @include flexColumn((gap: 12px));
+    @include flex-column((gap: 12px));
   }
   &__sectionContent {
-    @include flexColumn((gap: 1rem));
+    @include flex-column((gap: 1rem));
   }
   &__list {
-    @include flexColumn((gap: 4px));
+    @include flex-column((gap: 4px));
     margin: 0;
     padding: 0 0 0 30px;
   }

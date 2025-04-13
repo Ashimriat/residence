@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NotificationData, NotificationType } from '~/types/data/notification';
-import { mockNotifications } from '~/assets/mocks';
+import { mockNotifications } from '~/__mocks__';
 
 
 const notifications = ref<NotificationData[]>(mockNotifications(8));
@@ -72,7 +72,7 @@ div(
 
 <style lang="scss">
 .NotificationsPage {
-  @include flexColumn((gap: vars.$gaps-g48));
+  @include flex-column((gap: vars.$gaps-g48));
   --sectionPaddingBottom: 0;
   & span.pi-trash {
     cursor: pointer;
@@ -124,7 +124,7 @@ div(
     font-size: 16px;
   }
   &__iconContainer {
-    @include centeredFlex;
+    @include centered-flex;
     grid-column: 2;
     grid-row: 1 / span 2;
     cursor: pointer;

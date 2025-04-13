@@ -13,7 +13,7 @@ const {
 } = defineProps<Props>();
 
 
-const $b = useBEM('Subscription');
+const $b = useBEM('EventSubscription');
 </script>
 
 <template lang="pug">
@@ -33,8 +33,8 @@ div(:class="$b({ owned: isOwned })")
 </template>
 
 <style lang="scss">
-.Subscription {
-  @include flexColumn((gap: vars.$gaps-g24));
+.EventSubscription {
+  @include flex-column((gap: vars.$gaps-g24));
   padding: var(--subscriptionPadding, 20px);
   background-color: var(--subscriptionBackgroundColor, #{vars.$colors-white});
   border-radius: vars.$br-s;
@@ -45,14 +45,9 @@ div(:class="$b({ owned: isOwned })")
   }
   &__generalData {
     @include flex((align-items: center, justify-content: space-between));
-    & span {
-      color: vars.$colors-beige;
-      font-size: vars.$fs-l;
-      font-weight: vars.$fw-bold;
-    }
   }
   &__description {
-    font-size: var(--staticFontSize-S-XS);
+    font: vars.$fonts-textM;
     color: vars.$colors-black;
   }
   &__buttonsContainer {

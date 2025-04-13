@@ -5,7 +5,8 @@ declare module '#app' {
     $displayedModalData: ShallowRef<{
       component: Component,
       data: unknown,
-      title: string
+      title: string,
+      size: 'm' | 's'
     }[]>
   }
 }

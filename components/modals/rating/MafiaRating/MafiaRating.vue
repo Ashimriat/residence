@@ -97,7 +97,7 @@ div(:class="$b()")
           placeholder="Роль"
           :class="$b('roleSelect')"
         )
-        PInputText(
+        RzdTextInput(
           v-model="playerRating.additionalScores"
           v-keyfilter.int
           placeholder="Доп баллы"
@@ -128,7 +128,7 @@ div(:class="$b()")
 
 <style lang="scss">
 .MafiaRating {
-  @include flexColumn((gap: vars.$gaps-g16));
+  @include flex-column((gap: vars.$gaps-g16));
 
   max-width: 1000px;
 
@@ -148,7 +148,7 @@ div(:class="$b()")
   }
 
   &__controls {
-    @include flexColumn((justify-content: center));
+    @include flex-column((justify-content: center));
 
     &--multiple {
       justify-content: space-between
@@ -173,7 +173,7 @@ div(:class="$b()")
   }
 
   &__ratingsContainer {
-    @include flexColumn((gap: vars.$gaps-g12));
+    @include flex-column((gap: vars.$gaps-g12));
 
     padding: 20px;
     background-color: vars.$colors-white;

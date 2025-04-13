@@ -1,7 +1,7 @@
 enum EButtonVariant {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
-  CONTRAST = 'contrast',
+  TERTIARY = 'contrast',
   DANGER = 'danger',
 }
 
@@ -64,11 +64,20 @@ enum EButtons {
   CONFIRM_MASTER = 'confirmMaster',
   CREATE_EVENT = 'createEvent',
   ADD_GAME_ROUND = 'addGameRound',
+  RECOVER_PASSWORD = 'recoverPassword',
+
+  BACK = 'back',
 
 
   // Мафия
   SAVE_RATINGS = 'saveRatings',
 }
 
+enum EButtonSize {
+  S = 's',
+  M = 'm',
+  L = 'l',
+}
 
-export { EButtonVariant, EButtons };
+
+export { EButtonVariant, EButtons, EButtonSize };

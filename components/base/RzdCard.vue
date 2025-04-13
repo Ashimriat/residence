@@ -22,7 +22,7 @@ const $b = useBEM('RzdCard');
 </script>
 
 <template lang="pug">
-div(:class="$b([orientation ?? 'row'])")
+div(:class="$b([direction])")
   div(
     v-if="preserveSubcontent || slots.subContent"
     :class="$b('subcontent')"
@@ -35,6 +35,18 @@ div(:class="$b([orientation ?? 'row'])")
     slot(name="content")
 </template>
 
+
+<style lang="scss" scoped>
+.RzdCard {
+  &--column {
+    --cardContentMinHeight: fit-content;
+  }
+  &__content {
+    min-height: var(--cardContentMinHeight, 220px);
+  }
+}
+</style>
+
 <style lang="scss">
 .RzdCard {
   @include flex((
@@ -45,11 +57,11 @@ div(:class="$b([orientation ?? 'row'])")
   width: var(--cardWidth);
   max-width: var(--cardMaxWidth, 876px);
   height: var(--cardHeight, 584px);
-  padding: var(--cardPadding, 12px);
+  padding: var(--cardPadding, 8px);
   border-radius: var(--cardBorderRadius, #{vars.$br-l});
   box-shadow: var(--cardBoxShadow, #{vars.$shadows-popup});
   &--column {
-    --cardContentMinHeight: fit-content;
+    justify-content: space-between;
   }
   &__subcontent {
     flex-basis: var(--cardSubcontentFlexBasis, 56%);
@@ -59,7 +71,6 @@ div(:class="$b([orientation ?? 'row'])")
     background-color: vars.$colors-white;
     border-radius: var(--cardContentBorderRadius, #{vars.$br-m});
     overflow: hidden;
-    min-height: var(--cardContentMinHeight, 220px);
   }
 }
 

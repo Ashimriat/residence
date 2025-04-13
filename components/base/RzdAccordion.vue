@@ -1,13 +1,12 @@
 <script setup lang="ts">
 export type AccordionContent = {
-  header: string;
+  title: string;
   id: string;
 };
 
 type Props = {
   content: AccordionContent[];
 };
-
 
 const { content } = defineProps<Props>();
 
@@ -22,23 +21,21 @@ PAccordion(
   collapse-icon="pi pi-angle-down"
 )
   PAccordionPanel(
-    v-for="({ header, id }) of content"
+    v-for="({ title, id }) of content"
     :key="id"
     :value="id"
     :pt:root:class="$b('panel')"
   )
     PAccordionHeader(:pt:root:class="$b('header')")
-      | {{ header }}
-    PAccordionContent(
-      :pt:content:class="$b('section')"
-    )
+      | {{ title }}
+    PAccordionContent(:pt:content:class="$b('section')")
       slot(:name="id")
 </template>
 
 <style lang="scss">
 
 .RzdAccordion {
-  @include flexColumn((gap: vars.$gaps-g12));
+  @include flex-column((gap: vars.$gaps-g12));
   --p-accordion-header-toggle-icon-active-color: var(--p-accordion-header-toggle-icon-color);
   &__panel {
     --p-accordion-panel-border-color: var(--p-slate-200);
@@ -47,7 +44,7 @@ PAccordion(
     --p-accordion-header-hover-color: var(--p-accordion-header-color);
     --p-accordion-header-toggle-icon-hover-color: var(--p-accordion-header-toggle-icon-color);
     --p-accordion-header-toggle-icon-active-hover-color: var(--p-accordion-header-toggle-icon-active-color);
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
     font-weight: vars.$fw-bold;
     border-radius: vars.$br-x2s;
     padding: 10px 12px;
@@ -59,14 +56,14 @@ PAccordion(
     }
   }
   &__section {
-    @include flexColumn;
+    @include flex-column;
     --p-accordion-content-padding: 12px;
     border-radius: 0 0 vars.$br-xs vars.$br-xs;
     background-color: vars.$colors-white;
   }
   &__link {
     padding: 12px 0;
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
     &:first-of-type {
       padding-top: 0;
     }

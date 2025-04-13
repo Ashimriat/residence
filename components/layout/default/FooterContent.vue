@@ -19,14 +19,14 @@ div(:class="$b()")
           :type="EIcons.INSTAGRAM"
           :size="EIconsSizes.XL"
         )
-    NavigationMenu(is-footer-menu)
+    FooterNavMenu
   div(:class="$b('copyright')")
     | © Все права защищены
 </template>
 
 <style lang="scss">
 .FooterContent {
-  @include flexColumn((gap: 20px));
+  @include flex-column((gap: 20px));
   color: vars.$colors-white;
   padding: 24px 80px;
   background-color: vars.$colors-black;
@@ -37,7 +37,7 @@ div(:class="$b()")
     height: 190px;
   }
   &__companyDataBlock {
-    @include flexColumn((justify-content: space-between));
+    @include flex-column((justify-content: space-between));
   }
   &__companyContactsBlock {
     @include flex((gap: 12px));

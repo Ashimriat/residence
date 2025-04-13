@@ -69,11 +69,11 @@
 //     return (dialogRef!).value.data;
 //   }
 
-//   function openSignIn(): void {
+//   function openLogin(): void {
 //     openModal(SignIn, { title: 'Вход' });
 //   }
 
-//   function openSignUp(): void {
+//   function openRegistration(): void {
 //     openModal(SignUp, { title: 'Регистрация' });
 //   }
 
@@ -157,8 +157,8 @@
 //     getModalData,
 //     closeModal,
 //     /** */
-//     openSignIn,
-//     openSignUp,
+//     openLogin,
+//     openRegistration,
 //     seeMerch,
 //     seeAchievement,
 //     createClan,

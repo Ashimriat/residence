@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockContacts, mockSocials } from '~assets/mocks';
+import { mockContacts, mockSocials } from '~/__mocks__';
 import { EIconsSizes } from '~/components/constants';
 
 
@@ -16,7 +16,7 @@ div(:class="$b()")
       :key="`contact_${i}`"
       :class="$b('contact')"
     )
-      PAvatar(
+      RzdAvatar(
         size="large"
         shape="circle"
         :class="$b('avatar')"
@@ -50,17 +50,17 @@ div(:class="$b()")
 .ContactsPage {
   @include flex((gap: 4rem));
   &__section {
-    @include flexColumn((gap: 1.4rem));
+    @include flex-column((gap: 1.4rem));
   }
   &__contact {
     @include flex((align-items: center, gap: 1.4rem));
   }
   &__contactDataContainer {
-    @include flexColumn((justify-content: space-between));
+    @include flex-column((justify-content: space-between));
 
     height: 80%;
     & > div:first-child {
-      @include flexColumn;
+      @include flex-column;
     }
   }
   &__contactTopic {
@@ -88,7 +88,7 @@ div(:class="$b()")
       }
     }
     &__avatar {
-      --avatarSize: 10rem;
+      --rzd-avatar-size: 100px;
     }
     &__contactDataContainer {
       gap: 2rem;

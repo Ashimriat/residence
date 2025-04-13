@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mockOtherUsers, mockText } from '~/assets/mocks';
+import { mockOtherUsers, mockText } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 
@@ -19,7 +19,7 @@ UsersStructure(
   :class="$b()"
 )
   template(#texts)
-    h3
+    h4
       | Реферральная система
     span(:class="$b('description')")
       | {{ mockText() }}
@@ -34,7 +34,7 @@ UsersStructure(
 <style lang="scss">
 .ReferralsList {
   &__description {
-    font-size: vars.$fs-static-s;
+    font-size: vars.$fs-s;
   }
   
   &__button {
