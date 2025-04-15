@@ -35,6 +35,7 @@ PSelectButton(
 .RzdSelectButtons {
   @include flex((gap: var(--gap, #{vars.$gaps-g16})));
   width: 100%;
+  overflow: auto;
 
   --p-togglebutton-background: #{vars.$colors-white};
   --p-togglebutton-hover-background: #{vars.$colors-black};
@@ -64,7 +65,7 @@ PSelectButton(
 
   & .p-togglebutton {
     flex-grow: 1;
-
+    min-width: fit-content;
     border-width: var(--borderWidth, 3px);
     border-radius: var(--borderRadius, #{vars.$br-s});
 

@@ -21,7 +21,7 @@ div(:class="$b()")
   )
     UsersStructure(
       :users
-      :items-in-row="4"
+      :items-in-row="{ desktop: 4, mobile: 1 }"
       :class="$b('gameData')"
     )
       template(#texts)
@@ -55,7 +55,7 @@ div(:class="$b()")
     RzdCarousel(
       v-slot="{ itemsData }"
       :items="otherEvents"
-      :visible-amount="6"
+      :visible-amount="{ desktop: 6, mobile: 3 }"
     )
       div(:class="$b('eventsContainer')")
         EventCard(
@@ -75,7 +75,9 @@ div(:class="$b()")
   --usersStructureSubcontentFlexBasis: 38%;
   --usersStructureContentWidth: 62%;
 
-
+  --scoped-game-parties-font: #{vars.$fonts-textBoldL};
+  --scoped-event-card-flex-basis: calc((100% - 32px) / 3);
+  --scoped-other-games-padding: 12px;
 
   &__gameData {
     box-shadow: none;
@@ -95,7 +97,7 @@ div(:class="$b()")
     }
 
     & > div {
-      font: vars.$fonts-textBoldL;
+      font: var(--scoped-game-parties-font);
       color: vars.$colors-white;
     }
   }
@@ -111,15 +113,23 @@ div(:class="$b()")
     border-radius: vars.$br-l;
 
     & > h4 {
-      padding-left: 12px;
+      padding-left: var(--scoped-other-games-padding);
     }
   }
 
   &__eventsContainer {
     @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
     & > * {
-      flex-basis: calc((100% - 32px) / 3);
+      flex-basis: var(--scoped-event-card-flex-basis);
     }
+  }
+}
+
+@include mobile {
+  .EventManagePage {
+    --scoped-game-parties-font: #{vars.$fonts-textBoldS};
+    --scoped-event-card-flex-basis: 100%;
+    --scoped-other-games-padding: 4px;
   }
 }
 </style>

@@ -28,7 +28,7 @@ div(:class="$b()")
         div(:class="$b('logoContainer')")
           component(:is="logo")
         div(:class="$b('gameData')")
-          h3
+          h3(:class="$b('gameName')")
             | {{ name }}
           span(
             v-if="!isMobile"
@@ -69,6 +69,7 @@ div(:class="$b()")
   --scoped-sectioncontent-gap: #{vars.$gaps-g40};
   --scoped-game-gap: #{vars.$gaps-g40};
   --scoped-game-height: 204px;
+  --scoped-game-name-font: #{vars.$fonts-desktopH3};
   --scoped-logo-maxwidth: 173px;
   --scoped-logo-maxheight: 200px;
   --scoped-logo-translateX: 5%;
@@ -80,6 +81,7 @@ div(:class="$b()")
     --scoped-sectioncontent-gap: #{vars.$gaps-g12};
     --scoped-game-gap: 0;
     --scoped-game-height: 154px;
+    --scoped-game-name-font: #{vars.$fonts-textBoldL};
     --scoped-logo-maxwidth: 115px;
     --scoped-logo-maxheight: 125px;
     --scoped-logo-translateX: -35%;
@@ -120,6 +122,9 @@ div(:class="$b()")
     flex-grow: 1;
     cursor: pointer;
     overflow: hidden;
+  }
+  &__gameName {
+    font: var(--scoped-game-name-font);
   }
   &__description {
     font: vars.$fonts-textM;

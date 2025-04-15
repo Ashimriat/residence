@@ -26,7 +26,7 @@ const TABS_LIST: TabData[] = [
 ];
 const activeTab = ref<string>(TABS_LIST[0].id);
 
-const { selectedDate } = useCalendar();
+const selectedDate = ref<CalendarDate>(null);
 
 const activeEvents = computed<EventData[]>(() => {
   const activeTabIndex = TABS_LIST.findIndex(({ id }) => id === activeTab.value);
@@ -116,7 +116,7 @@ $paddingTop: 6px;
       width: 100%;
     }
     &__calendar {
-      margin: 16px 0;
+      margin-bottom: 14px;
       position: static;
     }
   }

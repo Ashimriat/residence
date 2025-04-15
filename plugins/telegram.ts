@@ -17,33 +17,31 @@ export default defineNuxtPlugin(() => {
 
   const backButtonClickHandler = () => router.back();
 
+  const isMiniApp = isTMA()
+
   if (mountBackButton.isAvailable()) {
     mountBackButton()
   }
 
   onNuxtReady(() => {
-    onBeforeMount(() => {
-      if (!isTMA()) return;
-      init();
-      if (!isMobile) {
-        expandViewport();
-      }
-    });
+    if (!isMiniApp) return;
+    init();
+    if (!isMobile) {
+      expandViewport();
+    }
 
     watch(
       () => route.path,
       () => {
-        if (!isTMA()) return;
-        /** @TODO убрать лишнее */
-        if (/^\/([a-z]{2}\/)?(mobile\/?)?$/.test(route.path)) {
+        if (!isMiniApp) return;
+        if (route.path === '/') {
           hideBackButton()
           offBackButtonClick(backButtonClickHandler);
           return;
         }
-        if (!isBackButtonVisible()) {
-          showBackButton()
-          onBackButtonClick(backButtonClickHandler)
-        }
+        if (isBackButtonVisible()) return;
+        showBackButton()
+        onBackButtonClick(backButtonClickHandler)
       },
       { immediate: true },
     )

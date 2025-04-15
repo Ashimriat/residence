@@ -131,7 +131,7 @@ const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
     iconPos: EIconPos.RIGHT,
   },
   [EButtons.GIFT_TO_FRIEND]: {
-    label: 'Подарить другу',
+    label: 'Подарить',
     variant: EButtonVariant.TERTIARY,
     iconType: EIcons.GIFT,
     atMobile: {

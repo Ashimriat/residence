@@ -4,14 +4,16 @@ import { EButtons } from '~/components/constants';
 
 export type MobileCalendarModalData = {
   withTimeSelect?: boolean;
+  activedDate: CalendarDate;
+  activeTime: Time;
   onSelect: (date: NonNullable<CalendarDate>, time: Time) => void;
 };
 
-
-const { selectedDate, selectedTime } = useCalendar();
-
 const { getModalData } = useModal<MobileCalendarModalData>();
-const { onSelect, withTimeSelect } = getModalData();
+const { onSelect, withTimeSelect, activeDate, activeTime } = getModalData();
+
+const selectedDate = ref<CalendarDate>(activeDate)
+const selectedTime = ref<Time>(activeTime)
 
 const confirm = () => {
   onSelect(
@@ -29,7 +31,6 @@ div(:class="$b()")
     v-model:date="selectedDate"
     v-model:time="selectedTime"
     as-desktop
-    :with-time="withTimeSelect"
   )
   RzdButton(
     :type="EButtons.CONFIRM"

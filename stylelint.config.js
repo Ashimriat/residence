@@ -13,7 +13,6 @@ export default {
   rules: {
     'plugin/no-unsupported-browser-features': [true, {
       browsers: ['last 2 Chrome versions'],//, 'Last 2 versions'],
-      ignore: ['rem'],
       ignorePartialSupport: true,
       severity: 'warning'
     }],

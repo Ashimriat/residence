@@ -32,7 +32,7 @@ const emit = defineEmits<Emits>();
 const { providedData, checkIsClanOwner } = useUserStore();
 
 const showList = defineModel<boolean>('showList', { default: true });
-const selectedUser = defineModel<string | null>('selected', { default: 'null' });
+const selectedUser = defineModel<string | null>('selected', { default: null });
 
 const isSelectableUser = computed<boolean>(() => selectedUser.value !== null);
 
@@ -44,6 +44,10 @@ function handleSelection(id: string): void {
 }
 
 const $b = useBEM('UsersStructure');
+
+onMounted(() => {
+  console.log("SELECTED USER", isSelectableUser.value);
+})
 </script>
 
 <template lang="pug">
@@ -221,7 +225,7 @@ RzdCard(
     --rzd-card-content-width: 100%;
     --usersStructureHeight: fit-content;
     --usersStructureListHeight: 220px;
-    --usersStructureParticipantPadding: 0;
+    --usersStructureParticipantPadding: 12px 6px;
     --usersStructureListPadding: 20px 0 20px 12px;
 
     &--list {

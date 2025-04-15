@@ -162,23 +162,24 @@ RzdCard(
   }
   &--coloring {
     &_light {
-      --coloring-background: #{vars.$colors-white};
-      --coloring-game-color: #{vars.$colors-black};
-      --coloring-game-title-color: #{vars.$colors-black};
+      --scoped-coloring-background: #{vars.$colors-white};
+      --scoped-coloring-game-color: #{vars.$colors-black};
+      --scoped-coloring-game-title-color: #{vars.$colors-black};
     }
     &_grey,
     &_dark {
-      --coloring-game-color: #{vars.$colors-white};
-      --coloring-game-title-color: #{vars.$colors-beige};
+      --scoped-coloring-game-color: #{vars.$colors-white};
+      --scoped-coloring-game-title-color: #{vars.$colors-beige};
       --rzd-icon-color: #{vars.$colors-white};
+      --rzd-divider-color: #{vars.$colors-white};
     }
     &_grey {
-      --coloring-background: #{vars.$colors-greyDark};
+      --scoped-coloring-background: #{vars.$colors-greyDark};
     }
     &_dark {
       --rzd-card-background: #{vars.$colors-black};
       --rzd-card-content-background: #{vars.$colors-black};
-      --coloring-background: #{vars.$colors-black};
+      --scoped-coloring-background: #{vars.$colors-black};
     }
   }
   &__topContainer {
@@ -229,7 +230,7 @@ RzdCard(
     box-sizing: border-box;
     width: 100%;
     padding: 12px;
-    background: var(--coloring-background);
+    background: var(--scoped-coloring-background);
     border-radius: vars.$br-m;
   }
 
@@ -238,7 +239,7 @@ RzdCard(
   }
 
   &__gameTitle {
-    color: var(--coloring-game-title-color);
+    color: var(--scoped-coloring-game-title-color);
   }
 
   &__eventDatePlace {
@@ -252,7 +253,7 @@ RzdCard(
       align-items: center,
       gap: vars.$gaps-g8,
     ));
-    color: var(--coloring-game-color);
+    color: var(--scoped-coloring-game-color);
     font: var(--font-text-m);
     
     & > span {
@@ -270,7 +271,7 @@ RzdCard(
       align-items: center,
     ));
     font: var(--font-text-m);
-    color: var(--coloring-game-color);
+    color: var(--scoped-coloring-game-color);
 
     & > span {
       text-decoration: underline;
@@ -280,11 +281,7 @@ RzdCard(
 
 @include mobile {
   .EventCard {
-    flex-basis: 100%;
-    max-height: 320px;
-    &__divider {
-      max-width: 194px;
-    }
+    --rzd-card-maxheight: 320px;
   }
 }
 </style>

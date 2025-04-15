@@ -1,14 +1,7 @@
 <script setup lang="ts">
-type ByAxis<T> = {
-  x: T;
-  y: T;
-};
-type ByDevice = {
-  desktop: number;
-  mobile: number;
-};
+
 export type Props = {
-  itemsInRow?: number | Partial<ByDevice>;
+  itemsInRow?: number | Partial<ByDevice<number>>;
   gap?: number | Partial<ByAxis<number>>;
 };
 
@@ -21,11 +14,18 @@ const {
 const { isDesktop } = useDevice();
 
 const usedGap = computed<ByAxis<number>>(() => {
-  if (typeof gap === 'number' || typeof gap === 'string') {
+  if (typeof gap === 'string') {
     return { x: gap, y: gap };
   }
-  let x = gap.x ?? 40;
-  let y = gap.y ?? 40;
+  let x = 0;
+  let y = 0;
+  if (typeof gap === 'number') {
+    x = gap;
+    y = gap;
+  } else {
+    x = gap.x ?? 40;
+    y = gap.y ?? 40;
+  }
   if (!isDesktop) {
     x /= 2;
     y /= 2;

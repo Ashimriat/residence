@@ -263,6 +263,7 @@ PPaginator(
   &__skipper {
     @include centered-flex;
     cursor: pointer;
+    color: vars.$colors-black;
   }
   &__skipperInput {
     padding: 8px;

@@ -220,12 +220,13 @@ div(:class="$b()")
   }
   &__founderAvatar {
     border: 6px solid vars.$colors-beige;
-    --rzd-avatar-size: 120px;
+    --rzd-avatar-size: 240px;
   }
   &__founderDataContainer {
-    @include flex-column((gap: 1.5rem));
+    @include flex-column((gap: vars.$gaps-g28));
   }
   &__founderData {
+    @include flex-column((gap: vars.$gaps-g8));
     & > span {
       display: block;
       margin-top: 4px;
@@ -278,6 +279,10 @@ div(:class="$b()")
 
     &__descriptionText {
       font: vars.$fonts-textS;
+    }
+
+    &__founderAvatar {
+      --rzd-avatar-size: 120px;
     }
 
     &__eventsCardsContainer {

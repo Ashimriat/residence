@@ -155,6 +155,8 @@ div(:class="$b()")
 
   max-width: 1000px;
 
+  --scoped-event-card-flex-basis: 65%;
+
   &__upperContainer {
     @include flex((
       justify-content: space-between,
@@ -164,7 +166,8 @@ div(:class="$b()")
   }
 
   &__eventCard {
-    flex-basis: 65%;
+    flex-basis: var(--scoped-event-card-flex-basis);
+    --rzd-card-width: var(--scoped-event-card-flex-basis);
   }
 
   &__gameHeader {
@@ -236,6 +239,18 @@ div(:class="$b()")
   &__expelButton {
     width: 40px;
     height: 40px;
+  }
+}
+
+@include mobile {
+  .MafiaRating {
+    --scoped-event-card-flex-basis: 100%;
+    &__upperContainer {
+      flex-direction: column;
+    }
+    &__controls {
+      gap: vars.$gaps-g12;  
+    }
   }
 }
 </style>

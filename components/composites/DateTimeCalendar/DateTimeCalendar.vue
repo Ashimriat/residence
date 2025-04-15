@@ -12,7 +12,7 @@ export type CalendarDate = {
   start: Temporal.PlainDate;
   end?: Temporal.PlainDate;
 } | null;
-export type Time = string;
+export type Time = string | null;
 
 type Props = {
   asDesktop?: boolean;
@@ -24,7 +24,7 @@ const { asDesktop, isDisabled } = defineProps<Props>();
 
 
 const selectedDate = defineModel<CalendarDate>('date', { required: true });
-const selectedTime = defineModel<string>('time', { default: null });
+const selectedTime = defineModel<Time | undefined>('time', { default: undefined });
 
 const { isMobile } = useDevice();
 const { closeModal, showMobileCalendar } = useModal();
@@ -45,6 +45,8 @@ const selectedDateTimeLabel = computed<string>(() => {
 function openOnMobile(): void {
   showMobileCalendar({
     withTimeSelect: withTimeSelect.value,
+    activeDate: selectedDate.value,
+    activeTime: selectedTime.value,
     onSelect: (date: NonNullable<CalendarDate>, time: Time) => {
       selectedDate.value = date;
       selectedTime.value = time;
@@ -57,7 +59,7 @@ const processedDate = ref<Temporal.PlainDate>(
   Temporal.Now.instant().toZonedDateTimeISO(Temporal.Now.timeZoneId()).toPlainDate()
 );
 
-const withTimeSelect = computed<boolean>(() => selectedTime.value !== null);
+const withTimeSelect = computed<boolean>(() => selectedTime.value !== undefined);
 
 const days = computed<CalendarDay[]>(() => {
   const res: CalendarDay[] = [];
@@ -238,22 +240,26 @@ div(
 
 <style lang="scss">
 .DateTimeCalendar {
-  min-width: 320px;
+  width: var(--scoped-width);
   &--desktop {
     @include flex-column((gap: 12px));
+
+    --scoped-width: 320px;
+
     background-color: vars.$colors-white;
     padding: 16px;
-    width: 320px;
     border-radius: vars.$br-l;
     box-sizing: border-box;
   }
   &--mobile {
-    --rzd-icon-color: #{vars.$colors-black};
     @include flex((justify-content: space-between, align-items: center));
+
+    --rzd-icon-color: #{vars.$colors-black};
+    --scoped-width: 100%;
+    
     height: 40px;
     background-color: vars.$colors-white;
-    font-size: 16px;
-    font-weight: vars.$fw-bold;
+    font: vars.$fonts-textBoldM;
     padding: 10px 16px;
     border-radius: vars.$br-xs;
     color: vars.$colors-black;
@@ -411,7 +417,7 @@ div(
     @include centered-flex;
     border: 2px solid vars.$colors-white;
     border-radius: vars.$br-xs;
-    font-size: vars.$fs-m;
+    font: vars.$fonts-buttonM;
     background-color: var(--timeSlotBackgroundColor, transparent);
     color: var(--timeSlotColor, #{vars.$colors-white});
     max-width: 77px;

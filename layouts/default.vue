@@ -37,7 +37,7 @@ div(:class="$b()")
       @include fixed((top: 58px));
       @include centered-flex;
       background-color: transparent;
-      padding: 0 24px;
+      padding: 0 20px;
     }
   }
   &__header,

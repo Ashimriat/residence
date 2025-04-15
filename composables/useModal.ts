@@ -71,7 +71,11 @@ export default function useModal<T>() {
   }
 
   function showMobileCalendar(data: MobileCalendarModalData): void {
-    openModal(LazyMCalendar, { data, title: 'Дата и время' });
+    let title = 'Выберите дату';
+    if (data.withTimeSelect) {
+      title += ' и время';
+    }
+    openModal(LazyMCalendar, { data, title });
   }
 
   function addPlayers(): void {

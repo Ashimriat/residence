@@ -4,10 +4,10 @@ import { PInputText, PPassword } from '#components';
 
 
 type TextInputProps = InputTextProps & {
-  type: 'text';
+  type?: 'text';
 };
 type PasswordInputProps = PasswordProps & {
-  type: 'password';
+  type?: 'password';
 }
 
 type Props = {

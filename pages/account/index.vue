@@ -45,8 +45,6 @@ div(:class="$b()")
           div(:class="$b('dataContainer', ['statistics'])")
             span
               | Топ #1
-            span 
-              | Рейтинг 24600
             span
               | 300 баллов
       RzdLinkButton(
@@ -148,15 +146,16 @@ div(:class="$b()")
     @include flex((align-items: center));
     &--user,
     &--birthdate {
-      font: vars.$fonts-textBoldM;
       & > span {
         color: vars.$colors-black;
       }
     }
     &--user {
       color: vars.$colors-black;
+      font: vars.$fonts-textBoldM;
     }
     &--birthdate {
+      font: var(--font-text-bold-m);
       gap: vars.$gaps-g4;
     }
     &--statistics {
@@ -165,8 +164,7 @@ div(:class="$b()")
       color: vars.$colors-black;
       & span {
         @include relative;
-        &:first-of-type,
-        &:nth-of-type(2) {
+        &:first-of-type {
           @include with-pseudo-after((
             border-radius: 50%,
             background-color: vars.$colors-black,
@@ -199,7 +197,7 @@ div(:class="$b()")
     @include flex((justify-content: space-between, align-items: center));
   }
   &__userRating {
-    font: vars.$fonts-textBoldM;
+    font: var(--font-text-bold-l);
     & span {
       color: vars.$colors-beige;
     }
@@ -234,6 +232,8 @@ div(:class="$b()")
 
 @include mobile {
   .AccountPage {
+    --rzd-avatar-size: 64px;
+
     --userDataSubsectionFlexDirection: column;
     --settingsButtonMinWidth: 100%;
     --userDataSubsectionPadding: 12px;

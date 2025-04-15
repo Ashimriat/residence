@@ -4,24 +4,27 @@ import type { CarouselProps } from 'primevue';
 
 type Props = {
   items: CarouselProps['value'][] | CarouselProps['value'][][];
-  visibleAmount?: CarouselProps['numVisible'];
+  visibleAmount?: ByDevice<CarouselProps['numVisible']>;
   withPagination?: boolean
 };
 
 
 const {
   items,
-  visibleAmount = 1,
+  /** optional */
+  visibleAmount = { desktop: 1, mobile: 1 },
   withPagination
 } = defineProps<Props>();
 
-const { isDesktop, isMobile } = useDevice();
+const { platform, isDesktop, isMobile } = usePlatform();
 
 const displayedItems = computed<CarouselProps['value'][]>(() => {
-  if (Array.isArray(items[0])) return items;
-  const res: any[][] = [];
-  for (let i = 0; i < items.length; i += visibleAmount) {
-    res.push(items.slice(i, i + visibleAmount));
+  const displayedAmount = visibleAmount[platform];
+  if (Array.isArray(items[0]) && items[0].length === displayedAmount) return items;
+  const res: CarouselProps['value'][] = [];
+  const flattenedItems = items.flat();
+  for (let i = 0; i < flattenedItems.length; i += displayedAmount) {
+    res.push(flattenedItems.slice(i, i + displayedAmount));
   }
   return res;
 });

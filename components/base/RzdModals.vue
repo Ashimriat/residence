@@ -144,7 +144,7 @@ Wrapper(
 
 
   &__title {
-    font: vars.$fonts-desktopH4;
+    font: var(--font-h4);
     color: vars.$colors-black;
   }
 

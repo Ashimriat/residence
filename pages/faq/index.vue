@@ -70,6 +70,7 @@ div(:class="$b()")
         | {{ title }}
       RzdIcon(
         :type="EIcons.CHEVRON_RIGHT"
+        is-adaptive
         :class="$b('sectionArrow', { facingUp: openingStatuses[type] })"
       )
     div(
@@ -94,13 +95,8 @@ div(:class="$b()")
             span
               | {{ question }}
             RzdIcon(
-              v-if="openingStatuses[`${type}_${j}`]"
-              :type="EIcons.MINUS"
-              :class="$b('questionIcon')"
-            )
-            RzdIcon(
-              v-else
-              :type="EIcons.PLUS"
+              :type="openingStatuses[`${type}_${j}`] ? EIcons.MINUS : EIcons.PLUS"
+              is-adaptive
               :class="$b('questionIcon')"
             )
           RzdAvatar(
@@ -124,7 +120,9 @@ div(:class="$b()")
 
 <style lang="scss">
 .PageFAQ {
-  @include flex-column((gap: 4rem));
+  @include flex-column((gap: var(--gap-x4l)));
+
+  --scoped-section-title-font: #{vars.$fonts-desktopH3};
   &__section,
   &__questionContent {
     @include transition(max-height);
@@ -138,6 +136,10 @@ div(:class="$b()")
     @include flex-column((align-items: center));
     background-color: vars.$colors-white;
     border-radius: vars.$br-xl;
+
+    & h3 {
+      font: var(--scoped-section-title-font);
+    }
   }
   &__upperContainer {
     @include flex((
@@ -208,8 +210,8 @@ div(:class="$b()")
     min-height: 56px;
     border-radius: vars.$br-l;
     padding: 16px 24px;
-    font: vars.$fonts-textBoldM;
     user-select: none;
+    font: var(--font-text-bold-m);
   }
   &__question {
     justify-content: space-between;
@@ -224,6 +226,10 @@ div(:class="$b()")
 
 @include mobile {
   .PageFAQ {
+    --scoped-section-title-font: #{vars.$fonts-textBoldM};
+    &__section {
+      border-radius: vars.$br-s;
+    }
     &__questionsWrapper {
       max-width: unset;
     }
@@ -244,9 +250,19 @@ div(:class="$b()")
       min-height: 40px;
       border-radius: vars.$br-s;
     }
+    &__question {
+      padding-right: 6px;
+      gap: 4px;
+    }
     &__upperContainer,
     &__questionsWrapper {
       padding: 14px 12px;
+    }
+    &__logoContainer {
+      & > svg {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 }

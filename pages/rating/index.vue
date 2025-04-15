@@ -21,7 +21,7 @@ function finishSeason(): void {
 }
 
 watch(activeType, () => {
-  page.value = 1;
+  page.value = 0;
 })
 </script>
 

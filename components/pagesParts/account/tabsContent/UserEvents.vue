@@ -18,7 +18,7 @@ div(:class="$b()")
     RzdCarousel(
       :class="$b('eventsCarousel')"
       :items="eventsMock"
-      :visible-amount="isMobile ? 2 : 4"
+      :visible-amount="{ desktop: 4, mobile: 2 }"
     )
       template(#default="{ itemsData }")
         div(:class="$b('eventsContainer')")

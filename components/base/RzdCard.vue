@@ -45,6 +45,7 @@ div(:class="$b([direction])")
   width: var(--rzd-card-width);
   max-width: var(--rzd-card-maxwidth, 876px);
   height: var(--rzd-card-height, 584px);
+  max-height: var(--rzd-card-maxheight, unset);
   padding: var(--rzd-card-padding, 8px);
   border-radius: var(--rzd-card-border-radius, #{vars.$br-l});
   box-shadow: var(--rzd-card-boxshadow, #{vars.$shadows-popup});

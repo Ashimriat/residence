@@ -18,7 +18,8 @@ PDivider(
 .RzdDivider {
   --p-divider-horizontal-margin: 0.6rem 0;
   width: var(--width, 100%);
-  height: 2px;
-  background-color: var(--dividerBackgroundColor, #{vars.$colors-black});
+  &::before {
+    --p-divider-border-color: var(--rzd-divider-color, #{vars.$colors-black});
+  }
 }
 </style>

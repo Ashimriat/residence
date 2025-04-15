@@ -22,6 +22,7 @@ div(:class="$b()")
     v-model="value"
     :pt:root:class="$b('toggle')"
     :pt:slider:class="$b('slider')"
+    :pt:handle:class="$b('handle')"
   )
 </template>
 

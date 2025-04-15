@@ -12,6 +12,11 @@
   --font-text-m: #{vars.$fonts-textM};
 
   --font-text-bold-l: #{vars.$fonts-textBoldL};
+  --font-text-bold-m: #{vars.$fonts-textBoldM};
+
+
+
+  --gap-x4l: 80px;
 }
 
 @include mobile {
@@ -26,5 +31,10 @@
     --font-text-m: #{vars.$fonts-textS};
 
     --font-text-bold-l: #{vars.$fonts-textBoldM};
+    --font-text-bold-m: #{vars.$fonts-textBoldS};
+
+
+    --gap-x4l: 40px;
+
   }
 }
