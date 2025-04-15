@@ -1,15 +1,4 @@
 <script setup lang="ts">
-import { init, expandViewport, isTMA } from '@telegram-apps/sdk-vue';
-
-const { isMobile } = useDevice();
-
-onBeforeMount(() => {
-  if (!isTMA()) return;
-  init();
-  if (!isMobile) {
-    expandViewport();
-  }
-});
 </script>
 
 <template lang="pug">
