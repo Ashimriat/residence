@@ -4,6 +4,15 @@ import path from 'node:path';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+  modules: [
+    '@primevue/nuxt-module',
+    '@morev/v-bem-transformer',
+    'nuxt-svgo',
+    '@nuxtjs/device',
+    '@pinia/nuxt',
+    'nuxt-time',
+    '@nuxt/eslint',
+  ],
   app: {
     baseURL: '/residence/',
     head: {
@@ -26,27 +35,18 @@ export default defineNuxtConfig({
       'types/**',
     ],
   },
-  vite: {
-    server: {
-      allowedHosts: true,
-    }
-  },
   compatibilityDate: '2024-11-01',
   alias: {
     '~assets': path.resolve(import.meta.dirname, 'assets'),
     '~scss': path.resolve(import.meta.dirname, 'assets/scss'),
   },
-  devtools: { enabled: true },
-  modules: [
-    '@primevue/nuxt-module',
-    '@morev/v-bem-transformer',
-    'nuxt-svgo',
-    '@nuxtjs/device',
-    '@pinia/nuxt',
-    'nuxt-time',
-    '@nuxt/eslint',
-  ],
+  $development: {
+    devtools: { enabled: true },
+  },
   vite: {
+    server: {
+      allowedHosts: true,
+    },
     css: {
       preprocessorOptions: {
         scss: {

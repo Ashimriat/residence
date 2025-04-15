@@ -43,7 +43,7 @@ div(:class="$b()")
         h1
           | {{ title }}
       RzdButton(
-        v-if="isAdmin"
+        v-if="false && isAdmin"
         :type="EButtons.EDIT_RULES"
         @click="turnEditModeOn"
       )

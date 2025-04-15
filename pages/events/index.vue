@@ -49,7 +49,7 @@ div(:class="$b()")
         :data="data"
       )
     RzdButton(
-      v-if="isAdmin"
+      v-if="false && isAdmin"
       :type="EButtons.ADD_SUBSCRIPTION"
     )
   section(:class="$b('section')")
