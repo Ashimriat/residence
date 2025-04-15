@@ -63,6 +63,9 @@ $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
 
 .UserEvents {
   @include flex((justify-content: space-between, flex-wrap: wrap, gap: 1rem));
+
+  --event-card-flex-basis: calc((100% - 16px) / 2);
+
   &__contentSection {
     @include flex-column((gap: 1.4rem));
     padding: 20px;
@@ -81,7 +84,7 @@ $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
     @include flex((gap: vars.$gaps-g16, flex-wrap: wrap));
   }
   &__eventData {
-    flex-basis: calc((100% - 16px) / 2);
+    flex-basis: var(--event-card-flex-basis);
   }
   &__subscriptionsContainer {
     @include flex((flex-wrap: wrap, gap: 0.8rem));
@@ -97,14 +100,12 @@ $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
     & > div:first-child {
       @include flex((justify-content: space-between));
     }
-    & > div:last-child {
-      // font-size: vars.$fs-s;
-    }
   }
 }
 
 @include mobile {
   .UserEvents {
+    --event-card-flex-basis: 100%;
     --eventsMaxWidth: 100%;
   }
 }

@@ -79,9 +79,23 @@ const ICONS_SIZES: Record<EIconsSizes, number> = {
 };
 
 
-export default function useIcon(iconType: EIcons, iconSize: EIconsSizes) {
+export default function useIcon(iconType: EIcons, iconSize: EIconsSizes, isAdaptive: boolean) {
+  const { isMobile } = useDevice();
+  let usedSize = iconSize;
+  if (isAdaptive && isMobile) {
+    switch (iconSize) {
+      case EIconsSizes.XL:
+        usedSize = EIconsSizes.L;
+        break;
+      case EIconsSizes.M:
+        usedSize = EIconsSizes.S;
+        break;
+      default:
+        break;
+    }
+  }
   return {
     image: ICONS_LIST[iconType],
-    finalSize: `${ICONS_SIZES[iconSize]}px`,
+    finalSize: `${ICONS_SIZES[usedSize]}px`,
   };
 };

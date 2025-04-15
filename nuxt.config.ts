@@ -26,6 +26,11 @@ export default defineNuxtConfig({
       'types/**',
     ],
   },
+  vite: {
+    server: {
+      allowedHosts: true,
+    }
+  },
   compatibilityDate: '2024-11-01',
   alias: {
     '~assets': path.resolve(import.meta.dirname, 'assets'),

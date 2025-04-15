@@ -19,8 +19,10 @@ type ButtonData = Partial<{
   htmlType: HTMLButtonElement['type'];
 }>;
 
+type ExtendedButtonData = ButtonData & { atMobile?: ButtonData };
 
-const SIGN_IN_BUTTON_DATA: ButtonData = {
+
+const SIGN_IN_BUTTON_DATA: ExtendedButtonData = {
   label: 'Войти',
   size: EButtonSize.M,
   iconType: EIcons.LOGIN,
@@ -28,7 +30,17 @@ const SIGN_IN_BUTTON_DATA: ButtonData = {
   iconSize: EIconsSizes.S,
 } as const;
 
-const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
+const EXPEL_BUTTON_DATA: ExtendedButtonData = {
+  variant: EButtonVariant.DANGER,
+  iconType: EIcons.CROSS_CIRCLED,
+  iconSize: EIconsSizes.S,
+  iconPos: EIconPos.RIGHT,
+  atMobile: {
+    label: 'Выгнать',
+  },
+}
+
+const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
   [EButtons.ALREADY_REGISTERED]: {
     label: 'Уже есть аккаунт?',
     isTextButton: true,
@@ -158,14 +170,10 @@ const BUTTONS_DATA: Record<EButtons, ButtonData & { atMobile?: ButtonData }> = {
     variant: EButtonVariant.DANGER,
     iconType: EIcons.CROSS_CIRCLED,
   },
-  [EButtons.EXPEL_PLAYER]: {
-    variant: EButtonVariant.DANGER,
-    iconType: EIcons.CROSS_CIRCLED,
-    iconSize: EIconsSizes.S,
-    iconPos: EIconPos.RIGHT,
-    atMobile: {
-      label: 'Выгнать',
-    },
+  [EButtons.EXPEL_PLAYER]: EXPEL_BUTTON_DATA,
+  [EButtons.DELETE_PLAYER]: {
+    ...EXPEL_BUTTON_DATA,
+    atMobile: undefined,
   },
   [EButtons.BACK]: {
     label: 'Назад',
@@ -284,6 +292,9 @@ export default function useButtonData(type: EButtons): Required<ButtonData> {
   };
   if (isMobile) {
     data.iconSize = EIconsSizes.S;
+    if (data.size === EButtonSize.L) {
+      data.size = EButtonSize.M;
+    }
     if (data.atMobile) {
       data = {
         ...data,

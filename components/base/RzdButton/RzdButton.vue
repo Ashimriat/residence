@@ -62,10 +62,11 @@ PButton(
   --p-button-gap: #{vars.$gaps-g8};
   --p-button-padding-x: 12px;
   --p-button-padding-y: 12px;
-  --p-button-border-radius: #{vars.$br-xs};
+  --p-button-border-radius: var(--scoped-border-radius);
 
-  height: var(--rzd-button-height, 48px);
+  height: var(--scoped-button-height);
   border-width: 2px;
+  box-sizing: border-box;
 
   &--variant {
     &_primary {
@@ -142,6 +143,23 @@ PButton(
     }
   }
 
+  &--size {
+    &_s {
+      --scoped-label-font: #{vars.$fonts-buttonS};
+      --scoped-border-radius: #{vars.$br-x2s};
+      --scoped-button-height: 28px;
+    }
+    &_m {
+      --scoped-label-font: #{vars.$fonts-buttonM};
+      --scoped-border-radius: #{vars.$br-xs};
+      --scoped-button-height: 40px;
+    }
+    &_l {
+      --scoped-label-font: #{vars.$fonts-buttonL};
+      --scoped-border-radius: #{vars.$br-s};
+      --scoped-button-height: 48px;
+    }
+  }
 
   &--text {
     @include centered-flex;
@@ -174,24 +192,12 @@ PButton(
     justify-content: center;
   }
 
-  &--size {
-    &_s {
-      --label-font: #{vars.$fonts-buttonS};
-    }
-    &_m {
-      --label-font: #{vars.$fonts-buttonM};
-    }
-    &_l {
-      --label-font: #{vars.$fonts-buttonL};
-    }
-  }
-
   & svg {
     order: var(--iconOrder);
   }
 
   &__label {
-    font: var(--label-font);
+    font: var(--scoped-label-font);
     order: var(--labelOrder);
   }
 
@@ -199,10 +205,6 @@ PButton(
 
 @include mobile {
   .RzdButton {
-    --p-button-border-radius: #{vars.$br-xs};
-
-    --rzd-button-height: 40px;
-
     &--variant {
       &_secondary {
         justify-content: space-between;
@@ -218,10 +220,6 @@ PButton(
         --p-button-text-secondary-hover-background: transparent;
         --p-button-text-secondary-active-background: transparent;
       }
-    }
-
-    &__label {
-      font: vars.$fonts-buttonM;
     }
   }
 }

@@ -15,12 +15,14 @@ form(
   :class="$b()"
   @submit=""
 )
-  RzdPasswordInput(
+  RzdInput(
     v-model="oldPassword"
+    type="password"
     placeholder="Старый пароль"
   )
-  RzdPasswordInput(
+  RzdInput(
     v-model="newPassword"
+    type="password"
     placeholder="Новый пароль"
   )
   div(:class="$b('buttonsContainer')")

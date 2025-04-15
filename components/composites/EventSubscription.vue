@@ -21,7 +21,10 @@ div(:class="$b({ owned: isOwned })")
   div(:class="$b('generalData')")
     h5
       | {{ data.name }}
-    PriceTag(:value="data.price")
+    PriceTag(
+      is-small
+      :value="data.price"
+    )
   div(:class="$b('description')")
     | {{ data.description }}
   div(
@@ -47,7 +50,7 @@ div(:class="$b({ owned: isOwned })")
     @include flex((align-items: center, justify-content: space-between));
   }
   &__description {
-    font: vars.$fonts-textM;
+    font: var(--font-text-m);
     color: vars.$colors-black;
   }
   &__buttonsContainer {

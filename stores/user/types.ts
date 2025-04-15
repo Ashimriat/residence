@@ -14,6 +14,7 @@ export type EditableUserData = {
   password2: string;
   about: string;
   sex: 'm' | 'f' | '';
+  isPrivateData: boolean;
 };
 
 export type ProvidedUserData = {

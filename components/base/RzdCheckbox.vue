@@ -37,9 +37,11 @@ div(:class="$b()")
     --p-checkbox-checked-hover-border-color: #{vars.$colors-beige};
     --p-checkbox-checked-border-color: #{vars.$colors-beige};
     --p-checkbox-checked-background: #{vars.$colors-beige};
+    --p-checkbox-background: #{vars.$colors-white};
   }
   &__label {
-    font: vars.$fonts-textM; 
+    font: vars.$fonts-textM;
+    color: vars.$colors-black;
   }
 }
 </style>

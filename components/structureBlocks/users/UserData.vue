@@ -62,8 +62,8 @@ div(:class="$b({ ranked: isRating, owner: isClanOwner })")
     border: 1px solid vars.$colors-beige;
   }
   &__name {
-    font-weight: vars.$fw-heavy;
-    font-size: var(--static-fontSize-m-s);
+    font: vars.$fonts-textBoldM;
+    color: vars.$colors-black;
   }
 }
 

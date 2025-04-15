@@ -69,11 +69,11 @@ div(:class="$b()")
       :options="selectOptions"
     )
     div(:class="$b('inputsContainer')")
-      RzdTextInput(
+      RzdInput(
         v-model="formData.name"
         placeholder="Имя"
       )
-      RzdTextInput(
+      RzdInput(
         v-model="formData.telegram"
         placeholder="Ник телеграм"
       )
@@ -104,7 +104,7 @@ div(:class="$b()")
   }
   &__question {
     color: vars.$colors-greyDark;
-    font: vars.$fonts-textL;
+    font: var(--font-text-l);
   }
   &__requestForm {
     @include flex-column((gap: 20px));
@@ -129,6 +129,11 @@ div(:class="$b()")
     border-radius: vars.$br-s;
     height: unset;
     width: 100%;
+    &__text {
+      border-radius: vars.$br-s;
+      text-align: center;
+      padding: 20px;
+    }
     &__requestQuestion {
       border-radius: 0 0 vars.$br-s vars.$br-s;
       padding: 20px;

@@ -13,19 +13,21 @@ type Emits = {
 };
 
 
-
 const {
   submitButton,
   additionalButtons = [],
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-
 const route = useRoute()
 const { userData } = storeToRefs(useUserStore());
 
-const data = ref<EditableUserData>({ ...userData.value });
-const isPrivateData = ref<boolean>(false)
+const data = ref<EditableUserData>({
+  ...userData.value,
+  password1: '',
+  password2: '',
+  isPrivateData: false,
+});
 
 const isDataChanged = computed<boolean>(() => {
   for (const [key, value] of getEntries(data.value)) {
@@ -49,9 +51,6 @@ const withEmptyFields = computed<boolean>(() => {
 const isSettings = computed<boolean>(() => route.path.includes('settings'))
 const $b = useBEM('UserDataForm');
 
-onMounted(() => {
-  console.log(userData.value)
-})
 </script>
 
 <template lang="pug">
@@ -74,30 +73,30 @@ form(
           :size="EIconsSizes.L"
         )
     div
-      RzdTextInput(
+      RzdInput(
         v-model="data.name"
         placeholder="Имя"
       )
-      RzdTextInput(
+      RzdInput(
         v-model="data.surname"
         placeholder="Фамилия"
       )
   div(:class="$b('container')")
-    RzdTextInput(
+    RzdInput(
       v-model="data.birthdate"
       placeholder="Дата рождения"
     )
-    RzdTextInput(
+    RzdInput(
       v-model="data.telegram"
       placeholder="Ник Телеграм"
     )
     template(v-if="isSettings")
-      RzdTextInput(
+      RzdInput(
         v-if="isSettings"
         v-model="data.instagram"
         placeholder="Ник Инстаграм"
       )
-      RzdTextInput(
+      RzdInput(
         v-else
         v-model="data.email"
         placeholder="Почта"
@@ -106,21 +105,23 @@ form(
     v-if="isSettings"
     :class="$b('container')"
   )
-    RzdTextInput(
+    RzdInput(
       v-model="data.email"
       placeholder="Почта"
     )
-    RzdTextInput(
+    RzdInput(
       v-model="data.phone"
       placeholder="Телефон"
     )
-  RzdPasswordInput(
+  RzdInput(
     v-model="data.password1"
-    placeholder="Пароль"
+    type="password"
+    :placeholder="isSettings ? 'Новый пароль' : 'Пароль'"
   )
-  RzdPasswordInput(
+  RzdInput(
     v-model="data.password2"
-    placeholder="Подтвердите пароль"
+    type="password"
+    :placeholder="isSettings ? 'Подтвердите новый пароль' : 'Подтвердите пароль'"
   )
   RzdTextarea(
     v-if="isSettings"
@@ -135,7 +136,7 @@ form(
   )
   RzdToggle(
     v-if="isSettings"
-    v-model="isPrivateData"
+    v-model="data.isPrivateData"
     label="Скрывать личную информацию от других пользователей?"
   )
   RzdButton(
@@ -154,9 +155,12 @@ form(
 <style lang="scss">
 .UserDataForm {
   @include flex-column((gap: vars.$gaps-g16));
+  
+  --rzd-avatar-size: 112px;
+
   box-sizing: content-box;
+  
   & input {
-    height: 48px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -168,8 +172,6 @@ form(
     }
   }
   &__avatar {
-    min-width: 112px;
-    min-height: 112px;
     background-color: vars.$colors-white;
     box-shadow: vars.$shadows-base;
   }
@@ -184,6 +186,17 @@ form(
     & span {
       @include absolute((bottom: 10px, right: 12px));
       font-size: vars.$fs-xs;
+    }
+  }
+}
+
+@include mobile {
+  .UserDataForm {
+    --rzd-avatar-size: 106px;
+    &__container {
+      &:nth-child(2) {
+        flex-direction: column;
+      }
     }
   }
 }

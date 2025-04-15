@@ -44,13 +44,15 @@ PAccordion(
     --p-accordion-header-hover-color: var(--p-accordion-header-color);
     --p-accordion-header-toggle-icon-hover-color: var(--p-accordion-header-toggle-icon-color);
     --p-accordion-header-toggle-icon-active-hover-color: var(--p-accordion-header-toggle-icon-active-color);
-    font-size: vars.$fs-s;
-    font-weight: vars.$fw-bold;
-    border-radius: vars.$br-x2s;
+    font: vars.$fonts-textBoldM;
+    color: vars.$colors-greyMuted;
+    border-radius: vars.$br-xs vars.$br-xs vars.$br-x2s vars.$br-x2s;
+    box-sizing: border-box;
+    height: 40px;
     padding: 10px 12px;
     background-color: vars.$colors-white;
     &[data-p-active="true"] {
-      color: vars.$colors-greyMuted;
+      color: vars.$colors-black;
       border-end-start-radius: 0;
       border-end-end-radius: 0;
     }

@@ -130,6 +130,7 @@ div(:class="$b()")
       @include flex-column((justify-content: space-between));
       padding: var(--ratingSubsectionPadding, 16px 28px);
       flex-basis: 32%;
+      color: vars.$colors-black;
     }
   }
   &__userDataWrapper {
@@ -151,6 +152,9 @@ div(:class="$b()")
       & > span {
         color: vars.$colors-black;
       }
+    }
+    &--user {
+      color: vars.$colors-black;
     }
     &--birthdate {
       gap: vars.$gaps-g4;
@@ -190,7 +194,6 @@ div(:class="$b()")
   }
   &__settingsLink {
     width: var(--settingsButtonWidth, initial);
-    height: 24px;
   }
   &__commonRatingContainer {
     @include flex((justify-content: space-between, align-items: center));

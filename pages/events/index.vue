@@ -36,7 +36,7 @@ div(:class="$b()")
           )
             | {{ description }}
     RzdButton(
-      v-if="isAdmin"
+      v-if="false && isAdmin"
       :type="EButtons.ADD_RULES"
     )
   section(:class="$b('section')")

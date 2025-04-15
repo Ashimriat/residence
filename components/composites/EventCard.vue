@@ -75,8 +75,8 @@ RzdCard(
         span(:class="$b('amount')")
           | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
         RzdIcon(
+          is-adaptive
           :type="EIcons.USERS"
-          :size="isMobile ? EIconsSizes.S : EIconsSizes.M"
         )
   template(#content)
     div(:class="$b('eventDetails')")
@@ -104,7 +104,10 @@ RzdCard(
             layout="horizontal"
             :class="$b('divider')"
           )
-          RzdIcon(:type="EIcons.CLOCK")
+          RzdIcon(
+            is-adaptive
+            :type="EIcons.CLOCK"
+          )
           span
             | {{ gameData.time }}
         div(:class="$b('locationBlock')")
@@ -153,7 +156,7 @@ RzdCard(
     }
     &_full {
       --rzd-card-padding: 24px 12px 12px;
-      --rzd-card-width: 400px;
+      --rzd-card-width: 100%;
       --rzd-card-height: 440px;
     }
   }
@@ -242,12 +245,6 @@ RzdCard(
     @include flex-column((gap: vars.$gaps-g12));
 
     width: 100%;
-    font-size: vars.$fs-s;
-
-    & span {
-      font: vars.$fonts-textM;
-      white-space: nowrap;
-    }
   }
 
   &__dateTimeBlock {
@@ -256,6 +253,11 @@ RzdCard(
       gap: vars.$gaps-g8,
     ));
     color: var(--coloring-game-color);
+    font: var(--font-text-m);
+    
+    & > span {
+      white-space: nowrap;
+    }
   }
 
   &__divider {
@@ -267,18 +269,18 @@ RzdCard(
       justify-content: space-between,
       align-items: center,
     ));
+    font: var(--font-text-m);
     color: var(--coloring-game-color);
 
     & > span {
-      line-height: 140%;
       text-decoration: underline;
-      cursor: pointer;
     }
   }
 }
 
 @include mobile {
   .EventCard {
+    flex-basis: 100%;
     max-height: 320px;
     &__divider {
       max-width: 194px;

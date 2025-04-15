@@ -18,7 +18,7 @@ const $b = useBEM('RzdTabs');
 <template lang="pug">
 PTabs(
   v-model:value="activeTab"
-  :pt:root:class="'TEST'"
+  :pt:root:class="$b()"
 )
   PTabList(:pt:root:class="$b('list')")
     PTab(
@@ -45,6 +45,9 @@ PTabs(
 
 <style lang="scss">
 .RzdTabs {
+  --scoped-tab-padding: 12px 16px;
+  --scoped-tab-height: 48px;
+  --scoped-tab-font: #{vars.$fonts-buttonL};
   &__list {
     --p-tabs-tablist-background: transparent;
     --p-tabs-tablist-border-color: transparent;
@@ -58,20 +61,21 @@ PTabs(
   }
   &__tab {
     @include centered-flex;
-    font: vars.$fonts-buttonL;
-    border-radius: vars.$br-s;
-    height: 48px;
 
     --p-tabs-tab-background: transparent;
     --p-tabs-tab-active-background: #{vars.$colors-black};
     --p-tabs-tab-border-color: #{vars.$colors-black};
-    --p-tabs-tab-padding: 12px 16px;
+    --p-tabs-tab-padding: var(--scoped-tab-padding);
     --p-tabs-tab-hover-color: #{vars.$colors-black};
     --p-tabs-tab-hover-border-color: #{vars.$colors-black};
     --p-tabs-tab-active-border-color: #{vars.$colors-black};
     --p-tabs-tab-color: #{vars.$colors-black};
     --p-tabs-tab-active-color: #{vars.$colors-white};
     --p-tabs-tab-border-width: 3px;
+    
+    height: var(--scoped-tab-height);
+    font: var(--scoped-tab-font);
+    border-radius: vars.$br-s;
   }
   &__panels {
     @include relative;
@@ -82,10 +86,9 @@ PTabs(
 
 @include mobile {
   .RzdTabs {
-    &__tab {
-      height: 16px;
-      --p-tabs-tab-padding: 8px 12px;
-    }
+    --scoped-tab-padding: 8px 12px;
+    --scoped-tab-height: 32px;
+    --scoped-tab-font: #{vars.$fonts-buttonS};
   }
 }
 </style>

@@ -18,7 +18,7 @@ const $b = useBEM('RzdSearch');
 PIconField(:pt:root:class="$b()")
   PInputIcon(:pt:root:class="$b('searchIconContainer')")
     RzdIcon(:type="EIcons.SEARCH")
-  RzdTextInput(
+  RzdInput(
     v-model="value"
     :disabled="isDisabled"
     :placeholder="placeholder"

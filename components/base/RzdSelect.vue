@@ -13,6 +13,7 @@ PSelect(
   v-bind="props"
   v-model="value"
   :pt:root:class="$b()"
+  :pt:overlay:class="$b('overlay')"
   :pt:label:class="$b('label')"
 )
   template(#option="{ option }")
@@ -26,6 +27,11 @@ PSelect(
 .RzdSelect {
   --p-select-focus-border-color: var(--p-select-hover-border-color);
   --p-select-border-color: #{vars.$colors-greyMuted};
+  --p-select-background: #{vars.$colors-white};
+  &__overlay {
+    --p-select-overlay-background: #{vars.$colors-white};
+    --p-select-overlay-color: #{vars.$colors-black};
+  }
   &__label {
     @include flex((align-items: center));
   }

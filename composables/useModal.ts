@@ -27,31 +27,35 @@ const GAMES_RATINGS: Record<string, Component> = {
 };
 
 export default function useModal<T>() {
-  const { $displayedModalData } = useNuxtApp()
+  const displayedModalData = useState<DisplayedModalData[]>(
+    'displayedModalData',
+    () => shallowRef([])
+  );
+  
 
   const openModal = <P>(component: Component, params: Partial<ModalOpenParams<P>>): void => {
     const layer = params?.layer ?? 0
     const data = params?.data
     const title = params?.title ?? '';
     const size = params?.size ?? 'm';
-    const newState = [...$displayedModalData.value];
+    const newState = [...displayedModalData.value];
     newState[layer] = {
       component,
       data,
       title,
       size,
     }
-    $displayedModalData.value = newState
+    displayedModalData.value = newState
   }
 
   function closeModal() {
-    const newState = [...$displayedModalData.value];
+    const newState = [...displayedModalData.value];
     newState.pop();
-    $displayedModalData.value = newState;
+    displayedModalData.value = newState;
   }
 
   function getModalData(): T {
-    return $displayedModalData.value[$displayedModalData.value.length - 1].data as T;
+    return displayedModalData.value[displayedModalData.value.length - 1].data as T;
   }
 
   function openLogin(): void {
@@ -67,7 +71,7 @@ export default function useModal<T>() {
   }
 
   function showMobileCalendar(data: MobileCalendarModalData): void {
-    openModal(LazyMCalendar, { data });
+    openModal(LazyMCalendar, { data, title: 'Дата и время' });
   }
 
   function addPlayers(): void {
@@ -78,7 +82,7 @@ export default function useModal<T>() {
     gameType: keyof typeof GAMES_RATINGS,
     data: EventData,
   ): void {
-    openModal(GAMES_RATINGS[gameType], { data });
+    openModal(GAMES_RATINGS[gameType], { data, title: 'Рейтинг' });
   }
 
 

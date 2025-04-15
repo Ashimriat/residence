@@ -6,20 +6,23 @@ import useIconData from './composable';
 
 type Props = {
   type: EIcons;
-  isClickable?: boolean;
   size?: EIconsSizes;
+  isClickable?: boolean;
+  isAdaptive?: boolean;
 };
 
 const {
   type,
-  isClickable = false,
+  /** optional */
   size = EIconsSizes.M,
+  isClickable,
+  isAdaptive
 } = defineProps<Props>();
 
 const {
   image,
   finalSize,
-} = useIconData(type, size);
+} = useIconData(type, size, isAdaptive);
 
 const $b = useBEM('RzdIcon');
 </script>

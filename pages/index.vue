@@ -84,11 +84,13 @@ div(:class="$b()")
           | Основатель Резиденции
       div(:class="$b('founderContacts')")
         RzdIcon(
-          :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
+          is-adaptive
+          :size="EIconsSizes.XL"
           :type="EIcons.TELEGRAM"
         )
         RzdIcon(
-          :size="isMobile ? EIconsSizes.L : EIconsSizes.XL"
+          is-adaptive
+          :size="EIconsSizes.XL"
           :type="EIcons.INSTAGRAM"
         )
   section(:class="$b('section', ['gallery'])")
@@ -228,7 +230,7 @@ div(:class="$b()")
       display: block;
       margin-top: 4px;
       color: vars.$colors-greyMuted;
-      font: vars.$fonts-textBoldL;
+      font: var(--font-text-bold-l);
     }
   }
   &__founderContacts {
@@ -267,14 +269,15 @@ div(:class="$b()")
       border-radius: vars.$br-m;
     }
 
-    &__descriptionText {
-      font: vars.$fonts-textS;
+    &__textContainer {
+      text-align: center;
+      & > h1 > span:first-child {
+        @include relative((left: -5px));
+      }
     }
 
-    &__founderData {
-      & > span {
-        font: vars.$fonts-textBoldS;
-      }
+    &__descriptionText {
+      font: vars.$fonts-textS;
     }
 
     &__eventsCardsContainer {

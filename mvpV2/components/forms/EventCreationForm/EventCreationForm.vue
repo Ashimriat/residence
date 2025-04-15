@@ -24,16 +24,16 @@ const $b = useBEM('EventCreationForm');
 
 <template lang="pug">
 div(:class="$b()")
-  RzdTextInput(
+  RzdInput(
     v-model="formData.name"
     placeholder="Название"
   )
-  RzdTextInput(
+  RzdInput(
     v-model="formData.price"
     v-keyfilter.money
     placeholder="Цена"
   )
-  RzdTextInput(
+  RzdInput(
     v-model="formData.address"
     placeholder="Адрес"
   )

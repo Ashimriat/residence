@@ -15,7 +15,7 @@ const $b = useBEM('CreateClan');
 
 <template lang="pug">
 div(:class="$b()")
-  RzdTextInput(
+  RzdInput(
     :class="$b('input')"
     placeholder="Название клана"
   )

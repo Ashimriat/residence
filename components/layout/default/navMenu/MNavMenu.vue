@@ -42,10 +42,11 @@ div(:class="$b()")
       )
       span
         | {{ userData.name }}
-    //- Notifications(
-    //-   with-bg
-    //-   :class="$b('notificationsLink')"
-    //- )
+    Notifications(
+      v-if="false"
+      with-bg
+      :class="$b('notificationsLink')"
+    )
   RzdButton(
     v-else
     :type="EButtons.SIGN_IN_MOBILE"
@@ -84,7 +85,10 @@ div(:class="$b()")
     v-if="isLoggedIn"
     :to="`/events/${isAdmin ? 'create' : 'order'}`"
   )
-    RzdButton(:type="isAdmin ? EButtons.ADD_EVENT_MOBILE : EButtons.ORDER_GAME")
+    RzdButton(
+      v-if="false"
+      :type="isAdmin ? EButtons.ADD_EVENT_MOBILE : EButtons.ORDER_GAME"
+    )
 </template>
 
 <style lang="scss">
@@ -115,9 +119,8 @@ div(:class="$b()")
   &__accountLink {
     @include flex((align-items: center, gap: vars.$gaps-g8));
     padding: 6px 12px;
-    font-size: vars.$fs-s;
+    font: vars.$fonts-textBoldM;
     background-color: vars.$colors-white;
-    font-weight: vars.$fw-extraBold;
     border-radius: vars.$br-xs;
     flex-grow: 1;
     & > * {
@@ -131,7 +134,7 @@ div(:class="$b()")
   }
   &__pageLink {
     padding: 12px 0;
-    font-size: vars.$fs-s;
+    font: vars.$fonts-textM;
     &:first-of-type {
       padding-top: 0;
     }
@@ -151,8 +154,7 @@ div(:class="$b()")
   &__authPageLink {
     @include flex((align-items: center, gap: vars.$gaps-g8));
     padding: 12px 0;
-    font-size: vars.$fs-s;
-    font-weight: vars.$fw-midHeavy;
+    font: vars.$fonts-textM;
     &--bordered {
       border-bottom: 2px solid vars.$colors-greyLight;
     }

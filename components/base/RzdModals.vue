@@ -8,6 +8,14 @@ type Props = {
   layer?: number
 }
 
+export type DisplayedModalData = {
+  component: Component;
+  data: unknown;
+  title: string;
+  size: 'm' | 's';
+}
+
+
 const {
   layer = 0
 } = defineProps<Props>()
@@ -15,15 +23,19 @@ const {
 
 const { platform, isDesktop } = usePlatform()
 const { closeModal } = useModal()
-const { $displayedModalData } = useNuxtApp()
 
+
+const displayedModalData = useState<DisplayedModalData[]>(
+  'displayedModalData',
+  () => shallowRef([])
+);
 
 const isVisible = computed<boolean>({
-  get: () => !!$displayedModalData.value.length,
+  get: () => !!displayedModalData.value.length,
   set: () => closeModal(),
 })
 
-const hasLayers = computed<boolean>(() => isVisible.value && $displayedModalData.value.length - 1 > layer)
+const hasLayers = computed<boolean>(() => isVisible.value && displayedModalData.value.length - 1 > layer)
 
 const style = computed<CSSProperties>(() => ({
   '--rzd-modals-styles-drawerheight': `${100 - 10 * (layer + 1)}%`
@@ -69,12 +81,12 @@ Wrapper(
   v-model:visible="isVisible"
   block-scroll
   :base-z-index="layer"
-  :header="$displayedModalData[layer]?.title"
+  :header="displayedModalData[layer]?.title"
   :pt:title:class="$b('title')"
   :style
 )
-  div(:class="$b('contentContainer', [platform, `size_${$displayedModalData[layer]?.size}_${platform}`])")
-    component(:is="$displayedModalData[layer].component")
+  div(:class="$b('contentContainer', [`size_${displayedModalData[layer]?.size}_${platform}`])")
+    component(:is="displayedModalData[layer].component")
   RzdModals(
     v-if="hasLayers"
     :layer="layer + 1"

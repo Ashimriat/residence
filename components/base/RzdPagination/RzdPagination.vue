@@ -162,7 +162,7 @@ PPaginator(
               @dblclick="setActiveSkipperInput(skipPos)"
             )
               | ...
-            RzdTextInput(
+            RzdInput(
               v-else
               ref="input"
               v-model="inputValue"

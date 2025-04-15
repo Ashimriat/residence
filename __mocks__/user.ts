@@ -16,6 +16,7 @@ const EDITABLE_DATA: EditableUserData = {
   password2: 'password2',
   about: 'Основатель комьюнити "Резиденция"',
   sex: 'm',
+  isPrivateData: false,
 };
 
 const PROVIDED_DATA: ProvidedUserData = {

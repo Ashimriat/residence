@@ -38,8 +38,7 @@ div(:class="$b()")
   }
 
   &__station {
-    font-weight: vars.$fw-midHeavy;
-    line-height: 140%;
+    font: var(--font-text-m);
   }
 }
 </style>

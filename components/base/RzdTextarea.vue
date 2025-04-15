@@ -54,9 +54,10 @@ div(:class="$b()")
     resize: none;
     background-color: vars.$colors-white;
     color: vars.$colors-black;
+    border-radius: vars.$br-s;
     &,
     &::placeholder {
-      font: vars.$fonts-textM;
+      font: var(--font-text-m);
     }
     &::placeholder {
       color: vars.$colors-greyMuted;
@@ -64,7 +65,8 @@ div(:class="$b()")
   }
   &__symbolsAmount {
     @include absolute((bottom: 10px, right: 12px));
-    font-size: vars.$fs-xs;
+    font: vars.$fonts-textS;
+    color: vars.$colors-greyMuted;
   }
 }
 
@@ -73,11 +75,6 @@ div(:class="$b()")
     &__text {
       --p-textarea-padding-x: 12px;
       --p-textarea-padding-y: 8px;
-
-      &,
-      &::placeholder {
-        font: vars.$fonts-textS;
-      }
     }
   }
 }

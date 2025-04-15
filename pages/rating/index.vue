@@ -102,12 +102,18 @@ div(:class="$b()")
   &__table {
     width: 100%;
     table-layout: fixed;
+
+    --p-datatable-row-background: #{vars.$colors-white};
+    --p-datatable-header-cell-background: #{vars.$colors-white};
+    --p-datatable-header-cell-border-color: #{vars.$colors-greyLight};
+    --p-datatable-body-cell-border-color: #{vars.$colors-greyLight};
   }
   &__tableContainer {
     border-radius: vars.$br-s;
   }
   &__tableBodyCell {
     font: vars.$fonts-textBoldM;
+    color: vars.$colors-black;
   }
   &__tableHeaderCell {
     color: vars.$colors-greyMuted;

@@ -19,15 +19,16 @@ function login(): void {
 
 <template lang="pug">
 form(:class="$b()")
-  RzdTextInput(
+  RzdInput(
     v-model="phone"
     v-keyfilter.int
     required
     name="phone"
     placeholder="Телефон"
   )
-  RzdPasswordInput( 
+  RzdInput( 
     v-model="password"
+    type="password"
     required
     fluid
     name="password"

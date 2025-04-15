@@ -50,6 +50,7 @@ const $b = useBEM('PageFAQ');
 
 <template lang="pug">
 div(:class="$b()")
+  //- @TODO: переделать на RzdAccordion
   section(
     v-for="({ type, title, contents }, i) in SECTIONS"
     :key="`faqSection_${i}`"
@@ -212,6 +213,7 @@ div(:class="$b()")
   }
   &__question {
     justify-content: space-between;
+    color: vars.$colors-black;
     --backgroundColor: #{vars.$colors-bg};
   }
   &__answer {

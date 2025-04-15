@@ -48,7 +48,7 @@ div(:class="$b()")
   }
   &__reviewText {
     color: vars.$colors-greyDark;
-    font: vars.$fonts-textM;
+    font: var(--font-text-m);
   }
 }
 

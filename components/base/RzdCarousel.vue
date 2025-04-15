@@ -5,10 +5,15 @@ import type { CarouselProps } from 'primevue';
 type Props = {
   items: CarouselProps['value'][] | CarouselProps['value'][][];
   visibleAmount?: CarouselProps['numVisible'];
+  withPagination?: boolean
 };
 
 
-const { items, visibleAmount = 1 } = defineProps<Props>();
+const {
+  items,
+  visibleAmount = 1,
+  withPagination
+} = defineProps<Props>();
 
 const { isDesktop, isMobile } = useDevice();
 
@@ -26,7 +31,7 @@ const mPage = defineModel<number>('page', { required: false, default: 0 });
 const { page, itemsAmount } = usePagination(displayedItems, 1, mPage);
 
 const indicatorListClass = computed<string>(
-  () => (isMobile ? 'indicatorList' : 'originalIndicatorList'),
+  () => (!withPagination && isMobile ? 'indicatorList' : 'originalIndicatorList'),
 );
 
 const $b = useBEM('RzdCarousel');
@@ -50,7 +55,7 @@ PCarousel(
   template(#item="{ data }")
     slot(:items-data="data")
   template(
-    v-if="isDesktop"
+    v-if="isDesktop || withPagination"
     #footer
   )
     RzdPagination(

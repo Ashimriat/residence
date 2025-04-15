@@ -37,6 +37,7 @@ enum EButtons {
   ADD_PLAYERS = 'addPlayers',
   LEAVE_CLAN = 'leaveClan',
   EXPEL_PLAYER = 'expelPlayer',
+  DELETE_PLAYER = 'deletePlayer',
   SAVE_CHANGES = 'saveChanges',
   CREATE_OWN_CLAN = 'createOwnClan',
   CREATE_CLAN = 'createClan',

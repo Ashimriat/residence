@@ -1,0 +1,30 @@
+@use './mixins' as *;
+@use './vars';
+
+:root {
+  --font-h1: #{vars.$fonts-desktopH1};
+  --font-h2: #{vars.$fonts-desktopH2};
+  --font-h3: #{vars.$fonts-desktopH3};
+  --font-h4: #{vars.$fonts-desktopH4};
+  --font-h5: #{vars.$fonts-desktopH5};
+
+  --font-text-l: #{vars.$fonts-textL};
+  --font-text-m: #{vars.$fonts-textM};
+
+  --font-text-bold-l: #{vars.$fonts-textBoldL};
+}
+
+@include mobile {
+  :root {
+    --font-h1: #{vars.$fonts-mobileH1};
+    --font-h2: #{vars.$fonts-mobileH2};
+    --font-h3: #{vars.$fonts-mobileH3};
+    --font-h4: #{vars.$fonts-mobileH4};
+    --font-h5: #{vars.$fonts-mobileH5};
+
+    --font-text-l: #{vars.$fonts-textM};
+    --font-text-m: #{vars.$fonts-textS};
+
+    --font-text-bold-l: #{vars.$fonts-textBoldM};
+  }
+}

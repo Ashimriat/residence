@@ -89,6 +89,7 @@ div(:class="$b()")
         v-model:page="page"
         :items="ratings"
         :pt:footer:class="$b('carousel')"
+        with-pagination
       )
   div(:class="$b('ratingsContainer')")
     RzdButton(
@@ -117,7 +118,7 @@ div(:class="$b()")
           placeholder="Роль"
           :class="$b('roleSelect')"
         )
-        RzdTextInput(
+        RzdInput(
           v-model="playerRating.additionalScores"
           v-keyfilter.int
           size="m"
@@ -132,7 +133,7 @@ div(:class="$b()")
             label="Ушел"
           )
         RzdButton(
-          :type="EButtons.EXPEL_PLAYER"
+          :type="EButtons.DELETE_PLAYER"
           :class="$b('expelButton')"
           @click="removeParticipant(playerRating.id)"
         )

@@ -271,6 +271,7 @@ div(
   }
   &__processedDate {
     @include centered-flex((gap: 4px));
+    color: vars.$colors-black;
     & > span {
       font: vars.$fonts-textBoldM;
     }

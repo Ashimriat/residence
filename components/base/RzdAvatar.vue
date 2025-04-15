@@ -19,8 +19,8 @@ PAvatar(
 
 <style lang="scss">
 .RzdAvatar {
-  width: var(--rzd-avatar-size, 48px);
-  height: var(--rzd-avatar-size, 48px);
+  min-width: var(--rzd-avatar-size, 48px);
+  min-height: var(--rzd-avatar-size, 48px);
   --p-avatar-background: var(--avatarBackground, #{vars.$colors-black});
   --p-avatar-lg-width: 180px;
   --p-avatar-xl-width: 240px;
