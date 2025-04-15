@@ -79,10 +79,11 @@ div(:class="$b()")
 .RulesPage {
   @include flex-column((gap: 22px));
   padding: 60px 80px;
+
+  --scoped-button-font: vars.$fonts-buttonL;
   &__backButton {
     @include flex((align-items: center, gap: 12px));
-    font-size: vars.$fs-m;
-    font-weight: vars.$fw-heavy;
+    font: var(--scoped-button-font);
     cursor: pointer;
     & div {
       border-left: 2px solid vars.$colors-black;
@@ -113,6 +114,10 @@ div(:class="$b()")
   }
   &__sectionContent {
     @include flex-column((gap: 1rem));
+    & * {
+      font: var(--font-text-m);
+      color: vars.$colors-black;
+    }
   }
   &__list {
     @include flex-column((gap: 4px));
@@ -124,6 +129,8 @@ div(:class="$b()")
 @include mobile {
   .RulesPage {
     padding: 0 24px 40px;
+
+    --scoped-button-font: vars.$fonts-buttonS;
     &__content {
       padding: 16px;
     }

@@ -14,6 +14,7 @@
   --font-text-bold-l: #{vars.$fonts-textBoldL};
   --font-text-bold-m: #{vars.$fonts-textBoldM};
 
+  --font-text-m: #{vars.$fonts-textM};
 
 
   --gap-x4l: 80px;
@@ -32,6 +33,8 @@
 
     --font-text-bold-l: #{vars.$fonts-textBoldM};
     --font-text-bold-m: #{vars.$fonts-textBoldS};
+
+    --font-text-m: #{vars.$fonts-textS};
 
 
     --gap-x4l: 40px;
