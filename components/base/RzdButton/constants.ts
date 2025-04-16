@@ -35,6 +35,7 @@ enum EButtons {
   USER_SETTINGS = 'userSettings',
   ORDER_GAME = 'orderGame',
   ADD_PLAYERS = 'addPlayers',
+  ADD_PLAYERS_CLAN = 'addPlayersClan',
   LEAVE_CLAN = 'leaveClan',
   EXPEL_PLAYER = 'expelPlayer',
   DELETE_PLAYER = 'deletePlayer',

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { type CalendarDate, type Time } from '../DateTimeCalendar.vue';
-
-
 type Props = {
   dataSectionTitle: string;
   isCalendarDisabled?: boolean;
@@ -14,7 +11,7 @@ const {
   isCalendarDisabled,
 } = defineProps<Props>();
 
-const { isDesktop } = useDevice();
+const { isDesktop } = usePlatform();
 
 const selectedDate = defineModel<CalendarDate>('date', { required: true });
 const selectedTime = defineModel<Time>('time', { required: true });

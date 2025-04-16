@@ -25,8 +25,6 @@ div(:class="$b()")
     :class="$b('label')"
   )
     | {{ props.label }}
-div(:class="$b()")
-
 </template>
 
 <style lang="scss">
@@ -40,8 +38,9 @@ div(:class="$b()")
     --p-checkbox-background: #{vars.$colors-white};
   }
   &__label {
-    font: vars.$fonts-textM;
+    font: var(--font-text-m);
     color: vars.$colors-black;
+    transform: translateY(2px);
   }
 }
 </style>

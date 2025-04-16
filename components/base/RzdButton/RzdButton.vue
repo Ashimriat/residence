@@ -127,6 +127,7 @@ PButton(
     }
 
     &_danger {
+      --rzd-icon-color: #{vars.$colors-white};
       --p-button-danger-background: #{vars.$colors-red};
       --p-button-danger-border-color: #{vars.$colors-red};
 

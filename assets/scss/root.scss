@@ -14,8 +14,7 @@
   --font-text-bold-l: #{vars.$fonts-textBoldL};
   --font-text-bold-m: #{vars.$fonts-textBoldM};
 
-  --font-text-m: #{vars.$fonts-textM};
-
+  --font-button-m: #{vars.$fonts-buttonM};
 
   --gap-x4l: 80px;
 }
@@ -34,7 +33,7 @@
     --font-text-bold-l: #{vars.$fonts-textBoldM};
     --font-text-bold-m: #{vars.$fonts-textBoldS};
 
-    --font-text-m: #{vars.$fonts-textS};
+    --font-button-m: #{vars.$fonts-buttonS};
 
 
     --gap-x4l: 40px;

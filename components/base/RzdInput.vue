@@ -15,13 +15,15 @@ type Props = {
 } & (TextInputProps | PasswordInputProps);
 
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 const props = withDefaults(
   defineProps<Props>(),
   { type: 'text', size: 'l' }
 );
 const value = defineModel<string>({ required: true })
+
+const inputEl = useTemplateRef<HTMLInputElement>('input');
 
 const usedSize = computed<Props['size']>(() => {
   if (!isMobile) return props.size;
@@ -47,10 +49,15 @@ const passedProps = computed<InputTextProps | PasswordProps>(
       }
     } as PasswordProps
 );
+
+defineExpose({
+  $el: props.type === 'text' ? inputEl.value : inputEl.value?.querySelector('input'),
+});
 </script>
 
 <template lang="pug">
 Wrapper(
+  ref="input"
   v-bind="{ ...props, ...passedProps }"
   v-model="value"
   :class="$b([`size_${usedSize}`])"

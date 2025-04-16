@@ -39,7 +39,7 @@ const openEventsCalendar = () => {
 
 const handleEventRequestSubmit = () => {};
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 function goToDetails(): void {
   aboutRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });

@@ -7,11 +7,12 @@ type DisplayData = {
   skipPos: SkipPosition[];
 };
 
-type Props = {
+export type Props = {
   itemsAmount: number;
+  type?: 'numbers' | 'dots' | 'label' | 'custom'
 };
 
-const { itemsAmount } = defineProps<Props>();
+const { itemsAmount, type = 'numbers' } = defineProps<Props>();
 
 const innerPage = defineModel<number>('page', { required: true });
 const currentPage = computed<number>({
@@ -118,59 +119,90 @@ PPaginator(
   :pt:paginator-container:class="$b()"
 )
   template(#container)
-    div(:class="$b('content')")
+    div(
+      v-if="type !== 'custom'"
+      :class="$b('content')"
+    )
       PButton.p-paginator-prev(
         :class="$b('controlButton', ['prev'], { disabled: currentPage === 1 })"
         @click.prevent.stop="processPageSelect(currentPage - 1)"
       )
         span.pi.pi-angle-left
-      slot(
-        name="pages"
-        :active-page="innerPage"
-        :on-page-click="processPageSelect"
+      div(
+        v-if="type === 'numbers'"
+        :class="$b('container')"
       )
-        div(:class="$b('container')")
-          PButton.p-paginator-page(
-            v-if="displayData.withFirst"
-            label="1"
-            :class="$b('pageButton', ['first'], { selected: currentPage === 1 })"
-            @click.prevent.stop="processPageSelect(1)"
+        PButton.p-paginator-page(
+          v-if="displayData.withFirst"
+          label="1"
+          :class="$b('pageButton', ['first'], { selected: currentPage === 1 })"
+          @click.prevent.stop="processPageSelect(1)"
+        )
+        PButton.p-paginator-page(
+          v-for="(pageNum, i) of displayData.pages"
+          :key="pageNum"
+          :class="$b('pageButton', { selected: currentPage === pageNum })"
+          :style="`--order: ${i + 2}`"
+          :label="`${pageNum}`"
+          @click.prevent.stop="processPageSelect(pageNum)"
+        )
+          | {{ pageNum }}
+        PButton.p-paginator-page(
+          v-if="displayData.withLast"
+          :label="`${pagesAmount}`"
+          :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount })"
+          @click.prevent.stop="processPageSelect(pagesAmount)"
+        )
+          | {{ pagesAmount }}
+        template(
+          v-for="skipPos in displayData.skipPos"
+          :key="skipPos"
+        )
+          span(
+            v-if="activeSkipperInput !== skipPos"
+            :class="$b('skipper', [skipPos])"
+            @dblclick="setActiveSkipperInput(skipPos)"
           )
-          PButton.p-paginator-page(
-            v-for="(pageNum, i) of displayData.pages"
-            :key="pageNum"
-            :class="$b('pageButton', { selected: currentPage === pageNum })"
-            :style="`--order: ${i + 2}`"
-            :label="`${pageNum}`"
+            | ...
+          RzdInput(
+            v-else
+            ref="input"
+            v-model="inputValue"
+            v-keyfilter.int
+            :class="$b('skipperInput', [skipPos])"
+            @blur="resetInput"
+            @keydown.enter="processInputConfirm"
+          )
+      ul.p-carousel-indicator-list(
+        v-else-if="type === 'dots'"
+        :class="$b('indicatorList')"
+      )
+        li.p-carousel-indicator(
+          v-for="(_, pageNum) of pagesAmount"
+          :key="`dot-${pageNum}`"
+          :class="{ 'p-carousel-indicator-active': pageNum === innerPage }"
+        )
+          button.p-carousel-indicator-button(
+            :class="$b('indicatorButton')"
             @click.prevent.stop="processPageSelect(pageNum)"
           )
-            | {{ pageNum }}
-          PButton.p-paginator-page(
-            v-if="displayData.withLast"
-            :label="`${pagesAmount}`"
-            :class="$b('pageButton', ['last'], { selected: currentPage === pagesAmount })"
-            @click.prevent.stop="processPageSelect(pagesAmount)"
-          )
-            | {{ pagesAmount }}
-          template(
-            v-for="skipPos in displayData.skipPos"
-            :key="skipPos"
-          )
-            span(
-              v-if="activeSkipperInput !== skipPos"
-              :class="$b('skipper', [skipPos])"
-              @dblclick="setActiveSkipperInput(skipPos)"
-            )
-              | ...
-            RzdInput(
-              v-else
-              ref="input"
-              v-model="inputValue"
-              v-keyfilter.int
-              :class="$b('skipperInput', [skipPos])"
-              @blur="resetInput"
-              @keydown.enter="processInputConfirm"
-            )
+      div(
+        v-else-if="type === 'label'"
+        :class="$b('label')"
+      )
+        span
+          | {{ currentPage + 1 }}
+        span
+          | из
+        span 
+          | {{ pagesAmount }}
+      slot(
+        v-else
+        name="pages"
+        :active-page="innerPage"
+        :pages-amount="pagesAmount"
+        :on-page-click="processPageSelect"
+      )
       PButton.p-paginator-next(
         :class="$b('controlButton', ['next'], { disabled: currentPage === pagesAmount })"
         @click.prevent.stop="processPageSelect(currentPage + 1)"
@@ -193,6 +225,9 @@ PPaginator(
 
   --p-paginator-nav-button-selected-background: #{vars.$colors-beige};
   --p-paginator-nav-button-selected-color: #{vars.$colors-white};
+
+  @include p-component-dot-buttons;
+
   & button {
     font: vars.$fonts-textBoldS;
   }
@@ -212,15 +247,20 @@ PPaginator(
     justify-content: center;
   }
   &__controlButton {
+    --p-paginator-nav-button-hover-background: transparent;
+    --p-paginator-nav-button-hover-color: #{vars.$colors-black};
+
+    @include hover-supported() {
+      background-color: vars.$colors-beige;
+      color: vars.$colors-white;
+    }
+
     &--disabled {
       cursor: default;
       pointer-events: none;
       opacity: var(--p-disabled-opacity);
     }
-    &:hover {
-      background-color: vars.$colors-beige;
-      color: vars.$colors-white;
-    }
+    
     & span {
       @include relative;
     }
@@ -268,6 +308,19 @@ PPaginator(
   &__skipperInput {
     padding: 8px;
     font-size: vars.$fs-s;
+  }
+
+  &__label {
+    @include centered-flex;
+    font: vars.$fonts-textM;
+    gap: vars.$gaps-g8;
+    margin: 0 vars.$gaps-g8;
+    & > span {
+      &:first-of-type,
+      &:last-of-type {
+        font: vars.$fonts-textBoldM;
+      }
+    }
   }
 }
 </style>

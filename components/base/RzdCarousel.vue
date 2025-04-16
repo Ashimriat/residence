@@ -4,7 +4,8 @@ import type { CarouselProps } from 'primevue';
 
 type Props = {
   items: CarouselProps['value'][] | CarouselProps['value'][][];
-  visibleAmount?: ByDevice<CarouselProps['numVisible']>;
+  visibleAmount?: number | ByDevice<number>;
+  paginationType?: RzdPaginationProps['type']
   withPagination?: boolean
 };
 
@@ -13,13 +14,16 @@ const {
   items,
   /** optional */
   visibleAmount = { desktop: 1, mobile: 1 },
-  withPagination
+  withPagination,
+  paginationType = 'dots',
 } = defineProps<Props>();
 
 const { platform, isDesktop, isMobile } = usePlatform();
 
 const displayedItems = computed<CarouselProps['value'][]>(() => {
-  const displayedAmount = visibleAmount[platform];
+  const displayedAmount = typeof visibleAmount === 'number'
+    ? visibleAmount
+    : visibleAmount[platform];
   if (Array.isArray(items[0]) && items[0].length === displayedAmount) return items;
   const res: CarouselProps['value'][] = [];
   const flattenedItems = items.flat();
@@ -65,26 +69,17 @@ PCarousel(
       v-model:page="page"
       :amount-on-page="1"
       :items-amount="itemsAmount"
+      :type="paginationType"
     )
-      template(#pages="{ activePage, onPageClick }")
-        ul.p-carousel-indicator-list(
-          :class="$b('indicatorList')"
-        )
-          li.p-carousel-indicator(
-            v-for="(_, pageNum) of displayedItems"
-            :key="`dot-${pageNum}`"
-            :class="{ 'p-carousel-indicator-active': pageNum === activePage }"
-          )
-            button.p-carousel-indicator-button(
-              :class="$b('indicatorButton')"
-              @click.prevent.stop="onPageClick(pageNum)"
-            )
 </template>
 
 <style lang="scss">
 .RzdCarousel {
   @include relative;
   max-width: var(--rzd-carousel-maxwidth);
+
+  @include p-component-dot-buttons;
+
   &__contentContainer {
     @include relative;
     gap: var(--carouselContentContainerGap, #{vars.$gaps-g28});
@@ -103,18 +98,6 @@ PCarousel(
   }
   &__originalControlButton {
     display: none;
-  }
-  &__indicatorList {
-    flex-direction: row;
-    padding: 4px;
-    align-items: center;
-  }
-  &__indicatorButton {
-    --p-carousel-indicator-background: #{vars.$colors-greyMuted};
-    --p-carousel-indicator-active-background: #{vars.$colors-black};
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
   }
 }
 

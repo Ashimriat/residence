@@ -64,13 +64,13 @@
   opacity: $opacity;
 }
 
-@mixin laptop($bottom: 760px, $upper: 1024px) {
+@mixin laptop($bottom: 961px, $upper: 1280px) {
   @media only screen and (min-device-width: $bottom) and (max-device-width: $upper) {
     @content;
   }
 }
 
-@mixin mobile($bottom: 320px, $upper: 760px) {
+@mixin mobile($bottom: 320px, $upper: 960px) {
   @media only screen and (min-device-width: $bottom) and (max-device-width: $upper) {
     @content;
   }
@@ -102,7 +102,8 @@
     
     @each $prop, $value in list.nth($args, $i + 1) {
       /**
-       *  @todo: сделать, чтобы добавление запятой было внутри этого цикла
+       * @TODO:
+       * сделать, чтобы добавление запятой было внутри этого цикла
        * Это позволит перейти от записи вида 
        *   @include transition(
        *     (border-color: $transitionTime ease-out),
@@ -163,4 +164,27 @@
 @mixin container-query-base($name, $type) {
   container: #{$name} / #{$type};
   box-sizing: unset;
+}
+
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin p-component-dot-buttons {
+  &__indicatorList {
+    flex-direction: row;
+    padding: 4px;
+    align-items: center;
+  }
+  &__indicatorButton {    
+    --p-carousel-indicator-background: #{vars.$colors-greyMuted};
+    --p-carousel-indicator-active-background: #{vars.$colors-black};
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
 }

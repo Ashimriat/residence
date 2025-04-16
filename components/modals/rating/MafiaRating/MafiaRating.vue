@@ -1,25 +1,34 @@
 <script setup lang="ts">
 import { EButtons } from '~/components/constants';
 import { MAFIA_ROLES_TOWN, MAFIA_TEAM_OPTIONS_TOWN } from './constants';
+import DParticipantsRating from './parts/DParticipantsRating.vue';
+import MParticipantsRating from './parts/MParticipantsRating.vue';
 
 
-type ParticipantRating = Participant & {
+export type ParticipantRating = Participant & {
   role: string;
   additionalScores: string;
   isLeft: boolean;
 };
+export type ParticipantsRatingComponentProps = {
+  ratingsData: ParticipantRating[];
+}
+export type ParticipantsRatingComponentEmits = {
+  remove: [playerId: string];
+}
 
 type GameRating = {
   winnersTeam: string;
   participants: ParticipantRating[];
 };
 
-
-const { getModalData, addPlayers } = useModal<EventData>();
+const { isDesktop } = usePlatform();
+const { closeModal, getModalData, addPlayers } = useModal<EventData>();
 
 const eventData = getModalData();
 
 const page = ref<number>(0);
+
 
 const $b = useBEM('MafiaRating');
 
@@ -37,6 +46,10 @@ const canProcessSave = computed<boolean>(() => {
   }
   return true;
 });
+
+const ParticipantsRating = computed<Component<ParticipantsRatingComponentProps>>(
+  () => isDesktop ? DParticipantsRating : MParticipantsRating
+);
 
 function generateGameRating(): void {
   ratings.value[ratings.value.length] = {
@@ -60,10 +73,6 @@ watch(page, () => {
   if (currentGameData.value) return;
   generateGameRating();
 }, { immediate: true });
-
-watch(canProcessSave, () => {
-  console.log(canProcessSave.value);
-})
 </script>
 
 <template lang="pug">
@@ -84,59 +93,22 @@ div(:class="$b()")
         :type="EButtons.ADD_GAME_ROUND"
         @click="generateGameRating"
       )
-      RzdCarousel(
+      RzdPagination(
         v-if="ratings.length > 1"
         v-model:page="page"
-        :items="ratings"
-        :pt:footer:class="$b('carousel')"
-        with-pagination
+        :amount-on-page="1"
+        :items-amount="ratings.length"
+        type="dots"
       )
   div(:class="$b('ratingsContainer')")
     RzdButton(
       :type="EButtons.ADD_PLAYERS"
       @click="addPlayers"
     )
-    RzdScrollPanel(
-      :items-in-row="1"
-      :gap="14"
-      :class="$b('participantsList', { small: currentGameData.participants.length < 5 })"
+    ParticipantsRating(
+      :ratings-data="currentGameData.participants"
+      @remove="removeParticipant"
     )
-      div(
-        v-for="(playerRating, i) of currentGameData.participants"
-        :key="playerRating.id"
-        :class="$b('participant')"
-      )
-        UserData(
-          :avatar="playerRating.avatar"
-          :name="playerRating.name"
-        )
-        RzdSelect(
-          v-model="playerRating.role"
-          :options="MAFIA_ROLES_TOWN"
-          option-label="label"
-          option-value="value"
-          placeholder="Роль"
-          :class="$b('roleSelect')"
-        )
-        RzdInput(
-          v-model="playerRating.additionalScores"
-          v-keyfilter.int
-          size="m"
-          placeholder="Доп баллы"
-          :class="$b('scores')"
-        )
-        div(:class="$b('checkbox')")
-          RzdCheckbox(
-            v-model="playerRating.isLeft"
-            :input-id="`isPlayerLeft-${i}`"
-            binary
-            label="Ушел"
-          )
-        RzdButton(
-          :type="EButtons.DELETE_PLAYER"
-          :class="$b('expelButton')"
-          @click="removeParticipant(playerRating.id)"
-        )
   RzdSelectButtons(
     v-model="currentGameData.winnersTeam"
     :options="MAFIA_TEAM_OPTIONS_TOWN"
@@ -144,7 +116,7 @@ div(:class="$b()")
   RzdButton(
     :type="EButtons.SAVE_RATINGS"
     :disabled="!canProcessSave"
-    @click=""
+    @click="closeModal"
   )
 </template>
 
@@ -184,16 +156,7 @@ div(:class="$b()")
     }
   }
 
-  &__participantsList {
-    height: 296px;
-    padding-right: 0;
-
-    &--small {
-      & > div {
-        padding-right: 0;
-      }
-    }
-  }
+  
 
   &__carousel {
     & > nav > div {
@@ -230,10 +193,6 @@ div(:class="$b()")
 
   &__scores {
     width: 140px;
-  }
-
-  &__checkbox {
-    @include flex((align-items: center, gap: vars.$gaps-g12));
   }
 
   &__expelButton {

@@ -26,7 +26,7 @@ const { asDesktop, isDisabled } = defineProps<Props>();
 const selectedDate = defineModel<CalendarDate>('date', { required: true });
 const selectedTime = defineModel<Time | undefined>('time', { default: undefined });
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 const { closeModal, showMobileCalendar } = useModal();
 
 const selectedDateTimeLabel = computed<string>(() => {
@@ -47,7 +47,7 @@ function openOnMobile(): void {
     withTimeSelect: withTimeSelect.value,
     activeDate: selectedDate.value,
     activeTime: selectedTime.value,
-    onSelect: (date: NonNullable<CalendarDate>, time: Time) => {
+    onSelect: (date: NonNullable<CalendarDate>, time: Time | undefined) => {
       selectedDate.value = date;
       selectedTime.value = time;
       closeModal();
@@ -148,6 +148,11 @@ function setSelectedDate(day: number): void {
     withTimeSelect.value
     || !selectedDate.value
     || selectedDate.value.end
+    /**
+     * @TODO_ASAP поправить логику
+     * Тут надо сделать расчет, чтобы если мы вторую дату
+     * выбрали раньше первой - она бы становилась новой первой
+     */ 
   ) {
     selectedDate.value = { start: daysAddedDate };
   } else if (day === selectedDate.value.start.day) {
@@ -324,13 +329,13 @@ div(
 
     &--common,
     &--selection {
-      &:hover {
+      @include hover-supported() {
         --dayNumColor: #{vars.$colors-white};
         --fillerWidth: 100%;
         --fillerBackgroundColor: #{vars.$colors-beige};
         --fillerBorderRadius: #{vars.$br-xs};
         --dayOpacity: 0.7;
-      }  
+      }
     }
     &--selection {
       background-color: vars.$colors-greyLight;
@@ -423,7 +428,10 @@ div(
     max-width: 77px;
     height: 40px;
     cursor: pointer;
-    &:hover,
+    @include hover-supported {
+      --timeSlotBackgroundColor: #{vars.$colors-white};
+      --timeSlotColor: #{vars.$colors-black};
+    }
     &--selected {
       --timeSlotBackgroundColor: #{vars.$colors-white};
       --timeSlotColor: #{vars.$colors-black};

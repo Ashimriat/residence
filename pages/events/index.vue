@@ -7,7 +7,7 @@ import { GAMES_DESCRIPTIONS } from './constants';
 /** Props & Emits */
 const userStore = useUserStore();
 const { isAdmin } = storeToRefs(userStore);
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 /** State & Composables */
 const $b = useBEM('EventsPage');

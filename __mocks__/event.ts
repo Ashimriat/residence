@@ -1,3 +1,4 @@
+import { deepmerge } from 'deepmerge-ts';
 import { mockOtherUsers } from './otherUsers';
 
 const EVENT_DATA: EventData = {
@@ -5,9 +6,13 @@ const EVENT_DATA: EventData = {
   oldPrice: 400,
   price: 300,
   gameData: {
+    id: crypto.randomUUID(),
     title: 'Городская мафия',
     description: 'Cоберитесь вместе для того, чтобы вычислить коварную мафию! Красные городские жители или же чёрная мафиозная команда - кто останется победителем, а кто покинет город?',
-    master: 'Александр',
+    master: {
+      name: 'Александр',
+      id: `${Math.round(Math.random())}`
+    },
     maxPlayersAmount: 10,
     address: 'Улица Пушкина, дом Колотушкина',
     date: '10 марта',
@@ -25,7 +30,22 @@ const EVENT_DATA: EventData = {
   },
 };
 
-const mockEventsData = (length: number): EventData[] => Array.from({ length }, () => EVENT_DATA);
+const mockEventsData = (length: number): EventData[] => (
+  Array.from(
+    { length },
+    () => deepmerge(
+      EVENT_DATA,
+      {
+        isSubscriptionWorks: Boolean(Math.round(Math.random())),
+        gameData: {
+          master: {
+            id: `${Math.round(Math.random())}`
+          }
+        }
+      }
+    )
+  )
+);
 
 const mockEventsBigData = (sets: number, setLength: number): EventData[][] => (
   Array.from({ length: sets }, () => mockEventsData(setLength))

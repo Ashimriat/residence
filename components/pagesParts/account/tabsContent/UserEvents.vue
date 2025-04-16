@@ -2,7 +2,7 @@
 import { mockAchievementsList, mockEventsData,  mockSubscriptions } from '~/__mocks__';
 
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 const eventsMock = mockEventsData(12)
 const achievementsMock = mockAchievementsList(isMobile ? 2 : 6)
@@ -16,20 +16,21 @@ div(:class="$b()")
     h5
       | Предстоящие события
     RzdCarousel(
-      :class="$b('eventsCarousel')"
+      v-slot="{ itemsData }"
       :items="eventsMock"
       :visible-amount="{ desktop: 4, mobile: 2 }"
+      :class="$b('eventsCarousel')"
     )
-      template(#default="{ itemsData }")
-        div(:class="$b('eventsContainer')")
-          EventCard(
-            v-for="(eventData, i) of itemsData"
-            :key="`eventCard_${i}`"
-            mode="light"
-            coloring="grey"
-            :event-data="eventData"
-            :class="$b('eventData')"
-          )
+      div(:class="$b('eventsContainer')")
+        EventCard(
+          v-for="(eventData, i) of itemsData"
+          :key="`eventCard_${i}`"
+          mode="light"
+          coloring="grey"
+          hide-label
+          :event-data="eventData"
+          :class="$b('eventData')"
+        )
   div(
     v-if="false"
     :class="$b('contentSection')"

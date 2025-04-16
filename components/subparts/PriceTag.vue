@@ -6,7 +6,7 @@ type Props = {
 };
 
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 const { value, oldValue, isSmall } = defineProps<Props>();
 

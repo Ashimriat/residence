@@ -11,7 +11,7 @@ const {
   gap = 40,
 } = defineProps<Props>();
 
-const { isDesktop } = useDevice();
+const { isDesktop } = usePlatform();
 
 const usedGap = computed<ByAxis<number>>(() => {
   if (typeof gap === 'string') {
@@ -99,8 +99,6 @@ $defaultItemBasis: calc((100% - v-bind('gapsSpace')) / v-bind('fItemsInRow'));
   &__bar {
     --p-scrollpanel-bar-background: var(--scrollPanelBarBackgroundColor, #{vars.$colors-greyMuted});
     --p-scrollpanel-bar-size: 6px;
-
-    opacity: 1;
   }
 }
 

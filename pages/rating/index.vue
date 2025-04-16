@@ -8,7 +8,7 @@ const activeType = ref<string>(OPTIONS[0].value);
 
 const tableData = mockRatingsTableData(500);
 
-const { isDesktop } = useDevice();
+const { isDesktop } = usePlatform();
 
 const { isAdmin } = storeToRefs(useUserStore());
 

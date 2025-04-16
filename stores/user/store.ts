@@ -21,6 +21,7 @@ const useUserStore = defineStore('user', () => {
     password2: '',
     about: '',
     sex: '',
+    isPrivateData: false,
   });
   const providedData = ref<ProvidedUserData>({
     id: '',

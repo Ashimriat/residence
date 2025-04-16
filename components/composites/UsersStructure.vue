@@ -180,8 +180,7 @@ RzdCard(
     cursor: pointer;
     border-radius: vars.$br-s;
 
-
-    &:hover {
+    @include hover-supported() {
       --expelButtonOpacity: 1;
 
       & button {
@@ -189,7 +188,10 @@ RzdCard(
       }
     }
 
-    &:hover,
+    @include hover-supported() {
+      background-color: vars.$colors-greyLight;
+    }
+    
     &--selected {
       background-color: vars.$colors-greyLight;
     }

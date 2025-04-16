@@ -19,9 +19,11 @@ div(:class="$b()")
   ClanView(:data="clansData[0]")
   h4
     | Кланы
-  RzdCarousel(:items="clansData.slice(1)")
-    template(#default="{ itemsData }")
-      ClanView(:data="itemsData[0]")
+  RzdCarousel(
+    v-slot="{ itemsData }"
+    :items="clansData.slice(1)"
+  )
+    ClanView(:data="itemsData[0]")
 </template>
 
 <style lang="scss">

@@ -10,7 +10,7 @@ const {
   preserveSubcontent = true,
 } = defineProps<Props>();
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 
 const direction = computed<'row' | 'column'>(
   () => orientation ?? isMobile ? 'column' : 'row',

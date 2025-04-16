@@ -11,7 +11,7 @@ const {
   isCalendarDisabled,
 } = defineProps<Props>();
 
-const { isDesktop } = useDevice();
+const { isDesktop } = usePlatform();
 
 const selectedDate = defineModel<CalendarDate>('date', { required: true });
 const selectedTime = defineModel<Time>('time', { required: true });

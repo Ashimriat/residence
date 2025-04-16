@@ -7,7 +7,7 @@ type Props = {
 };
 
 const { data } = defineProps<Props>();
-const { isDesktop } = useDevice();
+const { isDesktop } = usePlatform();
 
 const isParticipantsDisplayed = ref<boolean>(isDesktop);
 
@@ -56,7 +56,7 @@ UsersStructure(
     )
     template(v-if="isDesktop")
       RzdButton(
-        :type="EButtons.ADD_PLAYERS"
+        :type="EButtons.ADD_PLAYERS_CLAN"
         @click="inviteToClan(data.id)"
       )
     template(v-else)

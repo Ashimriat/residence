@@ -1,7 +1,11 @@
 export type GameData = {
+  id: string;
   title: string;
   description: string;
-  master: string;
+  master: {
+    name: string;
+    id: string;
+  }
   maxPlayersAmount: number;
   date: string;
   time: string;

@@ -20,7 +20,7 @@ div(:class="$b()")
   @include flex-column;
   --headerHeight: 100px;
   --footerHeight: 276px;
-  --mobileHeaderOffset: 0;
+  --layout-mobile-content-offset: 0;
   --headerBackgroundColor: #{vars.$colors-bg};
   --mainContentWidth: 1440px;
   --mainContentPadding: 60px 80px 160px;
@@ -34,7 +34,7 @@ div(:class="$b()")
       box-shadow: vars.$shadows-base;
     }
     &--mobile {
-      @include fixed((top: 58px));
+      @include fixed((top: var(--layout-mobile-header-offset)));
       @include centered-flex;
       background-color: transparent;
       padding: 0 20px;
@@ -60,7 +60,7 @@ div(:class="$b()")
     min-height: calc(
       100vh - var(--headerHeight) - var(--footerHeight)
     );
-    padding-top: var(--mobileHeaderOffset);
+    padding-top: var(--layout-mobile-content-offset);
     & > div {
       width: var(--mainContentWidth);
       padding: var(--mainContentPadding);
@@ -72,7 +72,8 @@ div(:class="$b()")
   .DefaultLayout {
     --headerHeight: 0px;
     --footerHeight: 386px;
-    --mobileHeaderOffset: 160px;
+    --layout-mobile-header-offset: 33px;
+    --layout-mobile-content-offset: 120px;
     --headerBackgroundColor: transparent;
     --mainContentWidth: 100%;
     --mainContentPadding: 0 24px 40px;

@@ -37,7 +37,7 @@ async function initializeTMA(): Promise<void> {
 }
 
 export default defineNuxtPlugin(() => {
-  const { isDesktop } = useDevice();
+  const { isDesktop } = usePlatform();
   const route = useRoute();
   const router = useRouter();
 

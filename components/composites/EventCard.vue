@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { EButtons, EIcons, EIconsSizes } from '~/components/constants';
+import { EButtons, EIcons } from '~/components/constants';
 
 
 type Props = {
   eventData: EventData;
   coloring: 'light' | 'grey' | 'dark'
   mode: 'light' | 'full';
-  label?: string;
   withDetails?: boolean;
+  hideLabel?: boolean;
 };
 type Emits = {
   signUp: [];
@@ -19,17 +19,25 @@ const {
   coloring,
   mode,
   /** optional */
-  label = '',
   withDetails,
+  hideLabel,
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const { isMobile } = useDevice();
 const $b = useBEM('EventCard');
+const { providedData } = storeToRefs(useUserStore())
 
 const isShowingDetails = ref<boolean>(false);
 
+const isEventMaster = computed<boolean>(
+  () => eventData.gameData.master.id === providedData.value.id
+);
 
+const label = computed<string>(() => {
+  if (isEventMaster.value) return 'Вы ведущий';
+  if (eventData.isSubscriptionWorks) return 'Действует абонемент';
+  return '';
+})
 
 /** Computeds */
 const secondButtonType = computed<EButtons>(() => (
@@ -47,7 +55,10 @@ function toggleDetails(): void {
   isShowingDetails.value = !isShowingDetails.value;
 }
 
-
+function handleClick(): void {
+  if (!isEventMaster.value) return;
+  navigateTo(`/admin/manageGame/${eventData.gameData.id}`);
+}
 </script>
 
 <template lang="pug">
@@ -55,6 +66,7 @@ RzdCard(
   orientation="column"
   :preserve-subcontent="!isLightMode"
   :class="$b([`mode_${mode}`, `coloring_${coloring}`])"
+  @click.stop="handleClick"
 )
   template(
     v-if="!isLightMode"
@@ -70,7 +82,7 @@ RzdCard(
           shape="circle"
         )
         div(:class="$b('masterName')")
-          | {{ gameData.master }}
+          | {{ gameData.master.name }}
       div(:class="$b('players')")
         span(:class="$b('amount')")
           | {{ `${participants.length}/${gameData.maxPlayersAmount}` }}
@@ -82,7 +94,7 @@ RzdCard(
     div(:class="$b('eventDetails')")
       slot(name="gameHeader")
         RzdChip(
-          v-if="label"
+          v-if="!hideLabel && label"
           :label
         )
         div(:class="$b('gameNamePriceBlock')")

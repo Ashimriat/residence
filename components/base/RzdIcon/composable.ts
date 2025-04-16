@@ -80,7 +80,7 @@ const ICONS_SIZES: Record<EIconsSizes, number> = {
 
 
 export default function useIcon(iconType: EIcons, iconSize: EIconsSizes, isAdaptive: boolean) {
-  const { isMobile } = useDevice();
+  const { isMobile } = usePlatform();
   let usedSize = iconSize;
   if (isAdaptive && isMobile) {
     switch (iconSize) {

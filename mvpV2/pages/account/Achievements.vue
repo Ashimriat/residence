@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mockAchievementsList } from '~/__mocks__';
 
-const { isMobile } = useDevice();
+const { isMobile } = usePlatform();
 const itemsAmount = isMobile ? 9 : 8;
 const itemsInRowAmount = isMobile ? 3 : 4;
 

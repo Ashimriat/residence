@@ -3,10 +3,17 @@ import { mockEventsData, mockEventsBigData, mockOtherUsers } from '~/__mocks__';
 import { EButtons } from '~/components/constants';
 
 
+const { providedData } = storeToRefs(useUserStore());
+
 const users = mockOtherUsers(40);
 
 const events = mockEventsData(3);
-const otherEvents = mockEventsBigData(3, 6);
+
+const otherEvents = mockEventsBigData(3, 6)
+  .flat()
+  .filter(
+    (event) => event.gameData.master.id === providedData.value.id
+  );
 
 const { openGameRating } = useModal();
 
@@ -64,6 +71,7 @@ div(:class="$b()")
           label="Вы ведущий"
           mode="light"
           coloring="grey"
+          hide-label
           :event-data="event"
         )
 </template>

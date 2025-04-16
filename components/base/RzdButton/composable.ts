@@ -40,6 +40,12 @@ const EXPEL_BUTTON_DATA: ExtendedButtonData = {
   },
 }
 
+const ADD_PLAYERS_DATA: ExtendedButtonData = {
+  label: 'Добавить игроков',
+  iconType: EIcons.PLUS_CIRCLED,
+  variant: EButtonVariant.TERTIARY,
+}
+
 const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
   [EButtons.ALREADY_REGISTERED]: {
     label: 'Уже есть аккаунт?',
@@ -157,10 +163,12 @@ const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
     iconType: EIcons.PLUS_CIRCLED,
   },
   [EButtons.ADD_PLAYERS]: {
-    label: 'Добавить игроков',
-    iconType: EIcons.PLUS_CIRCLED,
-    variant: EButtonVariant.TERTIARY,
+    ...ADD_PLAYERS_DATA,
+    atMobile: {
+      size: EButtonSize.S,
+    },
   },
+  [EButtons.ADD_PLAYERS_CLAN]: ADD_PLAYERS_DATA,
   [EButtons.TOGGLE_DETAILS]: {
     iconType: EIcons.LINK,
     variant: EButtonVariant.TERTIARY,
@@ -173,6 +181,7 @@ const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
   [EButtons.EXPEL_PLAYER]: EXPEL_BUTTON_DATA,
   [EButtons.DELETE_PLAYER]: {
     ...EXPEL_BUTTON_DATA,
+    iconType: EIcons.CROSS,
     atMobile: undefined,
   },
   [EButtons.BACK]: {
@@ -261,6 +270,9 @@ const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
     label: 'Добавить партию',
     iconType: EIcons.PLUS_CIRCLED,
     variant: EButtonVariant.TERTIARY,
+    atMobile: {
+      size: EButtonSize.S,
+    },
   },
   [EButtons.SAVE_RATINGS]: {
     label: 'Сохранить оценки',
@@ -285,7 +297,7 @@ const DEFAULT_PARAMS: Required<ButtonData> = {
 
 
 export default function useButtonData(type: EButtons): Required<ButtonData> {
-  const { isMobile } = useDevice();
+  const { isMobile } = usePlatform();
   let data = {
     ...DEFAULT_PARAMS,
     ...BUTTONS_DATA[type],

@@ -103,11 +103,11 @@ div(:class="$b()")
 }
 
 .MNavMenu {
-  @include absolute((top: -58px, left: 0));
+  @include absolute((top: calc(-1 * var(--layout-mobile-header-offset)), left: 0));
   @include flex-column((gap: vars.$gaps-g12));
   width: 100vw;
-  height: 100vh;
-  padding: 170px 20px 72px;
+  min-height: 100vh;
+  padding: var(--layout-mobile-content-offset) 20px calc(100vh - var(--layout-mobile-content-offset));
   box-sizing: border-box;
   background-color: vars.$colors-bg;
   &__topLinks {

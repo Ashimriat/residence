@@ -4,20 +4,20 @@ import { EButtons } from '~/components/constants';
 
 export type MobileCalendarModalData = {
   withTimeSelect?: boolean;
-  activedDate: CalendarDate;
-  activeTime: Time;
-  onSelect: (date: NonNullable<CalendarDate>, time: Time) => void;
+  activeDate: CalendarDate;
+  activeTime?: Time;
+  onSelect: (date: NonNullable<CalendarDate>, time: Time | undefined) => void;
 };
 
 const { getModalData } = useModal<MobileCalendarModalData>();
 const { onSelect, withTimeSelect, activeDate, activeTime } = getModalData();
 
 const selectedDate = ref<CalendarDate>(activeDate)
-const selectedTime = ref<Time>(activeTime)
+const selectedTime = ref<Time | undefined>(activeTime)
 
 const confirm = () => {
   onSelect(
-    selectedDate.value,
+    selectedDate.value!,
     selectedTime.value,
   );
 };

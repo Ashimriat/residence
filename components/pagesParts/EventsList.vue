@@ -59,10 +59,8 @@ div(:class="$b({ calendar: withCalendar })")
         EventCard(
           v-for="(data, j) in displayedItems"
           :key="`eventData_${j}`"
-          show-subscription
           coloring="light"
           mode="full"
-          :label="data.isSubscriptionWorks ? 'Действует абонемент' : ''"
           :event-data="data"
         )
   RzdPagination(

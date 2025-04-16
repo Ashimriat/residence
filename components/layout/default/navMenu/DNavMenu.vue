@@ -63,12 +63,19 @@ div(:class="$b()")
     font-weight: vars.$fw-bold;
     border-bottom: 2px solid var(--borderColor, transparent);
     cursor: pointer;
-    &:hover {
-      --borderColor: var(--sectionTitleBorderHoverColor);
+
+    
+    & {
+      @include hover-supported {
+        --borderColor: var(--sectionTitleBorderHoverColor);
+      }
     }
+
     &--active {
-      &,
-      &:hover {
+      @include hover-supported {
+        --borderColor: var(--sectionTitleBorderActiveColor);
+      }
+      & {
         --borderColor: var(--sectionTitleBorderActiveColor);
       }
     }
