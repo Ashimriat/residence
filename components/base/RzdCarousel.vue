@@ -46,8 +46,8 @@ const $b = useBEM('RzdCarousel');
 
 <template lang="pug">
 PCarousel(
+  v-model:page="page"
   :value="displayedItems"
-  :page="page"
   :num-visible="1"
   :num-scroll="1"
   :pt:root:class="$b()"

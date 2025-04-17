@@ -20,7 +20,6 @@ declare module 'vue' {
     PColumn: typeof import('primevue/column')['default']
     PDataTable: typeof import('primevue/datatable')['default']
     PDivider: typeof import('primevue/divider')['default']
-    PGalleria: typeof import('primevue/galleria')['default']
     PIconField: typeof import('primevue/iconfield')['default']
     PInputIcon: typeof import('primevue/inputicon')['default']
     POverlayBadge: typeof import('primevue/overlaybadge')['default']
