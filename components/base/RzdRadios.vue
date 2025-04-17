@@ -61,9 +61,14 @@ $border: 1px solid vars.$colors-black;
     padding: 10px;
     cursor: pointer;
 
+    &:not(&:first-of-type) {
+      border-left: var(--radiosOptionBorderInline, #{$border});
+      border-top: var(--radiosOptionBorderBlock, none);
+    }
+
     &:not(&:last-of-type) {
-      border-right: var(--radiosOptionBorderRight, #{$border});
-      border-bottom: var(--radiosOptionBorderBottom, none);
+      border-right: var(--radiosOptionBorderInline, #{$border});
+      border-bottom: var(--radiosOptionBorderBlock, none);
     }
   }
 
@@ -96,8 +101,8 @@ $border: 1px solid vars.$colors-black;
 @include mobile {
   .RzdRadios {
     --radiosFlexDirection: column;
-    --radiosOptionBorderRight: none;
-    --radiosOptionBorderBottom: #{$border};
+    --radiosOptionBorderInline: none;
+    --radiosOptionBorderBlock: #{$border};
     --radioSize: 16px;
   }
 }

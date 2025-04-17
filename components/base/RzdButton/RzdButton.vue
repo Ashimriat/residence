@@ -201,14 +201,12 @@ PButton(
     font: var(--scoped-label-font);
     order: var(--labelOrder);
   }
-
 }
 
 @include mobile {
   .RzdButton {
     &--variant {
       &_secondary {
-        justify-content: space-between;
         --p-button-secondary-background: transparent;
         --p-button-secondary-hover-background: transparent;
         --p-button-secondary-active-background: transparent;

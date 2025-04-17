@@ -3,12 +3,14 @@ import type { InputTextProps, PasswordProps } from 'primevue';
 import { PInputText, PPassword } from '#components';
 
 
+export type RzdInputTypes = 'text' | 'password'
 type TextInputProps = InputTextProps & {
   type?: 'text';
 };
 type PasswordInputProps = PasswordProps & {
   type?: 'password';
 }
+
 
 type Props = {
   size?: 'm' | 'l';

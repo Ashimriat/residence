@@ -98,7 +98,7 @@ div(:class="$b()")
     }
   }
   &__content {
-    @include flex-column((gap: 28px));
+    @include flex-column((gap: vars.$gaps-g28));
     background-color: vars.$colors-white;
     padding: 40px 120px;
     border-radius: vars.$br-l;
@@ -106,21 +106,21 @@ div(:class="$b()")
   &__topContainer {
     @include flex((justify-content: space-between));
     & > div {
-      @include flex((gap: 6px));
+      @include flex((gap: vars.$gaps-g8));
     }
   }
   &__section {
-    @include flex-column((gap: 12px));
+    @include flex-column((gap: vars.$gaps-g12));
   }
   &__sectionContent {
-    @include flex-column((gap: 1rem));
+    @include flex-column((gap: vars.$gaps-g16));
     & * {
       font: var(--font-text-m);
       color: vars.$colors-black;
     }
   }
   &__list {
-    @include flex-column((gap: 4px));
+    @include flex-column((gap: vars.$gaps-g4));
     margin: 0;
     padding: 0 0 0 30px;
   }

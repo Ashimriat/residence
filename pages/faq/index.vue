@@ -162,19 +162,19 @@ div(:class="$b()")
   &__questionsWrapper {
     @include flex-column((
       justify-content: center,
-      gap: 1.4rem,
+      gap: vars.$gaps-g24
     ));
     max-width: 54%;
     padding: 32px 0;
   }
   &__questionContent {
-    @include flex-column((gap: 1rem));
+    @include flex-column((gap: vars.$gaps-g24));
   }
   &__questionContainer {
     @include flex((
       justify-content: space-between,
       align-items: center,
-      gap: 0.8rem,
+      gap: vars.$gaps-g12
     ));
     cursor: pointer;
   }
@@ -185,7 +185,7 @@ div(:class="$b()")
     }
   }
   &__answerContainer {
-    @include flex((gap: 0.8rem));
+    @include flex((gap: vars.$gaps-g12));
   }
   &__avatar,
   &__logoContainer {

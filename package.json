@@ -25,7 +25,8 @@
     "nuxt-svgo": "4.0.9",
     "nuxt-time": "1.0.3",
     "primeicons": "^7.0.0",
-    "primevue": "^4.3.2"
+    "primevue": "^4.3.2",
+    "vue3-carousel-nuxt": "1.1.5"
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.1",

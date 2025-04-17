@@ -23,9 +23,3 @@ UserDataForm(
   @additional-button="openLogin()"
 )
 </template>
-
-<style lang="scss">
-.Registration {
-  max-width: 770px;
-}
-</style>

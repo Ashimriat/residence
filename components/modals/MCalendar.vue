@@ -45,12 +45,12 @@ div(:class="$b()")
     padding: 0;
   }
   .p-dialog-content {
-    padding: 32px 2rem;
+    padding: 32px;
   }
   .p-dialog-close-button {
     @include absolute((
       top: 4px,
-      right: 1.6rem,
+      right: 25px,
     ));
     padding: 0;
     width: fit-content;

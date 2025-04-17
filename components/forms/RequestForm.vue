@@ -61,7 +61,10 @@ div(:class="$b()")
       | {{ title }}
     span(:class="$b('question')")
       | {{ subtext }}
-  form(:class="$b('requestForm')")
+  form(
+    :class="$b('requestForm')"
+    @submit.prevent.stop="emit('submit', formData)"
+  )
     RzdSelectButtons(
       v-if="selectOptions.length"
       v-model="formData.selectOption"
@@ -84,7 +87,6 @@ div(:class="$b()")
     RzdButton(
       :type="buttonType"
       :disabled="!isRequestFormFilled"
-      @click="emit('submit', formData)"
     )
 </template>
 
@@ -133,6 +135,7 @@ div(:class="$b()")
       border-radius: vars.$br-s;
       text-align: center;
       padding: 20px;
+      max-width: unset;
     }
     &__requestQuestion {
       border-radius: 0 0 vars.$br-s vars.$br-s;

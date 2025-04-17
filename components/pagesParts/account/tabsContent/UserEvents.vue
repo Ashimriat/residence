@@ -1,23 +1,40 @@
 <script setup lang="ts">
+import { deepmerge } from 'deepmerge-ts'
 import { mockAchievementsList, mockEventsData,  mockSubscriptions } from '~/__mocks__';
 
 
 const { isMobile } = usePlatform();
+const { providedData } = storeToRefs(useUserStore())
 
 const eventsMock = mockEventsData(12)
 const achievementsMock = mockAchievementsList(isMobile ? 2 : 6)
+
+const eventsData = computed<{ events: EventData[], title: string }[]>(() => [
+  {
+    events: mockEventsData(12),
+    title: 'Предстоящие события',
+  },
+  {
+    events: mockEventsData(12).map((ev) => deepmerge(ev, { gameData: { master: { id: providedData.value.id } } })),
+    title: 'События, которые вы ведете'
+  }
+])
 
 const $b = useBEM('UserEvents');
 </script>
 
 <template lang="pug">
 div(:class="$b()")
-  div(:class="$b('contentSection', ['events'])")
+  div(
+    v-for="({ events, title }, i) of eventsData"
+    :key="i"
+    :class="$b('contentSection', ['events'])"
+  )
     h5
-      | Предстоящие события
+      | {{ title }}
     RzdCarousel(
       v-slot="{ itemsData }"
-      :items="eventsMock"
+      :items="events"
       :visible-amount="{ desktop: 4, mobile: 2 }"
       :class="$b('eventsCarousel')"
     )
@@ -63,12 +80,12 @@ $dotSize: 8px;
 $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
 
 .UserEvents {
-  @include flex((justify-content: space-between, flex-wrap: wrap, gap: 1rem));
+  @include flex((justify-content: space-between, flex-wrap: wrap, gap: vars.$gaps-g16));
 
   --event-card-flex-basis: calc((100% - 16px) / 2);
 
   &__contentSection {
-    @include flex-column((gap: 1.4rem));
+    @include flex-column((gap: 22px));
     padding: 20px;
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;
@@ -88,13 +105,13 @@ $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
     flex-basis: var(--event-card-flex-basis);
   }
   &__subscriptionsContainer {
-    @include flex((flex-wrap: wrap, gap: 0.8rem));
+    @include flex((flex-wrap: wrap, gap: vars.$gaps-g12));
     & > div {
-      flex-basis: calc(50% - 0.4rem);
+      flex-basis: calc(50% - 6px);
     }
   }
   &__subscription {
-    @include flex-column((gap: 1rem));
+    @include flex-column((gap: 16px));
     background-color: vars.$colors-greyLight;
     border-radius: vars.$br-s;
     padding: 20px;
@@ -106,6 +123,7 @@ $dotsContainerSize: $dotSize * 3 + $dotsGap * 2;
 
 @include mobile {
   .UserEvents {
+    gap: vars.$gaps-g24;
     --event-card-flex-basis: 100%;
     --eventsMaxWidth: 100%;
   }

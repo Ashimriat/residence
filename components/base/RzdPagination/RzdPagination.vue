@@ -191,7 +191,7 @@ PPaginator(
         :class="$b('label')"
       )
         span
-          | {{ currentPage + 1 }}
+          | {{ currentPage }}
         span
           | из
         span 
@@ -315,6 +315,7 @@ PPaginator(
     font: vars.$fonts-textM;
     gap: vars.$gaps-g8;
     margin: 0 vars.$gaps-g8;
+    color: vars.$colors-black;
     & > span {
       &:first-of-type,
       &:last-of-type {

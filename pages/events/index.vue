@@ -18,7 +18,7 @@ div(:class="$b()")
   section(:class="$b('section')")
     h2
       | Правила игр
-    div(:class="$b('sectionContent')")
+    div(:class="$b('sectionContent', ['games'])")
       NuxtLink(
         v-for="({ logo, name, description, gameType }) of GAMES_DESCRIPTIONS"
         :key="gameType"
@@ -42,7 +42,7 @@ div(:class="$b()")
   section(:class="$b('section')")
     h2
       | Абонементы
-    div(:class="$b('sectionContent')")
+    div(:class="$b('sectionContent', ['subscriptions'])")
       EventSubscription(
         v-for="(data, i) of mockSubscriptions(2)"
         :key="i"
@@ -92,30 +92,37 @@ div(:class="$b()")
 
 <style lang="scss">
 .EventsPage {
-  @include flex-column((gap: 4rem));
+  @include flex-column((gap: vars.$gaps-g48));
   &__section {
-    @include flex-column((gap: 26px));
+    @include flex-column((gap: vars.$gaps-g24));
     & > button {
       max-width: 275px;
       justify-content: space-between;
       align-items: center;
       & * {
-        font-size: 0.9rem;
+        font-size: 14px;
       }
     }
   }
   &__sectionContent {
-    @include flex((
-      gap: var(--scoped-sectioncontent-gap),
-      flex-wrap: wrap
-    ));
+    gap: var(--scoped-sectioncontent-gap);
+    &--games {
+      display: grid;
+      grid-template-columns: repeat(2, calc((100% - var(--scoped-sectioncontent-gap, #{vars.$gaps-g40})) / 2));
+      grid-template-rows: repeat(2, 1fr);
+    }
+    &--subscriptions {
+      @include flex((
+        flex-wrap: wrap,
+        justify-content: center,
+      ));
+    }
   }
   &__game {
     @include flex((
       align-items: center,
       gap: var(--scoped-game-gap),
     ));
-    max-width: calc((100% - var(--scoped-sectioncontent-gap, #{vars.$gaps-g40})) / 2);
     height: var(--scoped-game-height, 204px);
     background-color: vars.$colors-white;
     border-radius: vars.$br-l;

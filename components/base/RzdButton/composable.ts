@@ -88,9 +88,11 @@ const BUTTONS_DATA: Record<EButtons, ExtendedButtonData> = {
   },
   [EButtons.REQUEST_EVENT]: {
     label: 'Оставить заявку',
+    htmlType: 'submit',
   },
   [EButtons.ASK_QUESTION]: {
     label: 'Отправить заявку',
+    htmlType: 'submit',
   },
   [EButtons.WELCOME_BEGINNING]: {
     label: 'Начнём!',

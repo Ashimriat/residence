@@ -50,6 +50,7 @@ div(:class="$b()")
   RzdButton(
     v-else
     :type="EButtons.SIGN_IN_MOBILE"
+    :class="$b('loginButton')"
     @click="openLogin"
   )
   RzdAccordion(:content="ACCORDION_CONTENT")
@@ -144,6 +145,9 @@ div(:class="$b()")
     &:last-of-type {
       padding-bottom: 0;
     }
+  }
+  &__loginButton {
+    justify-content: space-between;
   }
   &__authPagesContainer {
     @include flex-column;

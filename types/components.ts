@@ -2,6 +2,7 @@
 export type { AccordionContent } from '~/components/base/RzdAccordion.vue';
 export type { RadioOption } from '~/components/base/RzdRadios.vue';
 export type { TabData } from '~/components/base/RzdTabs.vue';
+export type { RzdInputTypes } from '~/components/base/RzdInput.vue';
 export type { SelectOption } from '~/components/base/RzdSelectButtons.vue';
 export type { Props as RzdScrollPanelProps } from '~/components/base/RzdScrollPanel.vue';
 export type { DisplayedModalData } from '~/components/base/RzdModals.vue';

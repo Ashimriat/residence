@@ -93,16 +93,15 @@ div(:class="$b()")
 
 <style lang="scss">
 .AccountPage {
-  @include flex-column((gap: 2.5rem));
+  @include flex-column((gap: vars.$gaps-g40));
   --rzd-badge-translateX: calc(100% + #{vars.$gaps-g8});
   --rzd-badge-translateY: 0px;
   --rzd-avatar-size: 96px;
   --rzd-avatar-label-fontsize: 40px;
   
   &__section {
-    @include flex((gap: 1rem));
+    @include flex((gap: vars.$gaps-g40));
     &--user {
-      flex-wrap: wrap;
       justify-content: space-between;
     }
     &--content {
@@ -240,6 +239,14 @@ div(:class="$b()")
     --ratingSubsectionPadding: 16px 20px;
     --settingsButtonWidth: 100%;
     --badgeTranslateY: 5px;
+
+    &__section {
+      gap: vars.$gaps-g16;
+
+      &--user {
+        flex-direction: column;
+      }
+    }
   }
 }
 </style>

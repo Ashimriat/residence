@@ -3,6 +3,7 @@ import path from 'node:path';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-11-01',
   ssr: false,
   modules: [
     '@primevue/nuxt-module',
@@ -12,6 +13,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-time',
     '@nuxt/eslint',
+    'vue3-carousel-nuxt',
   ],
   app: {
     baseURL: '/residence/',
@@ -35,13 +37,15 @@ export default defineNuxtConfig({
       'types/**',
     ],
   },
-  compatibilityDate: '2024-11-01',
   alias: {
     '~assets': path.resolve(import.meta.dirname, 'assets'),
     '~scss': path.resolve(import.meta.dirname, 'assets/scss'),
   },
   $development: {
     devtools: { enabled: true },
+  },
+  carousel: {
+    prefix: 'RzdGallery'
   },
   vite: {
     server: {
