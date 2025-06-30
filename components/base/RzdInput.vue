@@ -62,7 +62,7 @@ Wrapper(
   ref="input"
   v-bind="{ ...props, ...passedProps }"
   v-model="value"
-  :class="$b([`size_${usedSize}`])"
+  :pt:root:class="$b([`size_${usedSize}`])"
 )
 </template>
 
@@ -72,6 +72,7 @@ Wrapper(
     &_m {
       --scoped-input-height: 44px;
     }
+
     &_l {
       --scoped-input-height: 48px;
     }
@@ -88,9 +89,9 @@ Wrapper(
     --p-inputtext-color: #{vars.$colors-black};
     
     height: var(--scoped-input-height);
-    box-shadow: vars.$shadows-base;
     border: 1px solid vars.$colors-greyMuted;
     border-radius: #{vars.$br-s};
+    box-shadow: vars.$shadows-base;
     
     &,
     &::placeholder {

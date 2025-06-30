@@ -1,25 +1,46 @@
 <script setup lang="ts">
-import { mockUserData } from '~/__mocks__';
+import type { ApiRequestedPayload } from '~/composables/useAPI';
+import { EApiRoutes } from '~/composables/useAPI';
 import { EButtons } from '~/components/constants';
 
 
 const $b = useBEM('Login');
-const userStore = useUserStore();
-const { setUserData } = userStore;
+const { isTMA } = usePlatform()
+const { setUserData } = useUserStore();
 const { openRegistration, openPasswordRecovery, closeModal } = useModal();
+const toast = useToasts()
 
 const phone = ref<string>('');
 const password = ref<string>('');
 
-function login(): void {
-  setUserData(mockUserData());
-  closeModal();
+const payload = computed<ApiRequestedPayload<EApiRoutes.LOGIN>>(() => ({
+  body: {
+    email: phone.value,
+    password: password.value
+  }
+}))
+
+const { data, isProcessing, error, makeRequest, getRequestError } = await useAPI(EApiRoutes.LOGIN, { payload })
+
+async function login(): Promise<void> {
+  await makeRequest()
+  if (error.value) {
+    toast.error('Не удалось залогиниться', getRequestError());
+    return;
+  }
+  toast.success('Успешный логин');
+  await delay(1_000)
+  console.log("TOKENS", data.value)
+  closeModal()
+  // setUserData(data.value)
+  // closeModal();
 }
 </script>
 
 <template lang="pug">
 form(:class="$b()")
   RzdInput(
+    v-if="!isTMA"
     v-model="phone"
     v-keyfilter.int
     required
@@ -44,6 +65,7 @@ form(:class="$b()")
   )
   RzdButton(
     :type="EButtons.SIGN_IN_MODAL"
+    :is-loading="isProcessing"
     @click="login"
   )
 </template>

@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { EButtons } from './constants';
+import type { EButtons } from './constants';
 import useButtonData from './composable';
 
 
 type Props = {
   type: EButtons;
+  isLoading?: boolean
 };
 
-const { type } = defineProps<Props>();
+const { type, isLoading } = defineProps<Props>();
 
 const {
   label,
@@ -43,6 +44,7 @@ PButton(
   :label="label"
   :severity="variant"
   :text="isTextButton"
+  :loading="isLoading"
   :pt:root:type="htmlType"
   :pt:root:class="$b(classes)"
   :pt:label:class="$b('label')"

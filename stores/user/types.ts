@@ -1,11 +1,11 @@
 import type { EUserRoles } from './store';
 
 
-export type EditableUserData = {
+export type EditableUserData<BD extends string | Date | undefined = string> = {
   avatar?: string;
   name: string;
   surname: string;
-  birthdate: string;
+  birthdate: BD;
   telegram: string;
   instagram: string;
   email: string;

@@ -5,6 +5,13 @@ import path from 'node:path';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   ssr: false,
+  nitro: {
+    routeRules: {
+      '/api/**': {
+        proxy: { to: 'http://217.198.13.57:8000/**' },
+      },
+    },
+  },
   modules: [
     '@primevue/nuxt-module',
     '@morev/v-bem-transformer',
@@ -14,6 +21,7 @@ export default defineNuxtConfig({
     'nuxt-time',
     '@nuxt/eslint',
     'vue3-carousel-nuxt',
+    '@vueuse/nuxt',
   ],
   app: {
     baseURL: '/residence/',
@@ -32,6 +40,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: [
       'composables',
+      'composables/**/index.ts',
       'utils',
       'stores',
       'types/**',
@@ -71,6 +80,7 @@ export default defineNuxtConfig({
     },
   ],
   primevue: {
+    usePrimeVue: true,
     importTheme: {
       from: '~/bootstrap/primevue/theme.ts',
       as: 'residenceTheme',

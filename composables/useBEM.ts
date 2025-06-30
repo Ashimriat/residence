@@ -16,7 +16,7 @@ const bMod = (...src: NotNameArgs[]): ClassesDict => {
         }, {}),
       };
     } else {
-      getEntries(val).forEach(([key, value]) => {
+      getTypedEntries(val).forEach(([key, value]) => {
         res[key] = !!value;
       });
     }

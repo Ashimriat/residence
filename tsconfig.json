@@ -4,5 +4,10 @@
   "includes": ["types/**/*.ts"],
   "vueCompilerOptions": {
  		"plugins": ["@vue/language-plugin-pug"]
- 	}
+  },
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": true
+  }
 }

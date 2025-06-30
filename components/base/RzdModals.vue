@@ -86,7 +86,7 @@ Wrapper(
   :style
 )
   div(:class="$b('contentContainer', [`size_${displayedModalData[layer]?.size}_${platform}`])")
-    component(:is="displayedModalData[layer].component")
+    component(:is="displayedModalData[layer]?.component")
   RzdModals(
     v-if="hasLayers"
     :layer="layer + 1"

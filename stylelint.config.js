@@ -19,6 +19,6 @@ export default {
     'at-rule-no-unknown': [true, {
       ignoreAtRules: [/include/]
     }],
-    'selector-class-pattern': false,
+    'selector-class-pattern': null,
   },
 };

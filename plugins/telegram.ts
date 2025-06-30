@@ -3,7 +3,7 @@ import {
   mountMiniApp,
   miniAppReady,
   mountBackButton,
-  isTMA,
+  isTMA as isTelegramMiniApp,
   showBackButton,
   hideBackButton,
   isBackButtonVisible,
@@ -44,7 +44,7 @@ export default defineNuxtPlugin(() => {
   const backButtonClickHandler = () => router.back();
 
 
-  const isMiniApp = isTMA();
+  const isMiniApp = isTelegramMiniApp();
 
   if (isMiniApp) {
     initializeTMA();
@@ -75,4 +75,10 @@ export default defineNuxtPlugin(() => {
       { immediate: true },
     );
   });
+
+  return {
+    provide: {
+      isTMA: isMiniApp
+    }
+  }
 });

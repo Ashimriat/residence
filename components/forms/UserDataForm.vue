@@ -5,32 +5,41 @@ import { EIcons, EIconsSizes } from '~/components/constants';
 
 type Props = {
   submitButton: EButtons;
+  isLoading: boolean;
   additionalButtons?: EButtons[];
 };
 type Emits = {
   additionalButton: [type: EButtons];
-  dataSubmit: [data: EditableUserData];
+  dataSubmit: [data: EditableUserData<Date | undefined>];
 };
 
 
 const {
   submitButton,
+  isLoading,
   additionalButtons = [],
 } = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
+const { isTMA } = usePlatform()
 const route = useRoute()
 const { userData } = storeToRefs(useUserStore());
 
-const data = ref<EditableUserData>({
+const data = ref<EditableUserData<Date | undefined>>({
   ...userData.value,
+  birthdate: undefined,
   password1: '',
   password2: '',
   isPrivateData: false,
 });
 
+const checkedKeys = computed<(keyof EditableUserData)[]>(() => {
+  if (isSettings.value) return getTypedKeys(data.value)
+  return ['name', 'surname', 'password1', 'password2', 'sex', isTMA ? 'telegram' : 'phone', 'birthdate'];
+})
+
 const isDataChanged = computed<boolean>(() => {
-  for (const [key, value] of getEntries(data.value)) {
+  for (const [key, value] of getTypedEntries(data.value)) {
     if (value !== userData.value[key]) {
       return true;
     }
@@ -39,8 +48,8 @@ const isDataChanged = computed<boolean>(() => {
 });
 
 const withEmptyFields = computed<boolean>(() => {
-  for (const [key, value] of getEntries(data.value)) {
-    if (!value && key !== 'avatar') {
+  for (const [key, value] of getTypedEntries(data.value)) {
+    if (!value && checkedKeys.value.includes(key) && key !== 'avatar') {
       return true;
     }
   }
@@ -50,7 +59,6 @@ const withEmptyFields = computed<boolean>(() => {
 
 const isSettings = computed<boolean>(() => route.path.includes('settings'))
 const $b = useBEM('UserDataForm');
-
 </script>
 
 <template lang="pug">
@@ -82,13 +90,20 @@ form(
         placeholder="Фамилия"
       )
   div(:class="$b('container')")
-    RzdInput(
+    RzdDatePicker(
       v-model="data.birthdate"
       placeholder="Дата рождения"
     )
     RzdInput(
+      v-if="!isTMA"
+      v-model="data.phone"
+      v-keyfilter.int
+      placeholder="Телефон"
+    )
+    RzdInput(
+      v-else
       v-model="data.telegram"
-      placeholder="Ник Телеграм"
+      placeholder="Телеграм"
     )
     template(v-if="isSettings")
       RzdInput(
@@ -108,10 +123,6 @@ form(
     RzdInput(
       v-model="data.email"
       placeholder="Почта"
-    )
-    RzdInput(
-      v-model="data.phone"
-      placeholder="Телефон"
     )
   RzdInput(
     v-model="data.password1"
@@ -149,6 +160,7 @@ form(
   RzdButton(
     :disabled="withEmptyFields || !isDataChanged"
     :type="submitButton"
+    :is-loading="isLoading"
   )
 </template>
 

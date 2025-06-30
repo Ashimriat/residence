@@ -41,7 +41,7 @@ const formData = ref<FormData>({
 
 
 const isRequestFormFilled = computed<boolean>(() => (
-  getKeys(formData.value).reduce((acc, key) => {
+  getTypedKeys(formData.value).reduce((acc, key) => {
     if (!acc) return acc;
     const value = formData.value[key];
     if (key === 'selectOption' && selectOptions.length) {

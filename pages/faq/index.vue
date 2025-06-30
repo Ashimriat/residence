@@ -34,7 +34,7 @@ function toggleSection(type: string): void {
 }
 
 onMounted(() => {
-  getKeys(sectionsRefs).forEach((key) => {
+  getTypedKeys(sectionsRefs).forEach((key) => {
     const elem = sectionsRefs[key];
     const fullHeight = getComputedStyle(elem).height;
     const firstChildHeight = getComputedStyle(elem.childNodes[0] as HTMLElement).height;
