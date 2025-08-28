@@ -53,8 +53,10 @@ export default async function useAPI<T extends EApiRoutes, P>(
 
   const convertedData = computed<DataForClient<T>>(() => {
     if (error.value !== null) return data.value as DataForClient<T>;
-    return converter.convertToClientData<T>(data.value as ApiProvidedData[T]) as any;
+    return converter.convertToClientData(data.value as ApiProvidedData[T]) as DataForClient<T>;
   })
+
+  type A = DataForClient<EApiRoutes.LOGIN>
 
   async function makeRequest(): Promise<void> {
     await sendRequest()

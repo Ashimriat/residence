@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
   app: {
-    baseURL: '/residence/',
+    // baseURL: '/residence/',
     head: {
       title: 'Резиденция',
       meta: [

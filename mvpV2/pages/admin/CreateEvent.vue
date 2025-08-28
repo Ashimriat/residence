@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { FormData } from '~/components/forms/EventCreationForm.vue';
 import { EButtons } from '~/components/constants';
 import {
   BIGGER_GAMES_OPTIONS as GAMES_OPTIONS,
   EVENTS_OPTIONS,
 } from '~/constants/events';
-import type { FormData } from '~/components/forms/EventCreationForm.vue';
 
 
 export type MasterSelectModalData = {

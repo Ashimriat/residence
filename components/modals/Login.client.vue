@@ -2,11 +2,11 @@
 import type { ApiRequestedPayload } from '~/composables/useAPI';
 import { EApiRoutes } from '~/composables/useAPI';
 import { EButtons } from '~/components/constants';
+import { ELocalStorageKeys } from '~/constants/localStorage';
 
 
 const $b = useBEM('Login');
 const { isTMA } = usePlatform()
-const { setUserData } = useUserStore();
 const { openRegistration, openPasswordRecovery, closeModal } = useModal();
 const toast = useToasts()
 
@@ -22,6 +22,8 @@ const payload = computed<ApiRequestedPayload<EApiRoutes.LOGIN>>(() => ({
 
 const { data, isProcessing, error, makeRequest, getRequestError } = await useAPI(EApiRoutes.LOGIN, { payload })
 
+const authTokens = useAuthTokens()
+
 async function login(): Promise<void> {
   await makeRequest()
   if (error.value) {
@@ -30,10 +32,9 @@ async function login(): Promise<void> {
   }
   toast.success('Успешный логин');
   await delay(1_000)
-  console.log("TOKENS", data.value)
+  /** @ts-ignore */
+  authTokens.value = data.value
   closeModal()
-  // setUserData(data.value)
-  // closeModal();
 }
 </script>
 

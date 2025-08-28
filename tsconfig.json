@@ -7,7 +7,7 @@
   },
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "noUncheckedIndexedAccess": true
   }
 }
